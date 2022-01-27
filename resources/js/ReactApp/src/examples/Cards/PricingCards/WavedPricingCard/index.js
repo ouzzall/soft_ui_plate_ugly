@@ -24,12 +24,12 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Custom styles for the WavedPricingCard
-import WavedPricingCardWavesRoot from "examples/Cards/PricingCards/WavedPricingCard/WavedPricingCardWavesRoot";
+import WavedPricingCardWavesRoot from "@uf/examples/Cards/PricingCards/WavedPricingCard/WavedPricingCardWavesRoot";
 
 function WavedPricingCard({ color, title, price, specifications, action }) {
   const renderSpecifications = specifications.map(({ count, label }, key) => (

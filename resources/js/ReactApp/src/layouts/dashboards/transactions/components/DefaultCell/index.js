@@ -17,7 +17,7 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
+import SuiTypography from "@uf/components/SuiTypography";
 
 function DefaultCell({ value, suffix }) {
   return (

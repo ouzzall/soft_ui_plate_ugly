@@ -22,22 +22,22 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiAvatar from "components/SuiAvatar";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiInput from "components/SuiInput";
+import SuiBox from "@uf/components/SuiBox";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiInput from "@uf/components/SuiInput";
 
 // Soft UI Dashboard PRO React base styles
-import borders from "assets/theme/base/borders";
+import borders from "@uf/assets/theme/base/borders";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import bruceMars from "assets/images/bruce-mars.jpg";
-import workSpace from "assets/images/work-space.jpeg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
+import bruceMars from "@uf/assets/images/bruce-mars.jpg";
+import workSpace from "@uf/assets/images/work-space.jpeg";
 
 function Post() {
   const { borderWidth, borderColor } = borders;

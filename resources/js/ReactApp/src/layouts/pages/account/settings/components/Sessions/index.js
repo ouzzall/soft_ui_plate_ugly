@@ -19,9 +19,9 @@ import Icon from "@mui/material/Icon";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadge from "@uf/components/SuiBadge";
 
 function Sessions() {
   const actionButtonStyles = {

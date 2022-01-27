@@ -29,13 +29,13 @@ import IconButton from "@mui/material/IconButton";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-// import SuiInput from "components/SuiInput";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+// import SuiInput from "@uf/components/SuiInput";
 
 // Soft UI Dashboard PRO React example components
-import Breadcrumbs from "examples/Breadcrumbs";
-// import NotificationItem from "examples/Items/NotificationItem";
+import Breadcrumbs from "@uf/examples/Breadcrumbs";
+// import NotificationItem from "@uf/examples/Items/NotificationItem";
 
 // Custom styles for DashboardNavbar
 import {
@@ -45,7 +45,7 @@ import {
   navbarIconButton,
   navbarDesktopMenu,
   navbarMobileMenu,
-} from "examples/Navbars/DashboardNavbar/styles";
+} from "@uf/examples/Navbars/DashboardNavbar/styles";
 
 // Soft UI Dashboard PRO React context
 import {
@@ -53,11 +53,11 @@ import {
   setTransparentNavbar,
   setMiniSidenav,
   // setOpenConfigurator,
-} from "context";
+} from "@uf/context";
 
 // Images
-// import team2 from "assets/images/team-2.jpg";
-// import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+// import team2 from "@uf/assets/images/team-2.jpg";
+// import logoSpotify from "@uf/assets/images/small-logos/logo-spotify.svg";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();

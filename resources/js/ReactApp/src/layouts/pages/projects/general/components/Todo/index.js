@@ -26,12 +26,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dasboard PRO Material components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dasboard PRO Material base styles
-import borders from "assets/theme/base/borders";
-import colors from "assets/theme/base/colors";
+import borders from "@uf/assets/theme/base/borders";
+import colors from "@uf/assets/theme/base/colors";
 
 function Todo({ color, title, date, project, company, defaultChecked, noDivider }) {
   const { borderWidth } = borders;

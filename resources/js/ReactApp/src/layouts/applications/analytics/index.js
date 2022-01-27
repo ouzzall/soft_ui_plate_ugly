@@ -22,25 +22,25 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiButton from "components/SuiButton";
-import SuiBadgeDot from "components/SuiBadgeDot";
+import SuiBox from "@uf/components/SuiBox";
+import SuiButton from "@uf/components/SuiButton";
+import SuiBadgeDot from "@uf/components/SuiBadgeDot";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import DefaultLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-import ComplexReportsDoughnutChart from "examples/Charts/DoughnutCharts/ComplexReportsDoughnutChart";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
+import ComplexReportsDoughnutChart from "@uf/examples/Charts/DoughnutCharts/ComplexReportsDoughnutChart";
 
 // Analytics application components
-import Social from "layouts/applications/analytics/components/Social";
-import Pages from "layouts/applications/analytics/components/Pages";
+import Social from "@uf/layouts/applications/analytics/components/Social";
+import Pages from "@uf/layouts/applications/analytics/components/Pages";
 
 // Data
-import defaultLineChartData from "layouts/applications/analytics/data/defaultLineChartData";
-import complexReportsDoughnutChartData from "layouts/applications/analytics/data/complexReportsDoughnutChartData";
+import defaultLineChartData from "@uf/layouts/applications/analytics/data/defaultLineChartData";
+import complexReportsDoughnutChartData from "@uf/layouts/applications/analytics/data/complexReportsDoughnutChartData";
 
 function Analytics() {
   const [menu, setMenu] = useState(null);

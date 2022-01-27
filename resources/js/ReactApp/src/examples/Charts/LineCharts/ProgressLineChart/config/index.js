@@ -15,11 +15,11 @@ Coded by www.creative-tim.com
 
 /* eslint-disable no-dupe-keys */
 // Soft UI Dashboard PRO React helper functions
-import rgba from "assets/theme/functions/rgba";
+import rgba from "@uf/assets/theme/functions/rgba";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
-import colors from "assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
+import colors from "@uf/assets/theme/base/colors";
 
 const { gradients } = colors;
 

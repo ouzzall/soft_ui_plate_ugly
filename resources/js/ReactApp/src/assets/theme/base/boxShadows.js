@@ -20,10 +20,10 @@ Coded by www.creative-tim.com
  */
 
 // Soft UI Dashboard PRO React Base Styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Soft UI Dashboard PRO React Helper Functions
-import boxShadow from "assets/theme/functions/boxShadow";
+import boxShadow from "@uf/assets/theme/functions/boxShadow";
 
 const { black, white, info, inputColors, tabs } = colors;
 

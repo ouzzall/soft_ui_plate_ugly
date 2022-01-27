@@ -20,16 +20,16 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAlert from "components/SuiAlert";
-import SuiButton from "components/SuiButton";
-import SuiSnackbar from "components/SuiSnackbar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAlert from "@uf/components/SuiAlert";
+import SuiButton from "@uf/components/SuiButton";
+import SuiSnackbar from "@uf/components/SuiSnackbar";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 
 function Notifications() {
   const [successSB, setSuccessSB] = useState(false);

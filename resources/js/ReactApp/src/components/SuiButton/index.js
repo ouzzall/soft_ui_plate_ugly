@@ -19,7 +19,7 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for SuiButton
-import SuiButtonRoot from "components/SuiButton/SuiButtonRoot";
+import SuiButtonRoot from "@uf/components/SuiButton/SuiButtonRoot";
 
 const SuiButton = forwardRef(
   ({ color, variant, size, circular, iconOnly, children, ...rest }, ref) => (

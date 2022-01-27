@@ -19,7 +19,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 // Custom styles for the SuiEditor
-import SuiEditorRoot from "components/SuiEditor/SuiEditorRoot";
+import SuiEditorRoot from "@uf/components/SuiEditor/SuiEditorRoot";
 
 function SuiEditor(props) {
   return (

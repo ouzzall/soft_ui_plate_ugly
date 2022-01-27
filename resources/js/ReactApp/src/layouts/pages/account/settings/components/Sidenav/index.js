@@ -17,18 +17,18 @@ Coded by www.creative-tim.com
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React icons
-import SpaceShip from "examples/Icons/SpaceShip";
-import Document from "examples/Icons/Document";
-import Cube from "examples/Icons/Cube";
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import CustomerSupport from "examples/Icons/CustomerSupport";
-import Settings from "examples/Icons/Settings";
-import CreditCard from "examples/Icons/CreditCard";
+import SpaceShip from "@uf/examples/Icons/SpaceShip";
+import Document from "@uf/examples/Icons/Document";
+import Cube from "@uf/examples/Icons/Cube";
+import Shop from "@uf/examples/Icons/Shop";
+import Office from "@uf/examples/Icons/Office";
+import CustomerSupport from "@uf/examples/Icons/CustomerSupport";
+import Settings from "@uf/examples/Icons/Settings";
+import CreditCard from "@uf/examples/Icons/CreditCard";
 
 function Sidenav() {
   const sidenavItems = [

@@ -17,11 +17,11 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiAvatar from "components/SuiAvatar";
-import SuiBadge from "components/SuiBadge";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiBadge from "@uf/components/SuiBadge";
 
 // Images
 const orderImage =

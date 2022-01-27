@@ -18,17 +18,17 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiButton from "@uf/components/SuiButton";
 
 // Image
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
 
 function Header() {
   const avatarStyles = {

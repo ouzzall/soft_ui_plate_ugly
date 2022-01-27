@@ -18,11 +18,11 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dasboard PRO Material components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // General page components
-import Todo from "layouts/pages/projects/general/components/Todo";
+import Todo from "@uf/layouts/pages/projects/general/components/Todo";
 
 function TodoList() {
   return (

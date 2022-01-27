@@ -22,9 +22,9 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Custom styles for ComplexProjectCard
 function ComplexProjectCard({ color, image, title, dateTime, description, members, dropdown }) {

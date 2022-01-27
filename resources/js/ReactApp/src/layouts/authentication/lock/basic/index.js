@@ -17,18 +17,18 @@ Coded by www.creative-tim.com
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Authentication layout components
-import BasicLayout from "layouts/authentication/components/BasicLayout";
+import BasicLayout from "@uf/layouts/authentication/components/BasicLayout";
 
 // Images
-import curved8 from "assets/images/curved-images/curved8.jpg";
-import team4 from "assets/images/team-4.jpg";
+import curved8 from "@uf/assets/images/curved-images/curved8.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
 
 function Basic() {
   return (

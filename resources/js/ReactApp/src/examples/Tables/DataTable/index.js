@@ -29,15 +29,15 @@ import TableRow from "@mui/material/TableRow";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiSelect from "components/SuiSelect";
-import SuiInput from "components/SuiInput";
-import SuiPagination from "components/SuiPagination";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiSelect from "@uf/components/SuiSelect";
+import SuiInput from "@uf/components/SuiInput";
+import SuiPagination from "@uf/components/SuiPagination";
 
 // Soft UI Dashboard PRO React example components
-import DataTableHeadCell from "examples/Tables/DataTable/DataTableHeadCell";
-import DataTableBodyCell from "examples/Tables/DataTable/DataTableBodyCell";
+import DataTableHeadCell from "@uf/examples/Tables/DataTable/DataTableHeadCell";
+import DataTableBodyCell from "@uf/examples/Tables/DataTable/DataTableBodyCell";
 
 function DataTable({
   entriesPerPage,

@@ -17,18 +17,18 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React components
-import MasterCard from "examples/Cards/MasterCard";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
+import MasterCard from "@uf/examples/Cards/MasterCard";
+import DefaultInfoCard from "@uf/examples/Cards/InfoCards/DefaultInfoCard";
 
 // Billing page components
-import BaseLayout from "layouts/pages/account/components/BaseLayout";
-import PaymentMethod from "layouts/pages/account/billing/components/PaymentMethod";
-import Invoices from "layouts/pages/account/billing/components/Invoices";
-import BillingInformation from "layouts/pages/account/billing/components/BillingInformation";
-import Transactions from "layouts/pages/account/billing/components/Transactions";
+import BaseLayout from "@uf/layouts/pages/account/components/BaseLayout";
+import PaymentMethod from "@uf/layouts/pages/account/billing/components/PaymentMethod";
+import Invoices from "@uf/layouts/pages/account/billing/components/Invoices";
+import BillingInformation from "@uf/layouts/pages/account/billing/components/BillingInformation";
+import Transactions from "@uf/layouts/pages/account/billing/components/Transactions";
 
 function Billing() {
   return (

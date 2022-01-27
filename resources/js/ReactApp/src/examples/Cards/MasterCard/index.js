@@ -21,12 +21,12 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Images
-import curved14 from "assets/images/curved-images/curved14.jpg";
-import masterCardLogo from "assets/images/logos/mastercard.png";
+import curved14 from "@uf/assets/images/curved-images/curved14.jpg";
+import masterCardLogo from "@uf/assets/images/logos/mastercard.png";
 
 function MasterCard({ color, number, holder, expires }) {
   const numbers = [...`${number}`];

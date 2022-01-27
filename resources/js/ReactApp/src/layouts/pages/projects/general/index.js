@@ -17,27 +17,27 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import AnimatedStatisticsCard from "examples/Cards/StatisticsCards/AnimatedStatisticsCard";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import AnnouncementCard from "examples/Cards/AnnouncementCard";
-import ProgressLineChart from "examples/Charts/LineCharts/ProgressLineChart";
-import ProgressDoughnutChart from "examples/Charts/DoughnutCharts/ProgressDoughnutChart";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import AnimatedStatisticsCard from "@uf/examples/Cards/StatisticsCards/AnimatedStatisticsCard";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import AnnouncementCard from "@uf/examples/Cards/AnnouncementCard";
+import ProgressLineChart from "@uf/examples/Charts/LineCharts/ProgressLineChart";
+import ProgressDoughnutChart from "@uf/examples/Charts/DoughnutCharts/ProgressDoughnutChart";
 
 // General page components
-import TodoList from "layouts/pages/projects/general/components/TodoList";
+import TodoList from "@uf/layouts/pages/projects/general/components/TodoList";
 
 // Data
-import progressLineChartData from "layouts/pages/projects/general/data/progressLineChartData";
-import progressDoughnutChartData from "layouts/pages/projects/general/data/progressDoughnutChartData";
+import progressLineChartData from "@uf/layouts/pages/projects/general/data/progressLineChartData";
+import progressDoughnutChartData from "@uf/layouts/pages/projects/general/data/progressDoughnutChartData";
 
 // Images
-import team3 from "assets/images/team-3.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
 
 function General() {
   return (

@@ -23,24 +23,24 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Soft UI Dashboard PRO React example components
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 
 // Soft UI Dashboard PRO React icons
-import Cube from "examples/Icons/Cube";
-import Document from "examples/Icons/Document";
-import Settings from "examples/Icons/Settings";
+import Cube from "@uf/examples/Icons/Cube";
+import Document from "@uf/examples/Icons/Document";
+import Settings from "@uf/examples/Icons/Settings";
 
 // Soft UI Dashboard PRO React base styles
-import breakpoints from "assets/theme/base/breakpoints";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
-import curved0 from "assets/images/curved-images/curved0.jpg";
+import burceMars from "@uf/assets/images/bruce-mars.jpg";
+import curved0 from "@uf/assets/images/curved-images/curved0.jpg";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -54,7 +54,7 @@ function Header() {
         : setTabsOrientation("horizontal");
     }
 
-    /** 
+    /**
      The event listener that's calling the handleTabsOrientation function when resizing the window.
     */
     window.addEventListener("resize", handleTabsOrientation);

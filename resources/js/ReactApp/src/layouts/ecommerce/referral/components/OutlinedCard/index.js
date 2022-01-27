@@ -17,14 +17,14 @@ Coded by www.creative-tim.com
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import borders from "assets/theme/base/borders";
+import borders from "@uf/assets/theme/base/borders";
 
 // Images
-import rocketShip from "assets/images/illustrations/rocket-white.png";
+import rocketShip from "@uf/assets/images/illustrations/rocket-white.png";
 
 function OutlinedCard() {
   const { borderWidth, borderColor } = borders;

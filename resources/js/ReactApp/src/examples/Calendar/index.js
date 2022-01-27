@@ -26,11 +26,11 @@ import interactionPlugin from "@fullcalendar/interaction";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Custom styles for Calendar
-import CalendarRoot from "examples/Calendar/CalendarRoot";
+import CalendarRoot from "@uf/examples/Calendar/CalendarRoot";
 
 function Calendar({ header, ...rest }) {
   const validClassNames = [

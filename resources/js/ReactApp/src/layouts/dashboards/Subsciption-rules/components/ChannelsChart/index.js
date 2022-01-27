@@ -20,14 +20,14 @@ import Icon from "@mui/material/Icon";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiBadgeDot from "components/SuiBadgeDot";
-import PieChart from "examples/Charts/PieChart";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiBadgeDot from "@uf/components/SuiBadgeDot";
+import PieChart from "@uf/examples/Charts/PieChart";
 
 // Data
-import channelChartData from "layouts/ecommerce/overview/components/ChannelsChart/data";
+import channelChartData from "@uf/layouts/ecommerce/overview/components/ChannelsChart/data";
 
 function ChannelsChart() {
   return (

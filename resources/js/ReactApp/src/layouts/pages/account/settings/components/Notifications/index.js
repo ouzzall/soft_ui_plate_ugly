@@ -21,11 +21,11 @@ import TableBody from "@mui/material/TableBody";
 import Switch from "@mui/material/Switch";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Setting pages components
-import TableCell from "layouts/pages/account/settings/components/TableCell";
+import TableCell from "@uf/layouts/pages/account/settings/components/TableCell";
 
 function Notifications() {
   return (

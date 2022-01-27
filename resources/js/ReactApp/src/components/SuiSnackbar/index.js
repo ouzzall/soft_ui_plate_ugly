@@ -24,14 +24,14 @@ import Divider from "@mui/material/Divider";
 import Fade from "@mui/material/Fade";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 // Custom styles for the SuiSnackbar
-import SuiSnackbarIconRoot from "components/SuiSnackbar/SuiSnackbarIconRoot";
+import SuiSnackbarIconRoot from "@uf/components/SuiSnackbar/SuiSnackbarIconRoot";
 
 function SuiSnackbar({ color, icon, title, dateTime, content, close, bgWhite, ...rest }) {
   const { size } = typography;

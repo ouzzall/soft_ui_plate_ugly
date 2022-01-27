@@ -25,43 +25,43 @@ import Card from "@mui/material/Card";
 
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-// import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+// import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import WeatherCard from "examples/Cards/WeatherCard";
-import DefaultCounterCard from "examples/Cards/CounterCards/DefaultCounterCard";
-import ReportsDoughnutChart from "examples/Charts/DoughnutCharts/ReportsDoughnutChart";
-// import ThinBarChart from "examples/Charts/BarCharts/ThinBarChart";
-import ControllerCard from "examples/Cards/ControllerCard";
-// import PlaceholderCard from "examples/Cards/PlaceholderCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import WeatherCard from "@uf/examples/Cards/WeatherCard";
+import DefaultCounterCard from "@uf/examples/Cards/CounterCards/DefaultCounterCard";
+import ReportsDoughnutChart from "@uf/examples/Charts/DoughnutCharts/ReportsDoughnutChart";
+// import ThinBarChart from "@uf/examples/Charts/BarCharts/ThinBarChart";
+import ControllerCard from "@uf/examples/Cards/ControllerCard";
+// import PlaceholderCard from "@uf/examples/Cards/PlaceholderCard";
 
 // SmartHome dashboard components
-// import Cameras from "layouts/dashboards/smart-home/components/Cameras";
-// import TemperatureSlider from "layouts/dashboards/smart-home/components/TemperatureSlider";
+// import Cameras from "@uf/layouts/dashboards/smart-home/components/Cameras";
+// import TemperatureSlider from "@uf/layouts/dashboards/smart-home/components/TemperatureSlider";
 
 // Data
-import reportsDoughnutChartData from "layouts/dashboards/smart-home/data/reportsDoughnutChartData";
-// import thinBarChartData from "layouts/dashboards/smart-home/data/thinBarChartData";
-import controllerCardIcons from "layouts/dashboards/smart-home/data/controllerCardIcons";
+import reportsDoughnutChartData from "@uf/layouts/dashboards/smart-home/data/reportsDoughnutChartData";
+// import thinBarChartData from "@uf/layouts/dashboards/smart-home/data/thinBarChartData";
+import controllerCardIcons from "@uf/layouts/dashboards/smart-home/data/controllerCardIcons";
 
 // Images
-import iconSunCloud from "assets/images/small-logos/icon-sun-cloud.png";
+import iconSunCloud from "@uf/assets/images/small-logos/icon-sun-cloud.png";
 
 /// my imports
 import Icon from "@mui/material/Icon";
-import gradientLineChartData from "layouts/dashboards/default/data/gradientLineChartData";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
-import typography from "assets/theme/base/typography";
+import gradientLineChartData from "@uf/layouts/dashboards/default/data/gradientLineChartData";
+import GradientLineChart from "@uf/examples/Charts/LineCharts/GradientLineChart";
+import typography from "@uf/assets/theme/base/typography";
 
-import DataTable from "examples/Tables/DataTable";
+import DataTable from "@uf/examples/Tables/DataTable";
 
 // Data
-import dataTableData from "layouts/ecommerce/orders/order-list/data/dataTableData";
+import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 
 
 function SmartHome() {
@@ -120,7 +120,7 @@ function SmartHome() {
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} xl={7}>
-            
+
               <GradientLineChart
                 title="Sales Overview"
                 description={
@@ -184,7 +184,7 @@ function SmartHome() {
             </Grid>
           </Grid>
         </SuiBox>
-        
+
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>
@@ -196,7 +196,7 @@ function SmartHome() {
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-              
+
               <ControllerCard
                 state={humidityState}
                 icon={humidityState ? humidityIconLight : humidityIconDark}
@@ -206,7 +206,7 @@ function SmartHome() {
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-              
+
             <ControllerCard
               state={temperatureState}
               icon={temperatureIconLight}
@@ -230,12 +230,12 @@ function SmartHome() {
      {/* order list   */}
 
      <SuiBox my={3}>
-        
+
         <Card>
           <DataTable table={dataTableData} entriesPerPage={false} canSearch />
         </Card>
       </SuiBox>
-     
+
       <Footer />
     </DashboardLayout>
   );

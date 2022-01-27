@@ -19,10 +19,10 @@ import { forwardRef, createContext, useContext } from "react";
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Custom styles for SuiPagination
-import SuiPaginationItemRoot from "components/SuiPagination/SuiPaginationItemRoot";
+import SuiPaginationItemRoot from "@uf/components/SuiPagination/SuiPaginationItemRoot";
 
 // The Pagination main context
 const Context = createContext();

@@ -20,18 +20,18 @@ import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import PageLayout from "examples/LayoutContainers/PageLayout";
+import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
+import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
 
 // Soft UI Dashboard PRO React page layout routes
-import pageRoutes from "page.routes";
+import pageRoutes from "@uf/page.routes";
 
 // Images
-import pattern from "assets/images/shapes/pattern-lines.svg";
+import pattern from "@uf/assets/images/shapes/pattern-lines.svg";
 
 function IllustrationLayout({ color, header, title, description, illustration, children }) {
   return (

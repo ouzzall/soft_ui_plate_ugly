@@ -24,10 +24,10 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadge from "@uf/components/SuiBadge";
+import SuiButton from "@uf/components/SuiButton";
 
 function DefaultPricingCard({ badge, price, specifications, action }) {
   const renderSpecifications = specifications.map(({ label, includes }) => (

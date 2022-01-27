@@ -20,36 +20,36 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import ProgressLineChart from "examples/Charts/LineCharts/ProgressLineChart";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-import MasterCard from "examples/Cards/MasterCard";
-import MiniInfoCard from "examples/Cards/InfoCards/MiniInfoCard";
-import ControllerCard from "examples/Cards/ControllerCard";
-import Calendar from "examples/Calendar";
-import CategoriesList from "examples/Lists/CategoriesList";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import ProgressLineChart from "@uf/examples/Charts/LineCharts/ProgressLineChart";
+import DefaultInfoCard from "@uf/examples/Cards/InfoCards/DefaultInfoCard";
+import MasterCard from "@uf/examples/Cards/MasterCard";
+import MiniInfoCard from "@uf/examples/Cards/InfoCards/MiniInfoCard";
+import ControllerCard from "@uf/examples/Cards/ControllerCard";
+import Calendar from "@uf/examples/Calendar";
+import CategoriesList from "@uf/examples/Lists/CategoriesList";
 
 // Widgets page components
-import Steps from "layouts/pages/widgets/components/Steps";
-import FullBody from "layouts/pages/widgets/components/FullBody";
-import MediaPlayer from "layouts/pages/widgets/components/MediaPlayer";
-import OrdersOverview from "layouts/pages/widgets/components/OrdersOverview";
-import UpcomingEvents from "layouts/pages/widgets/components/UpcomingEvents";
-import Chart from "layouts/pages/widgets/components/Chart";
+import Steps from "@uf/layouts/pages/widgets/components/Steps";
+import FullBody from "@uf/layouts/pages/widgets/components/FullBody";
+import MediaPlayer from "@uf/layouts/pages/widgets/components/MediaPlayer";
+import OrdersOverview from "@uf/layouts/pages/widgets/components/OrdersOverview";
+import UpcomingEvents from "@uf/layouts/pages/widgets/components/UpcomingEvents";
+import Chart from "@uf/layouts/pages/widgets/components/Chart";
 
 // Data
-import progressLineChartData from "layouts/pages/widgets/data/progressLineChartData";
-import calendarEventsData from "layouts/pages/widgets/data/calendarEventsData";
-import categoriesListData from "layouts/pages/widgets/data/categoriesListData";
-import incomeChartData from "layouts/pages/widgets/data/incomeChartData";
-import caloriesChartData from "layouts/pages/widgets/data/caloriesChartData";
+import progressLineChartData from "@uf/layouts/pages/widgets/data/progressLineChartData";
+import calendarEventsData from "@uf/layouts/pages/widgets/data/calendarEventsData";
+import categoriesListData from "@uf/layouts/pages/widgets/data/categoriesListData";
+import incomeChartData from "@uf/layouts/pages/widgets/data/incomeChartData";
+import caloriesChartData from "@uf/layouts/pages/widgets/data/caloriesChartData";
 
 function Widgets() {
   const [lights, setLights] = useState(false);

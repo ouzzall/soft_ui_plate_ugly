@@ -17,35 +17,35 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DefaultLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
-import VerticalBarChart from "examples/Charts/BarCharts/VerticalBarChart";
-import HorizontalBarChart from "examples/Charts/BarCharts/HorizontalBarChart";
-import MixedChart from "examples/Charts/MixedChart";
-import BubbleChart from "examples/Charts/BubbleChart";
-import DefaultDoughnutChart from "examples/Charts/DoughnutCharts/DefaultDoughnutChart";
-import PieChart from "examples/Charts/PieChart";
-import RadarChart from "examples/Charts/RadarChart";
-import PolarChart from "examples/Charts/PolarChart";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
+import GradientLineChart from "@uf/examples/Charts/LineCharts/GradientLineChart";
+import VerticalBarChart from "@uf/examples/Charts/BarCharts/VerticalBarChart";
+import HorizontalBarChart from "@uf/examples/Charts/BarCharts/HorizontalBarChart";
+import MixedChart from "@uf/examples/Charts/MixedChart";
+import BubbleChart from "@uf/examples/Charts/BubbleChart";
+import DefaultDoughnutChart from "@uf/examples/Charts/DoughnutCharts/DefaultDoughnutChart";
+import PieChart from "@uf/examples/Charts/PieChart";
+import RadarChart from "@uf/examples/Charts/RadarChart";
+import PolarChart from "@uf/examples/Charts/PolarChart";
 
 // Data
-import defaultLineChartData from "layouts/pages/charts/data/defaultLineChartData";
-import gradientLineChartData from "layouts/pages/charts/data/gradientLineChartData";
-import verticalBarChartData from "layouts/pages/charts/data/verticalBarChartData";
-import horizontalBarChartData from "layouts/pages/charts/data/horizontalBarChartData";
-import mixedChartData from "layouts/pages/charts/data/mixedChartData";
-import bubbleChartData from "layouts/pages/charts/data/bubbleChartData";
-import defaultDoughnutChartData from "layouts/pages/charts/data/defaultDoughnutChartData";
-import pieChartData from "layouts/pages/charts/data/pieChartData";
-import radarChartData from "layouts/pages/charts/data/radarChartData";
-import polarChartData from "layouts/pages/charts/data/polarChartData";
+import defaultLineChartData from "@uf/layouts/pages/charts/data/defaultLineChartData";
+import gradientLineChartData from "@uf/layouts/pages/charts/data/gradientLineChartData";
+import verticalBarChartData from "@uf/layouts/pages/charts/data/verticalBarChartData";
+import horizontalBarChartData from "@uf/layouts/pages/charts/data/horizontalBarChartData";
+import mixedChartData from "@uf/layouts/pages/charts/data/mixedChartData";
+import bubbleChartData from "@uf/layouts/pages/charts/data/bubbleChartData";
+import defaultDoughnutChartData from "@uf/layouts/pages/charts/data/defaultDoughnutChartData";
+import pieChartData from "@uf/layouts/pages/charts/data/pieChartData";
+import radarChartData from "@uf/layouts/pages/charts/data/radarChartData";
+import polarChartData from "@uf/layouts/pages/charts/data/polarChartData";
 
 function Charts() {
   return (

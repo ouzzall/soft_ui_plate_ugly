@@ -18,12 +18,12 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiBadge from "components/SuiBadge";
-import SuiSelect from "components/SuiSelect";
-import SuiInput from "components/SuiInput";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiBadge from "@uf/components/SuiBadge";
+import SuiSelect from "@uf/components/SuiSelect";
+import SuiInput from "@uf/components/SuiInput";
 
 function ProductInfo() {
   const frameOptions = [

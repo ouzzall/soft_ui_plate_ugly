@@ -21,28 +21,28 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import TeamProfileCard from "examples/Cards/TeamCards/TeamProfileCard";
-import EventCard from "examples/Cards/EventCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Footer from "@uf/examples/Footer";
+import TeamProfileCard from "@uf/examples/Cards/TeamCards/TeamProfileCard";
+import EventCard from "@uf/examples/Cards/EventCard";
 
 // Teams page components
-import Header from "layouts/pages/profile/components/Header";
-import Stories from "layouts/pages/profile/teams/components/Stories";
-import Post from "layouts/pages/profile/teams/components/Post";
+import Header from "@uf/layouts/pages/profile/components/Header";
+import Stories from "@uf/layouts/pages/profile/teams/components/Stories";
+import Post from "@uf/layouts/pages/profile/teams/components/Post";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoInvision from "assets/images/small-logos/logo-invision.svg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
+import logoSlack from "@uf/assets/images/small-logos/logo-slack.svg";
+import logoInvision from "@uf/assets/images/small-logos/logo-invision.svg";
 
 function Teams() {
   // TeamProfileCard dropdown menu state

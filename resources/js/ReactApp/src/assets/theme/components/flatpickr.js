@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Soft UI Dashboard PRO React helper functions
-import rgba from "assets/theme/functions/rgba";
+import rgba from "@uf/assets/theme/functions/rgba";
 
 const { info, white, gradients } = colors;
 

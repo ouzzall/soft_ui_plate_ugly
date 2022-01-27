@@ -18,21 +18,21 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DataTable from "examples/Tables/DataTable";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import DataTable from "@uf/examples/Tables/DataTable";
 
 // ProductPage page components
-import ProductImages from "layouts/ecommerce/products/product-page/components/ProductImages";
-import ProductInfo from "layouts/ecommerce/products/product-page/components/ProductInfo";
+import ProductImages from "@uf/layouts/ecommerce/products/product-page/components/ProductImages";
+import ProductInfo from "@uf/layouts/ecommerce/products/product-page/components/ProductInfo";
 
 // Data
-import dataTableData from "layouts/ecommerce/products/product-page/data/dataTableData";
+import dataTableData from "@uf/layouts/ecommerce/products/product-page/data/dataTableData";
 
 function ProductPage() {
   return (

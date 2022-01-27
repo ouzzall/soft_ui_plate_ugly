@@ -21,12 +21,12 @@ import Fade from "@mui/material/Fade";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadge from "@uf/components/SuiBadge";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 function CameraView({ image, date, time, value, index }) {
   const { size } = typography;

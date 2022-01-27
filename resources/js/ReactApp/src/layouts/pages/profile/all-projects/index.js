@@ -21,29 +21,29 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ComplexProjectCard from "examples/Cards/ProjectCards/ComplexProjectCard";
-import PlaceholderCard from "examples/Cards/PlaceholderCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Footer from "@uf/examples/Footer";
+import ComplexProjectCard from "@uf/examples/Cards/ProjectCards/ComplexProjectCard";
+import PlaceholderCard from "@uf/examples/Cards/PlaceholderCard";
 
 // Project page components
-import Header from "layouts/pages/profile/components/Header";
+import Header from "@uf/layouts/pages/profile/components/Header";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAsana from "assets/images/small-logos/logo-asana.svg";
-import logoInvision from "assets/images/small-logos/logo-invision.svg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
+import logoSlack from "@uf/assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "@uf/assets/images/small-logos/logo-spotify.svg";
+import logoXD from "@uf/assets/images/small-logos/logo-xd.svg";
+import logoAsana from "@uf/assets/images/small-logos/logo-asana.svg";
+import logoInvision from "@uf/assets/images/small-logos/logo-invision.svg";
 
 function AllProjects() {
   // ComplexProjectCard dropdown menu state

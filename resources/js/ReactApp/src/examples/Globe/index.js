@@ -20,10 +20,10 @@ import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 // threejs components
-import * as THREE from "three";
+import * as THREE from "@uf/three";
 import { OrbitControls } from "@three-ts/orbit-controls";
 
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 function Globe({ canvasStyle, ...rest }) {
   const globeRef = useRef(null);

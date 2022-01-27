@@ -20,39 +20,39 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import ProgressLineChart from "examples/Charts/LineCharts/ProgressLineChart";
-import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
-import MasterCard from "examples/Cards/MasterCard";
-import MiniInfoCard from "examples/Cards/InfoCards/MiniInfoCard";
-import ControllerCard from "examples/Cards/ControllerCard";
-import Calendar from "examples/Calendar";
-import CategoriesList from "examples/Lists/CategoriesList";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import ProgressLineChart from "@uf/examples/Charts/LineCharts/ProgressLineChart";
+import DefaultInfoCard from "@uf/examples/Cards/InfoCards/DefaultInfoCard";
+import MasterCard from "@uf/examples/Cards/MasterCard";
+import MiniInfoCard from "@uf/examples/Cards/InfoCards/MiniInfoCard";
+import ControllerCard from "@uf/examples/Cards/ControllerCard";
+import Calendar from "@uf/examples/Calendar";
+import CategoriesList from "@uf/examples/Lists/CategoriesList";
 
 // Widgets page components
-import Steps from "layouts/pages/rtl/components/Steps";
-import FullBody from "layouts/pages/rtl/components/FullBody";
-import MediaPlayer from "layouts/pages/rtl/components/MediaPlayer";
-import OrdersOverview from "layouts/pages/rtl/components/OrdersOverview";
-import UpcomingEvents from "layouts/pages/rtl/components/UpcomingEvents";
-import Chart from "layouts/pages/rtl/components/Chart";
+import Steps from "@uf/layouts/pages/rtl/components/Steps";
+import FullBody from "@uf/layouts/pages/rtl/components/FullBody";
+import MediaPlayer from "@uf/layouts/pages/rtl/components/MediaPlayer";
+import OrdersOverview from "@uf/layouts/pages/rtl/components/OrdersOverview";
+import UpcomingEvents from "@uf/layouts/pages/rtl/components/UpcomingEvents";
+import Chart from "@uf/layouts/pages/rtl/components/Chart";
 
 // Data
-import progressLineChartData from "layouts/pages/rtl/data/progressLineChartData";
-import calendarEventsData from "layouts/pages/rtl/data/calendarEventsData";
-import categoriesListData from "layouts/pages/rtl/data/categoriesListData";
-import incomeChartData from "layouts/pages/rtl/data/incomeChartData";
-import caloriesChartData from "layouts/pages/rtl/data/caloriesChartData";
+import progressLineChartData from "@uf/layouts/pages/rtl/data/progressLineChartData";
+import calendarEventsData from "@uf/layouts/pages/rtl/data/calendarEventsData";
+import categoriesListData from "@uf/layouts/pages/rtl/data/categoriesListData";
+import incomeChartData from "@uf/layouts/pages/rtl/data/incomeChartData";
+import caloriesChartData from "@uf/layouts/pages/rtl/data/caloriesChartData";
 
 // Soft UI Dashboard PRO React contexts
-import { useSoftUIController, setDirection } from "context";
+import { useSoftUIController, setDirection } from "@uf/context";
 
 function RTL() {
   const [, dispatch] = useSoftUIController();

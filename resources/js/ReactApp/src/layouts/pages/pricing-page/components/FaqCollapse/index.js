@@ -21,11 +21,11 @@ import Icon from "@mui/material/Icon";
 import Collapse from "@mui/material/Collapse";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React components
-import borders from "assets/theme/base/borders";
+import borders from "@uf/assets/theme/base/borders";
 
 function FaqCollapse({ title, open, children, ...rest }) {
   const { borderWidth, borderColor } = borders;

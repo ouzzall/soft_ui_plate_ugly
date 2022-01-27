@@ -14,15 +14,15 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "@uf/layouts/authentication/components/IllustrationLayout";
 
 // Image
-import lock from "assets/images/illustrations/lock.png";
+import lock from "@uf/assets/images/illustrations/lock.png";
 
 function Illustration() {
   return (

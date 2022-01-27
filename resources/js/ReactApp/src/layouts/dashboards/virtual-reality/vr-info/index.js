@@ -19,27 +19,27 @@ import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiAvatar from "components/SuiAvatar";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 // VR dashboards components
-import BaseLayout from "layouts/dashboards/virtual-reality/components/BaseLayout";
+import BaseLayout from "@uf/layouts/dashboards/virtual-reality/components/BaseLayout";
 
 // VRInfo dashboards components
-import TodoList from "layouts/dashboards/virtual-reality/vr-info/components/TodoList";
-import TodoCard from "layouts/dashboards/virtual-reality/vr-info/components/TodoCard";
-import Emails from "layouts/dashboards/virtual-reality/vr-info/components/Emails";
-import MediaPlayer from "layouts/dashboards/virtual-reality/vr-info/components/MediaPlayer";
-import Messages from "layouts/dashboards/virtual-reality/vr-info/components/Messages";
+import TodoList from "@uf/layouts/dashboards/virtual-reality/vr-info/components/TodoList";
+import TodoCard from "@uf/layouts/dashboards/virtual-reality/vr-info/components/TodoCard";
+import Emails from "@uf/layouts/dashboards/virtual-reality/vr-info/components/Emails";
+import MediaPlayer from "@uf/layouts/dashboards/virtual-reality/vr-info/components/MediaPlayer";
+import Messages from "@uf/layouts/dashboards/virtual-reality/vr-info/components/Messages";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import sunCloud from "assets/images/small-logos/icon-sun-cloud.png";
+import team1 from "@uf/assets/images/team-1.jpg";
+import sunCloud from "@uf/assets/images/small-logos/icon-sun-cloud.png";
 
 function VRInfo() {
   const { d1, h2, fontWeightMedium } = typography;

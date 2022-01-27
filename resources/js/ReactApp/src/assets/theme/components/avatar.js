@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import borders from "assets/theme/base/borders";
+import borders from "@uf/assets/theme/base/borders";
 
 const { borderRadius } = borders;
 

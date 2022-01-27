@@ -18,20 +18,20 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import PageLayout from "examples/LayoutContainers/PageLayout";
+import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
+import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+import Footer from "@uf/layouts/authentication/components/Footer";
 
 // Soft UI Dashboard PRO React page layout routes
-import pageRoutes from "page.routes";
+import pageRoutes from "@uf/page.routes";
 
 function Basic() {
   return (

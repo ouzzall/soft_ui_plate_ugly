@@ -14,17 +14,17 @@ Coded by www.creative-tim.com
 */
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
-import maria from "assets/images/marie.jpg";
-import bruceMars from "assets/images/bruce-mars.jpg";
-import ivana from "assets/images/ivana-squares.jpg";
-import kal from "assets/images/kal-visuals-square.jpg";
-import ivanaSquare from "assets/images/ivana-square.jpg";
-import ivancik from "assets/images/ivancik.jpg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
+import maria from "@uf/assets/images/marie.jpg";
+import bruceMars from "@uf/assets/images/bruce-mars.jpg";
+import ivana from "@uf/assets/images/ivana-squares.jpg";
+import kal from "@uf/assets/images/kal-visuals-square.jpg";
+import ivanaSquare from "@uf/assets/images/ivana-square.jpg";
+import ivancik from "@uf/assets/images/ivancik.jpg";
 
 export default [
   {

@@ -23,9 +23,9 @@ import PropTypes from "prop-types";
 import MuiLink from "@mui/material/Link";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 function SimpleProfileCard({ image, name, position, description, action }) {
   return (

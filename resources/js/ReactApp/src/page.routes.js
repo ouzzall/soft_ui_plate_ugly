@@ -31,12 +31,12 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React icons
-import Shop from "examples/Icons/Shop";
-import Office from "examples/Icons/Office";
-import Document from "examples/Icons/Document";
-import CustomerSupport from "examples/Icons/CustomerSupport";
-import Cube from "examples/Icons/Cube";
-import SpaceShip from "examples/Icons/SpaceShip";
+import Shop from "@uf/examples/Icons/Shop";
+import Office from "@uf/examples/Icons/Office";
+import Document from "@uf/examples/Icons/Document";
+import CustomerSupport from "@uf/examples/Icons/CustomerSupport";
+import Cube from "@uf/examples/Icons/Cube";
+import SpaceShip from "@uf/examples/Icons/SpaceShip";
 
 const pageRoutes = [
   {

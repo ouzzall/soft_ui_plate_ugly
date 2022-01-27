@@ -22,16 +22,16 @@ import { Link } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "@uf/layouts/authentication/components/IllustrationLayout";
 
 // Images
-import rocket from "assets/images/illustrations/rocket-white.png";
+import rocket from "@uf/assets/images/illustrations/rocket-white.png";
 
 function Illustration() {
   const [agreement, setAgreemnet] = useState(true);

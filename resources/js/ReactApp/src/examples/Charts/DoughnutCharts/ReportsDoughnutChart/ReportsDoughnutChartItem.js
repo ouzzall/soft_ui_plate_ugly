@@ -20,12 +20,12 @@ import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import borders from "assets/theme/base/borders";
-import colors from "assets/theme/base/colors";
+import borders from "@uf/assets/theme/base/borders";
+import colors from "@uf/assets/theme/base/colors";
 
 function ReportsDoughnutChartItem({ color, title, percentage, hasBorder }) {
   const { borderWidth } = borders;

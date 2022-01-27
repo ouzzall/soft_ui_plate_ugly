@@ -14,20 +14,20 @@ Coded by www.creative-tim.com
 */
 
 // uuid is a library for generating unique id
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "@uf/uuid";
 
 // Kanban application components
-import Card from "layouts/applications/kanban/components/Card";
+import Card from "@uf/layouts/applications/kanban/components/Card";
 
 // Images
-import officeDark from "assets/images/office-dark.jpg";
-import meeting from "assets/images/meeting.jpg";
-import homeDecore from "assets/images/home-decor-1.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+import officeDark from "@uf/assets/images/office-dark.jpg";
+import meeting from "@uf/assets/images/meeting.jpg";
+import homeDecore from "@uf/assets/images/home-decor-1.jpg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
 
 export default {
   columns: [

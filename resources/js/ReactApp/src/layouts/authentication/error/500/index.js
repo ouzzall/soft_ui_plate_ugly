@@ -20,25 +20,25 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import PageLayout from "examples/LayoutContainers/PageLayout";
+import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
+import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 // Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+import Footer from "@uf/layouts/authentication/components/Footer";
 
 // Soft UI Dashboard PRO React page layout routes
-import pageRoutes from "page.routes";
+import pageRoutes from "@uf/page.routes";
 
 // Images
-import error500 from "assets/images/illustrations/error-500.png";
+import error500 from "@uf/assets/images/illustrations/error-500.png";
 
 function Error500() {
   const { d1, d3, d4, d5 } = typography;

@@ -28,21 +28,21 @@ import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox"
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox"
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import SidenavCollapse from "examples/Sidenav/SidenavCollapse";
-import SidenavList from "examples/Sidenav/SidenavList";
-import SidenavItem from "examples/Sidenav/SidenavItem";
-// import SidenavCard from "examples/Sidenav/SidenavCard";
+import SidenavCollapse from "@uf/examples/Sidenav/SidenavCollapse";
+import SidenavList from "@uf/examples/Sidenav/SidenavList";
+import SidenavItem from "@uf/examples/Sidenav/SidenavItem";
+// import SidenavCard from "@uf/examples/Sidenav/SidenavCard";
 
 // Custom styles for the Sidenav
-import SidenavRoot from "examples/Sidenav/SidenavRoot";
-import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
+import SidenavRoot from "@uf/examples/Sidenav/SidenavRoot";
+import sidenavLogoLabel from "@uf/examples/Sidenav/styles/sidenav";
 
 // Soft UI Dashboard PRO React context
-import { useSoftUIController, setMiniSidenav } from "context";
+import { useSoftUIController, setMiniSidenav } from "@uf/context";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
   const [openCollapse, setOpenCollapse] = useState(false);

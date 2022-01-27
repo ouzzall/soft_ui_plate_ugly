@@ -17,13 +17,13 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiProgress from "components/SuiProgress";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiProgress from "@uf/components/SuiProgress";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
+import colors from "@uf/assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
 
 function SocialItem({ icon, title, percentage }) {
   const { socialMediaColors } = colors;

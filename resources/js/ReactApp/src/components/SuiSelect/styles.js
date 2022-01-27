@@ -13,14 +13,14 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-import borders from "assets/theme/base/borders";
-import boxShadows from "assets/theme/base/boxShadows";
+import colors from "@uf/assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
+import borders from "@uf/assets/theme/base/borders";
+import boxShadows from "@uf/assets/theme/base/boxShadows";
 
 // Soft UI Dashboard PRO React helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
-import boxShadow from "assets/theme/functions/boxShadow";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
+import boxShadow from "@uf/assets/theme/functions/boxShadow";
 
 // @emotion/react components
 import { keyframes } from "@emotion/react";

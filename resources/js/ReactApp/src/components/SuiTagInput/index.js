@@ -23,7 +23,7 @@ import ReactTagInput from "@pathofdev/react-tag-input";
 import "@pathofdev/react-tag-input/build/index.css";
 
 // Custom styles for SuiTagInput
-import SuiTagInputRoot from "components/SuiTagInput/SuiTagInputRoot";
+import SuiTagInputRoot from "@uf/components/SuiTagInput/SuiTagInputRoot";
 
 const SuiTagInput = forwardRef(({ size, error, success, ...rest }, ref) => (
   <SuiTagInputRoot ownerState={{ size, error, success }}>

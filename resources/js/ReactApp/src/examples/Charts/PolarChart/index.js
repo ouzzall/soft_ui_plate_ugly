@@ -25,11 +25,11 @@ import { PolarArea } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // PolarChart configurations
-import configs from "examples/Charts/PolarChart/configs";
+import configs from "@uf/examples/Charts/PolarChart/configs";
 
 function PolarChart({ title, description, chart }) {
   const { data, options } = configs(chart.labels || [], chart.datasets || {});

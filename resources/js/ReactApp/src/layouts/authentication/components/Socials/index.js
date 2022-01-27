@@ -14,8 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React components
-import SuiButton from "components/SuiButton";
-import SuiBox from "components/SuiBox";
+import SuiButton from "@uf/components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
 
 function Socials() {
   return (

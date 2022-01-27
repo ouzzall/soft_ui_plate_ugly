@@ -26,12 +26,12 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import RedditIcon from "@mui/icons-material/Reddit";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Analytics application components
-import SocialItem from "layouts/applications/analytics/components/SocialItem";
+import SocialItem from "@uf/layouts/applications/analytics/components/SocialItem";
 
 function Social() {
   return (

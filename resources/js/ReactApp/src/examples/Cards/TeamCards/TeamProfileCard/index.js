@@ -23,10 +23,10 @@ import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadge from "@uf/components/SuiBadge";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 function TeamProfileCard({ color, title, description, industry, rating, members, dropdown }) {
   const ratings = {

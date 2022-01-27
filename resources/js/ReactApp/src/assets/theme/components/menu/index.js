@@ -14,13 +14,13 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import boxShadows from "assets/theme/base/boxShadows";
-import typography from "assets/theme/base/typography";
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+import boxShadows from "@uf/assets/theme/base/boxShadows";
+import typography from "@uf/assets/theme/base/typography";
+import colors from "@uf/assets/theme/base/colors";
+import borders from "@uf/assets/theme/base/borders";
 
 // Soft UI Dashboard PRO React helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { lg } = boxShadows;
 const { size } = typography;

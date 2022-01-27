@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
+import SuiTypography from "@uf/components/SuiTypography";
 
 function ReviewCell({ rating }) {
   const ratings = {

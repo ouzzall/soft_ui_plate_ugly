@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
+import SuiTypography from "@uf/components/SuiTypography";
 
 export default [
   {

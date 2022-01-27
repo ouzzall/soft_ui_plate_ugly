@@ -21,11 +21,11 @@ Coded by www.creative-tim.com
 // import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-// import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+// import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 function Footer() {
   // const { href, name } = company;
@@ -61,9 +61,9 @@ function Footer() {
         px={1.5}
       >
         &copy; {new Date().getFullYear()}, uglyfood
-        
+
       </SuiBox>
-      
+
     </SuiBox>
   );
 }

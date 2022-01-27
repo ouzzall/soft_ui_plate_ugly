@@ -20,10 +20,10 @@ Coded by www.creative-tim.com
  */
 
 // Soft UI Dashboard PRO React Base Styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Soft UI Dashboard PRO React Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { grey } = colors;
 

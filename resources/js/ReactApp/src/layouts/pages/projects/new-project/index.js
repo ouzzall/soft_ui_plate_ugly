@@ -22,19 +22,19 @@ import Divider from "@mui/material/Divider";
 import Switch from "@mui/material/Switch";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiSelect from "components/SuiSelect";
-import SuiDatePicker from "components/SuiDatePicker";
-import SuiEditor from "components/SuiEditor";
-import SuiDropzone from "components/SuiDropzone";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiSelect from "@uf/components/SuiSelect";
+import SuiDatePicker from "@uf/components/SuiDatePicker";
+import SuiEditor from "@uf/components/SuiEditor";
+import SuiDropzone from "@uf/components/SuiDropzone";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 
 function NewProject() {
   const [startDate, setStartDate] = useState(new Date());

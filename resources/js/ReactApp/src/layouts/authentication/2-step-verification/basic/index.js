@@ -18,21 +18,21 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import PageLayout from "examples/LayoutContainers/PageLayout";
-import SpaceShip from "examples/Icons/SpaceShip";
+import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
+import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
+import SpaceShip from "@uf/examples/Icons/SpaceShip";
 
 // Soft UI Dashboard PRO React page layout routes
-import pageRoutes from "page.routes";
+import pageRoutes from "@uf/page.routes";
 
 // Images
-import curved9 from "assets/images/curved-images/curved9.jpg";
+import curved9 from "@uf/assets/images/curved-images/curved9.jpg";
 
 function Basic() {
   return (

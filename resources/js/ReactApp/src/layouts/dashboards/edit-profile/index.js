@@ -18,27 +18,27 @@ import Grid from "@mui/material/Grid";
 // import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-// import SuiSelect from "components/SuiSelect";
-// import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+// import SuiSelect from "@uf/components/SuiSelect";
+// import SuiTypography from "@uf/components/SuiTypography";
 
 // Security page components
-// import BaseLayout from "layouts/pages/account/components/BaseLayout";
-// import FormField from "layouts/pages/account/components/FormField";
-// import SecuritySettings from "layouts/pages/account/security/components/SecuritySettings";
-// import Authentication from "layouts/pages/account/security/components/Authentication";
-import ChangePassword from "layouts/dashboards/edit-profile/components/ChangePassword";
-import ChangeProfile from "layouts/dashboards/edit-profile/components/ChangeProfile";
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Header from "layouts/dashboards/edit-profile/components/Header/Header";
-// import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+// import BaseLayout from "@uf/layouts/pages/account/components/BaseLayout";
+// import FormField from "@uf/layouts/pages/account/components/FormField";
+// import SecuritySettings from "@uf/layouts/pages/account/security/components/SecuritySettings";
+// import Authentication from "@uf/layouts/pages/account/security/components/Authentication";
+import ChangePassword from "@uf/layouts/dashboards/edit-profile/components/ChangePassword";
+import ChangeProfile from "@uf/layouts/dashboards/edit-profile/components/ChangeProfile";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Header from "@uf/layouts/dashboards/edit-profile/components/Header/Header";
+// import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 
 function EditProfile() {
   return (
     <DashboardLayout>
       <Header />
       <SuiBox mt={5}>
-        
+
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6}>

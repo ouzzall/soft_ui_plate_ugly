@@ -18,10 +18,10 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiBadge from "components/SuiBadge";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiBadge from "@uf/components/SuiBadge";
 
 function Authentication() {
   return (

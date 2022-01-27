@@ -26,42 +26,42 @@ import Icon from "@mui/material/Icon";
 // import InstagramIcon from "@mui/icons-material/Instagram";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiBadgeDot from "components/SuiBadgeDot";
-import SuiButton from "components/SuiButton";
-// import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiBadgeDot from "@uf/components/SuiBadgeDot";
+import SuiButton from "@uf/components/SuiButton";
+// import SuiTypography from "@uf/components/SuiTypography";
 
-// import SuiSocialButton from "components/SuiSocialButton";
+// import SuiSocialButton from "@uf/components/SuiSocialButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-// import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-// import ProfilesList from "examples/Lists/ProfilesList";
-// import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-// import PlaceholderCard from "examples/Cards/PlaceholderCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Footer from "@uf/examples/Footer";
+// import ProfileInfoCard from "@uf/examples/Cards/InfoCards/ProfileInfoCard";
+// import ProfilesList from "@uf/examples/Lists/ProfilesList";
+// import DefaultProjectCard from "@uf/examples/Cards/ProjectCards/DefaultProjectCard";
+// import PlaceholderCard from "@uf/examples/Cards/PlaceholderCard";
 
 // Overview page components
-import Header from "layouts/dashboards/profile/components/Header";
-// import PlatformSettings from "layouts/pages/profile/profile-overview/components/PlatformSettings";
+import Header from "@uf/layouts/dashboards/profile/components/Header";
+// import PlatformSettings from "@uf/layouts/pages/profile/profile-overview/components/PlatformSettings";
 
 // Data
-// import profilesListData from "layouts/pages/profile/profile-overview/data/profilesListData";
-import DefaultStatisticsCard from "examples/Cards/StatisticsCards/DefaultStatisticsCard";
+// import profilesListData from "@uf/layouts/pages/profile/profile-overview/data/profilesListData";
+import DefaultStatisticsCard from "@uf/examples/Cards/StatisticsCards/DefaultStatisticsCard";
 
-import DefaultLineChart from "examples/Charts/LineCharts/DefaultLineChart";
+import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
 
 // Overview page components
-// import ChannelsChart from "layouts/ecommerce/overview/components/ChannelsChart";
+// import ChannelsChart from "@uf/layouts/ecommerce/overview/components/ChannelsChart";
 
 // Data
-import defaultLineChartData from "layouts/ecommerce/overview/data/defaultLineChartData";
+import defaultLineChartData from "@uf/layouts/ecommerce/overview/data/defaultLineChartData";
 
 // Images
-import DataTable from "examples/Tables/DataTable";
+import DataTable from "@uf/examples/Tables/DataTable";
 
 // Data
-import dataTableData from "layouts/ecommerce/orders/order-list/data/dataTableData";
+import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 
 function Profile() {
   return (
@@ -89,7 +89,7 @@ function Profile() {
                   value: "+12%",
                   label: "since last month",
                 }}
-                
+
               />
             </Grid>
             <Grid item xs={12} sm={4}>
@@ -101,14 +101,14 @@ function Profile() {
                   value: "+$213",
                   label: "since last month",
                 }}
-                
+
               />
             </Grid>
           </Grid>
         </SuiBox>
         <SuiBox mb={3}>
           <Grid container spacing={3}>
-            
+
             <Grid item xs={12} sm={12} lg={12}>
               <DefaultLineChart
                 title="Revenue"
@@ -139,21 +139,21 @@ function Profile() {
           </Grid>
         </SuiBox>
         <SuiBox my={3}>
-        
+
         <Card>
           <DataTable table={dataTableData} entriesPerPage={false} canSearch />
         </Card>
       </SuiBox>
       {/* <SuiBox mt={3} mb={3}>
         <Grid container spacing={3}>
-          
-          
-           
-          
-          
+
+
+
+
+
         </Grid>
       </SuiBox> */}
-      
+
 
       <Footer />
     </DashboardLayout>

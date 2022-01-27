@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 // Soft UI Dashboard PRO React helper functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { size } = typography;
 

@@ -18,21 +18,21 @@ import { useMemo } from "react";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import EventCalendar from "examples/Calendar";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import EventCalendar from "@uf/examples/Calendar";
 
 // Calendar application components
-import Header from "layouts/applications/calendar/components/Header";
-import NextEvents from "layouts/applications/calendar/components/NextEvents";
-import ProductivityChart from "layouts/applications/calendar/components/ProductivityChart";
+import Header from "@uf/layouts/applications/calendar/components/Header";
+import NextEvents from "@uf/layouts/applications/calendar/components/NextEvents";
+import ProductivityChart from "@uf/layouts/applications/calendar/components/ProductivityChart";
 
 // Data
-import calendarEventsData from "layouts/applications/calendar/data/calendarEventsData";
+import calendarEventsData from "@uf/layouts/applications/calendar/data/calendarEventsData";
 
 function Calendar() {
   return (

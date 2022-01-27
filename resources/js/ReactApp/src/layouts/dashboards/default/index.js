@@ -18,27 +18,27 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import SalesTable from "examples/Tables/SalesTable";
-import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
-import Globe from "examples/Globe";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import SalesTable from "@uf/examples/Tables/SalesTable";
+import ReportsBarChart from "@uf/examples/Charts/BarCharts/ReportsBarChart";
+import GradientLineChart from "@uf/examples/Charts/LineCharts/GradientLineChart";
+import Globe from "@uf/examples/Globe";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
-import breakpoints from "assets/theme/base/breakpoints";
+import typography from "@uf/assets/theme/base/typography";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
 
 // Data
-import salesTableData from "layouts/dashboards/default/data/salesTableData";
-import reportsBarChartData from "layouts/dashboards/default/data/reportsBarChartData";
-import gradientLineChartData from "layouts/dashboards/default/data/gradientLineChartData";
+import salesTableData from "@uf/layouts/dashboards/default/data/salesTableData";
+import reportsBarChartData from "@uf/layouts/dashboards/default/data/reportsBarChartData";
+import gradientLineChartData from "@uf/layouts/dashboards/default/data/gradientLineChartData";
 
 function Default() {
   const { values } = breakpoints;

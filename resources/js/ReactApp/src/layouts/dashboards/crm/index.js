@@ -18,30 +18,30 @@ import { useMemo } from "react";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniGradientLineChart from "examples/Charts/LineCharts/MiniGradientLineChart";
-import PlaceholderCard from "examples/Cards/PlaceholderCard";
-import BackgroundBlogCard from "examples/Cards/BlogCards/BackgroundBlogCard";
-import CategoriesList from "examples/Lists/CategoriesList";
-import MessageCard from "examples/Cards/MessageCard";
-import RankingsList from "examples/Lists/RankingsList";
-import Calendar from "examples/Calendar";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniGradientLineChart from "@uf/examples/Charts/LineCharts/MiniGradientLineChart";
+import PlaceholderCard from "@uf/examples/Cards/PlaceholderCard";
+import BackgroundBlogCard from "@uf/examples/Cards/BlogCards/BackgroundBlogCard";
+import CategoriesList from "@uf/examples/Lists/CategoriesList";
+import MessageCard from "@uf/examples/Cards/MessageCard";
+import RankingsList from "@uf/examples/Lists/RankingsList";
+import Calendar from "@uf/examples/Calendar";
 
 // Data
-import miniGradientLineChartData from "layouts/dashboards/crm/data/miniGradientLineChartData";
-import categoriesListData from "layouts/dashboards/crm/data/categoriesListData";
-import rankingsListData from "layouts/dashboards/crm/data/rankingsListData";
-import calendarEventsData from "layouts/dashboards/crm/data/calendarEventsData";
+import miniGradientLineChartData from "@uf/layouts/dashboards/crm/data/miniGradientLineChartData";
+import categoriesListData from "@uf/layouts/dashboards/crm/data/categoriesListData";
+import rankingsListData from "@uf/layouts/dashboards/crm/data/rankingsListData";
+import calendarEventsData from "@uf/layouts/dashboards/crm/data/calendarEventsData";
 
 // Images
-import ivancik from "assets/images/ivancik.jpg";
-import kalVisualsSquare from "assets/images/kal-visuals-square.jpg";
+import ivancik from "@uf/assets/images/ivancik.jpg";
+import kalVisualsSquare from "@uf/assets/images/kal-visuals-square.jpg";
 
 function CRM() {
   const { visitorsChart, incomeChart } = miniGradientLineChartData;

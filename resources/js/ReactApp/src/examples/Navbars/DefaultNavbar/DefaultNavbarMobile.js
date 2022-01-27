@@ -23,17 +23,17 @@ import Menu from "@mui/material/Menu";
 // import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
+import DefaultNavbarLink from "@uf/examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 
 // DefaultNavbar dropdown menus
-import PagesMenu from "examples/Navbars/DefaultNavbar/Menus/PagesMenu";
-import AuthenticationMenu from "examples/Navbars/DefaultNavbar/Menus/AuthenticationMenu";
-import ApplicationsMenu from "examples/Navbars/DefaultNavbar/Menus/ApplicationsMenu";
-import EcommerceMenu from "examples/Navbars/DefaultNavbar/Menus/EcommerceMenu";
-import DocsMenu from "examples/Navbars/DefaultNavbar/Menus/DocsMenu";
+import PagesMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/PagesMenu";
+import AuthenticationMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/AuthenticationMenu";
+import ApplicationsMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/ApplicationsMenu";
+import EcommerceMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/EcommerceMenu";
+import DocsMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/DocsMenu";
 
 function DefaultNavbarMobile({ routes, open, close }) {
   const { width } = open && open.getBoundingClientRect();

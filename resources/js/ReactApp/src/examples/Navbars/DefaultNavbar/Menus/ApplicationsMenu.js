@@ -24,10 +24,10 @@ import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbarMenu from "examples/Navbars/DefaultNavbar/DefaultNavbarMenu";
+import DefaultNavbarMenu from "@uf/examples/Navbars/DefaultNavbar/DefaultNavbarMenu";
 
 function ApplicationsMenu({ routes, open, close, mobileMenu }) {
   const renderApplicationsMenuRoute = (routeName) =>

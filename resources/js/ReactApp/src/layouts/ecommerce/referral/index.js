@@ -19,27 +19,27 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import OutlinedCounterCard from "examples/Cards/CounterCards/OutlinedCounterCard";
-import TransparentInfoCard from "examples/Cards/InfoCards/TransparentInfoCard";
-import ComplexBackgroundCard from "examples/Cards/BackgroundCards/ComplexBackgroundCard";
-import DataTable from "examples/Tables/DataTable";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import OutlinedCounterCard from "@uf/examples/Cards/CounterCards/OutlinedCounterCard";
+import TransparentInfoCard from "@uf/examples/Cards/InfoCards/TransparentInfoCard";
+import ComplexBackgroundCard from "@uf/examples/Cards/BackgroundCards/ComplexBackgroundCard";
+import DataTable from "@uf/examples/Tables/DataTable";
 
 // Referral page components
-import ReferralCode from "layouts/ecommerce/referral/components/ReferralCode";
-import OutlinedCard from "layouts/ecommerce/referral/components/OutlinedCard";
+import ReferralCode from "@uf/layouts/ecommerce/referral/components/ReferralCode";
+import OutlinedCard from "@uf/layouts/ecommerce/referral/components/OutlinedCard";
 
 // Data
-import dataTableData from "layouts/ecommerce/referral/data/dataTableData";
+import dataTableData from "@uf/layouts/ecommerce/referral/data/dataTableData";
 
 // Images
-import officeDark from "assets/images/office-dark.jpg";
+import officeDark from "@uf/assets/images/office-dark.jpg";
 
 const image1 =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/window-desk.jpg";

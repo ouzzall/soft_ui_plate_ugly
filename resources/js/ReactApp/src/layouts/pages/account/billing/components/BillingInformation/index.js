@@ -17,11 +17,11 @@ Coded by www.creative-tim.com
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Billing page components
-import Bill from "layouts/pages/account/billing/components/Bill";
+import Bill from "@uf/layouts/pages/account/billing/components/Bill";
 
 function BillingInformation() {
   return (

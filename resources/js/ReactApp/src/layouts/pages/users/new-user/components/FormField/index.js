@@ -17,12 +17,12 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // formik components
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage, Field } from "@uf/formik";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
 
 function FormField({ label, name, ...rest }) {
   return (

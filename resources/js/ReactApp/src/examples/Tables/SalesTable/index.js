@@ -26,11 +26,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
-import SuiBox from "components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import SalesTableCell from "examples/Tables/SalesTable/SalesTableCell";
+import SalesTableCell from "@uf/examples/Tables/SalesTable/SalesTableCell";
 
 function SalesTable({ title, rows }) {
   const renderTableCells = rows.map((row, key) => {

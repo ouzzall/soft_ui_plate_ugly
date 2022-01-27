@@ -28,15 +28,15 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import ReportsDoughnutChartItem from "examples/Charts/DoughnutCharts/ReportsDoughnutChart/ReportsDoughnutChartItem";
+import ReportsDoughnutChartItem from "@uf/examples/Charts/DoughnutCharts/ReportsDoughnutChart/ReportsDoughnutChartItem";
 
 // ReportsDoughnutChart configurations
-import configs from "examples/Charts/DoughnutCharts/ReportsDoughnutChart/configs";
+import configs from "@uf/examples/Charts/DoughnutCharts/ReportsDoughnutChart/configs";
 
 function ReportsDoughnutChart({ title, count, chart, tooltip }) {
   const { data, options } = configs(chart.labels || [], chart.datasets || {});

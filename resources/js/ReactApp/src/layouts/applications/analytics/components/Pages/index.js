@@ -23,13 +23,13 @@ import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Analytics application components
-import PagesHeaderCell from "layouts/applications/analytics/components/PagesHeaderCell";
-import PagesBodyCell from "layouts/applications/analytics/components/PagesBodyCell";
+import PagesHeaderCell from "@uf/layouts/applications/analytics/components/PagesHeaderCell";
+import PagesBodyCell from "@uf/layouts/applications/analytics/components/PagesBodyCell";
 
 function Pages() {
   return (

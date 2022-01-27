@@ -22,16 +22,16 @@ import { Link } from "react-router-dom";
 import Switch from "@mui/material/Switch";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "@uf/layouts/authentication/components/IllustrationLayout";
 
 // Image
-import chat from "assets/images/illustrations/chat.png";
+import chat from "@uf/assets/images/illustrations/chat.png";
 
 function Illustration() {
   const [rememberMe, setRememberMe] = useState(false);

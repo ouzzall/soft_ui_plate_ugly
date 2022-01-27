@@ -18,17 +18,17 @@ import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiSelect from "components/SuiSelect";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiSelect from "@uf/components/SuiSelect";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Security page components
-import BaseLayout from "layouts/pages/account/components/BaseLayout";
-import FormField from "layouts/pages/account/components/FormField";
-import SecuritySettings from "layouts/pages/account/security/components/SecuritySettings";
-import Authentication from "layouts/pages/account/security/components/Authentication";
-import ChangePassword from "layouts/pages/account/security/components/ChangePassword";
-import PasswordRequirements from "layouts/pages/account/security/components/PasswordRequirements";
+import BaseLayout from "@uf/layouts/pages/account/components/BaseLayout";
+import FormField from "@uf/layouts/pages/account/components/FormField";
+import SecuritySettings from "@uf/layouts/pages/account/security/components/SecuritySettings";
+import Authentication from "@uf/layouts/pages/account/security/components/Authentication";
+import ChangePassword from "@uf/layouts/pages/account/security/components/ChangePassword";
+import PasswordRequirements from "@uf/layouts/pages/account/security/components/PasswordRequirements";
 
 function Security() {
   return (

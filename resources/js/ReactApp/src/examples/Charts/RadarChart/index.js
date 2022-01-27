@@ -25,17 +25,17 @@ import { Radar } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // RadarChart configurations
-import configs from "examples/Charts/RadarChart/configs";
+import configs from "@uf/examples/Charts/RadarChart/configs";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Soft UI Dashboard PRO React helper functions
-import rgba from "assets/theme/functions/rgba";
+import rgba from "@uf/assets/theme/functions/rgba";
 
 function RadarChart({ title, description, chart }) {
   const chartDatasets = chart.datasets

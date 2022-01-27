@@ -17,24 +17,24 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 
 // Sweet Alerts page components
-import Basic from "layouts/pages/sweet-alerts/components/Basic";
-import Success from "layouts/pages/sweet-alerts/components/Success";
-import CustomHtml from "layouts/pages/sweet-alerts/components/CustomHtml";
-import GithubAvatarRequest from "layouts/pages/sweet-alerts/components/GithubAvatarRequest";
-import TitleWithText from "layouts/pages/sweet-alerts/components/TitleWithText";
-import AutoClose from "layouts/pages/sweet-alerts/components/AutoClose";
-import WithAttachedFunction from "layouts/pages/sweet-alerts/components/WithAttachedFunction";
-import WithSuccessAttachedFunction from "layouts/pages/sweet-alerts/components/WithSuccessAttachedFunction";
-import RtlLanguarge from "layouts/pages/sweet-alerts/components/RtlLanguarge";
+import Basic from "@uf/layouts/pages/sweet-alerts/components/Basic";
+import Success from "@uf/layouts/pages/sweet-alerts/components/Success";
+import CustomHtml from "@uf/layouts/pages/sweet-alerts/components/CustomHtml";
+import GithubAvatarRequest from "@uf/layouts/pages/sweet-alerts/components/GithubAvatarRequest";
+import TitleWithText from "@uf/layouts/pages/sweet-alerts/components/TitleWithText";
+import AutoClose from "@uf/layouts/pages/sweet-alerts/components/AutoClose";
+import WithAttachedFunction from "@uf/layouts/pages/sweet-alerts/components/WithAttachedFunction";
+import WithSuccessAttachedFunction from "@uf/layouts/pages/sweet-alerts/components/WithSuccessAttachedFunction";
+import RtlLanguarge from "@uf/layouts/pages/sweet-alerts/components/RtlLanguarge";
 
 function SweetAlerts() {
   return (

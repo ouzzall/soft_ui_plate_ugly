@@ -22,9 +22,9 @@ import Divider from "@mui/material/Divider";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 function RankingList({ title, date, rankings }) {
   const renderRankings = rankings.map(({ color, icon, name, description, value }, key) => (

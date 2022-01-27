@@ -25,19 +25,19 @@ import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import breakpoints from "assets/theme/base/breakpoints";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
 
 // Soft UI Dashboard PRO React example components
-import CameraView from "layouts/dashboards/smart-home/components/CameraView";
+import CameraView from "@uf/layouts/dashboards/smart-home/components/CameraView";
 
 // Images
-import camera1 from "assets/images/bg-smart-home-1.jpg";
-import camera2 from "assets/images/bg-smart-home-2.jpg";
-import camera3 from "assets/images/home-decor-3.jpg";
+import camera1 from "@uf/assets/images/bg-smart-home-1.jpg";
+import camera2 from "@uf/assets/images/bg-smart-home-2.jpg";
+import camera3 from "@uf/assets/images/home-decor-3.jpg";
 
 function Cameras() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -52,7 +52,7 @@ function Cameras() {
         : setTabsOrientation("horizontal");
     }
 
-    /** 
+    /**
      The event listener that's calling the handleTabsOrientation function when resizing the window.
     */
     window.addEventListener("resize", handleTabsOrientation);

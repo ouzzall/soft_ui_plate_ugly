@@ -26,12 +26,12 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiProgress from "components/SuiProgress";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiProgress from "@uf/components/SuiProgress";
 
 // ProgressLineChart configurations
-import configs from "examples/Charts/LineCharts/ProgressLineChart/config";
+import configs from "@uf/examples/Charts/LineCharts/ProgressLineChart/config";
 
 function ProgressLineChart({ color, icon, title, count, progress, height, chart }) {
   const { data, options } = configs(color, chart.labels || [], title, chart.data || []);

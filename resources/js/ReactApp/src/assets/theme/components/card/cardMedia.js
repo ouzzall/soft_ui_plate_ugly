@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React Base Styles
-import borders from "assets/theme/base/borders";
+import borders from "@uf/assets/theme/base/borders";
 
 // Soft UI Dashboard PRO React Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { borderRadius } = borders;
 

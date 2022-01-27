@@ -20,11 +20,11 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiBadge from "components/SuiBadge";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
-import SuiProgress from "components/SuiProgress";
+import SuiBox from "@uf/components/SuiBox";
+import SuiBadge from "@uf/components/SuiBadge";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiProgress from "@uf/components/SuiProgress";
 
 // Custom styles for the Card
 

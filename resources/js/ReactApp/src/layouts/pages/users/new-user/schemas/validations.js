@@ -13,8 +13,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import * as Yup from "yup";
-import checkout from "layouts/pages/users/new-user/schemas/form";
+import * as Yup from "@uf/yup";
+import checkout from "@uf/layouts/pages/users/new-user/schemas/form";
 
 const {
   formField: { firstName, lastName, email, password, repeatPassword, address1, city, zip, twitter },

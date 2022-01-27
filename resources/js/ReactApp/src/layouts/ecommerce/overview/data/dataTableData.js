@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Overview page components
-import ProductCell from "layouts/ecommerce/overview/components/ProductCell";
-import RefundsCell from "layouts/ecommerce/overview/components/RefundsCell";
-import DefaultCell from "layouts/ecommerce/overview/components/DefaultCell";
+import ProductCell from "@uf/layouts/ecommerce/overview/components/ProductCell";
+import RefundsCell from "@uf/layouts/ecommerce/overview/components/RefundsCell";
+import DefaultCell from "@uf/layouts/ecommerce/overview/components/DefaultCell";
 
 // Images
-import nikeV22 from "assets/images/ecommerce/blue-shoe.jpeg";
-import businessKit from "assets/images/ecommerce/black-mug.jpeg";
-import blackChair from "assets/images/ecommerce/black-chair.jpeg";
-import wirelessCharger from "assets/images/ecommerce/bang-sound.jpeg";
-import tripKit from "assets/images/ecommerce/photo-tools.jpeg";
+import nikeV22 from "@uf/assets/images/ecommerce/blue-shoe.jpeg";
+import businessKit from "@uf/assets/images/ecommerce/black-mug.jpeg";
+import blackChair from "@uf/assets/images/ecommerce/black-chair.jpeg";
+import wirelessCharger from "@uf/assets/images/ecommerce/bang-sound.jpeg";
+import tripKit from "@uf/assets/images/ecommerce/photo-tools.jpeg";
 
 export default {
   columns: [

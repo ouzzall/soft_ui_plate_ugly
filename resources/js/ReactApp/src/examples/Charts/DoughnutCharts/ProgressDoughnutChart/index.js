@@ -26,12 +26,12 @@ import Card from "@mui/material/Card";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadgeDot from "components/SuiBadgeDot";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadgeDot from "@uf/components/SuiBadgeDot";
 
 // ProgressDoughnutChart configurations
-import configs from "examples/Charts/DoughnutCharts/ProgressDoughnutChart/config";
+import configs from "@uf/examples/Charts/DoughnutCharts/ProgressDoughnutChart/config";
 
 function ProgressDoughnutChart({ color, icon, title, count, height, chart }) {
   const { data, options } = configs(chart.labels || [], chart.datasets || {});

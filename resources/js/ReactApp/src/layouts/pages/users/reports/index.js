@@ -21,20 +21,20 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
-import Table from "examples/Tables/Table";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import ComplexStatisticsCard from "@uf/examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import Table from "@uf/examples/Tables/Table";
 
 // Reports page components
-import Reviews from "layouts/pages/users/reports/components/Reviews";
+import Reviews from "@uf/layouts/pages/users/reports/components/Reviews";
 
 // Data
-import tableData from "layouts/pages/users/reports/data/tableData";
+import tableData from "@uf/layouts/pages/users/reports/data/tableData";
 
 function Reports() {
   const { columns, rows } = tableData;

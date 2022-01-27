@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // sweetalert2 components
-import Swal from "sweetalert2";
+import Swal from "@uf/sweetalert2";
 
 // Sweet Alerts page components
-import Template from "layouts/pages/sweet-alerts/components/Template";
+import Template from "@uf/layouts/pages/sweet-alerts/components/Template";
 
 function WithSuccessAttachedFunction() {
   const showAlert = () => {

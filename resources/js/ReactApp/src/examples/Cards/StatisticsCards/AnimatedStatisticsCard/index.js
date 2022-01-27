@@ -26,13 +26,13 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiBadge from "components/SuiBadge";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBadge from "@uf/components/SuiBadge";
+import SuiButton from "@uf/components/SuiButton";
 
 // Images
-import whiteCurved from "assets/images/curved-images/white-curved.jpeg";
+import whiteCurved from "@uf/assets/images/curved-images/white-curved.jpeg";
 
 function AnimatedStatisticsCard({ color, title, count, percentage, action }) {
   const sharedStyles = {

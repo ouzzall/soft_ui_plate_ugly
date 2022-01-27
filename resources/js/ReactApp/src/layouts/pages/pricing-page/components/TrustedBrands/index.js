@@ -17,16 +17,16 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Images
-import coinbase from "assets/images/logos/gray-logos/logo-coinbase.svg";
-import nasa from "assets/images/logos/gray-logos/logo-nasa.svg";
-import netflix from "assets/images/logos/gray-logos/logo-netflix.svg";
-import pinterest from "assets/images/logos/gray-logos/logo-pinterest.svg";
-import spotify from "assets/images/logos/gray-logos/logo-spotify.svg";
-import vodafone from "assets/images/logos/gray-logos/logo-vodafone.svg";
+import coinbase from "@uf/assets/images/logos/gray-logos/logo-coinbase.svg";
+import nasa from "@uf/assets/images/logos/gray-logos/logo-nasa.svg";
+import netflix from "@uf/assets/images/logos/gray-logos/logo-netflix.svg";
+import pinterest from "@uf/assets/images/logos/gray-logos/logo-pinterest.svg";
+import spotify from "@uf/assets/images/logos/gray-logos/logo-spotify.svg";
+import vodafone from "@uf/assets/images/logos/gray-logos/logo-vodafone.svg";
 
 function PricingCards() {
   return (

@@ -25,16 +25,16 @@ import { Line } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
-import gradientChartLine from "assets/theme/functions/gradientChartLine";
+import gradientChartLine from "@uf/assets/theme/functions/gradientChartLine";
 
 // MiniGradientLineChart configurations
-import configs from "examples/Charts/LineCharts/MiniGradientLineChart/configs";
+import configs from "@uf/examples/Charts/LineCharts/MiniGradientLineChart/configs";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 function MiniGradientLineChart({ title, description, height, chart }) {
   const chartRef = useRef(null);

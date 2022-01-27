@@ -17,9 +17,9 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 function ProductCell({ image, name }) {
   return (

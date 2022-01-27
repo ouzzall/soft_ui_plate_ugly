@@ -19,7 +19,7 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for the SuiBadge
-import SuiBadgeRoot from "components/SuiBadge/SuiBadgeRoot";
+import SuiBadgeRoot from "@uf/components/SuiBadge/SuiBadgeRoot";
 
 const SuiBadge = forwardRef(
   ({ color, variant, size, circular, indicator, border, container, children, ...rest }, ref) => (

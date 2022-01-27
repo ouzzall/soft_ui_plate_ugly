@@ -19,16 +19,16 @@ import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
 // Dropzone components
-import Dropzone from "dropzone";
+import Dropzone from "@uf/dropzone";
 
 // Dropzone styles
 import "dropzone/dist/dropzone.css";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Custom styles for the SuiDropzone
-import SuiDropzoneRoot from "components/SuiDropzone/SuiDropzoneRoot";
+import SuiDropzoneRoot from "@uf/components/SuiDropzone/SuiDropzoneRoot";
 
 function SuiDropzone({ options }) {
   const dropzoneRef = useRef();

@@ -18,16 +18,16 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiButton from "@uf/components/SuiButton";
 
 // Wizard application components
-import FormField from "layouts/applications/wizard/components/FormField";
+import FormField from "@uf/layouts/applications/wizard/components/FormField";
 
 // Images
-import team2 from "assets/images/team-2.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
 
 function About() {
   return (

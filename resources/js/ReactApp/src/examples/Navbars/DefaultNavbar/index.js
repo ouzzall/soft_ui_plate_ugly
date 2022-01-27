@@ -26,23 +26,23 @@ import Container from "@mui/material/Container";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
-import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
+import DefaultNavbarLink from "@uf/examples/Navbars/DefaultNavbar/DefaultNavbarLink";
+import DefaultNavbarMobile from "@uf/examples/Navbars/DefaultNavbar/DefaultNavbarMobile";
 
 // Soft UI Dashboard PRO React base styles
-import breakpoints from "assets/theme/base/breakpoints";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
 
 // DefaultNavbar dropdown menus
-import PagesMenu from "examples/Navbars/DefaultNavbar/Menus/PagesMenu";
-import AuthenticationMenu from "examples/Navbars/DefaultNavbar/Menus/AuthenticationMenu";
-import EcommerceMenu from "examples/Navbars/DefaultNavbar/Menus/EcommerceMenu";
-import ApplicationsMenu from "examples/Navbars/DefaultNavbar/Menus/ApplicationsMenu";
-import DocsMenu from "examples/Navbars/DefaultNavbar/Menus/DocsMenu";
+import PagesMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/PagesMenu";
+import AuthenticationMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/AuthenticationMenu";
+import EcommerceMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/EcommerceMenu";
+import ApplicationsMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/ApplicationsMenu";
+import DocsMenu from "@uf/examples/Navbars/DefaultNavbar/Menus/DocsMenu";
 
 function DefaultNavbar({ routes, transparent, light, action }) {
   const [pagesMenu, setPagesMenu] = useState(false);

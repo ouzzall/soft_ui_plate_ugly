@@ -18,11 +18,11 @@ import { useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Pricing page components
-import FaqCollapse from "layouts/pages/pricing-page/components/FaqCollapse";
+import FaqCollapse from "@uf/layouts/pages/pricing-page/components/FaqCollapse";
 
 function Faq() {
   const [collapse, setCollapse] = useState(false);

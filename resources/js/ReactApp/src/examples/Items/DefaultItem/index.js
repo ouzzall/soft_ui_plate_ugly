@@ -22,11 +22,11 @@ import PropTypes from "prop-types";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // custom styles for the DefaultItem
-import { defaultItemIconBox, defaultItemIcon } from "examples/Items/DefaultItem/styles";
+import { defaultItemIconBox, defaultItemIcon } from "@uf/examples/Items/DefaultItem/styles";
 
 const DefaultItem = forwardRef(({ color, icon, title, description, ...rest }, ref) => (
   <SuiBox {...rest} ref={ref} display="flex" alignItems="center">

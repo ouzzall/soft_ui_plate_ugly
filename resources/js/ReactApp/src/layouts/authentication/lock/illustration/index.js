@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Authentication layout components
-import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
+import IllustrationLayout from "@uf/layouts/authentication/components/IllustrationLayout";
 
 // Image
-import lock from "assets/images/illustrations/dark-lock-ill.png";
+import lock from "@uf/assets/images/illustrations/dark-lock-ill.png";
 
 function Illustration() {
   return (

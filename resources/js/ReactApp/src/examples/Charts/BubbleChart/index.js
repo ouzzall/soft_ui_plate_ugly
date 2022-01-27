@@ -25,14 +25,14 @@ import { Bubble } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // BubbleChart configurations
-import configs from "examples/Charts/BubbleChart/configs";
+import configs from "@uf/examples/Charts/BubbleChart/configs";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 function BubbleChart({ title, description, height, chart }) {
   const chartDatasets = chart.datasets

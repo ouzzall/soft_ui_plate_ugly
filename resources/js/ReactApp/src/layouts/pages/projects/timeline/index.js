@@ -17,17 +17,17 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import TimelineList from "examples/Timeline/TimelineList";
-import TimelineItem from "examples/Timeline/TimelineItem";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import TimelineList from "@uf/examples/Timeline/TimelineList";
+import TimelineItem from "@uf/examples/Timeline/TimelineItem";
 
 // Data
-import timelineData from "layouts/pages/projects/timeline/data/timelineData";
+import timelineData from "@uf/layouts/pages/projects/timeline/data/timelineData";
 
 function Timeline() {
   const renderTimelineItems = timelineData.map(

@@ -18,11 +18,11 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // EditProduct page components
-import FormField from "layouts/ecommerce/products/edit-product/components/FormField";
+import FormField from "@uf/layouts/ecommerce/products/edit-product/components/FormField";
 
 function Socials() {
   return (

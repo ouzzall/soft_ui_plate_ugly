@@ -25,11 +25,11 @@ import Icon from "@mui/material/Icon";
 import MuiLink from "@mui/material/Link";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Custom styles for the WavedBlogCard
-import WavedBlogCardWavesRoot from "examples/Cards/BlogCards/WavedBlogCard/WavedBlogCardWavesRoot";
+import WavedBlogCardWavesRoot from "@uf/examples/Cards/BlogCards/WavedBlogCard/WavedBlogCardWavesRoot";
 
 function WavedBlogCard({ image, title, description, action }) {
   const cardActionStyles = {

@@ -22,10 +22,10 @@ import PropTypes from "prop-types";
 import Select from "react-select";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Custom styles for SuiSelect
-import styles from "components/SuiSelect/styles";
+import styles from "@uf/components/SuiSelect/styles";
 
 const SuiSelect = forwardRef(({ size, error, success, ...rest }, ref) => {
   const { light } = colors;

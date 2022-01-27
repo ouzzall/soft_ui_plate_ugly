@@ -22,14 +22,14 @@ import ImgsViewer from "react-images-viewer";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Images
-import image1 from "assets/images/ecommerce/wooden-table.jpeg";
-import image2 from "assets/images/ecommerce/chair-pink.jpeg";
-import image3 from "assets/images/ecommerce/black-chair.jpeg";
-import image4 from "assets/images/ecommerce/chair-steel.jpeg";
-import image5 from "assets/images/ecommerce/chair-wood.jpeg";
+import image1 from "@uf/assets/images/ecommerce/wooden-table.jpeg";
+import image2 from "@uf/assets/images/ecommerce/chair-pink.jpeg";
+import image3 from "@uf/assets/images/ecommerce/black-chair.jpeg";
+import image4 from "@uf/assets/images/ecommerce/chair-steel.jpeg";
+import image5 from "@uf/assets/images/ecommerce/chair-wood.jpeg";
 
 function ProductImages() {
   const [currentImage, setCurrentImage] = useState(image1);

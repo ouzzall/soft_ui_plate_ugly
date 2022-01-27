@@ -20,10 +20,10 @@ import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DefaultPricingCard from "examples/Cards/PricingCards/DefaultPricingCard";
+import DefaultPricingCard from "@uf/examples/Cards/PricingCards/DefaultPricingCard";
 
 function PricingCards({ prices }) {
   const [starter, premium, enterprise] = prices;

@@ -28,14 +28,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiAvatar from "components/SuiAvatar";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-import borders from "assets/theme/base/borders";
+import colors from "@uf/assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
+import borders from "@uf/assets/theme/base/borders";
 
 function Table({ columns, rows }) {
   const { light } = colors;

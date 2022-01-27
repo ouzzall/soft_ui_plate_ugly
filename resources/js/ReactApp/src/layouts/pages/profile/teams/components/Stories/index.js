@@ -19,16 +19,16 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+import colors from "@uf/assets/theme/base/colors";
+import borders from "@uf/assets/theme/base/borders";
 
 // Soft UI Dashboard PRO React data variables
-import storiesData from "layouts/pages/profile/teams/components/Stories/data/storiesData";
+import storiesData from "@uf/layouts/pages/profile/teams/components/Stories/data/storiesData";
 
 function Stories() {
   const { borderWidth } = borders;

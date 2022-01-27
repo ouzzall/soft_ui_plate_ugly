@@ -23,32 +23,32 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
-import ProfilesList from "examples/Lists/ProfilesList";
-import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
-import PlaceholderCard from "examples/Cards/PlaceholderCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Footer from "@uf/examples/Footer";
+import ProfileInfoCard from "@uf/examples/Cards/InfoCards/ProfileInfoCard";
+import ProfilesList from "@uf/examples/Lists/ProfilesList";
+import DefaultProjectCard from "@uf/examples/Cards/ProjectCards/DefaultProjectCard";
+import PlaceholderCard from "@uf/examples/Cards/PlaceholderCard";
 
 // Overview page components
-import Header from "layouts/pages/profile/components/Header";
-import PlatformSettings from "layouts/pages/profile/profile-overview/components/PlatformSettings";
+import Header from "@uf/layouts/pages/profile/components/Header";
+import PlatformSettings from "@uf/layouts/pages/profile/profile-overview/components/PlatformSettings";
 
 // Data
-import profilesListData from "layouts/pages/profile/profile-overview/data/profilesListData";
+import profilesListData from "@uf/layouts/pages/profile/profile-overview/data/profilesListData";
 
 // Images
-import homeDecor1 from "assets/images/home-decor-1.jpg";
-import homeDecor2 from "assets/images/home-decor-2.jpg";
-import homeDecor3 from "assets/images/home-decor-3.jpg";
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import homeDecor1 from "@uf/assets/images/home-decor-1.jpg";
+import homeDecor2 from "@uf/assets/images/home-decor-2.jpg";
+import homeDecor3 from "@uf/assets/images/home-decor-3.jpg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
 
 function Overview() {
   return (

@@ -14,12 +14,12 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React Base Styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
-import boxShadows from "assets/theme/base/boxShadows";
+import colors from "@uf/assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
+import boxShadows from "@uf/assets/theme/base/boxShadows";
 
 // Soft UI Dashboard PRO React Helper Functions
-import pxToRem from "assets/theme/functions/pxToRem";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { transparent, light, info, secondary } = colors;
 const { size } = typography;

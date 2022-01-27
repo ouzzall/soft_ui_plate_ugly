@@ -14,16 +14,16 @@ Coded by www.creative-tim.com
 */
 
 // Overview page components
-import ProductCell from "layouts/ecommerce/overview/components/ProductCell";
-import RefundsCell from "layouts/ecommerce/overview/components/RefundsCell";
-import DefaultCell from "layouts/ecommerce/overview/components/DefaultCell";
+import ProductCell from "@uf/layouts/ecommerce/overview/components/ProductCell";
+import RefundsCell from "@uf/layouts/ecommerce/overview/components/RefundsCell";
+import DefaultCell from "@uf/layouts/ecommerce/overview/components/DefaultCell";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
-import team5 from "assets/images/team-5.jpg";
+import team1 from "@uf/assets/images/team-1.jpg";
+import team2 from "@uf/assets/images/team-2.jpg";
+import team3 from "@uf/assets/images/team-3.jpg";
+import team4 from "@uf/assets/images/team-4.jpg";
+import team5 from "@uf/assets/images/team-5.jpg";
 
 export default {
   columns: [

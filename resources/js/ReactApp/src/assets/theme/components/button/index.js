@@ -14,10 +14,10 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React Button Styles
-import root from "assets/theme/components/button/root";
-import contained from "assets/theme/components/button/contained";
-import outlined from "assets/theme/components/button/outlined";
-import text from "assets/theme/components/button/text";
+import root from "@uf/assets/theme/components/button/root";
+import contained from "@uf/assets/theme/components/button/contained";
+import outlined from "@uf/assets/theme/components/button/outlined";
+import text from "@uf/assets/theme/components/button/text";
 
 export default {
   defaultProps: {

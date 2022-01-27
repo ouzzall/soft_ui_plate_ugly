@@ -17,11 +17,11 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Wizard application components
-import FormField from "layouts/applications/wizard/components/FormField";
+import FormField from "@uf/layouts/applications/wizard/components/FormField";
 
 function Address() {
   return (

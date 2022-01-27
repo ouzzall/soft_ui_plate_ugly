@@ -23,17 +23,17 @@ import Tooltip from "@mui/material/Tooltip";
 import Divider from "@mui/material/Divider";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 
 // Images
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoAsana from "assets/images/small-logos/logo-asana.svg";
+import logoSlack from "@uf/assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "@uf/assets/images/small-logos/logo-spotify.svg";
+import logoAtlassian from "@uf/assets/images/small-logos/logo-atlassian.svg";
+import logoAsana from "@uf/assets/images/small-logos/logo-asana.svg";
 
 function Accounts() {
   const [slack2FA, setSlack2FA] = useState(true);

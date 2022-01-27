@@ -19,7 +19,7 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for SuiAvatar
-import SuiAvatarRoot from "components/SuiAvatar/SuiAvatarRoot";
+import SuiAvatarRoot from "@uf/components/SuiAvatar/SuiAvatarRoot";
 
 const SuiAvatar = forwardRef(({ bgColor, size, shadow, ...rest }, ref) => (
   <SuiAvatarRoot ref={ref} ownerState={{ shadow, bgColor, size }} {...rest} />

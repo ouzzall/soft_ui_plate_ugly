@@ -26,14 +26,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbarMenu from "examples/Navbars/DefaultNavbar/DefaultNavbarMenu";
+import DefaultNavbarMenu from "@uf/examples/Navbars/DefaultNavbar/DefaultNavbarMenu";
 
 // Images
-import curved8 from "assets/images/curved-images/curved8.jpg";
+import curved8 from "@uf/assets/images/curved-images/curved8.jpg";
 
 function AuthenticationMenu({ routes, open, close, mobileMenu }) {
   const renderAuthenticationMenuRoute = (routeName) =>

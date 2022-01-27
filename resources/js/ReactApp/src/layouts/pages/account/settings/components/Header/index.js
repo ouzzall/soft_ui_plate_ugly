@@ -21,12 +21,12 @@ import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
+import burceMars from "@uf/assets/images/bruce-mars.jpg";
 
 function Header() {
   const [visible, setVisible] = useState(true);

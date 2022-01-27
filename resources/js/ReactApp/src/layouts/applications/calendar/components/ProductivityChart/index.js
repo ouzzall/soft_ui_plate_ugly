@@ -25,18 +25,18 @@ import MenuItem from "@mui/material/MenuItem";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React helper functions
-import gradientChartLine from "assets/theme/functions/gradientChartLine";
+import gradientChartLine from "@uf/assets/theme/functions/gradientChartLine";
 
 // Chart configurations
-import configs from "layouts/applications/calendar/components/ProductivityChart/configs";
+import configs from "@uf/layouts/applications/calendar/components/ProductivityChart/configs";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import typography from "assets/theme/base/typography";
+import colors from "@uf/assets/theme/base/colors";
+import typography from "@uf/assets/theme/base/typography";
 
 function ProductivityChart() {
   const { white } = colors;

@@ -20,16 +20,16 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiSelect from "components/SuiSelect";
-import SuiTagInput from "components/SuiTagInput";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiSelect from "@uf/components/SuiSelect";
+import SuiTagInput from "@uf/components/SuiTagInput";
 
 // Settings page components
-import FormField from "layouts/pages/account/components/FormField";
+import FormField from "@uf/layouts/pages/account/components/FormField";
 
 // Data
-import selectData from "layouts/pages/account/settings/components/BasicInfo/data/selectData";
+import selectData from "@uf/layouts/pages/account/settings/components/BasicInfo/data/selectData";
 
 function BasicInfo() {
   const [skills, setSkills] = useState(["react", "angular"]);

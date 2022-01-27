@@ -24,42 +24,42 @@ import Grid from "@mui/material/Grid";
 // import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-// import SuiSelect from "components/SuiSelect";
-import SuiButton from "components/SuiButton";
-import SuiInput from "components/SuiInput";
-// import SuiBadgeDot from "components/SuiBadgeDot";
-// import SuiButton from "components/SuiButton";
-// import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+// import SuiSelect from "@uf/components/SuiSelect";
+import SuiButton from "@uf/components/SuiButton";
+import SuiInput from "@uf/components/SuiInput";
+// import SuiBadgeDot from "@uf/components/SuiBadgeDot";
+// import SuiButton from "@uf/components/SuiButton";
+// import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
 import Switch from "@mui/material/Switch";
-import SuiTypography from "components/SuiTypography";
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import SuiTypography from "@uf/components/SuiTypography";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 // import Divider from "@mui/material/Divider";
-// import DefaultStatisticsCard from "examples/Cards/StatisticsCards/DefaultStatisticsCard";
-// import DefaultLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-// import HorizontalBarChart from "examples/Charts/BarCharts/HorizontalBarChart";
-// import SalesTable from "examples/Tables/SalesTable";
-// import DataTable from "examples/Tables/DataTable";
+// import DefaultStatisticsCard from "@uf/examples/Cards/StatisticsCards/DefaultStatisticsCard";
+// import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
+// import HorizontalBarChart from "@uf/examples/Charts/BarCharts/HorizontalBarChart";
+// import SalesTable from "@uf/examples/Tables/SalesTable";
+// import DataTable from "@uf/examples/Tables/DataTable";
 
 // Overview page components
-// import ChannelsChart from "layouts/ecommerce/overview/components/ChannelsChart";
+// import ChannelsChart from "@uf/layouts/ecommerce/overview/components/ChannelsChart";
 
 // Data
-// import defaultLineChartData from "layouts/ecommerce/overview/data/defaultLineChartData";
-// import horizontalBarChartData from "layouts/ecommerce/overview/data/horizontalBarChartData";
-// import salesTableData from "layouts/ecommerce/overview/data/salesTableData";
-// import Table from "examples/Tables/Table";
-// import FormField from "layouts/pages/account/components/FormField";
-// import dataTableData from "layouts/ecommerce/overview/data/dataTableData";
+// import defaultLineChartData from "@uf/layouts/ecommerce/overview/data/defaultLineChartData";
+// import horizontalBarChartData from "@uf/layouts/ecommerce/overview/data/horizontalBarChartData";
+// import salesTableData from "@uf/layouts/ecommerce/overview/data/salesTableData";
+// import Table from "@uf/examples/Tables/Table";
+// import FormField from "@uf/layouts/pages/account/components/FormField";
+// import dataTableData from "@uf/layouts/ecommerce/overview/data/dataTableData";
 
 function SubscriptionRules() {
   const [spotify2FA, setSpotify2FA] = useState(true);
   const handleSetSpotify2FA = () => setSpotify2FA(!spotify2FA);
-  
+
   function  weeklyfun(){
     const x = document.getElementById("weekly");
     const y = document.getElementById("showMoreWeekly");
@@ -73,8 +73,8 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
-  
+  }
+
   function  fortnightlyfun(){
     const x = document.getElementById("fortnightly");
     const y = document.getElementById("showMoreFortnightly");
@@ -89,7 +89,7 @@ function SubscriptionRules() {
     z.style.display = "none";
   }
   }
-  
+
   function  Monthlyfun(){
     const x = document.getElementById("Monthly");
     const y = document.getElementById("showMoreMonthly");
@@ -103,8 +103,8 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
-  
+  }
+
   function  Yearlyfun(){
     const x = document.getElementById("Yearly");
     const y = document.getElementById("showMoreYearly");
@@ -118,7 +118,7 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
+  }
   function  dailyfun(){
     const x = document.getElementById("daily");
     const y = document.getElementById("showMore");
@@ -146,7 +146,7 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
+  }
   function  weeklyfun2(){
     const x = document.getElementById("weekly2");
     const y = document.getElementById("showMoreWeekly2");
@@ -160,7 +160,7 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
+  }
   function  fortnightlyfun2(){
     const x = document.getElementById("fortnightly2");
     const y = document.getElementById("showMoreFortnightly2");
@@ -188,7 +188,7 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
+  }
   function  Yearlyfun2(){
     const x = document.getElementById("Yearly2");
     const y = document.getElementById("showMoreYearly2");
@@ -202,13 +202,13 @@ function SubscriptionRules() {
     y.style.display = "block";
     z.style.display = "none";
   }
-  } 
+  }
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <SuiBox py={3}>
         <Card >
-          <SuiBox mt={3} mb={3}> 
+          <SuiBox mt={3} mb={3}>
               <Grid container spacing={3}>
                 <Grid item xs={12} lg={12} md={12}>
                 <SuiBox
@@ -218,7 +218,7 @@ function SubscriptionRules() {
               flexDirection={{ xs: "column", sm: "row" }}
             >
               <SuiBox display="flex" alignItems="center">
-                
+
                 <SuiBox ml={2} lineHeight={0}>
                   <SuiTypography variant="h5" fontWeight="medium">
                     Subsciption Rules
@@ -248,41 +248,41 @@ function SubscriptionRules() {
                 </Grid>
               </Grid>
           </SuiBox>
-        </Card>  
+        </Card>
         <SuiBox mb={3} mt={3}>
           <Grid container spacing={3}>
           <Grid item xs={12} lg={6}>
               <Card>
-                <SuiBox mt={3} mb={3}> 
+                <SuiBox mt={3} mb={3}>
                     <Grid container spacing={3}>
                       <Grid item xs={12} lg={12} md={12}>
                       <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
                           <SuiBox display="flex" alignItems="center">
                             <SuiBox ml={2} lineHeight={0}>
                             <SuiTypography mb={3} variant="h5" fontWeight="medium">Product Page Subscriptions</SuiTypography>
-                              
+
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
                         <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
                           <SuiBox display="flex" alignItems="center">
                             <SuiBox ml={2} lineHeight={0}>
-                            
+
                               <SuiTypography variant="h5" fontWeight="medium">Daily Subscription</SuiTypography>
                                 <SuiTypography onClick={dailyfun} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
                                   <div id="showMore"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLess" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -305,9 +305,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -328,19 +328,19 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
                                 <SuiButton  variant="outlined" color="info">Reset</SuiButton>
                                 <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                                
+
                             </SuiBox>
                         </div>
-                        
-                   
+
+
                       </Grid>
                       <Grid item xs={12} lg={12} md={12}>
                         <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
@@ -351,16 +351,16 @@ function SubscriptionRules() {
                                   <div id="showMoreWeekly"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessWeekly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -383,9 +383,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -406,9 +406,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -426,16 +426,16 @@ function SubscriptionRules() {
                                   <div id="showMoreFortnightly"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessFortnightly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -458,9 +458,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -481,9 +481,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -501,16 +501,16 @@ function SubscriptionRules() {
                                   <div id="showMoreMonthly"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessMonthly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -533,9 +533,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -556,9 +556,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -576,16 +576,16 @@ function SubscriptionRules() {
                                   <div id="showMoreYearly"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessYearly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -608,9 +608,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -631,9 +631,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -644,19 +644,19 @@ function SubscriptionRules() {
                       </Grid>
                     </Grid>
                 </SuiBox>
-                 
-              </Card> 
+
+              </Card>
             </Grid>
             <Grid item xs={12} lg={6}>
               <Card>
-                <SuiBox mt={3} mb={3}> 
+                <SuiBox mt={3} mb={3}>
                     <Grid container spacing={3}>
                       <Grid item xs={12} lg={12} md={12}>
                       <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
                           <SuiBox display="flex" alignItems="center">
                             <SuiBox ml={2} lineHeight={0}>
                             <SuiTypography mb={3} variant="h5" fontWeight="medium">Cart Page Subscriptions</SuiTypography>
-                              
+
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -668,16 +668,16 @@ function SubscriptionRules() {
                                   <div id="showMore2"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLess2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -700,9 +700,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -723,19 +723,19 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
                                 <SuiButton  variant="outlined" color="info">Reset</SuiButton>
                                 <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                                
+
                             </SuiBox>
                         </div>
-                        
-                   
+
+
                       </Grid>
                       <Grid item xs={12} lg={12} md={12}>
                         <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
@@ -746,16 +746,16 @@ function SubscriptionRules() {
                                   <div id="showMoreWeekly2"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessWeekly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -778,9 +778,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -801,9 +801,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -821,16 +821,16 @@ function SubscriptionRules() {
                                   <div id="showMoreFortnightly2"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessFortnightly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -853,9 +853,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -876,9 +876,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -896,16 +896,16 @@ function SubscriptionRules() {
                                   <div id="showMoreMonthly2"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessMonthly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -928,9 +928,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -951,9 +951,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -971,16 +971,16 @@ function SubscriptionRules() {
                                   <div id="showMoreYearly2"  style={{marginTop:"10px"}} >Show More</div>
                                   <div id="showLessYearly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
                                 </SuiTypography>
-                                
+
                             </SuiBox>
-                            
+
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                             <SuiBox lineHeight={0} mx={2}>
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
@@ -1003,9 +1003,9 @@ function SubscriptionRules() {
                                       Heading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Heading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox
@@ -1026,9 +1026,9 @@ function SubscriptionRules() {
                                       Subheading
                                   </SuiTypography>
                                   <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-                                  
+
                                     <SuiInput type="Text" placeholder="Subeading"  />
-                                    
+
                                   </SuiBox>
                             </SuiBox>
                             <SuiBox mr={2} style={{textAlign:"right"}}>
@@ -1039,12 +1039,12 @@ function SubscriptionRules() {
                       </Grid>
                     </Grid>
                 </SuiBox>
-                 
-              </Card> 
+
+              </Card>
             </Grid>
           </Grid>
         </SuiBox>
-        
+
       </SuiBox>
       <Footer />
     </DashboardLayout>

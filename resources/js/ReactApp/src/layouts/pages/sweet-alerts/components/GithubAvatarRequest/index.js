@@ -15,10 +15,10 @@ Coded by www.creative-tim.com
 
 /* eslint-disable no-dupe-keys */
 // sweetalert2 components
-import Swal from "sweetalert2";
+import Swal from "@uf/sweetalert2";
 
 // Sweet Alerts page components
-import Template from "layouts/pages/sweet-alerts/components/Template";
+import Template from "@uf/layouts/pages/sweet-alerts/components/Template";
 
 function GithubAvatarRequest() {
   const showAlert = () => {

@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // formik components
-import { Formik, Form } from "formik";
+import { Formik, Form } from "@uf/formik";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -26,24 +26,24 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 
 // NewUser page components
-import UserInfo from "layouts/pages/users/new-user/components/UserInfo";
-import Address from "layouts/pages/users/new-user/components/Address";
-import Socials from "layouts/pages/users/new-user/components/Socials";
-import Profile from "layouts/pages/users/new-user/components/Profile";
+import UserInfo from "@uf/layouts/pages/users/new-user/components/UserInfo";
+import Address from "@uf/layouts/pages/users/new-user/components/Address";
+import Socials from "@uf/layouts/pages/users/new-user/components/Socials";
+import Profile from "@uf/layouts/pages/users/new-user/components/Profile";
 
 // NewUser layout schemas for form and form feilds
-import validations from "layouts/pages/users/new-user/schemas/validations";
-import form from "layouts/pages/users/new-user/schemas/form";
-import initialValues from "layouts/pages/users/new-user/schemas/initialValues";
+import validations from "@uf/layouts/pages/users/new-user/schemas/validations";
+import form from "@uf/layouts/pages/users/new-user/schemas/form";
+import initialValues from "@uf/layouts/pages/users/new-user/schemas/initialValues";
 
 function getSteps() {
   return ["User Info", "Address", "Social", "Profile"];

@@ -22,11 +22,11 @@ import PropTypes from "prop-types";
 import Fade from "@mui/material/Fade";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Custom styles for the SuiAlert
-import SuiAlertRoot from "components/SuiAlert/SuiAlertRoot";
-import SuiAlertCloseIcon from "components/SuiAlert/SuiAlertCloseIcon";
+import SuiAlertRoot from "@uf/components/SuiAlert/SuiAlertRoot";
+import SuiAlertCloseIcon from "@uf/components/SuiAlert/SuiAlertCloseIcon";
 
 function SuiAlert({ color, dismissible, children, ...rest }) {
   const [alertStatus, setAlertStatus] = useState("mount");

@@ -20,8 +20,8 @@ import PropTypes from "prop-types";
 import Checkbox from "@mui/material/Checkbox";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 function IdCell({ id, checked }) {
   return (

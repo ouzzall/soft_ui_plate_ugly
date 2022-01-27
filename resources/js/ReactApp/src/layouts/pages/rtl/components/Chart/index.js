@@ -25,17 +25,17 @@ import { Line } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React helper functions
-import gradientChartLine from "assets/theme/functions/gradientChartLine";
+import gradientChartLine from "@uf/assets/theme/functions/gradientChartLine";
 
 // Chart configurations
-import configs from "layouts/pages/widgets/components/Chart/configs";
+import configs from "@uf/layouts/pages/widgets/components/Chart/configs";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 function Chart({ title, count, percentage, chart }) {
   const chartRef = useRef(null);

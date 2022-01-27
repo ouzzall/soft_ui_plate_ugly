@@ -23,7 +23,7 @@ import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 function DefaultNavbarMenu({ open, close, placement, children, style }) {
   const [anchor, setAnchor] = useState(false);

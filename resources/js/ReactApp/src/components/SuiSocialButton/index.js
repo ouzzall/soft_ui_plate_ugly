@@ -19,7 +19,7 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for SuiSocialButton
-import SuiSocialButtonRoot from "components/SuiSocialButton/SuiSocialButtonRoot";
+import SuiSocialButtonRoot from "@uf/components/SuiSocialButton/SuiSocialButtonRoot";
 
 const SuiSocialButton = forwardRef(
   ({ color, size, iconOnly, circular, children, ...rest }, ref) => (

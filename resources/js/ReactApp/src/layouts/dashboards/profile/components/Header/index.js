@@ -24,25 +24,25 @@ import Tooltip from "@mui/material/Tooltip";
 // import Tab from "@mui/material/Tab";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiAvatar from "components/SuiAvatar";
-import SuiInput from "components/SuiInput";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiAvatar from "@uf/components/SuiAvatar";
+import SuiInput from "@uf/components/SuiInput";
+import SuiButton from "@uf/components/SuiButton";
 // Soft UI Dashboard PRO React example components
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 import Icon from "@mui/material/Icon";
 // Soft UI Dashboard PRO React icons
-// import Cube from "examples/Icons/Cube";
-// import Document from "examples/Icons/Document";
-// import Settings from "examples/Icons/Settings";
+// import Cube from "@uf/examples/Icons/Cube";
+// import Document from "@uf/examples/Icons/Document";
+// import Settings from "@uf/examples/Icons/Settings";
 
 // Soft UI Dashboard PRO React base styles
-import breakpoints from "assets/theme/base/breakpoints";
-// import OutlinedCounterCard from "examples/Cards/CounterCards/OutlinedCounterCard";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
+// import OutlinedCounterCard from "@uf/examples/Cards/CounterCards/OutlinedCounterCard";
 // Images
-import burceMars from "assets/images/bruce-mars.jpg";
-import curved0 from "assets/images/curved-images/curved0.jpg";
+import burceMars from "@uf/assets/images/bruce-mars.jpg";
+import curved0 from "@uf/assets/images/curved-images/curved0.jpg";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
@@ -56,7 +56,7 @@ function Header() {
         : setTabsOrientation("horizontal");
     }
 
-    /** 
+    /**
      The event listener that's calling the handleTabsOrientation function when resizing the window.
     */
     window.addEventListener("resize", handleTabsOrientation);
@@ -74,7 +74,7 @@ function Header() {
     <SuiBox position="relative">
       <DashboardNavbar absolute light />
       <SuiBox style = {{minHeight: "200px"}}
-        
+
         display="flex"
         alignItems="center"
         position="relative"
@@ -114,8 +114,8 @@ function Header() {
               </SuiBox>
             </SuiBox>
           </Grid>
-          
-          
+
+
           <Grid item>
             <SuiBox height="100%" mt={0.5} lineHeight={1}>
               <SuiTypography variant="h5" fontWeight="medium">
@@ -173,16 +173,16 @@ function Header() {
                     Earnings
                   </SuiTypography>
                   <SuiTypography variant="h4" fontWeight="bold">
-                    
-                    
+
+
                       <SuiTypography style={{color:"#fff"}} component="span" variant="h5" fontWeight="bold">
                        1454
                       </SuiTypography>
-                    
+
                   </SuiTypography>
                 </SuiBox>
           </Grid>
-          
+
         </Grid>
       </Card>
     </SuiBox>

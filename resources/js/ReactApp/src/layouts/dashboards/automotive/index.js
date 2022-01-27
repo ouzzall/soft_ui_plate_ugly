@@ -17,17 +17,17 @@ Coded by www.creative-tim.com
 import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
 
 // Automotive dashboard components
-import AutomotiveDetails from "layouts/dashboards/automotive/components/AutomotiveDetails";
-import AutomotiveMonitor from "layouts/dashboards/automotive/components/AutomotiveMonitor";
+import AutomotiveDetails from "@uf/layouts/dashboards/automotive/components/AutomotiveDetails";
+import AutomotiveMonitor from "@uf/layouts/dashboards/automotive/components/AutomotiveMonitor";
 
 function Automotive() {
   return (

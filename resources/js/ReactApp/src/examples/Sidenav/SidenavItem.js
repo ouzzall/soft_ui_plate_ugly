@@ -23,13 +23,13 @@ import ListItemText from "@mui/material/ListItemText";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Custom styles for the SidenavItem
-import { item, itemContent, itemArrow } from "examples/Sidenav/styles/sidenavItem";
+import { item, itemContent, itemArrow } from "@uf/examples/Sidenav/styles/sidenavItem";
 
 // Soft UI Dashboard PRO React contexts
-import { useSoftUIController } from "context";
+import { useSoftUIController } from "@uf/context";
 
 function SidenavItem({ name, active, nested, children, open, ...rest }) {
   const [controller] = useSoftUIController();

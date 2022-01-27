@@ -19,13 +19,13 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom styles for SuiInput
-import SuiInputRoot from "components/SuiInput/SuiInputRoot";
-import SuiInputWithIconRoot from "components/SuiInput/SuiInputWithIconRoot";
-import SuiInputIconBoxRoot from "components/SuiInput/SuiInputIconBoxRoot";
-import SuiInputIconRoot from "components/SuiInput/SuiInputIconRoot";
+import SuiInputRoot from "@uf/components/SuiInput/SuiInputRoot";
+import SuiInputWithIconRoot from "@uf/components/SuiInput/SuiInputWithIconRoot";
+import SuiInputIconBoxRoot from "@uf/components/SuiInput/SuiInputIconBoxRoot";
+import SuiInputIconRoot from "@uf/components/SuiInput/SuiInputIconRoot";
 
 // Soft UI Dashboard PRO React contexts
-import { useSoftUIController } from "context";
+import { useSoftUIController } from "@uf/context";
 
 const SuiInput = forwardRef(({ size, icon, error, success, disabled, ...rest }, ref) => {
   let template;

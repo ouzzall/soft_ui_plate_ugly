@@ -23,19 +23,19 @@ import StepLabel from "@mui/material/StepLabel";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import Footer from "@uf/examples/Footer";
 
 // NewProduct page components
-import Header from "layouts/ecommerce/products/new-product/components/Header";
-import ProductInfo from "layouts/ecommerce/products/new-product/components/ProductInfo";
-import Media from "layouts/ecommerce/products/new-product/components/Media";
-import Socials from "layouts/ecommerce/products/new-product/components/Socials";
-import Pricing from "layouts/ecommerce/products/new-product/components/Pricing";
+import Header from "@uf/layouts/ecommerce/products/new-product/components/Header";
+import ProductInfo from "@uf/layouts/ecommerce/products/new-product/components/ProductInfo";
+import Media from "@uf/layouts/ecommerce/products/new-product/components/Media";
+import Socials from "@uf/layouts/ecommerce/products/new-product/components/Socials";
+import Pricing from "@uf/layouts/ecommerce/products/new-product/components/Pricing";
 
 function getSteps() {
   return ["1. Product Info", "2. Media", "3. Social", "4. Pricing"];

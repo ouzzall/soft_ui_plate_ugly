@@ -14,14 +14,14 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard PRO React base styles
-import borders from "assets/theme/base/borders";
-import typography from "assets/theme/base/typography";
-import colors from "assets/theme/base/colors";
-import boxShadows from "assets/theme/base/boxShadows";
+import borders from "@uf/assets/theme/base/borders";
+import typography from "@uf/assets/theme/base/typography";
+import colors from "@uf/assets/theme/base/colors";
+import boxShadows from "@uf/assets/theme/base/boxShadows";
 
 // // Soft UI Dashboard PRO React helper functions
-import linearGradient from "assets/theme/functions/linearGradient";
-import pxToRem from "assets/theme/functions/pxToRem";
+import linearGradient from "@uf/assets/theme/functions/linearGradient";
+import pxToRem from "@uf/assets/theme/functions/pxToRem";
 
 const { borderRadius } = borders;
 const { fontWeightMedium, fontWeightBold, size } = typography;

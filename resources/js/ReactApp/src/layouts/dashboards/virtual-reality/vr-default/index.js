@@ -18,22 +18,22 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import SalesTable from "examples/Tables/SalesTable";
-import Globe from "examples/Globe";
+import MiniStatisticsCard from "@uf/examples/Cards/StatisticsCards/MiniStatisticsCard";
+import SalesTable from "@uf/examples/Tables/SalesTable";
+import Globe from "@uf/examples/Globe";
 
 // Soft UI Dashboard PRO React base styles
-import breakpoints from "assets/theme/base/breakpoints";
+import breakpoints from "@uf/assets/theme/base/breakpoints";
 
 // VR dashboards components
-import BaseLayout from "layouts/dashboards/virtual-reality/components/BaseLayout";
+import BaseLayout from "@uf/layouts/dashboards/virtual-reality/components/BaseLayout";
 
 // Data
-import salesTableData from "layouts/dashboards/default/data/salesTableData";
+import salesTableData from "@uf/layouts/dashboards/default/data/salesTableData";
 
 function VRDefault() {
   const { values } = breakpoints;

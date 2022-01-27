@@ -14,14 +14,15 @@ Coded by www.creative-tim.com
 */
 
 import React from "react";
-import ReactDOM, { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from "@uf/App";
 
 // Soft UI Context Provider
-import { SoftUIControllerProvider } from "./context";
+import { SoftUIControllerProvider } from "@uf/context";
 
 ReactDOM.render(
-  <BrowserRouter>
+    <BrowserRouter>
     <SoftUIControllerProvider>
       <App />
     </SoftUIControllerProvider>

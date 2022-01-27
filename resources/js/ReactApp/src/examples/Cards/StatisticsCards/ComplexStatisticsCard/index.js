@@ -22,14 +22,14 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import typography from "assets/theme/base/typography";
+import typography from "@uf/assets/theme/base/typography";
 
 // Images
-import whiteCurved from "assets/images/curved-images/white-curved.jpeg";
+import whiteCurved from "@uf/assets/images/curved-images/white-curved.jpeg";
 
 function ComplexStatisticsCard({ color, icon, count, percentage, dropdown }) {
   const { size } = typography;

@@ -25,15 +25,15 @@ import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiInput from "components/SuiInput";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiInput from "@uf/components/SuiInput";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 // Images
-import curved10 from "assets/images/curved-images/curved10.jpg";
-import spotifyLogo from "assets/images/small-logos/logo-spotify.svg";
+import curved10 from "@uf/assets/images/curved-images/curved10.jpg";
+import spotifyLogo from "@uf/assets/images/small-logos/logo-spotify.svg";
 
 function AutomotiveMonitor() {
   return (

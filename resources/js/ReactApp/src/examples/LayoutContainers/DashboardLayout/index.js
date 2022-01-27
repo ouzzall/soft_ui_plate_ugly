@@ -22,10 +22,10 @@ import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React context
-import { useSoftUIController, setLayout } from "context";
+import { useSoftUIController, setLayout } from "@uf/context";
 
 function DashboardLayout({ children }) {
   const [controller, dispatch] = useSoftUIController();

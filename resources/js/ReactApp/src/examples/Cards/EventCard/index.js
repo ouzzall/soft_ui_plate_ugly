@@ -25,10 +25,10 @@ import Divider from "@mui/material/Divider";
 import Tooltip from "@mui/material/Tooltip";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
-import SuiAvatar from "components/SuiAvatar";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
+import SuiAvatar from "@uf/components/SuiAvatar";
 
 function EventCard({ id, image, title, dateTime, description, members, action }) {
   const renderMembers = members.map(({ image: media, name }) => (

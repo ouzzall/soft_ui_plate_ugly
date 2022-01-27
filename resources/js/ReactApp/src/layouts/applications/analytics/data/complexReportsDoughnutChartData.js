@@ -14,11 +14,11 @@ Coded by www.creative-tim.com
 */
 
 // Image
-import adobeXD from "assets/images/small-logos/logo-xd.svg";
-import atlassian from "assets/images/small-logos/logo-atlassian.svg";
-import slack from "assets/images/small-logos/logo-slack.svg";
-import spotify from "assets/images/small-logos/logo-spotify.svg";
-import jira from "assets/images/small-logos/logo-jira.svg";
+import adobeXD from "@uf/assets/images/small-logos/logo-xd.svg";
+import atlassian from "@uf/assets/images/small-logos/logo-atlassian.svg";
+import slack from "@uf/assets/images/small-logos/logo-slack.svg";
+import spotify from "@uf/assets/images/small-logos/logo-spotify.svg";
+import jira from "@uf/assets/images/small-logos/logo-jira.svg";
 
 export default {
   images: [adobeXD, atlassian, slack, spotify, jira],

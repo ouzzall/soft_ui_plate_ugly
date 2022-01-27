@@ -19,17 +19,17 @@ import { useState } from "react";
 import Container from "@mui/material/Container";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Soft UI Dashboard PRO React example components
-import PageLayout from "examples/LayoutContainers/PageLayout";
+import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
 
 // Pricing page components
-import Header from "layouts/pages/pricing-page/components/Header";
-import Footer from "layouts/pages/pricing-page/components/Footer";
-import PricingCards from "layouts/pages/pricing-page/components/PricingCards";
-import TrustedBrands from "layouts/pages/pricing-page/components/TrustedBrands";
-import Faq from "layouts/pages/pricing-page/components/Faq";
+import Header from "@uf/layouts/pages/pricing-page/components/Header";
+import Footer from "@uf/layouts/pages/pricing-page/components/Footer";
+import PricingCards from "@uf/layouts/pages/pricing-page/components/PricingCards";
+import TrustedBrands from "@uf/layouts/pages/pricing-page/components/TrustedBrands";
+import Faq from "@uf/layouts/pages/pricing-page/components/Faq";
 
 function PricingPage() {
   const [tabValue, setTabValue] = useState(0);

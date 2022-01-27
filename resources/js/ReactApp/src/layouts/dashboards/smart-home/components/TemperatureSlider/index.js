@@ -23,14 +23,14 @@ import CircularSlider from "react-circular-slider-svg";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
+import colors from "@uf/assets/theme/base/colors";
 
 // Custom styles for TemperatureSlider
-import circularSlider from "layouts/dashboards/smart-home/components/TemperatureSlider/styles";
+import circularSlider from "@uf/layouts/dashboards/smart-home/components/TemperatureSlider/styles";
 
 function TemperatureSlider({ title, color, current, label, start, end, ...sliderProps }) {
   const { circleSliderColors } = colors;

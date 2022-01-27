@@ -20,8 +20,8 @@ import PropTypes from "prop-types";
 import TableCell from "@mui/material/TableCell";
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
-import SuiBox from "components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
 
 function SalesTableCell({ title, content, image, noBorder, ...rest }) {
   let template;

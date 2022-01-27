@@ -20,12 +20,12 @@ import CountUp from "react-countup";
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React base styles
-import colors from "assets/theme/base/colors";
-import borders from "assets/theme/base/borders";
+import colors from "@uf/assets/theme/base/colors";
+import borders from "@uf/assets/theme/base/borders";
 
 function OutlinedCounterCard({ color, count, title, prefix, suffix }) {
   const { secondary } = colors;

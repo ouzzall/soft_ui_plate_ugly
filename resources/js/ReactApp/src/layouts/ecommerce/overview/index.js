@@ -24,29 +24,29 @@ import Icon from "@mui/material/Icon";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiBadgeDot from "components/SuiBadgeDot";
-import SuiButton from "components/SuiButton";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiBadgeDot from "@uf/components/SuiBadgeDot";
+import SuiButton from "@uf/components/SuiButton";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import DefaultStatisticsCard from "examples/Cards/StatisticsCards/DefaultStatisticsCard";
-import DefaultLineChart from "examples/Charts/LineCharts/DefaultLineChart";
-import HorizontalBarChart from "examples/Charts/BarCharts/HorizontalBarChart";
-import SalesTable from "examples/Tables/SalesTable";
-import DataTable from "examples/Tables/DataTable";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
+import DefaultStatisticsCard from "@uf/examples/Cards/StatisticsCards/DefaultStatisticsCard";
+import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
+import HorizontalBarChart from "@uf/examples/Charts/BarCharts/HorizontalBarChart";
+import SalesTable from "@uf/examples/Tables/SalesTable";
+import DataTable from "@uf/examples/Tables/DataTable";
 
 // Overview page components
-import ChannelsChart from "layouts/ecommerce/overview/components/ChannelsChart";
+import ChannelsChart from "@uf/layouts/ecommerce/overview/components/ChannelsChart";
 
 // Data
-import defaultLineChartData from "layouts/ecommerce/overview/data/defaultLineChartData";
-import horizontalBarChartData from "layouts/ecommerce/overview/data/horizontalBarChartData";
-import salesTableData from "layouts/ecommerce/overview/data/salesTableData";
-import dataTableData from "layouts/ecommerce/overview/data/dataTableData";
+import defaultLineChartData from "@uf/layouts/ecommerce/overview/data/defaultLineChartData";
+import horizontalBarChartData from "@uf/layouts/ecommerce/overview/data/horizontalBarChartData";
+import salesTableData from "@uf/layouts/ecommerce/overview/data/salesTableData";
+import dataTableData from "@uf/layouts/ecommerce/overview/data/dataTableData";
 
 function Overview() {
   // DefaultStatisticsCard state for the dropdown value

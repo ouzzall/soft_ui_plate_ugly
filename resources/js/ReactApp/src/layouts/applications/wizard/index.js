@@ -23,19 +23,19 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
-import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
+import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
+import Footer from "@uf/examples/Footer";
 
 // Wizard page components
-import About from "layouts/applications/wizard/components/About";
-import Account from "layouts/applications/wizard/components/Account";
-import Address from "layouts/applications/wizard/components/Address";
+import About from "@uf/layouts/applications/wizard/components/About";
+import Account from "@uf/layouts/applications/wizard/components/Account";
+import Address from "@uf/layouts/applications/wizard/components/Address";
 
 function getSteps() {
   return ["About", "Account", "Address"];

@@ -19,8 +19,8 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 const SuiBadgeDot = forwardRef(({ variant, color, size, badgeContent, font, ...rest }, ref) => {
   let finalSize;

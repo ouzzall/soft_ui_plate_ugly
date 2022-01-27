@@ -19,10 +19,10 @@ import { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Soft UI Dashboard PRO React components
-import SuiTypography from "components/SuiTypography";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // Custom styles for SuiProgress
-import SuiProgressRoot from "components/SuiProgress/SuiProgressRoot";
+import SuiProgressRoot from "@uf/components/SuiProgress/SuiProgressRoot";
 
 const SuiProgress = forwardRef(({ variant, color, value, label, ...rest }, ref) => (
   <>

@@ -24,7 +24,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
+import SuiBox from "@uf/components/SuiBox";
 
 // Custom styles for the SidenavCollapse
 import {
@@ -33,10 +33,10 @@ import {
   collapseIcon,
   collapseText,
   collapseArrow,
-} from "examples/Sidenav/styles/sidenavCollapse";
+} from "@uf/examples/Sidenav/styles/sidenavCollapse";
 
 // Soft UI Dashboard PRO React context
-import { useSoftUIController } from "context";
+import { useSoftUIController } from "@uf/context";
 
 function SidenavCollapse({ color, icon, name, children, active, noCollapse, open, ...rest }) {
   const [controller] = useSoftUIController();

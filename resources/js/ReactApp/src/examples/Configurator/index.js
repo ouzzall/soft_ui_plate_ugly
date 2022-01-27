@@ -30,12 +30,12 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
-import SuiButton from "components/SuiButton";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
+import SuiButton from "@uf/components/SuiButton";
 
 // Custom styles for the Configurator
-import ConfiguratorRoot from "examples/Configurator/ConfiguratorRoot";
+import ConfiguratorRoot from "@uf/examples/Configurator/ConfiguratorRoot";
 
 // Soft UI Dashboard PRO React context
 import {
@@ -45,7 +45,7 @@ import {
   setMiniSidenav,
   setFixedNavbar,
   setSidenavColor,
-} from "context";
+} from "@uf/context";
 
 function Configurator() {
   const [controller, dispatch] = useSoftUIController();

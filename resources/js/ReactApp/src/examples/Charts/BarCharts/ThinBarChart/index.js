@@ -25,11 +25,11 @@ import { Bar } from "react-chartjs-2";
 import Card from "@mui/material/Card";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 // ThinBarChart configuration
-import configs from "examples/Charts/BarCharts/ThinBarChart/configs";
+import configs from "@uf/examples/Charts/BarCharts/ThinBarChart/configs";
 
 function ThinBarChart({ color, title, height, chart }) {
   const { data, options } = configs(color, chart.labels || [], chart.datasets || {});

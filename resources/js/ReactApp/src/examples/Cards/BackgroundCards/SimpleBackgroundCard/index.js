@@ -24,8 +24,8 @@ import Card from "@mui/material/Card";
 import MuiLink from "@mui/material/Link";
 
 // Soft UI Dashboard PRO React components
-import SuiBox from "components/SuiBox";
-import SuiTypography from "components/SuiTypography";
+import SuiBox from "@uf/components/SuiBox";
+import SuiTypography from "@uf/components/SuiTypography";
 
 function SimpleBackgroundCard({ image, title, description, action }) {
   const template = (

@@ -15,28 +15,28 @@ Coded by www.creative-tim.com
 
 /* eslint-disable react/prop-types */
 // Soft UI Dashboard PRO React components
-import SuiBadge from "components/SuiBadge";
+import SuiBadge from "@uf/components/SuiBadge";
 
 // ProductsList page components
-import ProductCell from "layouts/ecommerce/products/products-list/components/ProductCell";
-import ActionCell from "layouts/ecommerce/products/products-list/components/ActionCell";
+import ProductCell from "@uf/layouts/ecommerce/products/products-list/components/ProductCell";
+import ActionCell from "@uf/layouts/ecommerce/products/products-list/components/ActionCell";
 
 // Images
-import adidasHoodie from "assets/images/ecommerce/adidas-hoodie.jpeg";
-import macBookPro from "assets/images/ecommerce/macbook-pro.jpeg";
-import metroChair from "assets/images/ecommerce/metro-chair.jpeg";
-import alchimiaChair from "assets/images/ecommerce/alchimia-chair.jpeg";
-import fendiCoat from "assets/images/ecommerce/fendi-coat.jpeg";
-import offWhiteJacket from "assets/images/ecommerce/off-white-jacket.jpeg";
-import yohjiYamamoto from "assets/images/ecommerce/yohji-yamamoto.jpeg";
-import mcqueenShirt from "assets/images/ecommerce/mcqueen-shirt.jpeg";
-import yellowChair from "assets/images/ecommerce/yellow-chair.jpeg";
-import heronTshirt from "assets/images/ecommerce/heron-tshirt.jpeg";
-import livingChair from "assets/images/ecommerce/living-chair.jpeg";
-import orangeSofa from "assets/images/ecommerce/orange-sofa.jpeg";
-import burberry from "assets/images/ecommerce/burberry.jpeg";
-import dgSkirt from "assets/images/ecommerce/d&g-skirt.jpeg";
-import undercover from "assets/images/ecommerce/undercover.jpeg";
+import adidasHoodie from "@uf/assets/images/ecommerce/adidas-hoodie.jpeg";
+import macBookPro from "@uf/assets/images/ecommerce/macbook-pro.jpeg";
+import metroChair from "@uf/assets/images/ecommerce/metro-chair.jpeg";
+import alchimiaChair from "@uf/assets/images/ecommerce/alchimia-chair.jpeg";
+import fendiCoat from "@uf/assets/images/ecommerce/fendi-coat.jpeg";
+import offWhiteJacket from "@uf/assets/images/ecommerce/off-white-jacket.jpeg";
+import yohjiYamamoto from "@uf/assets/images/ecommerce/yohji-yamamoto.jpeg";
+import mcqueenShirt from "@uf/assets/images/ecommerce/mcqueen-shirt.jpeg";
+import yellowChair from "@uf/assets/images/ecommerce/yellow-chair.jpeg";
+import heronTshirt from "@uf/assets/images/ecommerce/heron-tshirt.jpeg";
+import livingChair from "@uf/assets/images/ecommerce/living-chair.jpeg";
+import orangeSofa from "@uf/assets/images/ecommerce/orange-sofa.jpeg";
+import burberry from "@uf/assets/images/ecommerce/burberry.jpeg";
+import dgSkirt from "@uf/assets/images/ecommerce/d&g-skirt.jpeg";
+import undercover from "@uf/assets/images/ecommerce/undercover.jpeg";
 
 // Badges
 const outOfStock = (
