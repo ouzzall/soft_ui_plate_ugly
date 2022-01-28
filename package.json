@@ -31,7 +31,6 @@
         "chart.js": "3.4.1",
         "chroma-js": "2.1.2",
         "dropzone": "5.9.2",
-        "eslint-import-resolver-webpack": "^0.13.2",
         "flatpickr": "4.6.9",
         "formik": "2.2.9",
         "laravel-mix-polyfill": "^3.0.1",
@@ -83,7 +82,6 @@
     },
     "devDependencies": {
         "@babel/preset-react": "^7.13.13",
-        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.4",
         "@popperjs/core": "^2.10.2",
         "axios": "^0.21",
         "bootstrap": "^5.1.3",
