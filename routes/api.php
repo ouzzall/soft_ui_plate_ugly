@@ -19,5 +19,27 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/test', function(){
-    return auth()->user();
+    $shop = auth()->user();
+    return $shop;
+    // $api = $shop->api()->graph('query {
+    //     subscriptionContracts(first: 10) {
+    //       edges {
+    //         node {
+    //           id
+    //           createdAt
+    //           status
+    //           nextBillingDate
+    //           customer {
+    //             firstName
+    //             lastName
+    //           }
+    //           billingPolicy {
+    //             interval
+    //             intervalCount
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }');
+    //   return $api;
 })->middleware(['verify.shopify']);

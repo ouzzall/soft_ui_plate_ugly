@@ -49,6 +49,7 @@ import { useSoftUIController, setMiniSidenav } from "@uf/context";
 
 // Images
 import brand from "@uf/assets/images/logo-ct.png";
+import axios from "axios";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();
@@ -90,6 +91,15 @@ export default function App() {
   useEffect(() => {
     document.body.setAttribute("dir", direction);
   }, [direction]);
+
+  useEffect(() => {
+      const getData = async () => {
+        await axios.get('authenticate/token');
+        let data = await axios.post('api/test');
+        console.log(data.data);
+      }
+      getData();
+  }, []);
 
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
