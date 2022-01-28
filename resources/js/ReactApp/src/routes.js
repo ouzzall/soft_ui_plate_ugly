@@ -125,7 +125,7 @@ const routes = [
         component: Transactions,
     },
     {
-        name: "Orders",
+        name: "Order",
         key: "orders",
         icon: <Shop size="12px" />,
         route: '/layouts/dashboards/orders',
