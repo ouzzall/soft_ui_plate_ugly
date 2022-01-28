@@ -26,10 +26,5 @@ mix.webpackConfig({
         alias: {
             '@uf': path.resolve(__dirname, 'resources/js/ReactApp/src')
         }
-    },
-    devServer: {
-        proxy: {
-            '*': 'http://localhost:8000'
-        }
     }
 });
