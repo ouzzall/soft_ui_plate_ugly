@@ -110,76 +110,63 @@ import Shop from "@uf/examples/Icons/Shop";
 // import CreditCard from "@uf/examples/Icons/CreditCard";
 
 const routes = [
-
-
-
-  {
-    type: "collapse",
-    name: "Ugly Foods",
-    key: "dashboards",
-    icon: <Shop size="12px" />,
-    collapse: [
-
-      {
+    {
         name: "Dashboard",
         key: "smart-home",
-        route: "/",
+        icon: <Shop size="12px" />,
+        route: '/',
         component: SmartHome,
-      },
-      {
+    },
+    {
         name: "Transactions",
         key: "transactions",
-        route: "/layouts/dashboards/transactions",
+        icon: <Shop size="12px" />,
+        route: '/layouts/dashboards/transactions',
         component: Transactions,
-      },
-      {
+    },
+    {
         name: "Orders",
-        key: "transactions",
-        route: "/layouts/dashboards/orders",
+        key: "orders",
+        icon: <Shop size="12px" />,
+        route: '/layouts/dashboards/orders',
         component: Orders,
-      },
-
-      {
-        name: "Shiping Rules",
-        key: "Shiping Rules",
+    },
+    {
+        name: "Shipping Rules",
+        key: "shipping-rules",
+        icon: <Shop size="12px" />,
         route: "/layouts/dashboards/shiping-rules",
         component: ShipingRules,
-      },
-      {
+    },
+    {
         name: "Subscription Rules",
-        key: "Subscription Rules",
+        key: "subscription-rules",
+        icon: <Shop size="12px" />,
         route: "/layouts/dashboards/Subsciption-rules",
         component: SubscriptionRules,
-      },
-
-
-      {
+    },
+    {
         name: "Profile",
-        key: "Profile",
+        key: "profile",
+        icon: <Shop size="12px" />,
         route: "/layouts/dashboards/profile",
         component: Profile,
-      },
-      {
+    },
+    {
         name: "Edit Profile",
-        key: "Edit Profile",
+        key: "edit-profile",
+        icon: <Shop size="12px" />,
         route: "/layouts/dashboards/edit-profile",
         component: EditProfile,
-      },
-      {
-        name: "Edit Profile",
-        key: "Edit Profile",
-        route: "/layouts/dashboards/edit-profile",
-        component: EditProfile,
-      },
-
-      {
+    },
+    {
         name: "Sign In",
-        key: "Singn In",
+        key: "sign-in",
+        icon: <Shop size="12px" />,
         route: "layouts/authentication/sign-in/basic",
         component: SignInBasic,
-      },
-    ],
-  },
+    },
+
 ];
 
 export default routes;
