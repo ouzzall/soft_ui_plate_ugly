@@ -21,7 +21,7 @@ import Card from "@mui/material/Card";
 // import Menu from "@mui/material/Menu";
 // import MenuItem from "@mui/material/MenuItem";
 // import Divider from "@mui/material/Divider";
-
+import { Link } from "react-router-dom";
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
 // import SuiTypography from "@uf/components/SuiTypography";
@@ -34,7 +34,7 @@ import Footer from "@uf/examples/Footer";
 import DataTable from "@uf/examples/Tables/DataTable";
 
 // Data
-import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
+// import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 
@@ -86,39 +86,19 @@ function Orders() {
           <SuiBox display="flex">
           <SuiBox style={{width: "150px",marginRight:"10px"}}>
               <SuiSelect
-              placeholder="Select year"
+              placeholder="Category"
               options={[
-                { value: "january", label: "January" },
-                { value: "february", label: "February" },
-                { value: "march", label: "March" },
-                { value: "april", label: "April" },
-                { value: "may", label: "May" },
-                { value: "june", label: "June" },
-                { value: "july", label: "July" },
-                { value: "august", label: "August" },
-                { value: "september", label: "September" },
-                { value: "october", label: "October" },
-                { value: "november", label: "November" },
-                { value: "december", label: "December" },
+                { value: "area-wise", label: "Area Wise" },
+                { value: "order Wise", label: "Order Wise" },
               ]}
             />
             </SuiBox>
             <SuiBox style={{width: "150px",marginRight:"10px"}}>
               <SuiSelect
-              placeholder="Select year"
+              placeholder="Type"
               options={[
-                { value: "january", label: "January" },
-                { value: "february", label: "February" },
-                { value: "march", label: "March" },
-                { value: "april", label: "April" },
-                { value: "may", label: "May" },
-                { value: "june", label: "June" },
-                { value: "july", label: "July" },
-                { value: "august", label: "August" },
-                { value: "september", label: "September" },
-                { value: "october", label: "October" },
-                { value: "november", label: "November" },
-                { value: "december", label: "December" },
+                { value: "earned", label: "Earned" },
+                { value: "redeemed", label: "Redeemed" },
               ]}
             />
             </SuiBox>
@@ -129,7 +109,85 @@ function Orders() {
           </SuiBox>
         </SuiBox>
         <Card>
-          <DataTable table={dataTableData} entriesPerPage={false} canSearch />
+          {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
+          <DataTable  entriesPerPage={false} canSearch
+  table={{
+    columns: [
+      { Header: "Id", accessor: "id" },
+      { Header: "Name", accessor: "name" },
+      { Header: "Email", accessor: "email" },
+      { Header: "Order Id", accessor: "orderid" },
+      { Header: "Points", accessor: "points" },
+      { Header: "Type", accessor: "type" },
+      { Header: "Category", accessor: "category" },
+      { Header: "Date", accessor: "date"},
+    ],
+    rows: [
+      {
+        id:1,
+        name: <Link to="/layouts/dashboards/profile">Faizan</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:2,
+        name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:3,
+        name: <Link to="/layouts/dashboards/profile">Talha</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:4,
+        name: <Link to="/layouts/dashboards/profile">Zain</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:5,
+        name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:6,
+        name: <Link to="/layouts/dashboards/profile">Ali</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      
+    ]
+  }}
+/>
+
         </Card>
       </SuiBox>
       <Footer />

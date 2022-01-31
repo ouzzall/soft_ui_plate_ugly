@@ -304,7 +304,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Heading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Heading"  />
 
@@ -327,7 +327,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Subheading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Subeading"  />
 
@@ -382,7 +382,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Heading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Heading"  />
 
@@ -405,7 +405,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Subheading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Subeading"  />
 
@@ -417,231 +417,8 @@ function SubscriptionRules() {
                             </SuiBox>
                         </div>
                       </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Fortnightly Subscription</SuiTypography>
-                                <SuiTypography onClick={fortnightlyfun} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreFortnightly"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessFortnightly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="fortnightly" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Monthly Subscription</SuiTypography>
-                                <SuiTypography onClick={Monthlyfun} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreMonthly"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessMonthly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="Monthly" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Yearly Subscription</SuiTypography>
-                                <SuiTypography onClick={Yearlyfun} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreYearly"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessYearly" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="Yearly" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
+                      
+                      
                     </Grid>
                 </SuiBox>
 
@@ -699,7 +476,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Heading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Heading"  />
 
@@ -722,7 +499,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Subheading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Subeading"  />
 
@@ -777,7 +554,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Heading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Heading"  />
 
@@ -800,7 +577,7 @@ function SubscriptionRules() {
                                   <SuiTypography variant="button" fontWeight="medium" color="text">
                                       Subheading
                                   </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
+                                  <SuiBox width={{ xs: "50%", sm: "50%", md: "50%" }} mt={{ xs: 1, sm: 0 }}>
 
                                     <SuiInput type="Text" placeholder="Subeading"  />
 
@@ -812,231 +589,7 @@ function SubscriptionRules() {
                             </SuiBox>
                         </div>
                       </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Fortnightly Subscription</SuiTypography>
-                                <SuiTypography onClick={fortnightlyfun2} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreFortnightly2"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessFortnightly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="fortnightly2" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Monthly Subscription</SuiTypography>
-                                <SuiTypography onClick={Monthlyfun2} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreMonthly2"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessMonthly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="Monthly2" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Yearly Subscription</SuiTypography>
-                                <SuiTypography onClick={Yearlyfun2} variant="button" color="text" fontWeight="regular" style={{cursor: "pointer",textDecoration: "underline"}}>
-                                  <div id="showMoreYearly2"  style={{marginTop:"10px"}} >Show More</div>
-                                  <div id="showLessYearly2" style={{display:"none",marginTop:"10px"}}>Show Less</div>
-                                </SuiTypography>
-
-                            </SuiBox>
-
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        <div id="Yearly2" style={{display:"none"}}>
-                              <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Heading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Heading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox
-                                ml={2}
-                                mr={2}
-                                  bgColor="grey-100"
-                                  borderRadius="lg"
-                                  display="flex"
-                                  justifyContent="space-between"
-                                  alignItems={{ xs: "flex-start", sm: "center" }}
-                                  flexDirection={{ xs: "column", sm: "row" }}
-                                  my={3}
-                                  py={1}
-                                  pl={{ xs: 1, sm: 2 }}
-                                  pr={1}
-                                >
-                                  <SuiTypography variant="button" fontWeight="medium" color="text">
-                                      Subheading
-                                  </SuiTypography>
-                                  <SuiBox width={{ xs: "50%", sm: "25%", md: "30%" }} mt={{ xs: 1, sm: 0 }}>
-
-                                    <SuiInput type="Text" placeholder="Subeading"  />
-
-                                  </SuiBox>
-                            </SuiBox>
-                            <SuiBox mr={2} style={{textAlign:"right"}}>
-                                <SuiButton  variant="outlined" color="info">Reset</SuiButton>
-                                <SuiButton style={{marginLeft: "10px"}} variant="contained" color="info">Save</SuiButton>
-                            </SuiBox>
-                        </div>
-                      </Grid>
+                      
                     </Grid>
                 </SuiBox>
 

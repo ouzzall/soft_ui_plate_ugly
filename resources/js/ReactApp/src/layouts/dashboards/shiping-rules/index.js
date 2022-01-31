@@ -38,6 +38,7 @@ import SuiTypography from "@uf/components/SuiTypography";
 import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 import Footer from "@uf/examples/Footer";
+import Actions from "@uf/layouts/dashboards/shiping-rules/components/ActionCell";
 // import DefaultStatisticsCard from "@uf/examples/Cards/StatisticsCards/DefaultStatisticsCard";
 // import DefaultLineChart from "@uf/examples/Charts/LineCharts/DefaultLineChart";
 // import HorizontalBarChart from "@uf/examples/Charts/BarCharts/HorizontalBarChart";
@@ -134,7 +135,7 @@ function ShipingRules() {
                 </SuiBox>
                 
                 <SuiBox mb={3} mt={3} display="flex">
-                  <Grid  ml={2} item xs={3} lg={3} md={3}>
+                  <Grid  ml={2} item xs={4} lg={4} md={4}>
                           <SuiSelect
                               placeholder="Postal code"
                               options={[
@@ -153,62 +154,45 @@ function ShipingRules() {
                               ]}  
                             />
                   </Grid> 
+                  
                   <Grid  ml={2} item xs={3} lg={3} md={3}>
-                          <SuiSelect
-                              placeholder="Area code"
-                              options={[
-                                { value: "january", label: "January" },
-                                { value: "february", label: "February" },
-                                { value: "march", label: "March" },
-                                { value: "april", label: "April" },
-                                { value: "may", label: "May" },
-                                { value: "june", label: "June" },
-                                { value: "july", label: "July" },
-                                { value: "august", label: "August" },
-                                { value: "september", label: "September" },
-                                { value: "october", label: "October" },
-                                { value: "november", label: "November" },
-                                { value: "december", label: "December" },
-                              ]}  
-                            />
+                    <span style={{display:"flex"}}>
+                        <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
+                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" placeholder="100"  />
+                    </span>  
                   </Grid>
-                  <Grid  ml={2} item xs={2} lg={2} md={2}>
-                    <SuiInput type="number" placeholder="100"  />
-                  </Grid>
-                  <Grid  ml={2} mr={1} item xs={2} lg={2} md={2}>
+                  <Grid  ml={2} mr={1} item xs={1} lg={2} md={2}>
                     <SuiButton variant="contained" color="info">Add</SuiButton>
                   </Grid>
                 </SuiBox>  
                 <SuiBox>
                     <Table
                       columns={[
-                        { name: "name", align: "left" },
-                        { name: "function", align: "left" },
-                        { name: "email", align: "center" },
-                        { name: "employed", align: "center" },
+                        { name: "id", align: "center" },
+                        { name: "postalCode", align: "center" },
+                        { name: "price", align: "center" },
+                        { name: "Actions", align: "center" },
                       ]}
                       rows={[
                         {
-                          name: ["https://bit.ly/3qzezP5", "John Micheal"],
-                          function: "Manager",
-                          
-                          email: "john@user.com",
-                          employed: "23/04/18",
+                          id: 1,
+                          postalCode: 121212,
+                          price: 100,
+                          Actions: <Actions />,
                         },
                         {
-                          name: ["https://bit.ly/3CfVnYA", "Alexa Liras"],
-                          function: "Programator",
-                          
-                          email: "alexa@user.com",
-                          employed: "11/01/19",
+                          id: 2,
+                          postalCode: 252525,
+                          price: 200,
+                          Actions: <Actions />,
                         },
                         {
-                          name: ["https://bit.ly/3wM6x6v", "Laurent Perrier"],
-                          function: "Executive",
-                          
-                          email: "laurent@user.com",
-                          employed: "19/09/17",
+                          id: 3,
+                          postalCode: 484848,
+                          price: 300,
+                          Actions: <Actions />,
                         },
+                        
                       ]
                     }
                     />
@@ -223,7 +207,7 @@ function ShipingRules() {
                         <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
                           <SuiBox display="flex" alignItems="center">
                             <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium">Order Based Rules </SuiTypography>
+                              <SuiTypography variant="h5" fontWeight="medium"> Order Based Rules </SuiTypography>
                             </SuiBox>
                           </SuiBox>
                           <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
@@ -241,81 +225,57 @@ function ShipingRules() {
                 </SuiBox>
                 
                 <SuiBox mb={3} mt={3} display="flex">
+                   
+                  
                   <Grid  ml={2} item xs={3} lg={3} md={3}>
+                    <span style={{display:"flex"}}>
+                        <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
+                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" placeholder="100"  />
+                    </span>  
+                  </Grid>
+                  <Grid  ml={2} item xs={4} lg={4} md={4}>
                           <SuiSelect
-                              placeholder="Postal code"
+                              placeholder="select type"
                               options={[
-                                { value: "january", label: "January" },
-                                { value: "february", label: "February" },
-                                { value: "march", label: "March" },
-                                { value: "april", label: "April" },
-                                { value: "may", label: "May" },
-                                { value: "june", label: "June" },
-                                { value: "july", label: "July" },
-                                { value: "august", label: "August" },
-                                { value: "september", label: "September" },
-                                { value: "october", label: "October" },
-                                { value: "november", label: "November" },
-                                { value: "december", label: "December" },
-                              ]}  
-                            />
-                  </Grid> 
-                  <Grid  ml={2} item xs={3} lg={3} md={3}>
-                          <SuiSelect
-                              placeholder="Area code"
-                              options={[
-                                { value: "january", label: "January" },
-                                { value: "february", label: "February" },
-                                { value: "march", label: "March" },
-                                { value: "april", label: "April" },
-                                { value: "may", label: "May" },
-                                { value: "june", label: "June" },
-                                { value: "july", label: "July" },
-                                { value: "august", label: "August" },
-                                { value: "september", label: "September" },
-                                { value: "october", label: "October" },
-                                { value: "november", label: "November" },
-                                { value: "december", label: "December" },
+                                { value: "percentage", label: "Percentage" },
+                                { value: "fixed", label: "fixed" },
+                                
                               ]}  
                             />
                   </Grid>
-                  <Grid  ml={2} item xs={2} lg={2} md={2}>
-                    <SuiInput type="number" placeholder="100"  />
-                  </Grid>
-                  <Grid  ml={2} mr={1} item xs={2} lg={2} md={2}>
+                  <Grid  ml={2} mr={1} item xs={1} lg={2} md={2}>
                     <SuiButton variant="contained" color="info">Add</SuiButton>
                   </Grid>
                 </SuiBox>  
                 <SuiBox>
                     <Table
                       columns={[
-                        { name: "name", align: "left" },
-                        { name: "function", align: "left" },
-                        { name: "email", align: "center" },
-                        { name: "employed", align: "center" },
+                        { name: "id", align: "center" },
+                        
+                        { name: "price", align: "center" },
+                        { name: "type", align: "center" },
+                        { name: "Actions", align: "center" },
                       ]}
                       rows={[
                         {
-                          name: ["https://bit.ly/3qzezP5", "John Micheal"],
-                          function: "Manager",
-                          
-                          email: "john@user.com",
-                          employed: "23/04/18",
+                          id: 1,
+                          price: 100,
+                          type: "fixed",
+                          Actions: <Actions />,
                         },
                         {
-                          name: ["https://bit.ly/3CfVnYA", "Alexa Liras"],
-                          function: "Programator",
-                          
-                          email: "alexa@user.com",
-                          employed: "11/01/19",
+                          id: 2,
+                          type: "percentage",
+                          price: 200,
+                          Actions: <Actions />,
                         },
                         {
-                          name: ["https://bit.ly/3wM6x6v", "Laurent Perrier"],
-                          function: "Executive",
-                          
-                          email: "laurent@user.com",
-                          employed: "19/09/17",
+                          id: 3,
+                          type: "fixed",
+                          price: 300,
+                          Actions: <Actions />,
                         },
+                        
                       ]
                     }
                     />

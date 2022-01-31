@@ -22,12 +22,12 @@ import Grid from "@mui/material/Grid";
 // import MenuItem from "@mui/material/MenuItem";
 import Card from "@mui/material/Card";
 
-
+import { Link } from "react-router-dom";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
 import SuiTypography from "@uf/components/SuiTypography";
-// import SuiButton from "@uf/components/SuiButton";
+ import SuiButton from "@uf/components/SuiButton";
 
 // Soft UI Dashboard PRO React example components
 import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
@@ -50,7 +50,7 @@ import reportsDoughnutChartData from "@uf/layouts/dashboards/smart-home/data/rep
 import controllerCardIcons from "@uf/layouts/dashboards/smart-home/data/controllerCardIcons";
 
 // Images
-import iconSunCloud from "@uf/assets/images/small-logos/icon-sun-cloud.png";
+// import iconSunCloud from "@uf/assets/images/small-logos/icon-sun-cloud.png";
 
 /// my imports
 import Icon from "@mui/material/Icon";
@@ -61,7 +61,7 @@ import typography from "@uf/assets/theme/base/typography";
 import DataTable from "@uf/examples/Tables/DataTable";
 
 // Data
-import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
+// import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 
 
 function SmartHome() {
@@ -120,7 +120,7 @@ function SmartHome() {
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} xl={7}>
-
+            
               <GradientLineChart
                 title="Sales Overview"
                 description={
@@ -142,85 +142,84 @@ function SmartHome() {
             <Grid item xs={12} xl={5}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
-                  <WeatherCard
-                    title="weather today"
-                    weather={{ location: "San Francisco", degree: 29 }}
-                    icon={{ component: iconSunCloud, text: "cloudy" }}
-                  />
+                  <Card  style={{background: "linear-gradient(310deg,#f87c56,#ee5340)" ,color: "white",padding: "16px"}} >
+                    <span style={{opacity:"0.7",fontSize: "14px"}} >Progress</span>
+                    <h4>Report Overview</h4>
+                    
+                  </Card>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
                     count={21}
-                    suffix={<>&deg;C</>}
-                    title="living room"
-                    description="temperature"
+                    title="Created"
+                    description="Total Coupon"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
                     count={44}
-                    suffix="%"
-                    title="outside"
-                    description="humidity"
+                    suffix=""
+                    title="Redeemed"
+                    description="Coupons"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
                     count={87}
-                    suffix="m³"
-                    title="water"
-                    description="consumption"
+                    suffix=""
+                    title="Total"
+                    description="Points Given"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
-                    count={417}
-                    suffix="GB"
-                    title="internet"
-                    description="all devices"
+                    count={47}
+                    suffix=""
+                    title="Redeemed"
+                    description="Points"
                   />
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
         </SuiBox>
-
+        
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>
               <ReportsDoughnutChart
-                title="Consumption by room me"
-                count={{ number: 471.3, text: "whatts" }}
+                title="Top Five Areas"
+                count={{ number: 471.3, text: "Orders" }}
                 chart={reportsDoughnutChartData}
-                tooltip="See the consumption per room"
+                tooltip="See the consumption per area"
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-
+              
               <ControllerCard
                 state={humidityState}
-                icon={humidityState ? humidityIconLight : humidityIconDark}
-                title="humidity"
+                // icon={humidityState ? humidityIconLight : humidityIconDark}
+                title="Delivery Rules Group"
                 description="Inactive since: 2 days"
                 onChange={() => setHumidityState(!humidityState)}
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-
+              
             <ControllerCard
               state={temperatureState}
-              icon={temperatureIconLight}
-              title="temperature"
-              description="Active"
+              // icon={temperatureIconLight}
+              title="Order Based Rules"
+              description="On/Off Order Based Rules"
               onChange={() => setTemperatureState(!temperatureState)}
             />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
               <ControllerCard
                 state={airConditionerState}
-                icon={airConditionerState ? airConditionerIconLight : airConditionerIconDark}
-                title="air conditioner"
-                description="Inactive since: 1 hour"
+                // icon={airConditionerState ? airConditionerIconLight : airConditionerIconDark}
+                title="Subsciption Rules"
+                description="On/Off all Subsciption rules"
                 onChange={() => setAirConditionerState(!airConditionerState)}
               />
             </Grid>
@@ -230,12 +229,93 @@ function SmartHome() {
      {/* order list   */}
 
      <SuiBox my={3}>
-
+        
         <Card>
-          <DataTable table={dataTableData} entriesPerPage={false} canSearch />
+          {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
+          <DataTable  entriesPerPage={false} canSearch
+  table={{
+    columns: [
+      { Header: "Id", accessor: "id" },
+      { Header: "Name", accessor: "name" },
+      { Header: "Email", accessor: "email" },
+      { Header: "Order Id", accessor: "orderid" },
+      { Header: "Points", accessor: "points" },
+      { Header: "Type", accessor: "type" },
+      { Header: "Category", accessor: "category" },
+      { Header: "Date", accessor: "date"},
+    ],
+    rows: [
+      {
+        id:1,
+        name: <Link to="layouts/dashboards/profile">Faizan</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:2,
+        name: <Link to="layouts/dashboards/profile">Sanwal</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:3,
+        name: <Link to="layouts/dashboards/profile">Talha</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:4,
+        name: <Link to="layouts/dashboards/profile">Zain</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:5,
+        name: <Link to="layouts/dashboards/profile">Hamza</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      {
+        id:6,
+        name: <Link to="layouts/dashboards/profile">Ali</Link>,
+        email: "abc@gmail.com",
+        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
+        points: 60,
+        type: "Earned",
+        category:"Area Wise",
+        date: "4/11/2021",
+      },
+      
+    ]
+  }}
+/>
+<div className="seeMore" style={{textAlign: "right" ,marginRight: "26px" ,marginBottom: "20px"}}>
+  <Link to="/layouts/dashboards/transactions"> 
+  <SuiButton variant="gradient" color="info" size="medium">see More</SuiButton></Link>
+</div>
         </Card>
       </SuiBox>
-
+     
       <Footer />
     </DashboardLayout>
   );

@@ -24,7 +24,7 @@ import SuiBox from "@uf/components/SuiBox";
 import SuiTypography from "@uf/components/SuiTypography";
 
 // Soft UI Dashboard PRO React example components
-import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
+// import DefaultNavbar from "@uf/examples/Navbars/DefaultNavbar";
 import PageLayout from "@uf/examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
@@ -36,16 +36,7 @@ import pageRoutes from "@uf/page.routes";
 function BasicLayout({ title, description, image, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar
-        routes={pageRoutes}
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-pro-react",
-          label: "buy now",
-        }}
-        transparent
-        light
-      />
+      
       <SuiBox
         width="calc(100% - 2rem)"
         minHeight="50vh"

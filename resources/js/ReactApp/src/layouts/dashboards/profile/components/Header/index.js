@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 
 import { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
@@ -108,9 +109,11 @@ function Header() {
           <SuiBox position="relative" height="max-content" mx="auto">
               <SuiAvatar src={burceMars} alt="profile picture" size="xxl" variant="rounded" />
               <SuiBox alt="spotify logo" position="absolute" right={0} bottom={0} mr={-1} mb={-1}>
+              <Link to="/layouts/dashboards/edit-profile">
                 <SuiButton variant="gradient" color="light" size="small" iconOnly>
                   <Icon>edit</Icon>
                 </SuiButton>
+                </Link>
               </SuiBox>
             </SuiBox>
           </Grid>

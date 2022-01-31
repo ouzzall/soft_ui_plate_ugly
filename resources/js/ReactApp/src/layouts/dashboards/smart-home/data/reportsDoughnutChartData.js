@@ -14,7 +14,7 @@ Coded by www.creative-tim.com
 */
 
 export default {
-  labels: ["Living Room", "Kitchen", "Attic", "Garage", "Basement"],
+  labels: ["Anson", "Telok Blangah", "Pasir Panjang", "Orchard", "Ardmore"],
   datasets: {
     label: "Consumption",
     backgroundColors: ["primary", "secondary", "info", "success", "warning"],

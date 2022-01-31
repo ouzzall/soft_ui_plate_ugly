@@ -44,7 +44,7 @@ function Basic() {
   return (
     <BasicLayout
       title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      description="To create new account register yourself"
       image={curved6}
     >
       <Card>

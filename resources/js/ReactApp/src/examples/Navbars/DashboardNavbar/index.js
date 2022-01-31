@@ -145,14 +145,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
+              <Link style={{}} to="/layouts/dashboards/edit-profile">
               <IconButton
                 size="small"
-                color="inherit"
+                
 
               >
-                <Icon>settings</Icon>
+                <Icon sx={({ palette: { dark, white } }) => ({
+                                      color: light ? white.main : dark.main,
+                                    })}>settings</Icon>
               </IconButton>
-
+              </Link>     
             </SuiBox>
           </SuiBox>
         )}

@@ -42,9 +42,11 @@ import SmartHome from "@uf/layouts/dashboards/smart-home";
 import Transactions from "@uf/layouts/dashboards/transactions";
 import ShipingRules from "@uf/layouts/dashboards/shiping-rules";
 import Orders from "@uf/layouts/dashboards/orders";
+import Users from "@uf/layouts/dashboards/users";
 import Profile from "@uf/layouts/dashboards/profile";
 import EditProfile from "@uf/layouts/dashboards/edit-profile";
 import SubscriptionRules from "@uf/layouts/dashboards/Subsciption-rules";
+import OrderDetails from "@uf/layouts/dashboards/order-details";
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
 
@@ -84,7 +86,7 @@ import SubscriptionRules from "@uf/layouts/dashboards/Subsciption-rules";
 import SignInBasic from "@uf/layouts/authentication/sign-in/basic";
 // import SignInCover from "@uf/layouts/authentication/sign-in/cover";
 // import SignInIllustration from "@uf/layouts/authentication/sign-in/illustration";
-// import SignUpBasic from "@uf/layouts/authentication/sign-up/basic";
+import SignUpBasic from "@uf/layouts/authentication/sign-up/basic";
 // import SignUpCover from "@uf/layouts/authentication/sign-up/cover";
 // import SignUpIllustration from "@uf/layouts/authentication/sign-up/illustration";
 // import ResetBasic from "@uf/layouts/authentication/reset-password/basic";
@@ -132,6 +134,14 @@ const routes = [
         component: Orders,
     },
     {
+        name: "Users",
+        key: "users",
+        icon: <Shop size="12px" />,
+        route: '/layouts/dashboards/users',
+        component: Users,
+    },
+    
+    {
         name: "Shipping Rules",
         key: "shipping-rules",
         icon: <Shop size="12px" />,
@@ -145,6 +155,13 @@ const routes = [
         route: "/layouts/dashboards/Subsciption-rules",
         component: SubscriptionRules,
     },
+    {
+        name: "Order Details",
+        key: "Order Details",
+        icon: <Shop size="12px" />,
+        route: "/layouts/dashboards/order-details",
+        component: OrderDetails,
+      },
     {
         name: "Profile",
         key: "profile",
@@ -163,9 +180,17 @@ const routes = [
         name: "Sign In",
         key: "sign-in",
         icon: <Shop size="12px" />,
-        route: "layouts/authentication/sign-in/basic",
+        route: "/authentication/sign-in/basic",
         component: SignInBasic,
     },
+    {
+        name: "Sign Up",
+        key: "sign-up",
+        icon: <Shop size="12px" />,
+        route: "/authentication/sign-up/basic",
+        component: SignUpBasic,
+    },
+    
 
 ];
 

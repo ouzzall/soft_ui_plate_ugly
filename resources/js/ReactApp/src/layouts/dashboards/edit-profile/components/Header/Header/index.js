@@ -107,11 +107,7 @@ function Header() {
           <Grid item>
           <SuiBox position="relative" height="max-content" mx="auto">
               <SuiAvatar src={burceMars} alt="profile picture" size="xxl" variant="rounded" />
-              <SuiBox alt="spotify logo" position="absolute" right={0} bottom={0} mr={-1} mb={-1}>
-                <SuiButton variant="gradient" color="light" size="small" iconOnly>
-                  <Icon>edit</Icon>
-                </SuiButton>
-              </SuiBox>
+              
             </SuiBox>
           </Grid>
 
@@ -126,62 +122,7 @@ function Header() {
               </SuiTypography>
             </SuiBox>
           </Grid>
-          <Grid item xs={6} md={3} lg={3} sx={{ ml: "auto" }}>
-                <SuiBox
-                style={{paddingTop: "2px",paddingBottom:"0",paddingLeft:"10px",paddingRight:"10px"}}
-                  borderRadius="md"
-                  border="0.0625rem dashed #8392ab"
-                  textAlign="center"
-                  py={2}
-                >
-                  <SuiTypography variant="h6" style={{color:"#17c1e8"}} fontWeight="medium" textTransform="capitalize">
-                    Coupon
-                  </SuiTypography>
-                  <SuiBox display="flex" style={{marginBottom:"0"}} alignItems="center" mb={2}>
-                      <SuiBox width="70%" mr={1}>
-                        <SuiInput
-                          size="small"
-                          defaultValue="code is hear"
-                          icon={{ component: "lock", direction: "right" }}
-                          disabled
-                        />
-                      </SuiBox>
-                      <Tooltip title="Expires On: 12-2-2022" placement="top">
-                        <SuiButton
-                          variant="outlined"
-                          color="secondary"
-                          size="small"
-                          sx={{ padding: "0.5rem 1rem" }}
-                        >
-                          copy
-                        </SuiButton>
-                      </Tooltip>
-                    </SuiBox>
-                    <span style={{fontSize:"13px"}}>Expires On: 12-2-2022</span>
-
-                </SuiBox>
-          </Grid>
-          <Grid item xs={6} md={2} lg={2} >
-                {/* ernings card */}
-                <SuiBox
-                  style={{background: "linear-gradient(310deg, #2152ff,#21d4fd )"}}
-                  borderRadius="md"
-                  textAlign="center"
-                  py={2}
-                >
-                  <SuiTypography variant="h6" style={{color:"#fff"}} fontWeight="medium" textTransform="capitalize">
-                    Earnings
-                  </SuiTypography>
-                  <SuiTypography variant="h4" fontWeight="bold">
-
-
-                      <SuiTypography style={{color:"#fff"}} component="span" variant="h5" fontWeight="bold">
-                       1454
-                      </SuiTypography>
-
-                  </SuiTypography>
-                </SuiBox>
-          </Grid>
+          
 
         </Grid>
       </Card>
