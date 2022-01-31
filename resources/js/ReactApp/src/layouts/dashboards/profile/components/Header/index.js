@@ -181,7 +181,7 @@ function Header() {
                       <SuiTypography style={{color:"#fff"}} component="span" variant="h5" fontWeight="bold">
                        1454
                       </SuiTypography>
-
+                      <SuiButton variant="text" style={{textDecoration: "underline"}} color="white">Create Coupon</SuiButton>
                   </SuiTypography>
                 </SuiBox>
           </Grid>

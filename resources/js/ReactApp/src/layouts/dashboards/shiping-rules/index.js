@@ -135,7 +135,7 @@ function ShipingRules() {
                 </SuiBox>
                 
                 <SuiBox mb={3} mt={3} display="flex">
-                  <Grid  ml={2} item xs={4} lg={4} md={4}>
+                  <Grid  ml={2} item xs={4} lg={5} md={5}>
                           <SuiSelect
                               placeholder="Postal code"
                               options={[
@@ -158,7 +158,7 @@ function ShipingRules() {
                   <Grid  ml={2} item xs={3} lg={3} md={3}>
                     <span style={{display:"flex"}}>
                         <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
-                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" placeholder="100"  />
+                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" min="0" placeholder="100"  />
                     </span>  
                   </Grid>
                   <Grid  ml={2} mr={1} item xs={1} lg={2} md={2}>
@@ -230,10 +230,10 @@ function ShipingRules() {
                   <Grid  ml={2} item xs={3} lg={3} md={3}>
                     <span style={{display:"flex"}}>
                         <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
-                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" placeholder="100"  />
+                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number"  placeholder="100" min="1"  />
                     </span>  
                   </Grid>
-                  <Grid  ml={2} item xs={4} lg={4} md={4}>
+                  <Grid  ml={2} item xs={4} lg={5} md={5}>
                           <SuiSelect
                               placeholder="select type"
                               options={[

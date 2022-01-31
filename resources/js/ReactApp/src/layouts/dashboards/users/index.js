@@ -71,35 +71,15 @@ function users() {
     <DashboardNavbar />
     <SuiBox my={3}>
       <SuiBox display="flex"  justifyContent="space-between" alignItems="flex-start" mb={2}>
-        <SuiBox display="flex" >
-        <SuiBox ml={1}>
-            <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
-          </SuiBox>
-          <SuiBox ml={1}>
-            <SuiDatePicker input={{ placeholder: "Select End Date" }} />
-          </SuiBox>
-          <SuiBox ml={1}>
-            <SuiButton variant="gradient" color="info">
-              Filter
-            </SuiButton>
-          </SuiBox>
-        </SuiBox>
+        
         <SuiBox display="flex">
-        <SuiBox style={{width: "150px",marginRight:"10px"}}>
-            <SuiSelect
-            placeholder="Category"
-            options={[
-              { value: "area-wise", label: "Area Wise" },
-              { value: "order Wise", label: "Order Wise" },
-            ]}
-          />
-          </SuiBox>
+        
           <SuiBox style={{width: "150px",marginRight:"10px"}}>
             <SuiSelect
             placeholder="Type"
             options={[
-              { value: "earned", label: "Earned" },
-              { value: "redeemed", label: "Redeemed" },
+              { value: "Block", label: "Block" },
+              { value: "Active", label: "Active" },
             ]}
           />
           </SuiBox>

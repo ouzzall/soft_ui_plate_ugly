@@ -32,14 +32,14 @@ function ActionCell() {
           <Icon>visibility</Icon>
         </Tooltip>
       </SuiTypography>
-      </Link>
+      </Link> */}
       <SuiBox mx={2}>
         <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-          <Tooltip title="Edit product" placement="top">
+          <Tooltip title="Edit Rule" placement="top">
             <Icon>edit</Icon>
           </Tooltip>
         </SuiTypography>
-      </SuiBox> */}
+      </SuiBox>
       <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
         <Tooltip title="Delete Rule" placement="left">
           <Icon>delete</Icon>

@@ -66,14 +66,20 @@ function DashboardNavbar({ absolute, light, isMini }) {
   // const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
 
+  // useEffect(() => {
+  //   // Setting the navbar type
+  //   if (fixedNavbar) {
+  //     setNavbarType("fixed");
+  //   } else {
+  //     setNavbarType("static");
+  //   }
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
-      setNavbarType("sticky");
+      setNavbarType("static");
     } else {
       setNavbarType("static");
     }
-
     // A function that sets the transparent state of the navbar.
     function handleTransparentNavbar() {
       setTransparentNavbar(dispatch, (fixedNavbar && window.scrollY === 0) || !fixedNavbar);
