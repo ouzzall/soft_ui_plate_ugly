@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect, useMemo } from "react";
 
 // react-router components
-import { Route, Switch, Redirect, useLocation } from "react-router-dom";
+import { Route, Switch, Redirect, useLocation, useHistory } from "react-router-dom";
 
 import '@uf/assets/style.css';
 // @mui material components
@@ -50,121 +50,137 @@ import { useSoftUIController, setMiniSidenav } from "@uf/context";
 // Images
 import brand from "@uf/assets/images/logo-ct.png";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "./reducers/loadingSlice";
+import Loader from "./components/Loader";
 
 export default function App() {
-  const [controller, dispatch] = useSoftUIController();
-  const { miniSidenav, direction, layout, sidenavColor } = controller;
-  const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const [rtlCache, setRtlCache] = useState(null);
-  const { pathname } = useLocation();
+    const [controller, dispatch] = useSoftUIController();
+    const { miniSidenav, direction, layout, sidenavColor } = controller;
+    const [onMouseEnter, setOnMouseEnter] = useState(false);
+    const [rtlCache, setRtlCache] = useState(null);
+    const { pathname } = useLocation();
+    const loading = useSelector((state) => state.loading.value);
+    const dispatch1 = useDispatch();
 
-  // Cache for the rtl
-  useMemo(() => {
-    const cacheRtl = createCache({
-      key: "rtl",
-      stylisPlugins: [rtlPlugin],
-    });
+    const history = useHistory();
 
-    setRtlCache(cacheRtl);
-  }, []);
 
-  // Open sidenav when mouse enter on mini sidenav
-  const handleOnMouseEnter = () => {
-    if (miniSidenav && !onMouseEnter) {
-      setMiniSidenav(dispatch, false);
-      setOnMouseEnter(true);
-    }
-  };
+    // Cache for the rtl
+    useMemo(() => {
+        const cacheRtl = createCache({
+            key: "rtl",
+            stylisPlugins: [rtlPlugin],
+        });
 
-  // Close sidenav when mouse leave mini sidenav
-  const handleOnMouseLeave = () => {
-    if (onMouseEnter) {
-      setMiniSidenav(dispatch, true);
-      setOnMouseEnter(false);
-    }
-  };
+        setRtlCache(cacheRtl);
+    }, []);
 
-  // Change the openConfigurator state
-  // const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+    // Open sidenav when mouse enter on mini sidenav
+    const handleOnMouseEnter = () => {
+        if (miniSidenav && !onMouseEnter) {
+            setMiniSidenav(dispatch, false);
+            setOnMouseEnter(true);
+        }
+    };
 
-  // Setting the dir attribute for the body element
-  useEffect(() => {
-    document.body.setAttribute("dir", direction);
-  }, [direction]);
+    // Close sidenav when mouse leave mini sidenav
+    const handleOnMouseLeave = () => {
+        if (onMouseEnter) {
+            setMiniSidenav(dispatch, true);
+            setOnMouseEnter(false);
+        }
+    };
 
-  useEffect(() => {
-      const getData = async () => {
-        await axios.get('authenticate/token');
-        let data = await axios.post('api/test');
-        console.log(data.data);
-      }
-      getData();
-  }, []);
+    // Change the openConfigurator state
+    // const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
-  // Setting page scroll to 0 when changing the route
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-  }, [pathname]);
+    // Setting the dir attribute for the body element
+    useEffect(() => {
+        document.body.setAttribute("dir", direction);
+    }, [direction]);
 
-  const getRoutes = (allRoutes) =>
-    allRoutes.map((route) => {
-      if (route.collapse) {
-        return getRoutes(route.collapse);
-      }
 
-      if (route.route) {
-        return <Route exact path={route.route} component={route.component} key={route.key} />;
-      }
+    // Setting page scroll to 0 when changing the route
+    useEffect(() => {
+        document.documentElement.scrollTop = 0;
+        document.scrollingElement.scrollTop = 0;
+        const getUser = async () => {
+            dispatch1(setLoading(true));
+            const data = await fetch('/getSession');
+            const response = await data.json();
+            if (!response.success) {
+                if(pathname != '/signup') {
+                    history.push('/login');
+                }
+            } else {
+                if(pathname == '/signup' || pathname == '/login') {
+                    history.push('/');
+                }
+            }
+            dispatch1(setLoading(false));
+        }
+        getUser();
+    }, [pathname]);
 
-      return null;
-    });
+    const getRoutes = (allRoutes) =>
+        allRoutes.map((route) => {
+            if (route.collapse) {
+                return getRoutes(route.collapse);
+            }
 
-  return direction === "rtl" ? (
-      <CacheProvider value={rtlCache}>
-        <ThemeProvider theme={themeRTL}>
-          <CssBaseline />
-          {layout === "dashboard" && (
-            <>
-              <Sidenav
-                color={sidenavColor}
-                brand={brand}
-                brandName="Soft UI Dashboard PRO"
-                routes={routes}
-                onMouseEnter={handleOnMouseEnter}
-                onMouseLeave={handleOnMouseLeave}
-              />
+            if (route.route) {
+                return <Route exact path={route.route} component={route.component} key={route.key} />;
+            }
 
-            </>
-          )}
+            return null;
+        });
 
-          <Switch>
-            {getRoutes(routes)}
-            <Redirect from="*" to="/" />
-          </Switch>
+    return loading ? <Loader /> : (direction === "rtl" ? (
+        <CacheProvider value={rtlCache}>
+            <ThemeProvider theme={themeRTL}>
+                <CssBaseline />
+                {layout === "dashboard" && (
+                    <>
+                        <Sidenav
+                            color={sidenavColor}
+                            brand={brand}
+                            brandName="Soft UI Dashboard PRO"
+                            routes={routes}
+                            onMouseEnter={handleOnMouseEnter}
+                            onMouseLeave={handleOnMouseLeave}
+                        />
+
+                    </>
+                )}
+
+                <Switch>
+                    {getRoutes(routes)}
+                    <Redirect from="*" to="/" />
+                </Switch>
+            </ThemeProvider>
+        </CacheProvider>
+    ) : (
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {layout === "dashboard" && (
+                <>
+                    <Sidenav
+                        color={sidenavColor}
+                        brand={brand}
+                        brandName="Soft UI Dashboard PRO"
+                        routes={routes}
+                        onMouseEnter={handleOnMouseEnter}
+                        onMouseLeave={handleOnMouseLeave}
+                    />
+
+                </>
+            )}
+
+            <Switch>
+                {getRoutes(routes)}
+                <Redirect from="*" to="/" />
+            </Switch>
         </ThemeProvider>
-      </CacheProvider>
-  ) : (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={brand}
-              brandName="Soft UI Dashboard PRO"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-
-          </>
-        )}
-
-        <Switch>
-          {getRoutes(routes)}
-          <Redirect from="*" to="/" />
-        </Switch>
-      </ThemeProvider>
-  );
+    ));
 }

@@ -140,7 +140,7 @@ const routes = [
         route: '/layouts/dashboards/users',
         component: Users,
     },
-    
+
     {
         name: "Shipping Rules",
         key: "shipping-rules",
@@ -177,20 +177,22 @@ const routes = [
         component: EditProfile,
     },
     {
+        type: "nodisplay",
         name: "Sign In",
         key: "sign-in",
         icon: <Shop size="12px" />,
-        route: "/authentication/sign-in/basic",
+        route: "/login",
         component: SignInBasic,
     },
     {
+        type: "nodisplay",
         name: "Sign Up",
         key: "sign-up",
         icon: <Shop size="12px" />,
-        route: "/authentication/sign-up/basic",
+        route: "/signup",
         component: SignUpBasic,
     },
-    
+
 
 ];
 

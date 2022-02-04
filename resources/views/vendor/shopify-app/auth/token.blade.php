@@ -41,5 +41,9 @@
                 window.location.href = `{!! $target !!}{!! Str::contains($target, '?') ? '&' : '?' !!}token=${token}`;
             });
         </script>
+    @else
+    <script>
+        window.location.href = @json(route('index'));
+    </script>
     @endif
 @endsection

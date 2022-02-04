@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -22,7 +22,7 @@ import Grid from "@mui/material/Grid";
 // import MenuItem from "@mui/material/MenuItem";
 import Card from "@mui/material/Card";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
@@ -59,6 +59,7 @@ import GradientLineChart from "@uf/examples/Charts/LineCharts/GradientLineChart"
 import typography from "@uf/assets/theme/base/typography";
 
 import DataTable from "@uf/examples/Tables/DataTable";
+import { useDispatch, useSelector } from "react-redux";
 
 // Data
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
@@ -86,6 +87,9 @@ function SmartHome() {
   // const [wifiState, setWifiState] = useState(true);
 
   const { size } = typography;
+  const login = useSelector((state) => state.loading.value);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   // order list
   // const [menu, setMenu] = useState(null);
@@ -113,14 +117,13 @@ function SmartHome() {
   //     </MenuItem>
   //   </Menu>
   // );
-  return (
-    <DashboardLayout>
+  return (<DashboardLayout>
       <DashboardNavbar />
       <SuiBox pt={3}>
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} xl={7}>
-            
+
               <GradientLineChart
                 title="Sales Overview"
                 description={
@@ -145,7 +148,7 @@ function SmartHome() {
                   <Card  style={{background: "linear-gradient(310deg,#f87c56,#ee5340)" ,color: "white",padding: "16px"}} >
                     <span style={{opacity:"0.7",fontSize: "14px"}} >Progress</span>
                     <h4>Report Overview</h4>
-                    
+
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -183,7 +186,7 @@ function SmartHome() {
             </Grid>
           </Grid>
         </SuiBox>
-        
+
         <SuiBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={6}>
@@ -195,7 +198,7 @@ function SmartHome() {
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-              
+
               <ControllerCard
                 state={humidityState}
                 // icon={humidityState ? humidityIconLight : humidityIconDark}
@@ -205,7 +208,7 @@ function SmartHome() {
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
-              
+
             <ControllerCard
               state={temperatureState}
               // icon={temperatureIconLight}
@@ -229,7 +232,7 @@ function SmartHome() {
      {/* order list   */}
 
      <SuiBox my={3}>
-        
+
         <Card>
           {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
           <DataTable  entriesPerPage={false} canSearch
@@ -305,20 +308,20 @@ function SmartHome() {
         category:"Area Wise",
         date: "4/11/2021",
       },
-      
+
     ]
   }}
 />
 <div className="seeMore" style={{textAlign: "right" ,marginRight: "26px" ,marginBottom: "20px"}}>
-  <Link to="/layouts/dashboards/transactions"> 
+  <Link to="/layouts/dashboards/transactions">
   <SuiButton variant="gradient" color="info" size="medium">see More</SuiButton></Link>
 </div>
         </Card>
       </SuiBox>
-     
+
       <Footer />
     </DashboardLayout>
-  );
+  )
 }
 
 export default SmartHome;

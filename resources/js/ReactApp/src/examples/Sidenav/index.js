@@ -192,7 +192,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
                 );
             } else if (type === "divider") {
                 returnValue = <Divider key={key} />;
-            } else {
+            } else if(type != "nodisplay" ) {
                 returnValue = (<NavLink to={route} key={key} sx={{ textDecoration: "none" }}>
                         <SidenavCollapse
                             color={color}

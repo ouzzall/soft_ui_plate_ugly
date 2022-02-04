@@ -92,7 +92,7 @@ function Basic() {
                 Already have an account?&nbsp;
                 <SuiTypography
                   component={Link}
-                  to="/authentication/sign-in/basic"
+                  to="/login"
                   variant="button"
                   color="dark"
                   fontWeight="bold"

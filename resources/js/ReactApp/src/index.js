@@ -17,15 +17,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import App from "@uf/App";
+import store from '@uf/store'
+import { Provider } from 'react-redux'
 
 // Soft UI Context Provider
 import { SoftUIControllerProvider } from "@uf/context";
 
 ReactDOM.render(
     <BrowserRouter>
-    <SoftUIControllerProvider>
-      <App />
-    </SoftUIControllerProvider>
-  </BrowserRouter>,
-  document.getElementById("root")
+        <SoftUIControllerProvider>
+            <Provider store={store}>
+                <App />
+            </Provider>
+        </SoftUIControllerProvider>
+    </BrowserRouter>,
+    document.getElementById("root")
 );

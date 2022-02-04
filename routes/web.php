@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
+Route::get('/app-install', function(){
     return view('welcome');
 })->middleware(['verify.shopify'])->name('home');
 
-Route::view('/{any}', 'welcome')->middleware(['verify.shopify'])->where('any', '.*');
+
+// redirect if authenticated
+Route::view('/login', 'index')->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::view('/signup', 'index')->name('signup');
+
+
+// auth middleware
+Route::get('/', function(){
+    return view('index');
+})->name('index');
+Route::get('/getSession', [AuthController::class, 'getSession']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::view('/{any}', 'index')->where('any', '.*')->name('index.view');
+

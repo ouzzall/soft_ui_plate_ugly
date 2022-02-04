@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useHistory } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -27,6 +27,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 // import Menu from "@mui/material/Menu";
 import Icon from "@mui/material/Icon";
+// import LogoutIcon from '@mui/icons-material/Logout';
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
@@ -65,6 +66,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const { miniSidenav, transparentNavbar, fixedNavbar } = controller;
   // const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+  const history = useHistory();
 
   // useEffect(() => {
   //   // Setting the navbar type
@@ -73,6 +75,16 @@ function DashboardNavbar({ absolute, light, isMini }) {
   //   } else {
   //     setNavbarType("static");
   //   }
+
+  const handleLogout = async () => {
+      let data = await fetch('/logout', {
+          method: 'POST',
+      });
+      let response = await data.json();
+      if(response.success) {
+          history.push('/login');
+      }
+  }
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -123,21 +135,21 @@ function DashboardNavbar({ absolute, light, isMini }) {
           <SuiBox sx={(theme) => navbarRow(theme, { isMini })}>
 
             <SuiBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
+              <Link onClick={handleLogout}>
                 <IconButton sx={navbarIconButton} size="small">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
                       color: light ? white.main : dark.main,
                     })}
                   >
-                    account_circle
+                      logout
                   </Icon>
                   <SuiTypography
                     variant="button"
                     fontWeight="medium"
                     color={light ? "white" : "dark"}
                   >
-                    Sign in
+                    Log Out
                   </SuiTypography>
                 </IconButton>
               </Link>
@@ -154,14 +166,14 @@ function DashboardNavbar({ absolute, light, isMini }) {
               <Link style={{}} to="/layouts/dashboards/edit-profile">
               <IconButton
                 size="small"
-                
+
 
               >
                 <Icon sx={({ palette: { dark, white } }) => ({
                                       color: light ? white.main : dark.main,
                                     })}>settings</Icon>
               </IconButton>
-              </Link>     
+              </Link>
             </SuiBox>
           </SuiBox>
         )}
