@@ -135,7 +135,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
           <SuiBox sx={(theme) => navbarRow(theme, { isMini })}>
 
             <SuiBox color={light ? "white" : "inherit"}>
-              <Link onClick={handleLogout}>
+              <span onClick={handleLogout}>
                 <IconButton sx={navbarIconButton} size="small">
                   <Icon
                     sx={({ palette: { dark, white } }) => ({
@@ -152,7 +152,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                     Log Out
                   </SuiTypography>
                 </IconButton>
-              </Link>
+              </span>
               <IconButton
                 size="small"
                 color="inherit"

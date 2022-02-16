@@ -52,6 +52,7 @@ import brand from "@uf/assets/images/logo-ct.png";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "./reducers/loadingSlice";
+import { setUser } from "./reducers/userSlice";
 import Loader from "./components/Loader";
 
 export default function App() {
@@ -61,7 +62,8 @@ export default function App() {
     const [rtlCache, setRtlCache] = useState(null);
     const { pathname } = useLocation();
     const loading = useSelector((state) => state.loading.value);
-    const dispatch1 = useDispatch();
+    const user = useSelector((state) => state.user.user);
+    const dispatchState = useDispatch();
 
     const history = useHistory();
 
@@ -106,7 +108,7 @@ export default function App() {
         document.documentElement.scrollTop = 0;
         document.scrollingElement.scrollTop = 0;
         const getUser = async () => {
-            dispatch1(setLoading(true));
+            dispatchState(setLoading(true));
             const data = await fetch('/getSession');
             const response = await data.json();
             if (!response.success) {
@@ -117,8 +119,14 @@ export default function App() {
                 if(pathname == '/signup' || pathname == '/login') {
                     history.push('/');
                 }
+                routes.map((route) => {
+                    if (!route.role.includes(response.data.role.type) && route.route == pathname && route.role.length > 0) {
+                        history.push('/');
+                    }
+                })
             }
-            dispatch1(setLoading(false));
+            dispatchState(setUser(response.data));
+            dispatchState(setLoading(false));
         }
         getUser();
     }, [pathname]);
@@ -136,7 +144,7 @@ export default function App() {
             return null;
         });
 
-    return loading ? <Loader /> : (direction === "rtl" ? (
+    return (user == null && loading) ? <Loader /> :(direction === "rtl" ? (
         <CacheProvider value={rtlCache}>
             <ThemeProvider theme={themeRTL}>
                 <CssBaseline />
@@ -154,10 +162,10 @@ export default function App() {
                     </>
                 )}
 
-                <Switch>
+                {loading ? <Loader /> : (<Switch>
                     {getRoutes(routes)}
                     <Redirect from="*" to="/" />
-                </Switch>
+                </Switch>)}
             </ThemeProvider>
         </CacheProvider>
     ) : (
@@ -177,10 +185,10 @@ export default function App() {
                 </>
             )}
 
-            <Switch>
-                {getRoutes(routes)}
-                <Redirect from="*" to="/" />
-            </Switch>
+                {loading ? <Loader /> : (<Switch>
+                    {getRoutes(routes)}
+                    <Redirect from="*" to="/" />
+                </Switch>)}
         </ThemeProvider>
     ));
 }

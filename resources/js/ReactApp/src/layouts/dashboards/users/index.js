@@ -66,14 +66,78 @@ function users() {
   //   </Menu>
   // );
 
+  const rows = [
+    {
+      id:1,
+      name: <Link to='/layouts/dashboards/profile'>Faizan</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+    {
+      id:2,
+      name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+    {
+      id:3,
+      name: <Link to="/layouts/dashboards/profile">Talha</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+    {
+      id:4,
+      name: <Link to="/layouts/dashboards/profile">Zain</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+    {
+      id:5,
+      name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+    {
+      id:6,
+      name: <Link to="/layouts/dashboards/profile">Ali</Link>,
+      email: "abc@gmail.com",
+      phone: "+92335474589",
+      points: 60,
+      redeemed: 20,
+      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+
+    },
+
+  ]
+
   return (
     <DashboardLayout>
     <DashboardNavbar />
     <SuiBox my={3}>
       <SuiBox display="flex"  justifyContent="space-between" alignItems="flex-start" mb={2}>
-        
+
         <SuiBox display="flex">
-        
+
           <SuiBox style={{width: "150px",marginRight:"10px"}}>
             <SuiSelect
             placeholder="Type"
@@ -91,7 +155,7 @@ function users() {
       </SuiBox>
       <Card>
         {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-        <DataTable  entriesPerPage={false} canSearch
+        <DataTable entriesPerPage={false} canSearch
 table={{
   columns: [
     { Header: "Id", accessor: "id" },
@@ -101,71 +165,9 @@ table={{
     { Header: "Points Earned", accessor: "points" },
     { Header: "Points Redeemed", accessor: "redeemed" },
     { Header: "Actions", accessor: "actions" },
-    
+
   ],
-  rows: [
-    {
-      id:1,
-      name: <Link to="/layouts/dashboards/profile">Faizan</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    {
-      id:2,
-      name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    {
-      id:3,
-      name: <Link to="/layouts/dashboards/profile">Talha</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    {
-      id:4,
-      name: <Link to="/layouts/dashboards/profile">Zain</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    {
-      id:5,
-      name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    {
-      id:6,
-      name: <Link to="/layouts/dashboards/profile">Ali</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
-      
-    },
-    
-  ]
+  rows: rows,
 }}
 />
 

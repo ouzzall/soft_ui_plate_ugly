@@ -320,6 +320,14 @@ return [
     */
 
     'webhooks' => [
+        [
+            'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', 'SUBSCRIPTION_CONTRACTS_CREATE'),
+            'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', 'https://cfcd-110-39-134-126.ngrok.io/webhook/subscription-contract')
+        ],
+        [
+            'topic' => env('SHOPIFY_WEBHOOK_2_TOPIC', 'ORDERS_CREATE'),
+            'address' => env('SHOPIFY_WEBHOOK_2_ADDRESS', 'https://cfcd-110-39-134-126.ngrok.io/webhook/orders-create')
+        ]
         /*
             [
                 'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', 'ORDERS_CREATE'),

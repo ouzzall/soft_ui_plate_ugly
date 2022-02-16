@@ -43,6 +43,7 @@ import sidenavLogoLabel from "@uf/examples/Sidenav/styles/sidenav";
 
 // Soft UI Dashboard PRO React context
 import { useSoftUIController, setMiniSidenav } from "@uf/context";
+import { useSelector } from "react-redux";
 
 function Sidenav({ color, brand, brandName, routes, ...rest }) {
     const [openCollapse, setOpenCollapse] = useState(false);
@@ -53,6 +54,8 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     const { pathname } = location;
     const collapseName = pathname.split("/").slice(1)[0];
     const itemName = pathname.split("/").slice(1)[1];
+    const user = useSelector((state) => state.user.user);
+
 
     const closeSidenav = () => setMiniSidenav(dispatch, true);
 
@@ -140,7 +143,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
 
     // Render all the routes from the routes.js (All the visible items on the Sidenav)
     const renderRoutes = routes.map(
-        ({ type, name, icon, title, collapse, noCollapse, key, href, route }) => {
+        ({ type, name, icon, title, collapse, noCollapse, key, href, route, role }) => {
             let returnValue;
 
             if (type === "collapse") {
@@ -192,7 +195,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
                 );
             } else if (type === "divider") {
                 returnValue = <Divider key={key} />;
-            } else if(type != "nodisplay" ) {
+            } else if(type != "nodisplay" && role.includes(user?.role?.type)) {
                 returnValue = (<NavLink to={route} key={key} sx={{ textDecoration: "none" }}>
                         <SidenavCollapse
                             color={color}

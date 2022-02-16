@@ -24,6 +24,8 @@ class User extends Authenticatable implements IShopModel
         'name',
         'email',
         'password',
+        'role_id',
+        'shopify_customer_id',
     ];
 
     /**
@@ -44,4 +46,9 @@ class User extends Authenticatable implements IShopModel
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo('\App\Models\Role');
+    }
 }

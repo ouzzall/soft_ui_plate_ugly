@@ -90,6 +90,7 @@ function SmartHome() {
   const login = useSelector((state) => state.loading.value);
   const dispatch = useDispatch();
   const history = useHistory();
+  const user = useSelector((state) => state.user.user);
 
   // order list
   // const [menu, setMenu] = useState(null);

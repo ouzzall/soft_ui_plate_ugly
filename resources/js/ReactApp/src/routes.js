@@ -113,6 +113,7 @@ import Shop from "@uf/examples/Icons/Shop";
 
 const routes = [
     {
+        role: ["admin", "customer"],
         name: "Dashboard",
         key: "smart-home",
         icon: <Shop size="12px" />,
@@ -120,6 +121,7 @@ const routes = [
         component: SmartHome,
     },
     {
+        role: ["admin","customer"],
         name: "Transactions",
         key: "transactions",
         icon: <Shop size="12px" />,
@@ -127,6 +129,7 @@ const routes = [
         component: Transactions,
     },
     {
+        role: ["admin"],
         name: "Orders",
         key: "orders",
         icon: <Shop size="12px" />,
@@ -134,6 +137,7 @@ const routes = [
         component: Orders,
     },
     {
+        role: ["admin"],
         name: "Users",
         key: "users",
         icon: <Shop size="12px" />,
@@ -142,6 +146,7 @@ const routes = [
     },
 
     {
+        role: ["admin"],
         name: "Shipping Rules",
         key: "shipping-rules",
         icon: <Shop size="12px" />,
@@ -149,6 +154,7 @@ const routes = [
         component: ShipingRules,
     },
     {
+        role: ["admin"],
         name: "Subscription Rules",
         key: "subscription-rules",
         icon: <Shop size="12px" />,
@@ -156,6 +162,7 @@ const routes = [
         component: SubscriptionRules,
     },
     {
+        role: ["admin"],
         name: "Order Details",
         key: "Order Details",
         icon: <Shop size="12px" />,
@@ -163,6 +170,7 @@ const routes = [
         component: OrderDetails,
       },
     {
+        role: ["admin"],
         name: "Profile",
         key: "profile",
         icon: <Shop size="12px" />,
@@ -170,6 +178,7 @@ const routes = [
         component: Profile,
     },
     {
+        role: ["admin"],
         name: "Edit Profile",
         key: "edit-profile",
         icon: <Shop size="12px" />,
@@ -177,6 +186,7 @@ const routes = [
         component: EditProfile,
     },
     {
+        role: [],
         type: "nodisplay",
         name: "Sign In",
         key: "sign-in",
@@ -185,6 +195,7 @@ const routes = [
         component: SignInBasic,
     },
     {
+        role: [],
         type: "nodisplay",
         name: "Sign Up",
         key: "sign-up",
