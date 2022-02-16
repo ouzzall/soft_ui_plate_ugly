@@ -18,7 +18,7 @@ class CreateUserLoyaltiesTable extends Migration
             $table->double('loyalty_earned');
             $table->double('loyalty_radeemed');
             $table->unsignedBigInteger('user_id');
-            $table->date('last_radeemed_date');
+            $table->date('last_earned_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

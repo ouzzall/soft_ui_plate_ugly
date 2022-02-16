@@ -51,4 +51,9 @@ class User extends Authenticatable implements IShopModel
     {
         return $this->belongsTo('\App\Models\Role');
     }
+
+    public function loyalty()
+    {
+        return $this->hasOne('\App\Models\UserLoyalty', 'user_id');
+    }
 }
