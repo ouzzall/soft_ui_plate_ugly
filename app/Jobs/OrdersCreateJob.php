@@ -83,7 +83,7 @@ class OrdersCreateJob implements ShouldQueue
             $orderTags = explode(', ', $orderData->tags);
             foreach ($orderTags as $tag) {
                 try {
-                    $date = Carbon::createFromFormat('d/m/Y', $tag);
+                    $date = Carbon::createFromFormat('Y/m/d', $tag);
                     if ($date !== false) {
                         $deliveryDate = $date->format('Y-m-d');
                     }
@@ -105,7 +105,7 @@ class OrdersCreateJob implements ShouldQueue
                 $tags = explode(', ', $order['tags']);
                 foreach ($tags as $tag) {
                     try {
-                        $date = Carbon::createFromFormat('d/m/Y', $tag);
+                        $date = Carbon::createFromFormat('Y/m/d', $tag);
                         if ($date !== false) {
                             return $date->format('Y-m-d') === $deliveryDate;
                         }
