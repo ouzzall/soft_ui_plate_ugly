@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\ShippingRule;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -60,6 +61,7 @@ class OrdersCreateJob implements ShouldQueue
     {
         DB::beginTransaction();
         try {
+            $orderData = $this->data;
             $customer = $this->data->customer;
             $user = User::firstWhere('email', $customer->email);
             if (!$user) {
@@ -77,29 +79,61 @@ class OrdersCreateJob implements ShouldQueue
             }
 
             //Rule 1
-            $shipping_rule_one = null;
-            $todayDate = Carbon::today()->format('Y-m-d');
-            $dateCheck = $user->loyalty()->whereDate('last_earned_date', '!=', $todayDate);
-            if ($dateCheck) {
-                $orders = $this->shop->api()->rest('GET', '/admin/api/2022-01/customers/' . $customer->id . '/orders.json');
-                $orders = collect($orders['body']['orders']);
-                $orders = $orders->map(function ($order) {
-                    $tags = explode(', ', $order['tags']);
-                    foreach ($tags as $tag) {
-                        try {
-                            if (Carbon::createFromFormat('d/m/Y', $tag) !== false) {
-                                $order['delivery_date'] = $tag;
-                            }
-                        } catch (Exception $e) {
-                            // exception
-                        }
+            $deliveryDate = '';
+            $orderTags = explode(', ', $orderData->tags);
+            foreach ($orderTags as $tag) {
+                try {
+                    $date = Carbon::createFromFormat('d/m/Y', $tag);
+                    if ($date !== false) {
+                        $deliveryDate = $date->format('Y-m-d');
                     }
-                    return $order;
+                } catch (InvalidFormatException $ex) {
+                    // format exception
+                }
+            }
+            $dateCheck = $user->loyalty()->whereDate('last_earned_date', $deliveryDate)->first();
+            if ($dateCheck) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You have already earned on this delivery date!',
+                    'data' => null
+                ]);
+            }
+            $orders = $this->shop->api()->rest('GET', '/admin/api/2022-01/customers/' . $customer->id . '/orders.json');
+            $ordersCollection = collect($orders['body']['orders']);
+            $ordersCollection = $ordersCollection->filter(function ($order) use ($deliveryDate) {
+                $tags = explode(', ', $order['tags']);
+                foreach ($tags as $tag) {
+                    try {
+                        $date = Carbon::createFromFormat('d/m/Y', $tag);
+                        if ($date !== false) {
+                            return $date->format('Y-m-d') === $deliveryDate;
+                        }
+                    } catch (InvalidFormatException $ex) {
+                        // format exception
+                    }
+                }
+            });
+            if ($ordersCollection->isNotEmpty()) {
+                $totalOrderPriceSum = $ordersCollection->sum('subtotal_price');
+                $totalShippingPriceSum = $ordersCollection->sum(function($value){
+                    $shipping_lines = collect($value['shipping_lines']);
+                    return $shipping_lines->sum('price');
                 });
-                return $ordersByDate = $orders->groupBy('delivery_date');
-                foreach ($ordersByDate as $orders) {
-                    $orderTotal = $orders->sum('subtotal_price');
-                    $shippingTotal = $orders->sum('total_shipping_price_set.shop_money.amount');
+                $shipping_rule_one = ShippingRule::where('shipping_rule_type', 1)->where('is_active', 1)
+                    ->where('order_amount', '<=', $totalOrderPriceSum)->first();
+                if ($shipping_rule_one) {
+                    $loyaltyValue = 0;
+                    if ($shipping_rule_one->discount_type == 'fixed') {
+                        $loyaltyValue = $shipping_rule_one->shipping_amount;
+                        $user->loyalty()->increment('loyalty_earned', $loyaltyValue);
+                    } elseif ($shipping_rule_one->discount_type == 'percentage') {
+                        $loyaltyValue = $totalShippingPriceSum * ($shipping_rule_one->shipping_amount / 100);
+                        $user->loyalty()->increment('loyalty_earned', $loyaltyValue);
+                    }
+                    $user->loyalty()->update([
+                        'last_earned_date' => $deliveryDate
+                    ]);
                 }
             }
             DB::commit();
