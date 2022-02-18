@@ -47,7 +47,6 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function __construct($shopDomain, $data)
     {
-        $this->shop = User::where('name', 'uglyfoods.myshopify.com')->first();
         $this->shopDomain = $shopDomain;
         $this->data = $data;
     }
@@ -59,92 +58,18 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        DB::beginTransaction();
-        try {
-            $orderData = $this->data;
-            $customer = $this->data->customer;
-            $user = User::firstWhere('email', $customer->email);
-            if (!$user) {
-                $user = User::create([
-                    'shopify_customer_id' => $customer->id,
-                    'email' => $customer->email,
-                    'name' => $customer->first_name . " " . $customer->last_name,
-                    'password' => bcrypt('Customer@123'),
-                    'role_id' => 2,
-                ]);
-                $user->loyalty()->create([
-                    'loyalty_earned' => 0.0,
-                    'loyalty_radeemed' => 0.0,
-                ]);
-            }
-
-            //Rule 1
-            $deliveryDate = '';
-            $orderTags = explode(', ', $orderData->tags);
-            foreach ($orderTags as $tag) {
-                try {
-                    $date = Carbon::createFromFormat('Y/m/d', $tag);
-                    if ($date !== false) {
-                        $deliveryDate = $date->format('Y-m-d');
-                    }
-                } catch (InvalidFormatException $ex) {
-                    // format exception
-                }
-            }
-            $dateCheck = $user->loyalty()->whereDate('last_earned_date', $deliveryDate)->first();
-            if ($dateCheck) {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'You have already earned on this delivery date!',
-                    'data' => null
-                ]);
-            }
-            $orders = $this->shop->api()->rest('GET', '/admin/api/2022-01/customers/' . $customer->id . '/orders.json');
-            $ordersCollection = collect($orders['body']['orders']);
-            $ordersCollection = $ordersCollection->filter(function ($order) use ($deliveryDate) {
-                $tags = explode(', ', $order['tags']);
-                foreach ($tags as $tag) {
-                    try {
-                        $date = Carbon::createFromFormat('Y/m/d', $tag);
-                        if ($date !== false) {
-                            return $date->format('Y-m-d') === $deliveryDate;
-                        }
-                    } catch (InvalidFormatException $ex) {
-                        // format exception
-                    }
-                }
-            });
-            if ($ordersCollection->isNotEmpty()) {
-                $totalOrderPriceSum = $ordersCollection->sum('subtotal_price');
-                $totalShippingPriceSum = $ordersCollection->sum(function($value){
-                    $shipping_lines = collect($value['shipping_lines']);
-                    return $shipping_lines->sum('price');
-                });
-                $shipping_rule_one = ShippingRule::where('shipping_rule_type', 1)->where('is_active', 1)
-                    ->where('order_amount', '<=', $totalOrderPriceSum)->first();
-                if ($shipping_rule_one) {
-                    $loyaltyValue = 0;
-                    if ($shipping_rule_one->discount_type == 'fixed') {
-                        $loyaltyValue = $shipping_rule_one->shipping_amount;
-                        $user->loyalty()->increment('loyalty_earned', $loyaltyValue);
-                    } elseif ($shipping_rule_one->discount_type == 'percentage') {
-                        $loyaltyValue = $totalShippingPriceSum * ($shipping_rule_one->shipping_amount / 100);
-                        $user->loyalty()->increment('loyalty_earned', $loyaltyValue);
-                    }
-                    $user->loyalty()->update([
-                        'last_earned_date' => $deliveryDate
-                    ]);
-                }
-            }
-            DB::commit();
+        $loyaltyCalculated = loyaltyCalculator($this->data);
+        if(!$loyaltyCalculated) {
             return response()->json([
-                'success' => true,
-                'message' => 'Order created successfully!',
-                'data' => null
+                'success' => false,
+                'message' => 'An error occured!',
+                'data' => null,
             ]);
-        } catch (Exception $e) {
-            DB::rollBack();
-            return $e->getMessage();
         }
+        return response()->json([
+            'success' => true,
+            'message' => 'Loyalty calculation complete!',
+            'data' => null,
+        ]);
     }
 }
