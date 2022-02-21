@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -34,6 +35,7 @@ Route::get('/', function(){
 })->name('index');
 Route::get('/getSession', [AuthController::class, 'getSession']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/getUsers', [UserController::class, 'getUsers']);
 
 
 

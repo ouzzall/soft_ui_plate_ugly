@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Collection;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidDateException;
 use Carbon\Exceptions\InvalidFormatException;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
     public function __construct()
     {
     }
-    public function getCustomerOrders()
+    public function sync()
     {
-        $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/orders.json');
-        return $orders['body']['orders'][0]->customer;
+
     }
 }

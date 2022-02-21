@@ -80,4 +80,4 @@ Route::get('/test-get', function() {
     return $api;
 });
 
-Route::get('getCustomerOrders', [OrderController::class, 'getCustomerOrders']);
+Route::get('sync', [OrderController::class, 'sync']);

@@ -38,144 +38,108 @@ import DataTable from "@uf/examples/Tables/DataTable";
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
+import { useEffect, useState } from "react";
 
 function users() {
-  // const [menu, setMenu] = useState(null);
+    // const [menu, setMenu] = useState(null);
 
-  // const openMenu = (event) => setMenu(event.currentTarget);
-  // const closeMenu = () => setMenu(null);
+    // const openMenu = (event) => setMenu(event.currentTarget);
+    // const closeMenu = () => setMenu(null);
 
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={menu}
-  //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-  //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-  //     open={Boolean(menu)}
-  //     onClose={closeMenu}
-  //     keepMounted
-  //   >
-  //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
-  //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
-  //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
-  //     <Divider sx={{ margin: "0.5rem 0" }} />
-  //     <MenuItem onClick={closeMenu}>
-  //       <SuiTypography variant="button" color="error" fontWeight="regular">
-  //         Remove Filter
-  //       </SuiTypography>
-  //     </MenuItem>
-  //   </Menu>
-  // );
+    // const renderMenu = (
+    //   <Menu
+    //     anchorEl={menu}
+    //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    //     transformOrigin={{ vertical: "top", horizontal: "left" }}
+    //     open={Boolean(menu)}
+    //     onClose={closeMenu}
+    //     keepMounted
+    //   >
+    //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
+    //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
+    //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
+    //     <Divider sx={{ margin: "0.5rem 0" }} />
+    //     <MenuItem onClick={closeMenu}>
+    //       <SuiTypography variant="button" color="error" fontWeight="regular">
+    //         Remove Filter
+    //       </SuiTypography>
+    //     </MenuItem>
+    //   </Menu>
+    // );
 
-  const rows = [
-    {
-      id:1,
-      name: <Link to='/layouts/dashboards/profile'>Faizan</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+    const [usersData, setUsersData] = useState([]);
 
-    },
-    {
-      id:2,
-      name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
 
-    },
-    {
-      id:3,
-      name: <Link to="/layouts/dashboards/profile">Talha</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+    useEffect(() => {
+        async function getUsers() {
+            let data = await fetch('/getUsers');
+            let response = await data.json();
+            if (response.success) {
+                response.data.map((value) => {
+                    setUsersData([
+                        ...usersData,
+                        {
+                            id: value.id,
+                            name: value.name,
+                            email: value.email,
+                            phone: value.phone,
+                            points: value.loyalty.loyalty_earned,
+                            redeemed: value.loyalty.loyalty_radeemed,
+                            actions: <SuiButton variant="gradient" color="info" size="small">Block</SuiButton>
+                        }
+                    ])
+                });
+            }
+        }
+        getUsers();
+    }, []);
 
-    },
-    {
-      id:4,
-      name: <Link to="/layouts/dashboards/profile">Zain</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+    return (
+        <DashboardLayout>
+            <DashboardNavbar />
+            <SuiBox my={3}>
+                <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
 
-    },
-    {
-      id:5,
-      name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+                    <SuiBox display="flex">
 
-    },
-    {
-      id:6,
-      name: <Link to="/layouts/dashboards/profile">Ali</Link>,
-      email: "abc@gmail.com",
-      phone: "+92335474589",
-      points: 60,
-      redeemed: 20,
-      actions:<SuiButton variant="gradient" color="info" size="small">Block</SuiButton>,
+                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                            <SuiSelect
+                                placeholder="Type"
+                                options={[
+                                    { value: "Block", label: "Block" },
+                                    { value: "Active", label: "Active" },
+                                ]}
+                            />
+                        </SuiBox>
+                        <SuiButton variant="gradient" color="info">
+                            Filter
+                        </SuiButton>
 
-    },
+                    </SuiBox>
+                </SuiBox>
+                <Card>
+                    {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
+                    <DataTable entriesPerPage={false} canSearch
+                        table={{
+                            columns: [
+                                { Header: "Id", accessor: "id" },
+                                { Header: "Name", accessor: "name" },
+                                { Header: "Email", accessor: "email" },
+                                { Header: "Phone No", accessor: "phone" },
+                                { Header: "Points Earned", accessor: "points" },
+                                { Header: "Points Redeemed", accessor: "redeemed" },
+                                { Header: "Actions", accessor: "actions" },
 
-  ]
+                            ],
+                            rows: usersData,
+                        }}
+                    />
 
-  return (
-    <DashboardLayout>
-    <DashboardNavbar />
-    <SuiBox my={3}>
-      <SuiBox display="flex"  justifyContent="space-between" alignItems="flex-start" mb={2}>
-
-        <SuiBox display="flex">
-
-          <SuiBox style={{width: "150px",marginRight:"10px"}}>
-            <SuiSelect
-            placeholder="Type"
-            options={[
-              { value: "Block", label: "Block" },
-              { value: "Active", label: "Active" },
-            ]}
-          />
-          </SuiBox>
-          <SuiButton variant="gradient" color="info">
-              Filter
-            </SuiButton>
-
-        </SuiBox>
-      </SuiBox>
-      <Card>
-        {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-        <DataTable entriesPerPage={false} canSearch
-table={{
-  columns: [
-    { Header: "Id", accessor: "id" },
-    { Header: "Name", accessor: "name" },
-    { Header: "Email", accessor: "email" },
-    { Header: "Phone No", accessor: "phone" },
-    { Header: "Points Earned", accessor: "points" },
-    { Header: "Points Redeemed", accessor: "redeemed" },
-    { Header: "Actions", accessor: "actions" },
-
-  ],
-  rows: rows,
-}}
-/>
-
-      </Card>
-    </SuiBox>
-    <Footer />
-  </DashboardLayout>
-  );
+                </Card>
+            </SuiBox>
+            <Footer />
+        </DashboardLayout>
+    );
 }
 
 export default users;

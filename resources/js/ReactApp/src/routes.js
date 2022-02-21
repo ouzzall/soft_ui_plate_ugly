@@ -47,6 +47,7 @@ import Profile from "@uf/layouts/dashboards/profile";
 import EditProfile from "@uf/layouts/dashboards/edit-profile";
 import SubscriptionRules from "@uf/layouts/dashboards/Subsciption-rules";
 import OrderDetails from "@uf/layouts/dashboards/order-details";
+import Compaign from "@uf/layouts/dashboards/compaigns";
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
 
@@ -184,6 +185,14 @@ const routes = [
         icon: <Shop size="12px" />,
         route: "/layouts/dashboards/edit-profile",
         component: EditProfile,
+    },
+    {
+        role: ["admin"],
+        name: "compaigns",
+        key: "compaigns",
+        icon: <Shop size="12px" />,
+        route: "/layouts/dashboards/compaigns",
+        component: Compaign,
     },
     {
         role: [],
