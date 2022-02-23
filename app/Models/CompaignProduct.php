@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CompaignProduct extends Model
 {
     use HasFactory;
+
+    public function compaign()
+    {
+        return $this->belongsTo('\App\Models\Compaign', 'compaign_id');
+    }
 }

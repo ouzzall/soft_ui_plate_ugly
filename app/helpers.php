@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Compaign;
 use App\Models\ShippingRule;
 use App\Models\User;
 use Carbon\Carbon;
 use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('getShop')) {
     function getShop()
@@ -14,13 +16,12 @@ if (!function_exists('getShop')) {
     }
 }
 
-if (!function_exists('loyalty')) {
+if (!function_exists('loyaltyCalculator')) {
     function loyaltyCalculator($order)
     {
         DB::beginTransaction();
         try {
-            $orderData = collect($order);
-            $customer = $orderData->customer;
+            $customer = $order->customer;
             $user = User::firstWhere('email', $customer->email);
             if (!$user) {
                 $user = User::create([
@@ -36,9 +37,9 @@ if (!function_exists('loyalty')) {
                 ]);
             }
 
-            //Rule 1
+            //Rule (Order based)
             $deliveryDate = '';
-            $orderTags = explode(', ', $orderData->tags);
+            $orderTags = explode(', ', $order->tags);
             foreach ($orderTags as $tag) {
                 try {
                     $date = Carbon::createFromFormat('Y/m/d', $tag);
@@ -88,6 +89,40 @@ if (!function_exists('loyalty')) {
                     $user->loyalty()->update([
                         'last_earned_date' => $deliveryDate
                     ]);
+                    return true;
+                }
+            }
+            // Rule (Product / Collection based)
+            $item_ids = collect($order->line_items)->pluck('product_id');
+
+            // for products
+            $compaign = Compaign::whereHas('products', function ($q) use ($item_ids) {
+                $q->whereIn('product_id', $item_ids)->where('type', 'product');
+            })->where('is_active', 1)->first();
+            if ($compaign) {
+                $user->loyalty()->increment('loyalty_earned', $compaign->loyalty);
+                $user->loyalty()->update([
+                    'last_earned_date' => $deliveryDate
+                ]);
+                return true;
+            }
+            // for collections
+            foreach ($item_ids as $id) {
+                $collections = getShop()->api()->rest('GET', '/admin/api/2022-01/collects.json', [
+                    'product_id' => $id
+                ]);
+                if ($collections['status'] == 200) {
+                    $collection_ids = collect($collections['body']['collects'])->pluck('collection_id');
+                    $collectionCompaign = Compaign::whereHas('products', function ($q) use ($collection_ids) {
+                        $q->whereIn('product_id', $collection_ids)->where('type', 'collection');
+                    })->where('is_active', 1)->first();
+                    if ($collectionCompaign) {
+                        $user->loyalty()->increment('loyalty_earned', $collectionCompaign->loyalty);
+                        $user->loyalty()->update([
+                            'last_earned_date' => $deliveryDate
+                        ]);
+                        return true;
+                    }
                 }
             }
             DB::commit();

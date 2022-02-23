@@ -15,7 +15,11 @@ class CreateCompaignProductsTable extends Migration
     {
         Schema::create('compaign_products', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('product_id');
+            $table->enum('type', ['product', 'collection']);
+            $table->unsignedBigInteger('compaign_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
