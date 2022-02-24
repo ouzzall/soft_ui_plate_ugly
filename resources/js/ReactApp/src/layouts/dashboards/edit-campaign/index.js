@@ -53,7 +53,9 @@ import { useHistory } from "react-router-dom";
 // import initialValues from "@uf/layouts/pages/users/new-user/schemas/initialValues";
 
 
-function NewUser() {
+function EditCompain({ match }) {
+    const { id } = match.params;
+    const [campaignData, setCompaignData] = useState({});
     const [products, setProducts] = useState([]);
     const [collections, setCollections] = useState([]);
     const [compaignName, setCompaignName] = useState('');
@@ -63,6 +65,27 @@ function NewUser() {
     const history = useHistory();
 
     useEffect(() => {
+        const getCampaignData = async () => {
+            let data = await fetch(`/getCampaign/${id}`);
+            let response = await data.json();
+            if (response.success) {
+                setCompaignData(response.data);
+                setCompaignName(response.data.compaign_name);
+                let collects = response.data.collections.map(({ product_id }) => ({
+                    label: '',
+                    value: product_id
+                }));
+
+                let pros = response.data.products.map(({ product_id }) => ({
+                    label: '',
+                    value: product_id
+                }));
+                setSelectedCollections(collects);
+                setSelectedProducts(pros);
+                setLoyaltyValue(response.data.loyalty);
+            }
+        }
+        getCampaignData();
         const getCollections = async () => {
             const data = await fetch('/getCollections');
             const response = await data.json();
@@ -84,10 +107,12 @@ function NewUser() {
     const handleForm = async (event) => {
         event.preventDefault();
         let collectionsData = selectedCollections.map((collection) => ({
+            compaign_id: campaignData?.id,
             product_id: collection.value,
             type: 'collection'
         }));
         let productsData = selectedProducts.map((product) => ({
+            compaign_id: campaignData?.id,
             product_id: product.value,
             type: 'product'
         }));
@@ -97,8 +122,8 @@ function NewUser() {
             products: productsData,
             loyalty: loyaltyValue,
         }
-        const data = await fetch('/saveCompaign', {
-            method: 'POST',
+        const data = await fetch('/updateCampaign/1', {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -119,7 +144,7 @@ function NewUser() {
                     <Grid item xs={12} lg={8}>
                         <Card style={{ minHeight: "400px", }}>
                             <SuiBox style={{ padding: "40px 80px", }}>
-                                <h5>Create Campaign</h5>
+                                <h5>Edit Campaign</h5>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
                                         <FormField type="text" label="compaign name" placeholder="Compaign Name" value={compaignName} onChange={({ target: { value } }) => {
@@ -137,7 +162,7 @@ function NewUser() {
                                                 Collections
                                             </SuiTypography>
                                         </SuiBox>
-                                        <SuiSelect defaultValue={selectedCollections} onChange={setSelectedCollections}
+                                        <SuiSelect value={selectedCollections} onChange={setSelectedCollections}
                                             options={collections}
                                             isMulti
                                         />
@@ -151,7 +176,7 @@ function NewUser() {
                                                     Products
                                                 </SuiTypography>
                                             </SuiBox>
-                                            <SuiSelect name="products" defaultValue={selectedProducts} onChange={setSelectedProducts}
+                                            <SuiSelect name="products" value={selectedProducts} onChange={setSelectedProducts}
                                                 options={products}
                                                 isMulti
                                             />
@@ -176,4 +201,4 @@ function NewUser() {
     );
 }
 
-export default NewUser;
+export default EditCompain;

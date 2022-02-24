@@ -17,8 +17,4 @@ class OrderController extends Controller
     public function __construct()
     {
     }
-    public function sync()
-    {
-
-    }
 }

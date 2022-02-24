@@ -49,6 +49,7 @@ import SubscriptionRules from "@uf/layouts/dashboards/Subsciption-rules";
 import OrderDetails from "@uf/layouts/dashboards/order-details";
 import Compaign from "@uf/layouts/dashboards/compaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
+import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
 
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
@@ -166,6 +167,7 @@ const routes = [
     },
     {
         role: ["admin"],
+        type: "nodisplay",
         name: "Order Details",
         key: "Order Details",
         icon: <Shop size="12px" />,
@@ -173,7 +175,8 @@ const routes = [
         component: OrderDetails,
       },
     {
-        role: ["admin"],
+        role: ["admin", "customer"],
+        type: "nodisplay",
         name: "Profile",
         key: "profile",
         icon: <Shop size="12px" />,
@@ -181,7 +184,8 @@ const routes = [
         component: Profile,
     },
     {
-        role: ["admin"],
+        role: ["admin", "customer"],
+        type: "nodisplay",
         name: "Edit Profile",
         key: "edit-profile",
         icon: <Shop size="12px" />,
@@ -190,7 +194,7 @@ const routes = [
     },
     {
         role: ["admin"],
-        name: "compaigns",
+        name: "Compaigns",
         key: "compaigns",
         icon: <Shop size="12px" />,
         route: "/layouts/dashboards/compaigns",
@@ -208,13 +212,23 @@ const routes = [
     {
         role: [],
         type: "nodisplay",
+        name: "edit campaign",
+        key: "edit-compaign",
+        icon: <Shop size="12px" />,
+        route: "/edit-campaign/:id",
+        component: EditCampaign,
+    },
+
+    {
+        role: [],
+        type: "nodisplay",
         name: "Sign In",
         key: "sign-in",
         icon: <Shop size="12px" />,
         route: "/login",
         component: SignInBasic,
     },
- 
+
     {
         role: [],
         type: "nodisplay",

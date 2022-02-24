@@ -9,6 +9,11 @@ class Compaign extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'compaign_name',
+        'loyalty',
+    ];
+
     public function products()
     {
         return $this->hasMany('\App\Models\CompaignProduct', 'compaign_id');

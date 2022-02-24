@@ -20,29 +20,32 @@ import Tooltip from "@mui/material/Tooltip";
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
 import SuiTypography from "@uf/components/SuiTypography";
+import { Link } from "react-router-dom";
 
-function ActionCell() {
-  return (
-    <SuiBox display="flex" alignItems="center">
-      {/* <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+function ActionCell({edit, del}) {
+    return (
+        <SuiBox display="flex" alignItems="center">
+            {/* <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
         <Tooltip title="Preview product" placement="top">
           <Icon>visibility</Icon>
         </Tooltip>
       </SuiTypography> */}
-      <SuiBox mx={2}>
-        <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-          <Tooltip title="Edit Campaign" placement="top">
-            <Icon>edit</Icon>
-          </Tooltip>
-        </SuiTypography>
-      </SuiBox>
-      <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-        <Tooltip title="Delete Campaign" placement="left">
-          <Icon>delete</Icon>
-        </Tooltip>
-      </SuiTypography>
-    </SuiBox>
-  );
+            <SuiBox mx={2}>
+                <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+                    <Link to={edit}>
+                        <Tooltip title="Edit Campaign" placement="top">
+                            <Icon>edit</Icon>
+                        </Tooltip>
+                    </Link>
+                </SuiTypography>
+            </SuiBox>
+            <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+                <Tooltip title="Delete Campaign" placement="left">
+                    <Icon>delete</Icon>
+                </Tooltip>
+            </SuiTypography>
+        </SuiBox>
+    );
 }
 
 export default ActionCell;
