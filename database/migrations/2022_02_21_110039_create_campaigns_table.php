@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaignsTable extends Migration
+class CreateCampaignsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateCompaignsTable extends Migration
      */
     public function up()
     {
-        Schema::create('compaigns', function (Blueprint $table) {
+        Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->string('compaign_name');
+            $table->string('campaign_name');
             $table->double('loyalty')->default(0.0);
             $table->enum('is_active', [true, false]);
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateCompaignsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compaigns');
+        Schema::dropIfExists('campaigns');
     }
 }

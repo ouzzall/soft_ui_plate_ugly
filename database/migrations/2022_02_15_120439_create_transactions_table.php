@@ -16,8 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('order_id');
-            $table->double('points');
+            $table->double('loyalty_points');
             $table->unsignedBigInteger('transaction_type_id');
             $table->timestamps();
         });

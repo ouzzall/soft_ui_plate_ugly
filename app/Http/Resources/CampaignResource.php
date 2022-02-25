@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Collection;
+use App\Models\Product;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CampaignResource extends JsonResource
@@ -15,10 +17,18 @@ class CampaignResource extends JsonResource
     public function toArray($request)
     {
         $collections = $this->products()->where('type', 'collection')->get();
+        $collections = $collections->map(function($collection){
+            $collection['label'] = Collection::firstWhere('collection_id', $collection['product_id'])->title;
+            return $collection;
+        });
         $products = $this->products()->where('type', 'product')->get();
+        $products = $products->map(function($product){
+            $product['label'] = Product::firstWhere('product_id', $product['product_id'])->title;
+            return $product;
+        });
         return [
             'id' => $this->id,
-            'compaign_name' => $this->compaign_name,
+            'campaign_name' => $this->campaign_name,
             'loyalty' => $this->loyalty,
             'collections' => $collections,
             'products' => $products,

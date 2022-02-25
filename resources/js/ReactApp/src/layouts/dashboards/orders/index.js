@@ -119,8 +119,6 @@ table={{
     { Header: "Email", accessor: "email" },
     { Header: "Order Id", accessor: "orderid" },
     { Header: "Points", accessor: "points" },
-    { Header: "Type", accessor: "type" },
-    { Header: "Category", accessor: "category" },
     { Header: "Date", accessor: "date"},
   ],
   rows: [
@@ -130,8 +128,6 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
     {
@@ -140,8 +136,6 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
     {
@@ -150,8 +144,6 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
     {
@@ -160,8 +152,6 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
     {
@@ -170,8 +160,6 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
     {
@@ -180,11 +168,9 @@ table={{
       email: "abc@gmail.com",
       orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
       points: 60,
-      type: "Earned",
-      category:"Area Wise",
       date: "4/11/2021",
     },
-    
+
   ]
 }}
 />

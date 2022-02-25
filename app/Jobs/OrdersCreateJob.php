@@ -2,16 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Models\ShippingRule;
+use App\Models\Order;
 use App\Models\User;
-use Carbon\Carbon;
-use Carbon\Exceptions\InvalidFormatException;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Osiset\ShopifyApp\Objects\Values\ShopDomain;
 use stdClass;
 
@@ -56,18 +56,53 @@ class OrdersCreateJob implements ShouldQueue
      */
     public function handle()
     {
-        $loyaltyCalculated = loyaltyCalculator($this->data);
-        if(!$loyaltyCalculated) {
+        $order = $this->data;
+        $customer = $order->customer;
+        DB::beginTransaction();
+        try {
+            $localOrder = Order::create([
+                'order_number' => $order->id,
+                'order_name' => $order->name,
+                'customer_email' => $customer->email,
+                'customer_name' => $customer->first_name . " " . $customer->last_name,
+                'amount' => $order->subtotal_price,
+            ]);
+            $user = User::firstWhere('email', $customer->email);
+            if (!$user) {
+                $user = User::create([
+                    'shopify_customer_id' => $customer->id,
+                    'email' => $customer->email,
+                    'name' => $customer->first_name . " " . $customer->last_name,
+                    'password' => bcrypt('Customer@123'),
+                    'role_id' => 2,
+                ]);
+                $user->loyalty()->create([
+                    'loyalty_earned' => 0.0,
+                    'loyalty_radeemed' => 0.0,
+                ]);
+            }
+            $loyaltyCalculated = loyaltyCalculator($user, $order);
+            if ($loyaltyCalculated !== false) {
+                $user->loyalty()->increment('loyalty_earned', $loyaltyCalculated['loyalty_earned']);
+                $user->loyalty()->update([
+                    'last_earned_date' => $loyaltyCalculated['last_earned_date']
+                ]);
+                $localOrder->update([
+                    'loyalty_points' => $loyaltyCalculated['loyalty_earned']
+                ]);
+                $user->transactions()->create([
+                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
+                    'transaction_type_id' => 1,
+                ]);
+            }
+            DB::commit();
             return response()->json([
-                'success' => false,
-                'message' => 'An error occured!',
+                'success' => true,
+                'message' => 'Order created successfully!',
                 'data' => null,
             ]);
+        } catch (Exception $ex) {
+            DB::rollBack();
         }
-        return response()->json([
-            'success' => true,
-            'message' => 'Loyalty calculation complete!',
-            'data' => null,
-        ]);
     }
 }

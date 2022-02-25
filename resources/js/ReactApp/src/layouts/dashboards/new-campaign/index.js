@@ -56,7 +56,7 @@ import { useHistory } from "react-router-dom";
 function NewUser() {
     const [products, setProducts] = useState([]);
     const [collections, setCollections] = useState([]);
-    const [compaignName, setCompaignName] = useState('');
+    const [campaignName, setCampaignName] = useState('');
     const [loyaltyValue, setLoyaltyValue] = useState(0);
     const [selectedCollections, setSelectedCollections] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
@@ -91,22 +91,22 @@ function NewUser() {
             product_id: product.value,
             type: 'product'
         }));
-        const compaignData = {
-            compaign_name: compaignName,
+        const campaignData = {
+            campaign_name: campaignName,
             collections: collectionsData,
             products: productsData,
-            loyalty: loyaltyValue,
+            loyalty_points: loyaltyValue,
         }
-        const data = await fetch('/saveCompaign', {
+        const data = await fetch('/saveCampaign', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(compaignData),
+            body: JSON.stringify(campaignData),
         });
         const response = await data.json();
         if(response.success) {
-            history.push('/layouts/dashboards/compaigns');
+            history.push('/layouts/dashboards/campaigns');
         }
     }
 
@@ -122,8 +122,8 @@ function NewUser() {
                                 <h5>Create Campaign</h5>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="compaign name" placeholder="Compaign Name" value={compaignName} onChange={({ target: { value } }) => {
-                                            setCompaignName(value);
+                                        <FormField type="text" label="campaign name" placeholder="Campaign Name" value={campaignName} onChange={({ target: { value } }) => {
+                                            setCampaignName(value);
                                         }} />
                                     </Grid>
                                     <Grid item md={12} xs={12} sm={4} style={{ paddingTop: "5px", }}>
@@ -159,7 +159,7 @@ function NewUser() {
                                     </Grid>
                                 </SuiBox>
                                 <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="Loyalty" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
+                                        <FormField type="text" label="Loyalty Points" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
                                             setLoyaltyValue(value);
                                         }} />
                                     </Grid>

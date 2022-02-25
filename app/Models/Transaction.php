@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'loyalty_points',
+        'transaction_type_id',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User', 'user_id');
+    }
 }

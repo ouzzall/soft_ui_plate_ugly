@@ -56,4 +56,8 @@ class User extends Authenticatable implements IShopModel
     {
         return $this->hasOne('\App\Models\UserLoyalty', 'user_id');
     }
+    public function transactions()
+    {
+        return $this->hasMany('\App\Models\Transaction', 'user_id');
+    }
 }

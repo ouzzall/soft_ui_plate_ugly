@@ -3,26 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CampaignResource;
-use App\Models\Compaign;
+use App\Models\Campaign;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
-class CompaignController extends Controller
+class CampaignController extends Controller
 {
-    public function saveCompaign(Request $request)
+    public function saveCampaign(Request $request)
     {
         DB::beginTransaction();
         try {
-            $compaign = Compaign::create($request->all());
-            $compaign->products()->createMany($request->collections);
-            $compaign->products()->createMany($request->products);
+            $campaign = Campaign::create($request->all());
+            $campaign->products()->createMany($request->collections);
+            $campaign->products()->createMany($request->products);
             DB::commit();
             return response()->json([
                 'success' => true,
-                'message' => 'Compaign created successfully',
-                'data' => $compaign,
+                'message' => 'Campaign created successfully',
+                'data' => $campaign,
             ], Response::HTTP_CREATED);
         } catch (Exception $ex) {
             DB::rollBack();
@@ -36,19 +36,19 @@ class CompaignController extends Controller
 
     public function getCampaign($id)
     {
-        $compaign = Compaign::find($id);
-        if (!$compaign) {
+        $campaign = Campaign::find($id);
+        if (!$campaign) {
             return response()->json([
                 'success' => false,
-                'message' => 'Compaign not found',
+                'message' => 'Campaign not found',
                 'data' => null,
             ], Response::HTTP_NOT_FOUND);
         }
-        $compaign = new CampaignResource($compaign);
+        $campaign = new CampaignResource($campaign);
         return response()->json([
             'success' => true,
-            'message' => 'Compaign retrieved successfully',
-            'data' => $compaign,
+            'message' => 'Campaign retrieved successfully',
+            'data' => $campaign,
         ], Response::HTTP_OK);
     }
 
@@ -56,42 +56,42 @@ class CompaignController extends Controller
     {
         DB::beginTransaction();
         try {
-            $compaign = Compaign::find($id);
-            if (!$compaign) {
+            $campaign = Campaign::find($id);
+            if (!$campaign) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Compaign not found',
+                    'message' => 'Campaign not found',
                     'data' => null,
                 ], Response::HTTP_NOT_FOUND);
             }
-            $compaign->update($request->all());
+            $campaign->update($request->all());
 
             $collections = collect($request->collections);
             $collection_ids = $collections->pluck('product_id');
-            $compaign->products()->whereNotIn('product_id', $collection_ids)->where('type', 'collection')->delete();
-            $collections->map(function ($value) use ($compaign) {
-                $compaign->products()->updateOrCreate([
+            $campaign->products()->whereNotIn('product_id', $collection_ids)->where('type', 'collection')->delete();
+            $collections->map(function ($value) use ($campaign) {
+                $campaign->products()->updateOrCreate([
                     'product_id' => $value['product_id'],
-                    'compaign_id' => $compaign->id,
+                    'campaign_id' => $campaign->id,
                     'type' => $value['type']
                 ], $value);
             });
 
             $products = collect($request->products);
-            $product_ids = $collections->pluck('product_id');
-            $compaign->products()->whereNotIn('product_id', $product_ids)->where('type', 'product')->delete();
-            $products->map(function ($value) use ($compaign) {
-                $compaign->products()->updateOrCreate([
+            $product_ids = $products->pluck('product_id');
+            $campaign->products()->whereNotIn('product_id', $product_ids)->where('type', 'product')->delete();
+            $products->map(function ($value) use ($campaign) {
+                $campaign->products()->updateOrCreate([
                     'product_id' => $value['product_id'],
-                    'compaign_id' => $compaign->id,
+                    'campaign_id' => $campaign->id,
                     'type' => $value['type']
                 ], $value);
             });
             DB::commit();
             return response()->json([
                 'success' => true,
-                'message' => 'Compaign updated successfully',
-                'data' => $compaign,
+                'message' => 'Campaign updated successfully',
+                'data' => $campaign,
             ], Response::HTTP_CREATED);
         } catch (Exception $ex) {
             DB::rollBack();
@@ -103,13 +103,13 @@ class CompaignController extends Controller
         }
     }
 
-    public function getCompaigns()
+    public function getCampaigns()
     {
-        $compaigns = Compaign::all();
+        $campaigns = Campaign::all();
         return response()->json([
             'success' => true,
-            'message' => 'Compaigns retrieved successfully',
-            'data' => $compaigns,
+            'message' => 'Campaigns retrieved successfully',
+            'data' => $campaigns,
         ]);
     }
 }

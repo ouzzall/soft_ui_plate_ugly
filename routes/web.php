@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CompaignController;
+use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\UserController;
 use App\Models\Role;
@@ -41,10 +41,10 @@ Route::get('/getUsers', [UserController::class, 'getUsers']);
 Route::get('/getCollections', [DefaultController::class, 'getCollections']);
 Route::get('/getProducts', [DefaultController::class, 'getProducts']);
 
-Route::get('/getCompaigns', [CompaignController::class, 'getCompaigns']);
-Route::get('/getCampaign/{id}', [CompaignController::class, 'getCampaign']);
-Route::post('/saveCompaign', [CompaignController::class, 'saveCompaign']);
-Route::put('/updateCampaign/{id}', [CompaignController::class, 'updateCampaign']);
+Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
+Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
+Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
+Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
 
 
 

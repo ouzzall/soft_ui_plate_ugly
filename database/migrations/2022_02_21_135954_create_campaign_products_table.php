@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaignProductsTable extends Migration
+class CreateCampaignProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateCompaignProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('compaign_products', function (Blueprint $table) {
+        Schema::create('campaign_products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('product_id');
             $table->enum('type', ['product', 'collection']);
-            $table->unsignedBigInteger('compaign_id');
+            $table->unsignedBigInteger('campaign_id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +30,6 @@ class CreateCompaignProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compaign_products');
+        Schema::dropIfExists('campaign_products');
     }
 }

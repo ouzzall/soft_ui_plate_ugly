@@ -114,7 +114,7 @@ function Compaign() {
                             columns: [
                                 { Header: "Id", accessor: "id" },
                                 { Header: "Campaign Name", accessor: "compaign_name" },
-                                { Header: "Loyalty", accessor: "loyalty" },
+                                { Header: "Loyalty Points", accessor: "loyalty_points" },
                                 { Header: "Actions", accessor: "action" },
                             ],
                             rows: compaigns,

@@ -47,7 +47,7 @@ import Profile from "@uf/layouts/dashboards/profile";
 import EditProfile from "@uf/layouts/dashboards/edit-profile";
 import SubscriptionRules from "@uf/layouts/dashboards/Subsciption-rules";
 import OrderDetails from "@uf/layouts/dashboards/order-details";
-import Compaign from "@uf/layouts/dashboards/compaigns";
+import Campaign from "@uf/layouts/dashboards/campaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
 import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
 
@@ -194,11 +194,11 @@ const routes = [
     },
     {
         role: ["admin"],
-        name: "Compaigns",
-        key: "compaigns",
+        name: "Campaigns",
+        key: "campaigns",
         icon: <Shop size="12px" />,
-        route: "/layouts/dashboards/compaigns",
-        component: Compaign,
+        route: "/layouts/dashboards/campaigns",
+        component: Campaign,
     },
     {
         role: [],
@@ -213,7 +213,7 @@ const routes = [
         role: [],
         type: "nodisplay",
         name: "edit campaign",
-        key: "edit-compaign",
+        key: "edit-campaign",
         icon: <Shop size="12px" />,
         route: "/edit-campaign/:id",
         component: EditCampaign,

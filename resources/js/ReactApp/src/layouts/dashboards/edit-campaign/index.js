@@ -55,37 +55,16 @@ import { useHistory } from "react-router-dom";
 
 function EditCompain({ match }) {
     const { id } = match.params;
-    const [campaignData, setCompaignData] = useState({});
+    const [campaignData, setCampaignData] = useState({});
     const [products, setProducts] = useState([]);
     const [collections, setCollections] = useState([]);
-    const [compaignName, setCompaignName] = useState('');
+    const [campaignName, setCampaignName] = useState('');
     const [loyaltyValue, setLoyaltyValue] = useState(0);
     const [selectedCollections, setSelectedCollections] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const history = useHistory();
 
     useEffect(() => {
-        const getCampaignData = async () => {
-            let data = await fetch(`/getCampaign/${id}`);
-            let response = await data.json();
-            if (response.success) {
-                setCompaignData(response.data);
-                setCompaignName(response.data.compaign_name);
-                let collects = response.data.collections.map(({ product_id }) => ({
-                    label: '',
-                    value: product_id
-                }));
-
-                let pros = response.data.products.map(({ product_id }) => ({
-                    label: '',
-                    value: product_id
-                }));
-                setSelectedCollections(collects);
-                setSelectedProducts(pros);
-                setLoyaltyValue(response.data.loyalty);
-            }
-        }
-        getCampaignData();
         const getCollections = async () => {
             const data = await fetch('/getCollections');
             const response = await data.json();
@@ -102,36 +81,57 @@ function EditCompain({ match }) {
             }
         }
         getProducts();
+
+        const getCampaignData = async () => {
+            const data = await fetch(`/getCampaign/${id}`);
+            const response = await data.json();
+            if (response.success) {
+                setCampaignData(response.data);
+                setCampaignName(response.data.campaign_name);
+                let collects = response.data.collections.map(({ product_id, label }) => ({
+                    label: label,
+                    value: product_id
+                }));
+                let pros = response.data.products.map(({ product_id, label }) => ({
+                    label: label,
+                    value: product_id
+                }));
+                setSelectedCollections(collects);
+                setSelectedProducts(pros);
+                setLoyaltyValue(response.data.loyalty_points);
+            }
+        }
+        getCampaignData();
     }, []);
 
     const handleForm = async (event) => {
         event.preventDefault();
         let collectionsData = selectedCollections.map((collection) => ({
-            compaign_id: campaignData?.id,
+            campaign_id: campaignData?.id,
             product_id: collection.value,
             type: 'collection'
         }));
         let productsData = selectedProducts.map((product) => ({
-            compaign_id: campaignData?.id,
+            campaign_id: campaignData?.id,
             product_id: product.value,
             type: 'product'
         }));
-        const compaignData = {
-            compaign_name: compaignName,
+        const campaignData = {
+            campaign_name: campaignName,
             collections: collectionsData,
             products: productsData,
-            loyalty: loyaltyValue,
+            loyalty_points: loyaltyValue,
         }
         const data = await fetch('/updateCampaign/1', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(compaignData),
+            body: JSON.stringify(campaignData),
         });
         const response = await data.json();
-        if(response.success) {
-            history.push('/layouts/dashboards/compaigns');
+        if (response.success) {
+            history.push('/layouts/dashboards/campaigns');
         }
     }
 
@@ -147,8 +147,8 @@ function EditCompain({ match }) {
                                 <h5>Edit Campaign</h5>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="compaign name" placeholder="Compaign Name" value={compaignName} onChange={({ target: { value } }) => {
-                                            setCompaignName(value);
+                                        <FormField type="text" label="campaign name" placeholder="Campaign Name" value={campaignName} onChange={({ target: { value } }) => {
+                                            setCampaignName(value);
                                         }} />
                                     </Grid>
                                     <Grid item md={12} xs={12} sm={4} style={{ paddingTop: "5px", }}>
@@ -184,10 +184,10 @@ function EditCompain({ match }) {
                                     </Grid>
                                 </SuiBox>
                                 <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="Loyalty" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
-                                            setLoyaltyValue(value);
-                                        }} />
-                                    </Grid>
+                                    <FormField type="text" label="Loyalty Points" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
+                                        setLoyaltyValue(value);
+                                    }} />
+                                </Grid>
                                 <Grid container spacing={3} mt={5} justifyContent="center">
                                     <SuiButton type="submit" variant="gradient" color="info" >Save</SuiButton>
                                 </Grid>
