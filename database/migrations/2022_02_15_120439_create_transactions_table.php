@@ -19,6 +19,7 @@ class CreateTransactionsTable extends Migration
             $table->double('loyalty_points');
             $table->unsignedBigInteger('transaction_type_id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

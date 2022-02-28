@@ -20,6 +20,7 @@ class CreateSubscriptionsTable extends Migration
             $table->date('next_billing_date');
             $table->date('next_delivery_date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

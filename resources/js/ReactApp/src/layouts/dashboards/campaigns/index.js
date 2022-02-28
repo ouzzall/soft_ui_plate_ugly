@@ -39,21 +39,21 @@ import DataTable from "@uf/examples/Tables/DataTable"
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
-import ActionCell from "@uf/layouts/dashboards/compaigns/components/ActionCell";
+import ActionCell from "@uf/layouts/dashboards/campaigns/components/ActionCell";
 import { useEffect, useState } from "react";
 
-function Compaign() {
-    const [compaigns, setCompaigns] = useState([]);
+function Campaign() {
+    const [campaigns, setCampaigns] = useState([]);
     useEffect(() => {
         const getData = async () => {
-            let data = await fetch('/getCompaigns');
+            let data = await fetch('/getCampaigns');
             let response = await data.json();
             if (response.success) {
                 const result = response.data.map((value) => ({
                     ...value,
                     action: <ActionCell edit={`/edit-campaign/${value.id}`} />
                 }));
-                setCompaigns(result);
+                setCampaigns(result);
             }
         }
         getData();
@@ -113,11 +113,11 @@ function Compaign() {
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
-                                { Header: "Campaign Name", accessor: "compaign_name" },
+                                { Header: "Campaign Name", accessor: "campaign_name" },
                                 { Header: "Loyalty Points", accessor: "loyalty_points" },
                                 { Header: "Actions", accessor: "action" },
                             ],
-                            rows: compaigns,
+                            rows: campaigns,
                         }}
                     />
 
@@ -128,4 +128,4 @@ function Compaign() {
     );
 }
 
-export default Compaign;
+export default Campaign;

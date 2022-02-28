@@ -75,9 +75,10 @@ function users() {
             let data = await fetch('/getUsers');
             let response = await data.json();
             if (response.success) {
+                let users = [];
                 response.data.map((value) => {
-                    setUsersData([
-                        ...usersData,
+                    users = [
+                        ...users,
                         {
                             id: value.id,
                             name: value.name,
@@ -87,8 +88,9 @@ function users() {
                             redeemed: value.loyalty.loyalty_radeemed,
                             actions: <SuiButton variant="gradient" color="info" size="small">Block</SuiButton>
                         }
-                    ])
+                    ];
                 });
+                setUsersData(users);
             }
         }
         getUsers();

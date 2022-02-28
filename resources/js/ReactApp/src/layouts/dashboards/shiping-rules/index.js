@@ -57,61 +57,61 @@ import Table from "@uf/examples/Tables/Table";
 // import dataTableData from "@uf/layouts/ecommerce/overview/data/dataTableData";
 
 function ShipingRules() {
-  const [spotify2FA, setSpotify2FA] = useState(true);
-  const handleSetSpotify2FA = () => setSpotify2FA(!spotify2FA);
-  
+    const [spotify2FA, setSpotify2FA] = useState(true);
+    const handleSetSpotify2FA = () => setSpotify2FA(!spotify2FA);
 
-  return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <SuiBox py={3}>
-        <Card >
-          <SuiBox mt={3} mb={3}> 
-              <Grid container spacing={3}>
-                <Grid item xs={12} lg={12} md={12}>
-                <SuiBox
-              display="flex"
-              justifyContent="space-between"
-              alignItems={{ xs: "flex-start", sm: "center" }}
-              flexDirection={{ xs: "column", sm: "row" }}
-            >
-              <SuiBox display="flex" alignItems="center">
-                
-                <SuiBox ml={2} lineHeight={0}>
-                  <SuiTypography variant="h5" fontWeight="medium">
-                    Shipping Rules
-                  </SuiTypography>
-                  <SuiTypography variant="button" color="text" fontWeight="regular">
-                    Welcome to Shipping Rules
-                  </SuiTypography>
-                </SuiBox>
-              </SuiBox>
-              <SuiBox
-                display="flex"
-                justifyContent="flex-end"
-                alignItems="center"
-                width={{ xs: "100%", sm: "auto" }}
-                mt={{ xs: 1, sm: 0 }}
-              >
-                <SuiBox lineHeight={0} mx={2}>
-                  <SuiTypography variant="button" color="text" fontWeight="regular">
-                    {spotify2FA ? "Enabled" : "Disabled"}
-                  </SuiTypography>
-                </SuiBox>
-                <SuiBox mr={1}>
-                  <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
-                </SuiBox>
-              </SuiBox>
-            </SuiBox>
-                </Grid>
-              </Grid>
-          </SuiBox>
-        </Card>  
-        <SuiBox mb={3} mt={3}>
-          <Grid container spacing={3}>
-          <Grid item xs={12} lg={6}>
+
+    return (
+        <DashboardLayout>
+            <DashboardNavbar />
+            <SuiBox py={3}>
+                <Card >
+                    <SuiBox mt={3} mb={3}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} lg={12} md={12}>
+                                <SuiBox
+                                    display="flex"
+                                    justifyContent="space-between"
+                                    alignItems={{ xs: "flex-start", sm: "center" }}
+                                    flexDirection={{ xs: "column", sm: "row" }}
+                                >
+                                    <SuiBox display="flex" alignItems="center">
+
+                                        <SuiBox ml={2} lineHeight={0}>
+                                            <SuiTypography variant="h5" fontWeight="medium">
+                                                Shipping Rules
+                                            </SuiTypography>
+                                            <SuiTypography variant="button" color="text" fontWeight="regular">
+                                                Welcome to Shipping Rules
+                                            </SuiTypography>
+                                        </SuiBox>
+                                    </SuiBox>
+                                    <SuiBox
+                                        display="flex"
+                                        justifyContent="flex-end"
+                                        alignItems="center"
+                                        width={{ xs: "100%", sm: "auto" }}
+                                        mt={{ xs: 1, sm: 0 }}
+                                    >
+                                        <SuiBox lineHeight={0} mx={2}>
+                                            <SuiTypography variant="button" color="text" fontWeight="regular">
+                                                {spotify2FA ? "Enabled" : "Disabled"}
+                                            </SuiTypography>
+                                        </SuiBox>
+                                        <SuiBox mr={1}>
+                                            <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
+                                        </SuiBox>
+                                    </SuiBox>
+                                </SuiBox>
+                            </Grid>
+                        </Grid>
+                    </SuiBox>
+                </Card>
+                <SuiBox mb={3} mt={3}>
+                    <Grid container spacing={3}>
+                        {/* <Grid item xs={12} lg={6}>
               <Card>
-                <SuiBox mt={3} mb={3}> 
+                <SuiBox mt={3} mb={3}>
                     <Grid container spacing={3}>
                       <Grid item xs={12} lg={12} md={12}>
                         <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
@@ -125,15 +125,15 @@ function ShipingRules() {
                               <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
                             </SuiBox>
                             <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
+                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
                             </SuiBox>
                           </SuiBox>
                         </SuiBox>
-                        
+
                       </Grid>
                     </Grid>
                 </SuiBox>
-                
+
                 <SuiBox mb={3} mt={3} display="flex">
                   <Grid  ml={2} item xs={4} lg={5} md={5}>
                           <SuiSelect
@@ -151,20 +151,20 @@ function ShipingRules() {
                                 { value: "october", label: "October" },
                                 { value: "november", label: "November" },
                                 { value: "december", label: "December" },
-                              ]}  
+                              ]}
                             />
-                  </Grid> 
-                  
+                  </Grid>
+
                   <Grid  ml={2} item xs={3} lg={3} md={3}>
                     <span style={{display:"flex"}}>
-                        <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
+                        <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>
                       <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number" min="0" placeholder="100"  />
-                    </span>  
+                    </span>
                   </Grid>
                   <Grid  ml={2} mr={1} item xs={1} lg={2} md={2}>
                     <SuiButton variant="contained" color="info">Add</SuiButton>
                   </Grid>
-                </SuiBox>  
+                </SuiBox>
                 <SuiBox>
                     <Table
                       columns={[
@@ -192,103 +192,103 @@ function ShipingRules() {
                           price: 300,
                           Actions: <Actions />,
                         },
-                        
+
                       ]
                     }
                     />
-                </SuiBox>  
-              </Card> 
-            </Grid>
-            <Grid item xs={12} lg={6}>
-              <Card>
-                <SuiBox mt={3} mb={3}> 
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} lg={12} md={12}>
-                        <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
-                          <SuiBox display="flex" alignItems="center">
-                            <SuiBox ml={2} lineHeight={0}>
-                              <SuiTypography variant="h5" fontWeight="medium"> Order Based Rules </SuiTypography>
-                            </SuiBox>
-                          </SuiBox>
-                          <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
-                            <SuiBox lineHeight={0} mx={2}>
-                              <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
-                            </SuiBox>
-                            <SuiBox mr={1}>
-                              <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> 
-                            </SuiBox>
-                          </SuiBox>
-                        </SuiBox>
-                        
-                      </Grid>
+                </SuiBox>
+              </Card>
+            </Grid> */}
+                        <Grid item xs={12} lg={12}>
+                            <Card>
+                                <SuiBox mt={3} mb={3}>
+                                    <Grid container spacing={3}>
+                                        <Grid item xs={12} lg={12} md={12}>
+                                            <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
+                                                <SuiBox display="flex" alignItems="center">
+                                                    <SuiBox ml={2} lineHeight={0}>
+                                                        <SuiTypography variant="h5" fontWeight="medium"> Order Based Rules </SuiTypography>
+                                                    </SuiBox>
+                                                </SuiBox>
+                                                <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
+                                                    <SuiBox lineHeight={0} mx={2}>
+                                                        <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
+                                                    </SuiBox>
+                                                    <SuiBox mr={1}>
+                                                        <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
+                                                    </SuiBox>
+                                                </SuiBox>
+                                            </SuiBox>
+
+                                        </Grid>
+                                    </Grid>
+                                </SuiBox>
+
+                                <SuiBox mb={3} mt={3} display="flex">
+
+
+                                    <Grid ml={2} item xs={3} lg={3} md={3}>
+                                        <span style={{ display: "flex" }}>
+                                            <span style={{ borderTopLeftRadius: "0.5rem", borderBottomLeftRadius: "0.5rem", fontSize: "17px", background: "lightgray", paddingLeft: "8px", paddingRight: "8px", paddingTop: "7px" }}>$</span>
+                                            <SuiInput style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} type="number" placeholder="100" min="1" />
+                                        </span>
+                                    </Grid>
+                                    <Grid ml={2} item xs={4} lg={5} md={5}>
+                                        <SuiSelect
+                                            placeholder="select type"
+                                            options={[
+                                                { value: "percentage", label: "Percentage" },
+                                                { value: "fixed", label: "fixed" },
+
+                                            ]}
+                                        />
+                                    </Grid>
+                                    <Grid ml={2} mr={1} item xs={1} lg={2} md={2}>
+                                        <SuiButton variant="contained" color="info">Add</SuiButton>
+                                    </Grid>
+                                </SuiBox>
+                            </Card>
+                                <SuiBox mt={3}>
+                                    <Table
+                                        columns={[
+                                            { name: "id", align: "center" },
+
+                                            { name: "price", align: "center" },
+                                            { name: "type", align: "center" },
+                                            { name: "Actions", align: "center" },
+                                        ]}
+                                        rows={[
+                                            {
+                                                id: 1,
+                                                price: 100,
+                                                type: "fixed",
+                                                Actions: <Actions />,
+                                            },
+                                            {
+                                                id: 2,
+                                                type: "percentage",
+                                                price: 200,
+                                                Actions: <Actions />,
+                                            },
+                                            {
+                                                id: 3,
+                                                type: "fixed",
+                                                price: 300,
+                                                Actions: <Actions />,
+                                            },
+
+                                        ]
+                                        }
+                                    />
+                                </SuiBox>
+                        </Grid>
                     </Grid>
                 </SuiBox>
-                
-                <SuiBox mb={3} mt={3} display="flex">
-                   
-                  
-                  <Grid  ml={2} item xs={3} lg={3} md={3}>
-                    <span style={{display:"flex"}}>
-                        <span style={{borderTopLeftRadius: "0.5rem",borderBottomLeftRadius: "0.5rem",fontSize: "17px",background: "lightgray",paddingLeft: "8px",paddingRight: "8px",paddingTop: "7px"}}>$</span>        
-                      <SuiInput style={{borderTopLeftRadius: "0",borderBottomLeftRadius: "0"}} type="number"  placeholder="100" min="1"  />
-                    </span>  
-                  </Grid>
-                  <Grid  ml={2} item xs={4} lg={5} md={5}>
-                          <SuiSelect
-                              placeholder="select type"
-                              options={[
-                                { value: "percentage", label: "Percentage" },
-                                { value: "fixed", label: "fixed" },
-                                
-                              ]}  
-                            />
-                  </Grid>
-                  <Grid  ml={2} mr={1} item xs={1} lg={2} md={2}>
-                    <SuiButton variant="contained" color="info">Add</SuiButton>
-                  </Grid>
-                </SuiBox>  
-                <SuiBox>
-                    <Table
-                      columns={[
-                        { name: "id", align: "center" },
-                        
-                        { name: "price", align: "center" },
-                        { name: "type", align: "center" },
-                        { name: "Actions", align: "center" },
-                      ]}
-                      rows={[
-                        {
-                          id: 1,
-                          price: 100,
-                          type: "fixed",
-                          Actions: <Actions />,
-                        },
-                        {
-                          id: 2,
-                          type: "percentage",
-                          price: 200,
-                          Actions: <Actions />,
-                        },
-                        {
-                          id: 3,
-                          type: "fixed",
-                          price: 300,
-                          Actions: <Actions />,
-                        },
-                        
-                      ]
-                    }
-                    />
-                </SuiBox>  
-              </Card> 
-            </Grid>
-          </Grid>
-        </SuiBox>
-        
-      </SuiBox>
-      <Footer />
-    </DashboardLayout>
-  );
+
+            </SuiBox>
+            <Footer />
+        </DashboardLayout>
+    );
 }
 
-export default ShipingRules ;
+export default ShipingRules;

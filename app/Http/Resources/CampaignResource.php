@@ -29,7 +29,7 @@ class CampaignResource extends JsonResource
         return [
             'id' => $this->id,
             'campaign_name' => $this->campaign_name,
-            'loyalty' => $this->loyalty,
+            'loyalty_points' => $this->loyalty_points,
             'collections' => $collections,
             'products' => $products,
         ];

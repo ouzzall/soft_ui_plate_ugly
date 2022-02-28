@@ -122,7 +122,7 @@ function EditCompain({ match }) {
             products: productsData,
             loyalty_points: loyaltyValue,
         }
-        const data = await fetch('/updateCampaign/1', {
+        const data = await fetch(`/updateCampaign/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

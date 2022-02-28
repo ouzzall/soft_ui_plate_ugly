@@ -19,7 +19,6 @@ class CreateCampaignProductsTable extends Migration
             $table->enum('type', ['product', 'collection']);
             $table->unsignedBigInteger('campaign_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

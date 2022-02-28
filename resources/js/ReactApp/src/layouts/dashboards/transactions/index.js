@@ -37,162 +37,126 @@ import DataTable from "@uf/examples/Tables/DataTable";
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
+import { useEffect, useState } from "react";
 
 function Orders() {
-  // const [menu, setMenu] = useState(null);
+    // const [menu, setMenu] = useState(null);
 
-  // const openMenu = (event) => setMenu(event.currentTarget);
-  // const closeMenu = () => setMenu(null);
+    // const openMenu = (event) => setMenu(event.currentTarget);
+    // const closeMenu = () => setMenu(null);
 
-  // const renderMenu = (
-  //   <Menu
-  //     anchorEl={menu}
-  //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-  //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-  //     open={Boolean(menu)}
-  //     onClose={closeMenu}
-  //     keepMounted
-  //   >
-  //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
-  //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
-  //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
-  //     <Divider sx={{ margin: "0.5rem 0" }} />
-  //     <MenuItem onClick={closeMenu}>
-  //       <SuiTypography variant="button" color="error" fontWeight="regular">
-  //         Remove Filter
-  //       </SuiTypography>
-  //     </MenuItem>
-  //   </Menu>
-  // );
+    // const renderMenu = (
+    //   <Menu
+    //     anchorEl={menu}
+    //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    //     transformOrigin={{ vertical: "top", horizontal: "left" }}
+    //     open={Boolean(menu)}
+    //     onClose={closeMenu}
+    //     keepMounted
+    //   >
+    //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
+    //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
+    //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
+    //     <Divider sx={{ margin: "0.5rem 0" }} />
+    //     <MenuItem onClick={closeMenu}>
+    //       <SuiTypography variant="button" color="error" fontWeight="regular">
+    //         Remove Filter
+    //       </SuiTypography>
+    //     </MenuItem>
+    //   </Menu>
+    // );
 
-  return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <SuiBox my={3}>
-        <SuiBox display="flex"  justifyContent="space-between" alignItems="flex-start" mb={2}>
-          <SuiBox display="flex" >
-          <SuiBox ml={1}>
-              <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
-            </SuiBox>
-            <SuiBox ml={1}>
-              <SuiDatePicker input={{ placeholder: "Select End Date" }} />
-            </SuiBox>
-            <SuiBox ml={1}>
-              <SuiButton variant="gradient" color="info">
-                Filter
-              </SuiButton>
-            </SuiBox>
-          </SuiBox>
-          <SuiBox display="flex">
-          <SuiBox style={{width: "150px",marginRight:"10px"}}>
-              <SuiSelect
-              placeholder="Category"
-              options={[
-                { value: "area-wise", label: "Area Wise" },
-                { value: "order Wise", label: "Order Wise" },
-              ]}
-            />
-            </SuiBox>
-            <SuiBox style={{width: "150px",marginRight:"10px"}}>
-              <SuiSelect
-              placeholder="Type"
-              options={[
-                { value: "earned", label: "Earned" },
-                { value: "redeemed", label: "Redeemed" },
-              ]}
-            />
-            </SuiBox>
-            <SuiButton variant="gradient" color="info">
-                Filter
-              </SuiButton>
+    const [transactions, setTransactions] = useState([]);
 
-          </SuiBox>
-        </SuiBox>
-        <Card>
-          {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-          <DataTable  entriesPerPage={false} canSearch
-  table={{
-    columns: [
-      { Header: "Id", accessor: "id" },
-      { Header: "Name", accessor: "name" },
-      { Header: "Email", accessor: "email" },
-      { Header: "Order Id", accessor: "orderid" },
-      { Header: "Points", accessor: "points" },
-      { Header: "Type", accessor: "type" },
-      { Header: "Category", accessor: "category" },
-      { Header: "Date", accessor: "date"},
-    ],
-    rows: [
-      {
-        id:1,
-        name: <Link to="/layouts/dashboards/profile">Faizan</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:2,
-        name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:3,
-        name: <Link to="/layouts/dashboards/profile">Talha</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:4,
-        name: <Link to="/layouts/dashboards/profile">Zain</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:5,
-        name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:6,
-        name: <Link to="/layouts/dashboards/profile">Ali</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      
-    ]
-  }}
-/>
+    useEffect(() => {
+        const getData = async () => {
+            const data = await fetch('/getTransactions');
+            const response = await data.json();
+            let transactionsData = [];
+            if (response.success) {
+                response.data.map((value) => {
+                    transactionsData = [
+                        ...transactionsData,
+                        {
+                            id: value.id,
+                            customer_name: value.user.name,
+                            customer_email: value.user.email,
+                            loyalty_points: value.loyalty_points,
+                            type: value.transaction_type.title,
+                            date: new Date(value.created_at).toLocaleDateString(),
+                        }
+                    ];
+                });
+                setTransactions(transactionsData);
+            }
+        }
+        getData();
+    }, []);
 
-        </Card>
-      </SuiBox>
-      <Footer />
-    </DashboardLayout>
-  );
+    return (
+        <DashboardLayout>
+            <DashboardNavbar />
+            <SuiBox my={3}>
+                <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
+                    <SuiBox display="flex" >
+                        <SuiBox ml={1}>
+                            <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiDatePicker input={{ placeholder: "Select End Date" }} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiButton variant="gradient" color="info">
+                                Filter
+                            </SuiButton>
+                        </SuiBox>
+                    </SuiBox>
+                    <SuiBox display="flex">
+                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                            <SuiSelect
+                                placeholder="Category"
+                                options={[
+                                    { value: "area-wise", label: "Area Wise" },
+                                    { value: "order Wise", label: "Order Wise" },
+                                ]}
+                            />
+                        </SuiBox>
+                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                            <SuiSelect
+                                placeholder="Type"
+                                options={[
+                                    { value: "earned", label: "Earned" },
+                                    { value: "redeemed", label: "Redeemed" },
+                                ]}
+                            />
+                        </SuiBox>
+                        <SuiButton variant="gradient" color="info">
+                            Filter
+                        </SuiButton>
+
+                    </SuiBox>
+                </SuiBox>
+                <Card>
+                    {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
+                    <DataTable entriesPerPage={false} canSearch
+                        table={{
+                            columns: [
+                                { Header: "Id", accessor: "id" },
+                                { Header: "Customer Name", accessor: "customer_name" },
+                                { Header: "Customer Email", accessor: "customer_email" },
+                                { Header: "Loyalty Points", accessor: "loyalty_points" },
+                                { Header: "Transaction Type", accessor: "type" },
+                                { Header: "Date", accessor: "date" },
+                            ],
+                            rows: transactions
+                        }}
+                    />
+
+                </Card>
+            </SuiBox>
+            <Footer />
+        </DashboardLayout>
+    );
 }
 
 export default Orders;

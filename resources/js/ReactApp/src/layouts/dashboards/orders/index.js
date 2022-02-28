@@ -38,6 +38,7 @@ import DataTable from "@uf/examples/Tables/DataTable";
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
+import { useEffect, useState } from "react";
 
 function Orders() {
   // const [menu, setMenu] = useState(null);
@@ -65,6 +66,35 @@ function Orders() {
   //     </MenuItem>
   //   </Menu>
   // );
+
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+      const getData = async () => {
+          const data = await fetch('/getOrders');
+          const response = await data.json();
+          if(response.success) {
+              let ordersData = [];
+              response.data.map((value) => {
+                  ordersData = [
+                      ...ordersData,
+                      {
+                          id: value.id,
+                          order_name: value.order_name,
+                          customer_name: value.user.name,
+                          customer_email: value.user.email,
+                          loyalty_points: value.loyalty_points,
+                          date: new Date(value.created_at).toLocaleDateString(),
+                          delivery_date: new Date(value.delivery_date).toLocaleDateString()
+
+                      }
+                  ];
+              })
+              setOrders(ordersData);
+          }
+      }
+      getData();
+  }, []);
 
   return (
     <DashboardLayout>
@@ -115,63 +145,14 @@ function Orders() {
 table={{
   columns: [
     { Header: "Id", accessor: "id" },
-    { Header: "Name", accessor: "name" },
-    { Header: "Email", accessor: "email" },
-    { Header: "Order Id", accessor: "orderid" },
-    { Header: "Points", accessor: "points" },
-    { Header: "Date", accessor: "date"},
+    { Header: "Order Name", accessor: "order_name" },
+    { Header: "Customer Name", accessor: "customer_name" },
+    { Header: "Order Date", accessor: "date" },
+    { Header: "Delivery Date", accessor: "delivery_date" },
+    { Header: "Customer Email", accessor: "customer_email" },
+    { Header: "Loyalty Points", accessor: "loyalty_points"},
   ],
-  rows: [
-    {
-      id:1,
-      name: <Link to="/layouts/dashboards/profile">Faizan</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-    {
-      id:2,
-      name: <Link to="/layouts/dashboards/profile">Sanwal</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-    {
-      id:3,
-      name: <Link to="/layouts/dashboards/profile">Talha</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-    {
-      id:4,
-      name: <Link to="/layouts/dashboards/profile">Zain</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-    {
-      id:5,
-      name: <Link to="/layouts/dashboards/profile">Hamza</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-    {
-      id:6,
-      name: <Link to="/layouts/dashboards/profile">Ali</Link>,
-      email: "abc@gmail.com",
-      orderid: <Link to="/layouts/dashboards/order-details">1274</Link>,
-      points: 60,
-      date: "4/11/2021",
-    },
-
-  ]
+  rows: orders
 }}
 />
 

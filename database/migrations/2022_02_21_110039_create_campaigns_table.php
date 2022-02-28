@@ -17,7 +17,7 @@ class CreateCampaignsTable extends Migration
             $table->id();
             $table->string('campaign_name');
             $table->double('loyalty')->default(0.0);
-            $table->enum('is_active', [true, false]);
+            $table->enum('is_active', ['1', '0']);
             $table->timestamps();
             $table->softDeletes();
         });

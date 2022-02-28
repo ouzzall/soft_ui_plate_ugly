@@ -60,4 +60,8 @@ class User extends Authenticatable implements IShopModel
     {
         return $this->hasMany('\App\Models\Transaction', 'user_id');
     }
+    public function orders()
+    {
+        return $this->hasMany('\App\Models\Order', 'user_id');
+    }
 }

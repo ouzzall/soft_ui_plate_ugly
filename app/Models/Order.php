@@ -12,9 +12,13 @@ class Order extends Model
     protected $fillable = [
         'order_number',
         'order_name',
-        'customer_name',
-        'customer_email',
         'loyalty_points',
+        'delivery_date',
         'amount',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('\App\Models\User', 'user_id');
+    }
 }

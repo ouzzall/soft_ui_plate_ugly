@@ -57,16 +57,10 @@ class OrdersCreateJob implements ShouldQueue
     public function handle()
     {
         $order = $this->data;
+        Log::info(json_encode($order));
         $customer = $order->customer;
         DB::beginTransaction();
         try {
-            $localOrder = Order::create([
-                'order_number' => $order->id,
-                'order_name' => $order->name,
-                'customer_email' => $customer->email,
-                'customer_name' => $customer->first_name . " " . $customer->last_name,
-                'amount' => $order->subtotal_price,
-            ]);
             $user = User::firstWhere('email', $customer->email);
             if (!$user) {
                 $user = User::create([
@@ -81,6 +75,11 @@ class OrdersCreateJob implements ShouldQueue
                     'loyalty_radeemed' => 0.0,
                 ]);
             }
+            $localOrder = $user->orders()->create([
+                'order_number' => $order->id,
+                'order_name' => $order->name,
+                'amount' => $order->subtotal_price,
+            ]);
             $loyaltyCalculated = loyaltyCalculator($user, $order);
             if ($loyaltyCalculated !== false) {
                 $user->loyalty()->increment('loyalty_earned', $loyaltyCalculated['loyalty_earned']);
@@ -88,7 +87,8 @@ class OrdersCreateJob implements ShouldQueue
                     'last_earned_date' => $loyaltyCalculated['last_earned_date']
                 ]);
                 $localOrder->update([
-                    'loyalty_points' => $loyaltyCalculated['loyalty_earned']
+                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
+                    'delivery_date' => $loyaltyCalculated['last_earned_date'],
                 ]);
                 $user->transactions()->create([
                     'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
@@ -102,6 +102,7 @@ class OrdersCreateJob implements ShouldQueue
                 'data' => null,
             ]);
         } catch (Exception $ex) {
+            Log::info(json_encode($ex->getMessage()));
             DB::rollBack();
         }
     }

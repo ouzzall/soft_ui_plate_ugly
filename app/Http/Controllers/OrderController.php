@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Collection;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,5 +17,15 @@ class OrderController extends Controller
 {
     public function __construct()
     {
+    }
+
+    public function getOrders()
+    {
+        $orders = Order::all()->load('user');
+        return response()->json([
+            'success' => true,
+            'message' => 'Orders retrieved sucessfully!',
+            'data' => $orders,
+        ]);
     }
 }

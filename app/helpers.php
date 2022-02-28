@@ -21,7 +21,7 @@ if (!function_exists('loyaltyCalculator')) {
     {
         $result = [];
 
-        //Rule (Order based)
+        // Rule (Order based)
         $deliveryDate = '';
         $orderTags = explode(', ', $order->tags);
         foreach ($orderTags as $tag) {
@@ -70,7 +70,8 @@ if (!function_exists('loyaltyCalculator')) {
                 }
                 $result = [
                     'loyalty_earned' => $loyaltyValue,
-                    'last_earned_date' => $deliveryDate
+                    'last_earned_date' => $deliveryDate,
+                    'delivery_date' => $deliveryDate,
                 ];
                 return $result;
             }
@@ -84,7 +85,7 @@ if (!function_exists('loyaltyCalculator')) {
         })->where('is_active', 1)->first();
         if ($campaign) {
             $result = [
-                'loyalty_earned' => $campaign->loyalty,
+                'loyalty_earned' => $campaign->loyalty_points,
                 'last_earned_date' => $deliveryDate
             ];
             return $result;
@@ -101,8 +102,9 @@ if (!function_exists('loyaltyCalculator')) {
                 })->where('is_active', 1)->first();
                 if ($collectionCampaign) {
                     $result = [
-                        'loyalty_earned' => $collectionCampaign->loyalty,
-                        'last_earned_date' => $deliveryDate
+                        'loyalty_earned' => $collectionCampaign->loyalty_points,
+                        'last_earned_date' => $deliveryDate,
+                        'delivery_date' => $deliveryDate,
                     ];
                     return $result;
                 }

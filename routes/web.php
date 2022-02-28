@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +47,10 @@ Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
 Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
 Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
 Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
+
+Route::get('/getOrders', [OrderController::class, 'getOrders']);
+
+Route::get('/getTransactions', [TransactionController::class, 'getTransactions']);
 
 
 
