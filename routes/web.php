@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/app-install', function(){
+Route::get('/app-install', function () {
     return view('welcome');
 })->middleware(['verify.shopify'])->name('home');
 
@@ -34,7 +34,7 @@ Route::view('/signup', 'index')->name('signup');
 
 
 // auth middleware
-Route::get('/', function(){
+Route::get('/', function () {
     return view('index');
 })->name('index');
 Route::get('/getSession', [AuthController::class, 'getSession']);
@@ -49,10 +49,11 @@ Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
 Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
 
 Route::get('/getOrders', [OrderController::class, 'getOrders']);
+Route::get('/getOrderDetail/{id}', [OrderController::class, 'getOrderDetail']);
+Route::post('/refund', [OrderController::class, 'refund']);
 
 Route::get('/getTransactions', [TransactionController::class, 'getTransactions']);
 
 
 
 Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');
-

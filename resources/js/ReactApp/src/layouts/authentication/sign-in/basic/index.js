@@ -35,13 +35,9 @@ import Separator from "@uf/layouts/authentication/components/Separator";
 
 // Images
 import curved9 from "@uf/assets/images/curved-images/curved9.jpg";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../../../reducers/loadingSlice";
 
 function Basic() {
     const [rememberMe, setRememberMe] = useState(false);
-    const login = useSelector((state) => state.loading.value);
-    const dispatch = useDispatch();
     const history = useHistory();
 
     const handleSetRememberMe = () => setRememberMe(!rememberMe);

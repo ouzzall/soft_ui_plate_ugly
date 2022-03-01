@@ -38,6 +38,8 @@ import DataTable from "@uf/examples/Tables/DataTable";
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
+import ActionCell from "@uf/layouts/dashboards/orders/components/ActionCell";
+
 import { useEffect, useState } from "react";
 
 function Orders() {
@@ -85,7 +87,8 @@ function Orders() {
                           customer_email: value.user.email,
                           loyalty_points: value.loyalty_points,
                           date: new Date(value.created_at).toLocaleDateString(),
-                          delivery_date: new Date(value.delivery_date).toLocaleDateString()
+                          delivery_date: new Date(value.delivery_date).toLocaleDateString(),
+                          actions: <ActionCell view={`/layouts/dashboards/order-details/${value.id}`} />
 
                       }
                   ];
@@ -151,6 +154,7 @@ table={{
     { Header: "Delivery Date", accessor: "delivery_date" },
     { Header: "Customer Email", accessor: "customer_email" },
     { Header: "Loyalty Points", accessor: "loyalty_points"},
+    { Header: "Action", accessor: "actions"},
   ],
   rows: orders
 }}

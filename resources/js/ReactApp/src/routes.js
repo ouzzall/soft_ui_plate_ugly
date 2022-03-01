@@ -178,7 +178,7 @@ const routes = [
         name: "Order Details",
         key: "Order Details",
         icon: <Shop size="12px" />,
-        route: "/layouts/dashboards/order-details",
+        route: "/layouts/dashboards/order-details/:id",
         component: OrderDetails,
       },
     {

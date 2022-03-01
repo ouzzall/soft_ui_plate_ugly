@@ -87,7 +87,6 @@ function SmartHome() {
   // const [wifiState, setWifiState] = useState(true);
 
   const { size } = typography;
-  const login = useSelector((state) => state.loading.value);
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.user.user);

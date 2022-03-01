@@ -51,7 +51,6 @@ import { useSoftUIController, setMiniSidenav } from "@uf/context";
 import brand from "@uf/assets/images/logo-ct.png";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "./reducers/loadingSlice";
 import { setUser } from "./reducers/userSlice";
 import Loader from "./components/Loader";
 
@@ -61,7 +60,6 @@ export default function App() {
     const [onMouseEnter, setOnMouseEnter] = useState(false);
     const [rtlCache, setRtlCache] = useState(null);
     const { pathname } = useLocation();
-    const loading = useSelector((state) => state.loading.value);
     const user = useSelector((state) => state.user.user);
     const dispatchState = useDispatch();
 
@@ -108,7 +106,6 @@ export default function App() {
         document.documentElement.scrollTop = 0;
         document.scrollingElement.scrollTop = 0;
         const getUser = async () => {
-            dispatchState(setLoading(true));
             const data = await fetch('/getSession');
             const response = await data.json();
             if (!response.success) {
@@ -126,7 +123,6 @@ export default function App() {
                 })
             }
             dispatchState(setUser(response.data));
-            dispatchState(setLoading(false));
         }
         getUser();
     }, [pathname]);
@@ -144,7 +140,7 @@ export default function App() {
             return null;
         });
 
-    return (user == null && loading) ? <Loader /> :(direction === "rtl" ? (
+    return (direction === "rtl" ? (
         <CacheProvider value={rtlCache}>
             <ThemeProvider theme={themeRTL}>
                 <CssBaseline />
@@ -162,7 +158,7 @@ export default function App() {
                     </>
                 )}
 
-                {loading ? <Loader /> : (<Switch>
+                {(<Switch>
                     {getRoutes(routes)}
                     <Redirect from="*" to="/" />
                 </Switch>)}
@@ -185,7 +181,7 @@ export default function App() {
                 </>
             )}
 
-                {loading ? <Loader /> : (<Switch>
+                {(<Switch>
                     {getRoutes(routes)}
                     <Redirect from="*" to="/" />
                 </Switch>)}

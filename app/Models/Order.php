@@ -21,4 +21,9 @@ class Order extends Model
     {
         return $this->belongsTo('\App\Models\User', 'user_id');
     }
+
+    public function refunds()
+    {
+        return $this->hasMany('\App\Models\OrderProductRefund', 'order_id');
+    }
 }
