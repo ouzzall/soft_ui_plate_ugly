@@ -94,11 +94,15 @@ class OrderController extends Controller
                 ], Response::HTTP_NOT_FOUND);
             }
             $loyalty_points = false;
-            $shopOrderDetails = getShop()->api()->rest('GET', '/admin/api/2021-10/orders/' . $order->order_number . '.json')['body']['order'];
-            foreach ($shopOrderDetails['line_items'] as $line_item) {
-                if ($request->product_id == $line_item['product_id']) {
-                    $loyalty_points = $line_item['quantity'] * $line_item['price'];
+            if (!$request->get('loyalty_points')) {
+                $shopOrderDetails = getShop()->api()->rest('GET', '/admin/api/2021-10/orders/' . $order->order_number . '.json')['body']['order'];
+                foreach ($shopOrderDetails['line_items'] as $line_item) {
+                    if ($request->product_id == $line_item['product_id']) {
+                        $loyalty_points = ($line_item['quantity'] * $line_item['price']) / 0.001;
+                    }
                 }
+            } else {
+                $loyalty_points = $request->loyalty_points;
             }
             if (!$loyalty_points) {
                 return response()->json([
@@ -113,6 +117,10 @@ class OrderController extends Controller
                 'loyalty_points' => $loyalty_points,
             ]);
             $order->user->loyalty()->increment('loyalty_earned', $loyalty_points);
+            $order->user->transactions()->create([
+                'loyalty_points' => $loyalty_points,
+                'transaction_type_id' => 1,
+            ]);
             DB::commit();
             return response()->json([
                 'success' => true,

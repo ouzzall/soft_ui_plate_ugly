@@ -40,6 +40,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "@uf/components/Loader";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 
 const orderImage =
@@ -64,27 +65,44 @@ function OrderDetails({ match }) {
         getOrderDetails();
     }, [refunded]);
 
-    const refund = async (orderId, productId) => {
-        const data = await fetch('/refund', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                order_id: orderId,
-                product_id: productId,
-            })
+    const refund = async (orderId, productId, loyalty) => {
+        let confirm = await Swal.fire({
+            title: 'Refund',
+            icon: 'question',
+            inputLabel: 'Please enter the Loyalty value',
+            input: 'text',
+            inputValue: loyalty,
+            showCancelButton: true,
+            confirmButtonText: 'Confirm'
         });
-        const response = await data.json();
-        if (response.success) {
-            setRefunded(true);
+        if (confirm.isConfirmed) {
+            const data = await fetch('/refund', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    order_id: orderId,
+                    product_id: productId,
+                    loyalty_points: confirm.value,
+                })
+            });
+            const response = await data.json();
+            if (response.success) {
+                confirm = await Swal.fire({
+                    tilte: 'Done',
+                    icon: 'success',
+                    text: 'Product Refunded successfully!',
+                });
+                setRefunded(true);
+            }
         }
     }
     return loading ? <Loader /> : <DashboardLayout>
         <DashboardNavbar />
         <SuiBox my={7}>
             <Grid container spacing={3} justifyContent="center">
-                <Grid item xs={12} lg={8}>
+                <Grid item xs={12} lg={10}>
                     <Card>
                         <SuiBox pt={2} px={2}>
                             <SuiBox>
@@ -101,7 +119,7 @@ function OrderDetails({ match }) {
                         <Divider />
                         <SuiBox pt={1} pb={3} px={2}>
                             <SuiBox mb={3}>
-                                {orderDetail?.line_items?.map((value,index) => {
+                                {orderDetail?.line_items?.map((value, index) => {
                                     return <>
                                         <Grid key={index} xs={12} container spacing={3} alignItems="center" item>
                                             <Grid item md={6}>
@@ -161,16 +179,16 @@ function OrderDetails({ match }) {
                                                 </SuiBox>
                                             </Grid>
                                             <Grid item md={2}>
-                                                {value.is_refunded ? false : <SuiBox mb={2}>
+                                                <SuiBox mb={2}>
                                                     <SuiBox style={{ marginTop: "-32px" }}>
 
                                                         <SuiBox mb={2}>
-                                                            <SuiButton variant="gradient" color="info" onClick={() => refund(orderDetail?.id, value.product_id)}>Refund</SuiButton>
+                                                            <SuiButton variant="gradient" color="info" {...value.is_refunded ? { disabled: true } : { disabled: false }} onClick={() => refund(orderDetail?.id, value.product_id, (value.quantity * value.price) / 0.001)}>{value.is_refunded ? 'Refunded' : 'Refund'}</SuiButton>
                                                         </SuiBox>
 
                                                     </SuiBox>
 
-                                                </SuiBox> }
+                                                </SuiBox>
                                             </Grid>
                                         </Grid>
                                         <Divider />

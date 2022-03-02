@@ -45,6 +45,7 @@ Route::get('/getProducts', [DefaultController::class, 'getProducts']);
 
 Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
 Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
+Route::post('/checkCampaignData', [CampaignController::class, 'checkCampaignData']);
 Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
 Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
 

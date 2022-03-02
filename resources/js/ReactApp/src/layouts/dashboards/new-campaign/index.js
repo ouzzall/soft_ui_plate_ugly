@@ -40,6 +40,7 @@ import SuiSelect from "@uf/components/SuiSelect";
 import SuiTypography from "@uf/components/SuiTypography";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 // NewUser page components
 // import UserInfo from "@uf/layouts/pages/users/new-user/components/UserInfo";
@@ -97,16 +98,39 @@ function NewUser() {
             products: productsData,
             loyalty_points: loyaltyValue,
         }
-        const data = await fetch('/saveCampaign', {
+        const saveData = async (campaignData) => {
+            const data = await fetch('/saveCampaign', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(campaignData),
+            });
+            const response = await data.json();
+            if (response.success) {
+                history.push('/layouts/dashboards/campaigns');
+            }
+        }
+        const checkData = await fetch('/checkCampaignData', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(campaignData),
         });
-        const response = await data.json();
-        if(response.success) {
-            history.push('/layouts/dashboards/campaigns');
+        const checkResponse = await checkData.json();
+        if (checkResponse.success) {
+            let confirm = await Swal.fire({
+                title: 'Alert',
+                text: 'Products already exists in other campaign do you want to continue ?',
+                showCancelButton: true,
+            });
+            if (confirm.isConfirmed) {
+                saveData(campaignData);
+            }
+        }
+        else {
+            saveData(campaignData);
         }
     }
 
@@ -159,10 +183,10 @@ function NewUser() {
                                     </Grid>
                                 </SuiBox>
                                 <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="Loyalty Points" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
-                                            setLoyaltyValue(value);
-                                        }} />
-                                    </Grid>
+                                    <FormField type="text" label="Loyalty Points" placeholder="0" value={loyaltyValue} onChange={({ target: { value } }) => {
+                                        setLoyaltyValue(value);
+                                    }} />
+                                </Grid>
                                 <Grid container spacing={3} mt={5} justifyContent="center">
                                     <SuiButton type="submit" variant="gradient" color="info" >Save</SuiButton>
                                 </Grid>

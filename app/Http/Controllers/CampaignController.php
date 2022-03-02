@@ -11,6 +11,30 @@ use Illuminate\Support\Facades\DB;
 
 class CampaignController extends Controller
 {
+
+    public function checkCampaignData(Request $request)
+    {
+        $product_ids = collect($request->products)->pluck('product_id');
+        $collection_ids = collect($request->collections)->pluck('product_id');
+        $callback = function($q) use ($product_ids, $collection_ids) {
+            $q->where(function($q) use ($product_ids, $collection_ids) {
+                $q->whereIn('product_id', $product_ids)->orWhereIn('product_id', $collection_ids);
+            });
+        };
+        $campaign = Campaign::whereHas('products', $callback)->with('products', $callback)->first();
+        if(!$campaign) {
+            return response()->json([
+                'success' => false,
+                'message' => 'All products are unique in this campaign',
+                'data' => null
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Products already exists in some other campaign',
+            'data' => $campaign
+        ]);
+    }
     public function saveCampaign(Request $request)
     {
         DB::beginTransaction();
