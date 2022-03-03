@@ -64,4 +64,8 @@ class User extends Authenticatable implements IShopModel
     {
         return $this->hasMany('\App\Models\Order', 'user_id');
     }
+    public function price_rules()
+    {
+        return $this->hasMany('\App\Models\PriceRule', 'user_id');
+    }
 }

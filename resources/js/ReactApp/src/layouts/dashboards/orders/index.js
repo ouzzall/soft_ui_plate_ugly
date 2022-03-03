@@ -88,7 +88,7 @@ function Orders() {
                           loyalty_points: value.loyalty_points,
                           date: new Date(value.created_at).toLocaleDateString(),
                           delivery_date: new Date(value.delivery_date).toLocaleDateString(),
-                          actions: <ActionCell view={`/layouts/dashboards/order-details/${value.id}`} />
+                          actions: <ActionCell view={`/order-details/${value.id}`} />
 
                       }
                   ];

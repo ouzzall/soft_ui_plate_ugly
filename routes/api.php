@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -81,3 +82,5 @@ Route::get('/test-get', function() {
 });
 
 Route::get('sync', [OrderController::class, 'sync']);
+
+Route::post('createUser', [UserController::class, 'createUser']);

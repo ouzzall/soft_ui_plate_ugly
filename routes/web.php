@@ -25,36 +25,43 @@ use Illuminate\Support\Facades\Route;
 Route::get('/app-install', function () {
     return view('welcome');
 })->middleware(['verify.shopify'])->name('home');
+Route::get('/getSession', [AuthController::class, 'getSession']);
 
 
 // redirect if authenticated
-Route::view('/login', 'index')->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::view('/signup', 'index')->name('signup');
-
-
+Route::middleware(['guest'])->group(function () {
+    Route::view('/login', 'index')->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::view('/signup', 'index')->name('signup');
+});
 // auth middleware
-Route::get('/', function () {
-    return view('index');
-})->name('index');
-Route::get('/getSession', [AuthController::class, 'getSession']);
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/getUsers', [UserController::class, 'getUsers']);
-Route::get('/getCollections', [DefaultController::class, 'getCollections']);
-Route::get('/getProducts', [DefaultController::class, 'getProducts']);
+Route::middleware(['auth'])->group(function () {
+    // general routes
+    Route::get('/', function () {
+        return view('index');
+    })->name('index');
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/getTransactions', [TransactionController::class, 'getTransactions']);
 
-Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
-Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
-Route::post('/checkCampaignData', [CampaignController::class, 'checkCampaignData']);
-Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
-Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
+    // admin routes
+    Route::middleware('can:verify_role,"admin"')->group(function () {
+        Route::get('/getUsers', [UserController::class, 'getUsers']);
+        Route::get('/getCollections', [DefaultController::class, 'getCollections']);
+        Route::get('/getProducts', [DefaultController::class, 'getProducts']);
 
-Route::get('/getOrders', [OrderController::class, 'getOrders']);
-Route::get('/getOrderDetail/{id}', [OrderController::class, 'getOrderDetail']);
-Route::post('/refund', [OrderController::class, 'refund']);
+        Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
+        Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
+        Route::post('/checkCampaignData', [CampaignController::class, 'checkCampaignData']);
+        Route::post('/saveCampaign', [CampaignController::class, 'saveCampaign']);
+        Route::put('/updateCampaign/{id}', [CampaignController::class, 'updateCampaign']);
 
-Route::get('/getTransactions', [TransactionController::class, 'getTransactions']);
-
-
-
-Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');
+        Route::get('/getOrders', [OrderController::class, 'getOrders']);
+        Route::get('/getOrderDetail/{id}', [OrderController::class, 'getOrderDetail']);
+        Route::post('/refund', [OrderController::class, 'refund']);
+    });
+    Route::middleware('can:verify_role,"customer"')->group(function() {
+        Route::get('/getProfile', [UserController::class, 'getProfile']);
+        Route::post('/radeemPoints', [UserController::class, 'radeemPoints']);
+    });
+    Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');
+});

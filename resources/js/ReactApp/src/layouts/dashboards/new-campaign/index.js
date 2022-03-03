@@ -108,7 +108,7 @@ function NewUser() {
             });
             const response = await data.json();
             if (response.success) {
-                history.push('/layouts/dashboards/campaigns');
+                history.push('/campaigns');
             }
         }
         const checkData = await fetch('/checkCampaignData', {

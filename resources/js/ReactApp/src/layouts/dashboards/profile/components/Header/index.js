@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 
 import { Link } from "react-router-dom";
 // @mui material components
@@ -44,12 +44,20 @@ import breakpoints from "@uf/assets/theme/base/breakpoints";
 // Images
 import burceMars from "@uf/assets/images/bruce-mars.jpg";
 import curved0 from "@uf/assets/images/curved-images/curved0.jpg";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoyaltyInfo } from "../../../../../reducers/loyaltyInfoSlice";
 
-function Header() {
+function Header({ data }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
+  const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
+  const dispatch = useDispatch();
+
+
   // const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
+
     // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
       return window.innerWidth < breakpoints.values.sm
@@ -70,6 +78,37 @@ function Header() {
   }, [tabsOrientation]);
 
   // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+
+  const handleCreateCoupon = async () => {
+      const confirm = await Swal.fire({
+          title: 'Alert',
+          text: 'Do you want to generate a discount coupon?',
+          icon: 'question',
+          showDenyButton: true,
+          confirmButtonText: 'Yes',
+          denyButtonText: 'No'
+      });
+      if(confirm.isConfirmed) {
+          const data = await fetch('/radeemPoints', {
+              method: 'POST',
+          });
+          const response = await data.json();
+          if(response.success) {
+              let code = response.data.price_rules[0].discount_code;
+              let loyalty_earned = response.data.loyalty.loyalty_earned;
+              dispatch(setLoyaltyInfo({
+                coupon: code,
+                points: loyalty_earned,
+                expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
+            }));
+              Swal.fire({
+                  title: 'Done',
+                  text: response.message,
+                  icon: 'success',
+              });
+          }
+      }
+  }
 
   return (
     <SuiBox position="relative">
@@ -122,10 +161,10 @@ function Header() {
           <Grid item>
             <SuiBox height="100%" mt={0.5} lineHeight={1}>
               <SuiTypography variant="h5" fontWeight="medium">
-                Alex Thompson
+                {data?.name}
               </SuiTypography>
               <SuiTypography variant="button" color="text" fontWeight="medium">
-                alecthompson@mail.com | (44) 123 1234 123
+                {data?.email} | {data?.phone}
               </SuiTypography>
             </SuiBox>
           </Grid>
@@ -144,12 +183,12 @@ function Header() {
                       <SuiBox width="70%" mr={1}>
                         <SuiInput
                           size="small"
-                          defaultValue="code is hear"
+                          value={loyaltyInfo.coupon}
                           icon={{ component: "lock", direction: "right" }}
                           disabled
                         />
                       </SuiBox>
-                      <Tooltip title="Expires On: 12-2-2022" placement="top">
+                      <Tooltip title={`Expires On: ${loyaltyInfo.expiry}`} placement="top">
                         <SuiButton
                           variant="outlined"
                           color="secondary"
@@ -160,7 +199,7 @@ function Header() {
                         </SuiButton>
                       </Tooltip>
                     </SuiBox>
-                    <span style={{fontSize:"13px"}}>Expires On: 12-2-2022</span>
+                    <span style={{fontSize:"13px"}}>Expires On: {loyaltyInfo.expiry}</span>
 
                 </SuiBox>
           </Grid>
@@ -179,9 +218,9 @@ function Header() {
 
 
                       <SuiTypography style={{color:"#fff"}} component="span" variant="h5" fontWeight="bold">
-                       1454
+                       {loyaltyInfo.points}
                       </SuiTypography>
-                      <SuiButton variant="text" style={{textDecoration: "underline"}} color="white">Create Coupon</SuiButton>
+                      <SuiButton variant="text" style={{textDecoration: "underline"}} color="white" {...loyaltyInfo.points < 10000 ? {disabled: true}: {disabled: false} } onClick={handleCreateCoupon}>Create Coupon</SuiButton>
                   </SuiTypography>
                 </SuiBox>
           </Grid>
