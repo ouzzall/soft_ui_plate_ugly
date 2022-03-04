@@ -52,7 +52,6 @@ import brand from "@uf/assets/images/logo-ct.png";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./reducers/userSlice";
-import Loader from "./components/Loader";
 
 export default function App() {
     const [controller, dispatch] = useSoftUIController();
@@ -114,11 +113,19 @@ export default function App() {
                 }
             } else {
                 if(pathname == '/signup' || pathname == '/login') {
-                    history.push('/');
+                    if (response.data.role.type == 'customer') {
+                        history.push('/profile');
+                    } else {
+                        history.push('/');
+                    }
                 }
                 routes.map((route) => {
                     if (!route.role.includes(response.data.role.type) && route.route == pathname && route.role.length > 0) {
-                        history.push('/');
+                        if (response.data.role.type == 'customer') {
+                            history.push('/profile');
+                        } else {
+                            history.push('/');
+                        }
                     }
                 })
             }
@@ -134,7 +141,7 @@ export default function App() {
             }
 
             if (route.route) {
-                return <Route exact path={route.route} component={route.component} key={route.key} />;
+                return <Route exact path={route.route} component={route.component} key={route.key}/>;
             }
 
             return null;
@@ -158,10 +165,10 @@ export default function App() {
                     </>
                 )}
 
-                {(<Switch>
+                <Switch>
                     {getRoutes(routes)}
                     <Redirect from="*" to="/" />
-                </Switch>)}
+                </Switch>
             </ThemeProvider>
         </CacheProvider>
     ) : (
@@ -181,10 +188,10 @@ export default function App() {
                 </>
             )}
 
-                {(<Switch>
+                <Switch>
                     {getRoutes(routes)}
                     <Redirect from="*" to="/" />
-                </Switch>)}
+                </Switch>
         </ThemeProvider>
     ));
 }

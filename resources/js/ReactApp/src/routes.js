@@ -117,7 +117,7 @@ import Shop from "@uf/examples/Icons/Shop";
 
 const routes = [
     {
-        role: ["admin", "customer"],
+        role: ["admin"],
         name: "Dashboard",
         key: "smart-home",
         icon: <Shop size="12px" />,
@@ -142,8 +142,8 @@ const routes = [
     },
     {
         role: ["customer"],
-        name: "Profile",
-        key: "profile",
+        name: "Dashboard",
+        key: "dashboard",
         icon: <Shop size="12px" />,
         route: "/profile",
         component: Profile,

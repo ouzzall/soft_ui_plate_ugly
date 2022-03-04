@@ -60,6 +60,7 @@ import typography from "@uf/assets/theme/base/typography";
 
 import DataTable from "@uf/examples/Tables/DataTable";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "@uf/components/Loader";
 
 // Data
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
@@ -80,8 +81,8 @@ function SmartHome() {
   } = controllerCardIcons;
 
   // Controller cards states
-  const [humidityState, setHumidityState] = useState(false);
-  const [temperatureState, setTemperatureState] = useState(true);
+  const [orderState, setOrderState] = useState(false);
+  const [campaignState, setCampaignState] = useState(false);
   const [airConditionerState, setAirConditionerState] = useState(false);
   // const [lightsStata, setLightsStata] = useState(false);
   // const [wifiState, setWifiState] = useState(true);
@@ -90,6 +91,65 @@ function SmartHome() {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.user.user);
+  const [chartData, setChartData] = useState({});
+  const [dashboardData, setDashboardData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+      const getDashboardData = async () => {
+          setLoading(true);
+          let data = await fetch('/getCharts');
+          let response = await data.json();
+          if (response.success) {
+              setChartData(response.data.sales_chart);
+          }
+          data = await fetch('/getDashboardData');
+          response = await data.json();
+          if (response.success) {
+              setDashboardData(response.data);
+              setOrderState(response.data.settings.order_rule_active);
+              setCampaignState(response.data.settings.campaign_rule_active);
+          }
+          setLoading(false);
+      }
+      getDashboardData();
+  }, []);
+
+  const orderRuleChange = async (e) => {
+      e.target.disabled = true;
+      let data = await fetch('/updateSetting', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              order_rule_active: !orderState,
+          })
+      });
+      let response = await data.json();
+
+      if(response.success) {
+          setOrderState(response.data.order_rule_active);
+          e.target.disabled = false;
+      }
+  }
+
+  const campaignRuleChange = async (e) => {
+    let data = await fetch('/updateSetting', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            campaign_rule_active: !campaignState,
+        })
+    });
+    let response = await data.json();
+
+    if(response.success) {
+        setCampaignState(response.data.campaign_rule_active);
+    }
+}
 
   // order list
   // const [menu, setMenu] = useState(null);
@@ -117,7 +177,7 @@ function SmartHome() {
   //     </MenuItem>
   //   </Menu>
   // );
-  return (<DashboardLayout>
+  return loading ? <Loader /> : (<DashboardLayout>
       <DashboardNavbar />
       <SuiBox pt={3}>
         <SuiBox mb={3}>
@@ -128,7 +188,7 @@ function SmartHome() {
                 title="Sales Overview"
                 description={
                   <SuiBox display="flex" alignItems="center">
-                    <SuiBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
+                    {/* <SuiBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
                       <Icon sx={{ fontWeight: "bold" }}>arrow_upward</Icon>
                     </SuiBox>
                     <SuiTypography variant="button" color="text" fontWeight="medium">
@@ -136,50 +196,50 @@ function SmartHome() {
                       <SuiTypography variant="button" color="text" fontWeight="regular">
                         in 2021
                       </SuiTypography>
-                    </SuiTypography>
+                    </SuiTypography> */}
                   </SuiBox>
                 }
-                chart={gradientLineChartData}
+                chart={chartData}
               />
             </Grid>
             <Grid item xs={12} xl={5}>
               <Grid container spacing={3}>
                 <Grid item xs={12}>
                   <Card  style={{background: "linear-gradient(310deg,#f87c56,#ee5340)" ,color: "white",padding: "16px"}} >
-                    <span style={{opacity:"0.7",fontSize: "14px"}} >Progress</span>
+                    {/* <span style={{opacity:"0.7",fontSize: "14px"}} >Progress</span> */}
                     <h4>Report Overview</h4>
 
                   </Card>
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
-                    count={21}
-                    title="Created"
-                    description="Total Coupon"
+                    count={dashboardData?.users}
+                    title="Users"
+                    description="No. of Users"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
-                    count={44}
+                    count={dashboardData?.coupons}
                     suffix=""
-                    title="Redeemed"
-                    description="Coupons"
+                    title="Coupons"
+                    description="No. of coupons created"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
-                    count={87}
+                    count={dashboardData?.orders}
                     suffix=""
-                    title="Total"
-                    description="Points Given"
+                    title="Orders"
+                    description="No. of orders"
                   />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   <DefaultCounterCard
-                    count={47}
+                    count={dashboardData?.points_earned}
                     suffix=""
-                    title="Redeemed"
-                    description="Points"
+                    title="Earned Points"
+                    description="Total points earned"
                   />
                 </Grid>
               </Grid>
@@ -200,24 +260,24 @@ function SmartHome() {
             <Grid item xs={12} sm={6} lg={2}>
 
               <ControllerCard
-                state={humidityState}
+                state={campaignState}
                 // icon={humidityState ? humidityIconLight : humidityIconDark}
-                title="Delivery Rules Group"
-                description="Inactive since: 2 days"
-                onChange={() => setHumidityState(!humidityState)}
+                title="Campaign Rules"
+                description="Campaign rules"
+                onChange={campaignRuleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6} lg={2}>
 
             <ControllerCard
-              state={temperatureState}
+              state={orderState}
               // icon={temperatureIconLight}
               title="Order Based Rules"
-              description="On/Off Order Based Rules"
-              onChange={() => setTemperatureState(!temperatureState)}
+              description="Order Based Rules"
+              onChange={orderRuleChange}
             />
             </Grid>
-            <Grid item xs={12} sm={6} lg={2}>
+            {/* <Grid item xs={12} sm={6} lg={2}>
               <ControllerCard
                 state={airConditionerState}
                 // icon={airConditionerState ? airConditionerIconLight : airConditionerIconDark}
@@ -225,7 +285,7 @@ function SmartHome() {
                 description="On/Off all Subsciption rules"
                 onChange={() => setAirConditionerState(!airConditionerState)}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
         </SuiBox>
       </SuiBox>

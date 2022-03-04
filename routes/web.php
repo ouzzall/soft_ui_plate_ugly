@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TransactionController;
@@ -45,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
 
     // admin routes
     Route::middleware('can:verify_role,"admin"')->group(function () {
+        Route::get('/getCharts', [DashboardController::class, 'getCharts']);
+        Route::get('/getDashboardData', [DashboardController::class, 'getDashboardData']);
+        Route::post('/updateSetting', [DashboardController::class, 'updateSetting']);
         Route::get('/getUsers', [UserController::class, 'getUsers']);
         Route::get('/getCollections', [DefaultController::class, 'getCollections']);
         Route::get('/getProducts', [DefaultController::class, 'getProducts']);

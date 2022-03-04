@@ -51,7 +51,11 @@ function Basic() {
         });
         let response = await data.json();
         if (response.success) {
-            history.push('/');
+            if (response.data.role.type == 'customer') {
+                history.push('/profile');
+            } else {
+                history.push('/');
+            }
         }
     }
 

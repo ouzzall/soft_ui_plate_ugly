@@ -39,6 +39,7 @@ import DataTable from "@uf/examples/Tables/DataTable";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 import { useEffect, useState } from "react";
+import Loader from "@uf/components/Loader";
 
 function users() {
     // const [menu, setMenu] = useState(null);
@@ -66,12 +67,14 @@ function users() {
     //     </MenuItem>
     //   </Menu>
     // );
+    const [loading, setLoading] = useState(false);
 
     const [usersData, setUsersData] = useState([]);
 
 
     useEffect(() => {
         async function getUsers() {
+            setLoading(true);
             let data = await fetch('/getUsers');
             let response = await data.json();
             if (response.success) {
@@ -91,12 +94,13 @@ function users() {
                     ];
                 });
                 setUsersData(users);
+                setLoading(false);
             }
         }
         getUsers();
     }, []);
 
-    return (
+    return loading ? <Loader /> : (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>

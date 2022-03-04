@@ -38,6 +38,7 @@ import DataTable from "@uf/examples/Tables/DataTable";
 import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 import { useEffect, useState } from "react";
+import Loader from "@uf/components/Loader";
 
 function Orders() {
     // const [menu, setMenu] = useState(null);
@@ -67,9 +68,11 @@ function Orders() {
     // );
 
     const [transactions, setTransactions] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
+            setLoading(true);
             const data = await fetch('/getTransactions');
             const response = await data.json();
             let transactionsData = [];
@@ -88,12 +91,13 @@ function Orders() {
                     ];
                 });
                 setTransactions(transactionsData);
+                setLoading(false);
             }
         }
         getData();
     }, []);
 
-    return (
+    return loading ? <Loader /> : (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>

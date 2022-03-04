@@ -41,11 +41,14 @@ import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 import ActionCell from "@uf/layouts/dashboards/campaigns/components/ActionCell";
 import { useEffect, useState } from "react";
+import Loader from "@uf/components/Loader";
 
 function Campaign() {
     const [campaigns, setCampaigns] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
         const getData = async () => {
+            setLoading(true);
             let data = await fetch('/getCampaigns');
             let response = await data.json();
             if (response.success) {
@@ -54,12 +57,13 @@ function Campaign() {
                     action: <ActionCell edit={`/edit-campaign/${value.id}`} />
                 }));
                 setCampaigns(result);
+                setLoading(false);
             }
         }
         getData();
     }, []);
 
-    return (
+    return loading ? <Loader /> : (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>

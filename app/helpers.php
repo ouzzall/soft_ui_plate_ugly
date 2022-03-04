@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Campaign;
+use App\Models\Setting;
 use App\Models\ShippingRule;
 use App\Models\User;
 use Carbon\Carbon;
@@ -20,6 +21,7 @@ if (!function_exists('loyaltyCalculator')) {
     function loyaltyCalculator($user, $order)
     {
         $result = [];
+        $setting = Setting::first();
 
         // Rule (Order based)
         $deliveryDate = '';
@@ -61,7 +63,7 @@ if (!function_exists('loyaltyCalculator')) {
             });
             $shipping_rule_one = ShippingRule::where('shipping_rule_type', 1)->where('is_active', 1)
                 ->where('order_amount', '<=', $totalOrderPriceSum)->first();
-            if ($shipping_rule_one) {
+            if ($shipping_rule_one && $setting->order_rule_active) {
                 $loyaltyValue = 0;
                 if ($shipping_rule_one->discount_type == 'fixed') {
                     $loyaltyValue = $shipping_rule_one->shipping_amount;
@@ -83,7 +85,7 @@ if (!function_exists('loyaltyCalculator')) {
         $campaign = Campaign::whereHas('products', function ($q) use ($item_ids) {
             $q->whereIn('product_id', $item_ids)->where('type', 'product');
         })->where('is_active', 1)->first();
-        if ($campaign) {
+        if ($campaign && $setting->campaign_rule_active) {
             $result = [
                 'loyalty_earned' => $campaign->loyalty_points,
                 'last_earned_date' => $deliveryDate
@@ -100,7 +102,7 @@ if (!function_exists('loyaltyCalculator')) {
                 $collectionCampaign = Campaign::whereHas('products', function ($q) use ($collection_ids) {
                     $q->whereIn('product_id', $collection_ids)->where('type', 'collection');
                 })->where('is_active', 1)->first();
-                if ($collectionCampaign) {
+                if ($collectionCampaign && $setting->campaign_rule_active) {
                     $result = [
                         'loyalty_earned' => $collectionCampaign->loyalty_points,
                         'last_earned_date' => $deliveryDate,

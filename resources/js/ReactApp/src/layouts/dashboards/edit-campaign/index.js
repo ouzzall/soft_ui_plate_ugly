@@ -40,6 +40,7 @@ import SuiSelect from "@uf/components/SuiSelect";
 import SuiTypography from "@uf/components/SuiTypography";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Loader from "@uf/components/Loader";
 
 // NewUser page components
 // import UserInfo from "@uf/layouts/pages/users/new-user/components/UserInfo";
@@ -63,6 +64,7 @@ function EditCompain({ match }) {
     const [selectedCollections, setSelectedCollections] = useState([]);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const history = useHistory();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getCollections = async () => {
@@ -83,6 +85,7 @@ function EditCompain({ match }) {
         getProducts();
 
         const getCampaignData = async () => {
+            setLoading(true);
             const data = await fetch(`/getCampaign/${id}`);
             const response = await data.json();
             if (response.success) {
@@ -99,6 +102,7 @@ function EditCompain({ match }) {
                 setSelectedCollections(collects);
                 setSelectedProducts(pros);
                 setLoyaltyValue(response.data.loyalty_points);
+                setLoading(false);
             }
         }
         getCampaignData();
@@ -136,7 +140,7 @@ function EditCompain({ match }) {
     }
 
 
-    return (
+    return loading ? <Loader /> : (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox component="form" role="form" py={3} mb={20} onSubmit={handleForm}>

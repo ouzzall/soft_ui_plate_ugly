@@ -417,8 +417,8 @@ function SubscriptionRules() {
                             </SuiBox>
                         </div>
                       </Grid>
-                      
-                      
+
+
                     </Grid>
                 </SuiBox>
 
@@ -589,7 +589,7 @@ function SubscriptionRules() {
                             </SuiBox>
                         </div>
                       </Grid>
-                      
+
                     </Grid>
                 </SuiBox>
 

@@ -25,7 +25,7 @@ class UserController extends Controller
     public function radeemPoints()
     {
         $user = Auth::user();
-        if($user->loyalty->loyalty_earned < 10000) {
+        if ($user->loyalty->loyalty_earned < 10000) {
             return response()->json([
                 'success' => false,
                 'message' => 'You need at least 10000 loyalty points to perform radeem action!',
@@ -86,7 +86,9 @@ class UserController extends Controller
                 'loyalty_points' => $user->loyalty->loyalty_earned,
                 'transaction_type_id' => 2,
             ]);
-            $userData = $user->load(['loyalty','price_rules']);
+            $userData = $user->load(['loyalty', 'price_rules' => function ($q) {
+                $q->latest();
+            }]);
             DB::commit();
             return response()->json([
                 'success' => true,
@@ -102,7 +104,7 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = Auth::user();
-        $user = $user->load(['loyalty', 'price_rules' => function ($q){
+        $user = $user->load(['loyalty', 'price_rules' => function ($q) {
             $q->latest();
         }]);
         return response()->json([

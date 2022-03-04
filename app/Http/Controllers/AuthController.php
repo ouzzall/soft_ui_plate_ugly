@@ -13,17 +13,17 @@ class AuthController extends Controller
         $remember_me = ($request->remember_me == 'on') ? true : false;
         $user = null;
         if (Auth::attempt($credentials, $remember_me)) {
-            $user = Auth::user();
+            $user = Auth::user()->load('role');
             return response()->json([
                 'success' => true,
                 'message' => 'User Logged in successfully',
-                'user' => $user
+                'data' => $user
             ]);
         }
         return response()->json([
             'success' => false,
             'message' => 'Invalid credentials',
-            'user' => $user,
+            'data' => $user,
         ]);
     }
 
