@@ -71,30 +71,32 @@ function Orders() {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const getData = async () => {
-            setLoading(true);
-            const data = await fetch('/getTransactions');
-            const response = await data.json();
-            let transactionsData = [];
-            if (response.success) {
-                response.data.map((value) => {
-                    transactionsData = [
-                        ...transactionsData,
-                        {
-                            id: value.id,
-                            customer_name: value.user.name,
-                            customer_email: value.user.email,
-                            loyalty_points: value.loyalty_points,
-                            type: value.transaction_type.title,
-                            date: new Date(value.created_at).toLocaleDateString(),
-                        }
-                    ];
-                });
-                setTransactions(transactionsData);
-                setLoading(false);
-            }
-        }
-        getData();
+        // const getData = async () => {
+        //     setLoading(true);
+        //     const data = await fetch('/getTransactions');
+        //     const response = await data.json();
+        //     let transactionsData = [];
+        //     if (response.success) {
+        //         // response.data.map((value) => {
+        //         //     transactionsData = [
+        //         //         ...transactionsData,
+        //         //         {
+        //         //             id: value.id,
+        //         //             customer_name: value.user.name,
+        //         //             customer_email: value.user.email,
+        //         //             loyalty_points: value.loyalty_points,
+        //         //             type: value.transaction_type.title,
+        //         //             date: new Date(value.created_at).toLocaleDateString(),
+        //         //         }
+        //         //     ];
+        //         // });
+        //         console.log(response.data);
+        //         console.log(transactionsData);
+        //         setTransactions(transactionsData);
+        //         setLoading(false);
+        //     }
+        // }
+        // getData();
     }, []);
 
     return loading ? <Loader /> : (
@@ -142,14 +144,14 @@ function Orders() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch
+                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={`/getTransactions`}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
-                                { Header: "Customer Name", accessor: "customer_name" },
-                                { Header: "Customer Email", accessor: "customer_email" },
+                                { Header: "Customer Name", accessor: "user.name" },
+                                { Header: "Customer Email", accessor: "user.email" },
                                 { Header: "Loyalty Points", accessor: "loyalty_points" },
-                                { Header: "Transaction Type", accessor: "type" },
+                                { Header: "Transaction Type", accessor: "transaction_type.title" },
                                 { Header: "Date", accessor: "date" },
                             ],
                             rows: transactions
