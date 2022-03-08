@@ -42,28 +42,16 @@ import SuiSelect from "@uf/components/SuiSelect";
 import ActionCell from "@uf/layouts/dashboards/campaigns/components/ActionCell";
 import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../../reducers/loadingSlice";
 
 function Campaign() {
-    const [campaigns, setCampaigns] = useState([]);
-    const [loading, setLoading] = useState(false);
-    useEffect(() => {
-        const getData = async () => {
-            setLoading(true);
-            let data = await fetch('/getCampaigns');
-            let response = await data.json();
-            if (response.success) {
-                const result = response.data.map((value) => ({
-                    ...value,
-                    action: <ActionCell edit={`/edit-campaign/${value.id}`} />
-                }));
-                setCampaigns(result);
-                setLoading(false);
-            }
-        }
-        getData();
-    }, []);
 
-    return loading ? <Loader /> : (
+    const renderColumns = (row => ({
+        actions: <ActionCell edit={`/edit-campaign/${row.id}`} />
+    }))
+
+    return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>
@@ -113,16 +101,16 @@ function Campaign() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch
+                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={'/getCampaigns'}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
                                 { Header: "Campaign Name", accessor: "campaign_name" },
                                 { Header: "Loyalty Points", accessor: "loyalty_points" },
-                                { Header: "Actions", accessor: "action" },
+                                { Header: "Actions", accessor: "actions" },
                             ],
-                            rows: campaigns,
                         }}
+                        renderColumns={renderColumns}
                     />
 
                 </Card>

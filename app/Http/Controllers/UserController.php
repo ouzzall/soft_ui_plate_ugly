@@ -12,13 +12,37 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    public function getUsers()
+    public function getUsers(Request $request)
     {
-        $users = User::where('role_id', 2)->with('loyalty')->get();
+        $users = User::query();
+        $users->when($request->get('search'), function ($q) use ($request) {
+            $q->where(function ($q) use ($request) {
+                $q->where('id', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $request->search . '%')
+                    ->orWhereHas('role', function ($q) use ($request) {
+                        $q->where('title', 'LIKE', '%' . $request->search . '%');
+                    })
+                    ->orWhereHas('loyalty', function ($q) use ($request) {
+                        $q->where('loyalty_earned', 'LIKE', '%' . $request->search . '%')
+                            ->orWhere('loyalty_radeemed', 'LIKE', '%' . $request->search . '%');
+                    });
+            });
+        });
+        $count = $users->count();
+        $users->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
+            $q->take($request->limit)->skip($request->skip);
+        });
+        $users = $users->where('role_id', 2)->with('loyalty')->get();
+        $data = [
+            'data' => $users,
+            'pages' => ceil($count / $request->limit),
+            'row_count' => $count,
+        ];
         return response()->json([
             'success' => true,
             'message' => 'Users retrieved successfully!',
-            'data' => $users
+            'data' => $data
         ]);
     }
 

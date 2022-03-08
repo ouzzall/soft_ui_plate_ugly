@@ -39,67 +39,12 @@ import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../../reducers/loadingSlice";
 
 function Orders() {
-    // const [menu, setMenu] = useState(null);
 
-    // const openMenu = (event) => setMenu(event.currentTarget);
-    // const closeMenu = () => setMenu(null);
-
-    // const renderMenu = (
-    //   <Menu
-    //     anchorEl={menu}
-    //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-    //     open={Boolean(menu)}
-    //     onClose={closeMenu}
-    //     keepMounted
-    //   >
-    //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
-    //     <Divider sx={{ margin: "0.5rem 0" }} />
-    //     <MenuItem onClick={closeMenu}>
-    //       <SuiTypography variant="button" color="error" fontWeight="regular">
-    //         Remove Filter
-    //       </SuiTypography>
-    //     </MenuItem>
-    //   </Menu>
-    // );
-
-    const [transactions, setTransactions] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        // const getData = async () => {
-        //     setLoading(true);
-        //     const data = await fetch('/getTransactions');
-        //     const response = await data.json();
-        //     let transactionsData = [];
-        //     if (response.success) {
-        //         // response.data.map((value) => {
-        //         //     transactionsData = [
-        //         //         ...transactionsData,
-        //         //         {
-        //         //             id: value.id,
-        //         //             customer_name: value.user.name,
-        //         //             customer_email: value.user.email,
-        //         //             loyalty_points: value.loyalty_points,
-        //         //             type: value.transaction_type.title,
-        //         //             date: new Date(value.created_at).toLocaleDateString(),
-        //         //         }
-        //         //     ];
-        //         // });
-        //         console.log(response.data);
-        //         console.log(transactionsData);
-        //         setTransactions(transactionsData);
-        //         setLoading(false);
-        //     }
-        // }
-        // getData();
-    }, []);
-
-    return loading ? <Loader /> : (
+    return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>
@@ -153,8 +98,7 @@ function Orders() {
                                 { Header: "Loyalty Points", accessor: "loyalty_points" },
                                 { Header: "Transaction Type", accessor: "transaction_type.title" },
                                 { Header: "Date", accessor: "date" },
-                            ],
-                            rows: transactions
+                            ]
                         }}
                     />
 

@@ -38,6 +38,8 @@ import SuiPagination from "@uf/components/SuiPagination";
 // Soft UI Dashboard PRO React example components
 import DataTableHeadCell from "@uf/examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "@uf/examples/Tables/DataTable/DataTableBodyCell";
+import Loader from "@uf/components/Loader";
+import { useDispatch } from "react-redux";
 
 function DataTable({
     entriesPerPage,
@@ -49,7 +51,8 @@ function DataTable({
     noEndBorder,
     isServerSide,
     manualPagination,
-    url
+    url,
+    renderColumns,
 }) {
     const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
     const entries = entriesPerPage.entries ? entriesPerPage.entries : [5, 10, 15, 20, 25];
@@ -60,7 +63,7 @@ function DataTable({
         if (!isServerSide) {
             return table.rows;
         } else {
-            return tableData;
+            return tableData ?? [];
         }
     }, [table, tableData]);
 
@@ -180,10 +183,17 @@ function DataTable({
             const response = await fetch(
                 `${url}?limit=${limit}&skip=${skip}&search=${search}`
             )
-            const data = await response.json()
-            setTableData(data.data.data);
-            setTotalPages(data.data.pages);
-            setTotalRows(data.data.row_count);
+            const data = await response.json();
+            let result = data?.data;
+            if(renderColumns !== undefined) {
+                result.data = data?.data?.data?.map((value) => ({
+                    ...value,
+                    ...renderColumns(value)
+                }))
+            }
+            setTableData(result?.data);
+            setTotalPages(result?.pages);
+            setTotalRows(result?.row_count);
             setPageIndexChange(false);
         } catch (e) {
             console.log("Error while fetching", e)

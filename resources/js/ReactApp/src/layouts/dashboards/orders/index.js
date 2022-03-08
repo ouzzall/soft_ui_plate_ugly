@@ -42,68 +42,18 @@ import ActionCell from "@uf/layouts/dashboards/orders/components/ActionCell";
 
 import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
+import { setLoading } from "../../../reducers/loadingSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Orders() {
-    // const [menu, setMenu] = useState(null);
 
-    // const openMenu = (event) => setMenu(event.currentTarget);
-    // const closeMenu = () => setMenu(null);
+    const renderColumns = (row => ({
+        date: new Date(row.created_at).toLocaleDateString(),
+        delivery_date: new Date(row.delivery_date).toLocaleDateString(),
+        actions: <ActionCell view={`/order-details/${row.id}`} />
+    }))
 
-    // const renderMenu = (
-    //   <Menu
-    //     anchorEl={menu}
-    //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-    //     open={Boolean(menu)}
-    //     onClose={closeMenu}
-    //     keepMounted
-    //   >
-    //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
-    //     <Divider sx={{ margin: "0.5rem 0" }} />
-    //     <MenuItem onClick={closeMenu}>
-    //       <SuiTypography variant="button" color="error" fontWeight="regular">
-    //         Remove Filter
-    //       </SuiTypography>
-    //     </MenuItem>
-    //   </Menu>
-    // );
-
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        const getData = async () => {
-            setLoading(true);
-            const data = await fetch('/getOrders');
-            const response = await data.json();
-            if (response.success) {
-                let ordersData = [];
-                response.data.map((value) => {
-                    ordersData = [
-                        ...ordersData,
-                        {
-                            id: value.id,
-                            order_name: value.order_name,
-                            customer_name: value.user.name,
-                            customer_email: value.user.email,
-                            loyalty_points: value.loyalty_points,
-                            date: new Date(value.created_at).toLocaleDateString(),
-                            delivery_date: new Date(value.delivery_date).toLocaleDateString(),
-                            actions: <ActionCell view={`/order-details/${value.id}`} />
-
-                        }
-                    ];
-                })
-                setOrders(ordersData);
-                setLoading(false);
-            }
-        }
-        getData();
-    }, []);
-
-    return loading ? <Loader /> : (
+    return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>
@@ -148,20 +98,20 @@ function Orders() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch
+                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={'/getOrders'}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
                                 { Header: "Order Name", accessor: "order_name" },
-                                { Header: "Customer Name", accessor: "customer_name" },
+                                { Header: "Customer Name", accessor: "user.name" },
                                 { Header: "Order Date", accessor: "date" },
                                 { Header: "Delivery Date", accessor: "delivery_date" },
-                                { Header: "Customer Email", accessor: "customer_email" },
+                                { Header: "Customer Email", accessor: "user.email" },
                                 { Header: "Loyalty Points", accessor: "loyalty_points" },
                                 { Header: "Action", accessor: "actions" },
                             ],
-                            rows: orders
                         }}
+                        renderColumns={renderColumns}
                     />
 
                 </Card>

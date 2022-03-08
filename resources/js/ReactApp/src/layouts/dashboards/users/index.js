@@ -40,67 +40,17 @@ import SuiDatePicker from "@uf/components/SuiDatePicker";
 import SuiSelect from "@uf/components/SuiSelect";
 import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../../reducers/loadingSlice";
 
 function users() {
-    // const [menu, setMenu] = useState(null);
-
-    // const openMenu = (event) => setMenu(event.currentTarget);
-    // const closeMenu = () => setMenu(null);
-
-    // const renderMenu = (
-    //   <Menu
-    //     anchorEl={menu}
-    //     anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    //     transformOrigin={{ vertical: "top", horizontal: "left" }}
-    //     open={Boolean(menu)}
-    //     onClose={closeMenu}
-    //     keepMounted
-    //   >
-    //     <MenuItem onClick={closeMenu}>Status: Paid</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Refunded</MenuItem>
-    //     <MenuItem onClick={closeMenu}>Status: Canceled</MenuItem>
-    //     <Divider sx={{ margin: "0.5rem 0" }} />
-    //     <MenuItem onClick={closeMenu}>
-    //       <SuiTypography variant="button" color="error" fontWeight="regular">
-    //         Remove Filter
-    //       </SuiTypography>
-    //     </MenuItem>
-    //   </Menu>
-    // );
-    const [loading, setLoading] = useState(false);
-
-    const [usersData, setUsersData] = useState([]);
 
 
-    useEffect(() => {
-        async function getUsers() {
-            setLoading(true);
-            let data = await fetch('/getUsers');
-            let response = await data.json();
-            if (response.success) {
-                let users = [];
-                response.data.map((value) => {
-                    users = [
-                        ...users,
-                        {
-                            id: value.id,
-                            name: value.name,
-                            email: value.email,
-                            phone: value.phone,
-                            points: value.loyalty.loyalty_earned,
-                            redeemed: value.loyalty.loyalty_radeemed,
-                            actions: <SuiButton variant="gradient" color="info" size="small">Block</SuiButton>
-                        }
-                    ];
-                });
-                setUsersData(users);
-                setLoading(false);
-            }
-        }
-        getUsers();
-    }, []);
+    const renderColumns = (row) => ({
+        actions: <SuiButton variant="gradient" color="info" size="small">Block</SuiButton>
+    })
 
-    return loading ? <Loader /> : (
+    return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>
@@ -125,20 +75,19 @@ function users() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch
+                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={'/getUsers'}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
                                 { Header: "Name", accessor: "name" },
                                 { Header: "Email", accessor: "email" },
                                 { Header: "Phone No", accessor: "phone" },
-                                { Header: "Points Earned", accessor: "points" },
-                                { Header: "Points Redeemed", accessor: "redeemed" },
-                                { Header: "Actions", accessor: "actions" },
-
+                                { Header: "Points Earned", accessor: "loyalty.loyalty_earned" },
+                                { Header: "Points Redeemed", accessor: "loyalty.loyalty_radeemed" },
+                                { Header: "Actions", accessor: "actions" }
                             ],
-                            rows: usersData,
                         }}
+                        renderColumns={renderColumns}
                     />
 
                 </Card>

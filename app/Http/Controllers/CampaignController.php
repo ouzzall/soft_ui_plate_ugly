@@ -16,13 +16,13 @@ class CampaignController extends Controller
     {
         $product_ids = collect($request->products)->pluck('product_id');
         $collection_ids = collect($request->collections)->pluck('product_id');
-        $callback = function($q) use ($product_ids, $collection_ids) {
-            $q->where(function($q) use ($product_ids, $collection_ids) {
+        $callback = function ($q) use ($product_ids, $collection_ids) {
+            $q->where(function ($q) use ($product_ids, $collection_ids) {
                 $q->whereIn('product_id', $product_ids)->orWhereIn('product_id', $collection_ids);
             });
         };
         $campaign = Campaign::whereHas('products', $callback)->with('products', $callback)->first();
-        if(!$campaign) {
+        if (!$campaign) {
             return response()->json([
                 'success' => false,
                 'message' => 'All products are unique in this campaign',
@@ -127,13 +127,30 @@ class CampaignController extends Controller
         }
     }
 
-    public function getCampaigns()
+    public function getCampaigns(Request $request)
     {
-        $campaigns = Campaign::all();
+        $campaigns = Campaign::query();
+        $campaigns->when($request->get('search'), function ($q) use ($request) {
+            $q->where(function ($q) use ($request) {
+                $q->where('id', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('campaign_name', 'LIKE', '%' . $request->search . '%')
+                    ->orWhere('loyalty_points', 'LIKE', '%' . $request->search . '%');
+            });
+        });
+        $count = $campaigns->count();
+        $campaigns->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
+            $q->take($request->limit)->skip($request->skip);
+        });
+        $campaigns = $campaigns->get();
+        $data = [
+            'data' => $campaigns,
+            'pages' => ceil($count / $request->limit),
+            'row_count' => $count,
+        ];
         return response()->json([
             'success' => true,
             'message' => 'Campaigns retrieved successfully',
-            'data' => $campaigns,
+            'data' => $data,
         ]);
     }
 }
