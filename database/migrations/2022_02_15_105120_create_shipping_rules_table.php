@@ -18,6 +18,7 @@ class CreateShippingRulesTable extends Migration
             $table->double('shipping_amount');
             $table->double('order_amount');
             $table->unsignedBigInteger('shipping_rule_type');
+            $table->enum('discount_type', ['fixed', 'percentage']);
             $table->enum('is_active', ['1', '0']);
             $table->timestamps();
             $table->softDeletes();
