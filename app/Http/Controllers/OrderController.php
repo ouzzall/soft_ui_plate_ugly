@@ -23,7 +23,7 @@ class OrderController extends Controller
 
     public function getOrders(Request $request)
     {
-        $orders = Order::query();
+        $orders = Order::with('user');
         $orders->when($request->get('search'), function ($q) use ($request) {
             $q->where(function ($q) use ($request) {
                 $q->where('id', 'LIKE', '%' . $request->search . '%')
@@ -41,7 +41,7 @@ class OrderController extends Controller
         $orders->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $orders = $orders->with('user')->get();
+        $orders = $orders->get();
         $data = [
             'data' => $orders,
             'pages' => ceil($count / $request->limit),

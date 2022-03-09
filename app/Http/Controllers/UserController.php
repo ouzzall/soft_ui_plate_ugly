@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function getUsers(Request $request)
     {
-        $users = User::query();
+        $users = User::where('role_id', 2)->with('loyalty');
         $users->when($request->get('search'), function ($q) use ($request) {
             $q->where(function ($q) use ($request) {
                 $q->where('id', 'LIKE', '%' . $request->search . '%')
@@ -33,7 +33,7 @@ class UserController extends Controller
         $users->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $users = $users->where('role_id', 2)->with('loyalty')->get();
+        $users = $users->get();
         $data = [
             'data' => $users,
             'pages' => ceil($count / $request->limit),

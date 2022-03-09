@@ -75,7 +75,7 @@ function users() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={'/getUsers'}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={'/getUsers'}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },

@@ -23,7 +23,7 @@ import Tooltip from "@mui/material/Tooltip";
 import SuiBox from "@uf/components/SuiBox";
 import SuiTypography from "@uf/components/SuiTypography";
 
-function ActionCell() {
+function ActionCell({edit, del}) {
   return (
     <SuiBox display="flex" alignItems="center">
       {/* <Link to="/layouts/dashboards/transactions">
@@ -34,13 +34,13 @@ function ActionCell() {
       </SuiTypography>
       </Link> */}
       <SuiBox mx={2}>
-        <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+        <SuiTypography onClick={edit} variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
           <Tooltip title="Edit Rule" placement="top">
             <Icon>edit</Icon>
           </Tooltip>
         </SuiTypography>
       </SuiBox>
-      <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+      <SuiTypography onClick={del} variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
         <Tooltip title="Delete Rule" placement="left">
           <Icon>delete</Icon>
         </Tooltip>

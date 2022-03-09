@@ -40,6 +40,7 @@ import DataTableHeadCell from "@uf/examples/Tables/DataTable/DataTableHeadCell";
 import DataTableBodyCell from "@uf/examples/Tables/DataTable/DataTableBodyCell";
 import Loader from "@uf/components/Loader";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 function DataTable({
     entriesPerPage,
@@ -53,6 +54,7 @@ function DataTable({
     manualPagination,
     url,
     renderColumns,
+    reload
 }) {
     const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
     const entries = entriesPerPage.entries ? entriesPerPage.entries : [5, 10, 15, 20, 25];
@@ -61,7 +63,7 @@ function DataTable({
     const [tableData, setTableData] = useState([]);
     const data = useMemo(() => {
         if (!isServerSide) {
-            return table.rows;
+            return table.rows ?? [];
         } else {
             return tableData ?? [];
         }
@@ -70,6 +72,7 @@ function DataTable({
     const [totalPages, setTotalPages] = useState(0);
     const [totalRows, setTotalRows] = useState(0);
     const [pageIndexChange, setPageIndexChange] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const tableInstance = useTable(
         { columns, data, initialState: { pageIndex: 0 }, manualPagination: manualPagination, pageCount: totalPages, autoResetPage: pageIndexChange },
@@ -98,6 +101,12 @@ function DataTable({
 
     // Set the default value for the entries per page when component mounts
     useEffect(() => setPageSize(defaultValue || 10), [defaultValue]);
+
+    useEffect(() => {
+        if (isServerSide) {
+            setLoading(true);
+        }
+    }, []);
 
     // Set the entries per page value based on the select value
     const setEntriesPerPage = ({ value }) => setPageSize(value);
@@ -185,7 +194,7 @@ function DataTable({
             )
             const data = await response.json();
             let result = data?.data;
-            if(renderColumns !== undefined) {
+            if (renderColumns !== undefined) {
                 result.data = data?.data?.data?.map((value) => ({
                     ...value,
                     ...renderColumns(value)
@@ -196,130 +205,133 @@ function DataTable({
             setTotalRows(result?.row_count);
             setPageIndexChange(false);
         } catch (e) {
-            console.log("Error while fetching", e)
-            // setLoading(false)
+            console.log('An error occured while fetching');
         }
+        setLoading(false);
     }
 
     useEffect(() => {
         if (isServerSide) {
             fetchData && fetchData({ pageIndex, pageSize })
         }
-    }, [pageIndex, pageSize, search]);
+    }, [pageIndex, pageSize, search, reload]);
 
-    return (
-        <TableContainer sx={{ boxShadow: "none" }}>
-            {entriesPerPage || canSearch ? (
-                <SuiBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-                    {entriesPerPage && (
-                        <SuiBox display="flex" alignItems="center">
-                            <SuiSelect
-                                defaultValue={{ value: defaultValue, label: defaultValue }}
-                                options={entries.map((entry) => ({ value: entry, label: entry }))}
-                                onChange={setEntriesPerPage}
-                                size="small"
-                            />
-                            <SuiTypography variant="caption" color="secondary">
-                                &nbsp;&nbsp;entries per page
+    return loading ? (<div className="loaderHeight"><Loader /></div>) : (
+        <>
+            <TableContainer sx={{ boxShadow: "none" }}>
+                {entriesPerPage || canSearch ? (
+                    <SuiBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                        {entriesPerPage && (
+                            <SuiBox display="flex" alignItems="center">
+                                <SuiSelect
+                                    defaultValue={{ value: defaultValue, label: defaultValue }}
+                                    options={entries.map((entry) => ({ value: entry, label: entry }))}
+                                    onChange={setEntriesPerPage}
+                                    size="small"
+                                />
+                                <SuiTypography variant="caption" color="secondary">
+                                    &nbsp;&nbsp;entries per page
+                                </SuiTypography>
+                            </SuiBox>
+                        )}
+                        {canSearch && (
+                            <SuiBox width="12rem" ml="auto">
+                                <SuiInput
+                                    placeholder="Search..."
+                                    value={search}
+                                    onChange={({ currentTarget }) => {
+                                        setSearch(currentTarget.value);
+                                        setPageIndexChange(true);
+                                        onSearchChange(currentTarget.value);
+                                    }}
+                                />
+                            </SuiBox>
+                        )}
+                    </SuiBox>
+                ) : null}
+
+                <Table {...getTableProps()}>
+                    <SuiBox component="thead">
+                        {headerGroups.map((headerGroup) => (
+                            <TableRow {...headerGroup.getHeaderGroupProps()}>
+                                {headerGroup.headers.map((column) => (
+                                    <DataTableHeadCell
+                                        {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
+                                        width={column.width ? column.width : "auto"}
+                                        align={column.align ? column.align : "left"}
+                                        sorted={setSortedValue(column)}
+                                    >
+                                        {column.render("Header")}
+                                    </DataTableHeadCell>
+                                ))}
+                            </TableRow>
+                        ))}
+                    </SuiBox>
+                    <TableBody {...getTableBodyProps()}>
+                        {page.map((row, key) => {
+                            prepareRow(row);
+                            return (
+                                <TableRow {...row.getRowProps()}>
+                                    {row.cells.map((cell) => (
+                                        <DataTableBodyCell
+                                            noBorder={noEndBorder && rows.length - 1 === key}
+                                            align={cell.column.align ? cell.column.align : "left"}
+                                            {...cell.getCellProps()}
+                                        >
+                                            {cell.render("Cell")}
+                                        </DataTableBodyCell>
+                                    ))}
+                                </TableRow>
+                            );
+                        })}
+                    </TableBody>
+                </Table>
+
+                <SuiBox
+                    display="flex"
+                    flexDirection={{ xs: "column", sm: "row" }}
+                    justifyContent="space-between"
+                    alignItems={{ xs: "flex-start", sm: "center" }}
+                    p={!showTotalEntries && pageOptions.length === 1 ? 0 : 3}
+                >
+                    {showTotalEntries && (
+                        <SuiBox mb={{ xs: 3, sm: 0 }}>
+                            <SuiTypography variant="button" color="secondary" fontWeight="regular">
+                                Showing {entriesStart} to {entriesEnd} of {isServerSide ? totalRows : rows.length} entries
                             </SuiTypography>
                         </SuiBox>
                     )}
-                    {canSearch && (
-                        <SuiBox width="12rem" ml="auto">
-                            <SuiInput
-                                placeholder="Search..."
-                                value={search}
-                                onChange={({ currentTarget }) => {
-                                    setSearch(currentTarget.value);
-                                    setPageIndexChange(true);
-                                    onSearchChange(currentTarget.value);
-                                }}
-                            />
-                        </SuiBox>
+                    {pageOptions.length > 1 && (
+                        <SuiPagination
+                            variant={pagination.variant ? pagination.variant : "gradient"}
+                            color={pagination.color ? pagination.color : "info"}
+                        >
+                            {canPreviousPage && (
+                                <SuiPagination item onClick={() => previousPage()}>
+                                    <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
+                                </SuiPagination>
+                            )}
+                            {renderPagination.length > 6 ? (
+                                <SuiBox width="5rem" mx={1}>
+                                    <SuiInput
+                                        inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
+                                        value={customizedPageOptions[pageIndex]}
+                                        onChange={(handleInputPagination, handleInputPaginationValue)}
+                                    />
+                                </SuiBox>
+                            ) : (
+                                renderPagination
+                            )}
+                            {canNextPage && (
+                                <SuiPagination item onClick={() => nextPage()}>
+                                    <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
+                                </SuiPagination>
+                            )}
+                        </SuiPagination>
                     )}
                 </SuiBox>
-            ) : null}
-            <Table {...getTableProps()}>
-                <SuiBox component="thead">
-                    {headerGroups.map((headerGroup) => (
-                        <TableRow {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map((column) => (
-                                <DataTableHeadCell
-                                    {...column.getHeaderProps(isSorted && column.getSortByToggleProps())}
-                                    width={column.width ? column.width : "auto"}
-                                    align={column.align ? column.align : "left"}
-                                    sorted={setSortedValue(column)}
-                                >
-                                    {column.render("Header")}
-                                </DataTableHeadCell>
-                            ))}
-                        </TableRow>
-                    ))}
-                </SuiBox>
-                <TableBody {...getTableBodyProps()}>
-                    {page.map((row, key) => {
-                        prepareRow(row);
-                        return (
-                            <TableRow {...row.getRowProps()}>
-                                {row.cells.map((cell) => (
-                                    <DataTableBodyCell
-                                        noBorder={noEndBorder && rows.length - 1 === key}
-                                        align={cell.column.align ? cell.column.align : "left"}
-                                        {...cell.getCellProps()}
-                                    >
-                                        {cell.render("Cell")}
-                                    </DataTableBodyCell>
-                                ))}
-                            </TableRow>
-                        );
-                    })}
-                </TableBody>
-            </Table>
-
-            <SuiBox
-                display="flex"
-                flexDirection={{ xs: "column", sm: "row" }}
-                justifyContent="space-between"
-                alignItems={{ xs: "flex-start", sm: "center" }}
-                p={!showTotalEntries && pageOptions.length === 1 ? 0 : 3}
-            >
-                {showTotalEntries && (
-                    <SuiBox mb={{ xs: 3, sm: 0 }}>
-                        <SuiTypography variant="button" color="secondary" fontWeight="regular">
-                            Showing {entriesStart} to {entriesEnd} of {isServerSide ? totalRows : rows.length} entries
-                        </SuiTypography>
-                    </SuiBox>
-                )}
-                {pageOptions.length > 1 && (
-                    <SuiPagination
-                        variant={pagination.variant ? pagination.variant : "gradient"}
-                        color={pagination.color ? pagination.color : "info"}
-                    >
-                        {canPreviousPage && (
-                            <SuiPagination item onClick={() => previousPage()}>
-                                <Icon sx={{ fontWeight: "bold" }}>chevron_left</Icon>
-                            </SuiPagination>
-                        )}
-                        {renderPagination.length > 6 ? (
-                            <SuiBox width="5rem" mx={1}>
-                                <SuiInput
-                                    inputProps={{ type: "number", min: 1, max: customizedPageOptions.length }}
-                                    value={customizedPageOptions[pageIndex]}
-                                    onChange={(handleInputPagination, handleInputPaginationValue)}
-                                />
-                            </SuiBox>
-                        ) : (
-                            renderPagination
-                        )}
-                        {canNextPage && (
-                            <SuiPagination item onClick={() => nextPage()}>
-                                <Icon sx={{ fontWeight: "bold" }}>chevron_right</Icon>
-                            </SuiPagination>
-                        )}
-                    </SuiPagination>
-                )}
-            </SuiBox>
-        </TableContainer>
+            </TableContainer>
+        </>
     );
 }
 

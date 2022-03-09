@@ -52,20 +52,107 @@ import Actions from "@uf/layouts/dashboards/shiping-rules/components/ActionCell"
 // import defaultLineChartData from "@uf/layouts/ecommerce/overview/data/defaultLineChartData";
 // import horizontalBarChartData from "@uf/layouts/ecommerce/overview/data/horizontalBarChartData";
 // import salesTableData from "@uf/layouts/ecommerce/overview/data/salesTableData";
-import Table from "@uf/examples/Tables/Table";
+import DataTable from "@uf/examples/Tables/DataTable";
+import Swal from "sweetalert2";
 // import FormField from "@uf/layouts/pages/account/components/FormField";
 // import dataTableData from "@uf/layouts/ecommerce/overview/data/dataTableData";
 
 function ShipingRules() {
+    const [reloadTable, setReloadTable] = useState(false);
     const [spotify2FA, setSpotify2FA] = useState(true);
     const handleSetSpotify2FA = () => setSpotify2FA(!spotify2FA);
+    const [orderAmount, setOrderAmount] = useState(0);
+    const [shippingAmount, setShippingAmount] = useState(0);
+    const [discountType, setDiscountType] = useState('');
+    const [editId, setEditId] = useState(-1);
 
+    const editHandler = (row) => {
+        setEditId(row.id);
+        setOrderAmount(row.order_amount);
+        setShippingAmount(row.shipping_amount);
+        setDiscountType(row.discount_type);
+    }
 
+    const saveOrderRuleHandler = async () => {
+        const data = await fetch('/createOrderRule', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                order_amount: orderAmount,
+                shipping_amount: shippingAmount,
+                discount_type: discountType,
+            })
+        });
+        const response = await data.json();
+        if (response.success) {
+            Swal.fire({
+                title: 'Done!',
+                icon: 'success',
+                text: response.message,
+            });
+            setEditId(-1);
+            setOrderAmount(0);
+            setShippingAmount(0);
+            setDiscountType({
+                value: '',
+                label: 'Select type'
+            });
+            setReloadTable(!reloadTable);
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                icon: 'error',
+                text: response.message,
+            });
+        }
+    }
+
+    const updateOrderRuleHandler = async () => {
+        const data = await fetch(`/updateOrderRule/${editId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                order_amount: orderAmount,
+                shipping_amount: shippingAmount,
+                discount_type: discountType,
+            })
+        });
+        const response = await data.json();
+        if (response.success) {
+            Swal.fire({
+                title: 'Done!',
+                icon: 'success',
+                text: response.message,
+            });
+            setEditId(-1);
+            setOrderAmount(0);
+            setShippingAmount(0);
+            setDiscountType({
+                value: '',
+                label: 'Select type'
+            });
+            setReloadTable(!reloadTable);
+        } else {
+            Swal.fire({
+                title: 'Error!',
+                icon: 'error',
+                text: response.message,
+            });
+        }
+    }
+
+    const renderColumns = (row) => ({
+        actions: <Actions edit={() => editHandler(row)} />
+    })
     return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox py={3}>
-                <Card >
+                {/* <Card >
                     <SuiBox mt={3} mb={3}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} lg={12} md={12}>
@@ -106,7 +193,7 @@ function ShipingRules() {
                             </Grid>
                         </Grid>
                     </SuiBox>
-                </Card>
+                </Card> */}
                 <SuiBox mb={3} mt={3}>
                     <Grid container spacing={3}>
                         {/* <Grid item xs={12} lg={6}>
@@ -201,7 +288,7 @@ function ShipingRules() {
             </Grid> */}
                         <Grid item xs={12} lg={12}>
                             <Card>
-                                <SuiBox mt={3} mb={3}>
+                                <SuiBox mt={2} mb={2}>
                                     <Grid container spacing={3}>
                                         <Grid item xs={12} lg={12} md={12}>
                                             <SuiBox display="flex" justifyContent="space-between" alignItems={{ xs: "flex-start", sm: "center" }} flexDirection={{ xs: "column", sm: "row" }}>
@@ -230,57 +317,57 @@ function ShipingRules() {
                                     <Grid ml={2} item xs={3} lg={3} md={3}>
                                         <span style={{ display: "flex" }}>
                                             <span style={{ borderTopLeftRadius: "0.5rem", borderBottomLeftRadius: "0.5rem", fontSize: "17px", background: "lightgray", paddingLeft: "8px", paddingRight: "8px", paddingTop: "7px" }}>$</span>
-                                            <SuiInput style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} type="number" placeholder="100" min="1" />
+                                            <SuiInput value={orderAmount} style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} type="number" placeholder="Order Amount" min="1" onChange={({ target: { value } }) => {
+                                                setOrderAmount(value);
+                                            }} />
+                                        </span>
+                                    </Grid>
+                                    <Grid ml={2} item xs={3} lg={3} md={3}>
+                                        <span style={{ display: "flex" }}>
+                                            <span style={{ borderTopLeftRadius: "0.5rem", borderBottomLeftRadius: "0.5rem", fontSize: "17px", background: "lightgray", paddingLeft: "8px", paddingRight: "8px", paddingTop: "7px" }}>$</span>
+                                            <SuiInput value={shippingAmount} style={{ borderTopLeftRadius: "0", borderBottomLeftRadius: "0" }} type="number" placeholder="Shipping Amount" min="1" onChange={({ target: { value } }) => {
+                                                setShippingAmount(value);
+                                            }} />
                                         </span>
                                     </Grid>
                                     <Grid ml={2} item xs={4} lg={5} md={5}>
-                                        <SuiSelect
+                                        <SuiSelect menuPortalTarget={document.body}
+                                            defaultValue={{ value: discountType, label: discountType == 'fixed' ? 'Fixed' : discountType == 'percentage' ? 'Percentage' : 'Select type' }}
+                                            value={{ value: discountType, label: discountType == 'fixed' ? 'Fixed' : discountType == 'percentage' ? 'Percentage' : 'Select type' }}
+                                            onChange={(event) => setDiscountType(event.value)}
+                                            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
                                             placeholder="select type"
                                             options={[
                                                 { value: "percentage", label: "Percentage" },
-                                                { value: "fixed", label: "fixed" },
-
+                                                { value: "fixed", label: "Fixed" },
                                             ]}
                                         />
                                     </Grid>
                                     <Grid ml={2} mr={1} item xs={1} lg={2} md={2}>
-                                        <SuiButton variant="contained" color="info">Add</SuiButton>
+                                        <SuiButton variant="contained" color="info" onClick={() => {
+                                            if (editId > -1) {
+                                                updateOrderRuleHandler();
+                                            } else {
+                                                saveOrderRuleHandler();
+                                            }
+                                        }}>Save</SuiButton>
                                     </Grid>
                                 </SuiBox>
                             </Card>
-                                <SuiBox mt={3}>
-                                    <Table
-                                        columns={[
-                                            { name: "id", align: "center" },
-
-                                            { name: "price", align: "center" },
-                                            { name: "type", align: "center" },
-                                            { name: "Actions", align: "center" },
-                                        ]}
-                                        rows={[
-                                            {
-                                                id: 1,
-                                                price: 100,
-                                                type: "fixed",
-                                                Actions: <Actions />,
-                                            },
-                                            {
-                                                id: 2,
-                                                type: "percentage",
-                                                price: 200,
-                                                Actions: <Actions />,
-                                            },
-                                            {
-                                                id: 3,
-                                                type: "fixed",
-                                                price: 300,
-                                                Actions: <Actions />,
-                                            },
-
-                                        ]
-                                        }
-                                    />
-                                </SuiBox>
+                            <SuiBox mt={3}>
+                                <DataTable canSearch reload={reloadTable} manualPagination={true} isServerSide={true} url={'/getOrderRules'}
+                                    table={{
+                                        columns: [
+                                            { Header: "Id", accessor: "id" },
+                                            { Header: "Order Amount", accessor: "order_amount" },
+                                            { Header: "Shipping Amount", accessor: "shipping_amount" },
+                                            { Header: "Discount Type", accessor: "discount_type" },
+                                            { Header: "Actions", accessor: "actions" }
+                                        ],
+                                    }}
+                                    renderColumns={renderColumns}
+                                />
+                            </SuiBox>
                         </Grid>
                     </Grid>
                 </SuiBox>

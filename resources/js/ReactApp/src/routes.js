@@ -174,6 +174,7 @@ const routes = [
     },
     {
         role: ["admin"],
+        type: "nodisplay",
         name: "Subscription Rules",
         key: "subscription-rules",
         icon: <Shop size="12px" />,

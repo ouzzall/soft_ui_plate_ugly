@@ -68,12 +68,18 @@ class DashboardController extends Controller
         $no_of_orders = Order::count();
         $total_points_earned = Transaction::where('transaction_type_id', 1)->sum('loyalty_points');
         $setting = Setting::first();
+        $transactions = Transaction::with(['user', 'transaction_type'])->orderBy('id', 'DESC')->limit(5)->get();
+        $transactions = $transactions->map(function ($value) {
+            $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
+            return $value;
+        });
         $data = [
             'users' => $no_of_users,
             'coupons' => $no_of_coupons_created,
             'orders' => $no_of_orders,
             'points_earned' => $total_points_earned,
             'settings' => $setting,
+            'transactions' => $transactions
         ];
         return response()->json([
             'success' => true,

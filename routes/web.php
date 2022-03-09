@@ -5,6 +5,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Role;
@@ -62,6 +63,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/getOrders', [OrderController::class, 'getOrders']);
         Route::get('/getOrderDetail/{id}', [OrderController::class, 'getOrderDetail']);
         Route::post('/refund', [OrderController::class, 'refund']);
+
+        Route::get('/getOrderRules', [RulesController::class, 'getOrderRules']);
+        Route::post('/createOrderRule', [RulesController::class, 'saveOrderRule']);
+        Route::post('/updateOrderRule/{id}', [RulesController::class, 'updateOrderRule']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function() {
         Route::get('/getProfile', [UserController::class, 'getProfile']);

@@ -12,7 +12,7 @@ class TransactionController extends Controller
     public function getTransactions(Request $request)
     {
         $user = Auth::user();
-        $transactions = Transaction::query();
+        $transactions = Transaction::with(['user', 'transaction_type']);
         $transactions->when($user->role->type == 'customer', function ($q) use ($user) {
             $q->whereHas('user', function ($q) use ($user) {
                 $q->where('id', $user->id);
@@ -35,8 +35,7 @@ class TransactionController extends Controller
         $transactions->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-
-        $transactions = $transactions->with(['user', 'transaction_type'])->get();
+        $transactions = $transactions->get();
         $transactions = $transactions->map(function ($value) {
             $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
             return $value;

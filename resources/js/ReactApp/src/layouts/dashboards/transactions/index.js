@@ -89,7 +89,7 @@ function Orders() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={`/getTransactions`}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/getTransactions`}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },

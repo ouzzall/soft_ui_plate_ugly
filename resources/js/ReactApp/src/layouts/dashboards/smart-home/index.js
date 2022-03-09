@@ -88,12 +88,11 @@ function SmartHome() {
   // const [wifiState, setWifiState] = useState(true);
 
   const { size } = typography;
-  const dispatch = useDispatch();
-  const history = useHistory();
   const user = useSelector((state) => state.user.user);
   const [chartData, setChartData] = useState({});
   const [dashboardData, setDashboardData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
       const getDashboardData = async () => {
@@ -109,6 +108,7 @@ function SmartHome() {
               setDashboardData(response.data);
               setOrderState(response.data.settings.order_rule_active);
               setCampaignState(response.data.settings.campaign_rule_active);
+              setTransactions(response.data.transactions);
           }
           setLoading(false);
       }
@@ -295,85 +295,21 @@ function SmartHome() {
 
         <Card>
           {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-          <DataTable  entriesPerPage={false} canSearch
+          <DataTable entriesPerPage={false} canSearch
   table={{
     columns: [
-      { Header: "Id", accessor: "id" },
-      { Header: "Name", accessor: "name" },
-      { Header: "Email", accessor: "email" },
-      { Header: "Order Id", accessor: "orderid" },
-      { Header: "Points", accessor: "points" },
-      { Header: "Type", accessor: "type" },
-      { Header: "Category", accessor: "category" },
-      { Header: "Date", accessor: "date"},
+        { Header: "Id", accessor: "id" },
+        { Header: "Customer Name", accessor: "user.name" },
+        { Header: "Customer Email", accessor: "user.email" },
+        { Header: "Loyalty Points", accessor: "loyalty_points" },
+        { Header: "Transaction Type", accessor: "transaction_type.title" },
+        { Header: "Date", accessor: "date" },
     ],
-    rows: [
-      {
-        id:1,
-        name: <Link to="layouts/dashboards/profile">Faizan</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:2,
-        name: <Link to="layouts/dashboards/profile">Sanwal</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:3,
-        name: <Link to="layouts/dashboards/profile">Talha</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:4,
-        name: <Link to="layouts/dashboards/profile">Zain</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:5,
-        name: <Link to="layouts/dashboards/profile">Hamza</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-      {
-        id:6,
-        name: <Link to="layouts/dashboards/profile">Ali</Link>,
-        email: "abc@gmail.com",
-        orderid: <Link to="layouts/dashboards/order-details">1274</Link>,
-        points: 60,
-        type: "Earned",
-        category:"Area Wise",
-        date: "4/11/2021",
-      },
-
-    ]
+    rows: transactions
   }}
 />
 <div className="seeMore" style={{textAlign: "right" ,marginRight: "26px" ,marginBottom: "20px"}}>
-  <Link to="/layouts/dashboards/transactions">
+  <Link to="/transactions">
   <SuiButton variant="gradient" color="info" size="medium">see More</SuiButton></Link>
 </div>
         </Card>

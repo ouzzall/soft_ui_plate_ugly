@@ -101,7 +101,7 @@ function Campaign() {
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch manualPagination={true} isServerSide={true} url={'/getCampaigns'}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={'/getCampaigns'}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
