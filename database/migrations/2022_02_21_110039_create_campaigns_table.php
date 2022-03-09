@@ -16,7 +16,7 @@ class CreateCampaignsTable extends Migration
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
             $table->string('campaign_name');
-            $table->double('loyalty')->default(0.0);
+            $table->double('loyalty_points')->default(0.0);
             $table->enum('is_active', ['1', '0']);
             $table->timestamps();
             $table->softDeletes();
