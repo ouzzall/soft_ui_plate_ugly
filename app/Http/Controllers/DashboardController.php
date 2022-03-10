@@ -7,6 +7,7 @@ use App\Models\PriceRule;
 use App\Models\Setting;
 use App\Models\Transaction;
 use App\Models\User;
+use App\Models\UserLoyalty;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class DashboardController extends Controller
             } else {
                 $loyaltyData[] = 0;
             }
-            if(($orders[$k]['month'] ?? 0) == $i) {
+            if (($orders[$k]['month'] ?? 0) == $i) {
                 $totalOrdersData[] = $orders[$k]['amount'];
                 $k++;
             } else {
@@ -61,6 +62,51 @@ class DashboardController extends Controller
             'data' => $data,
         ]);
     }
+
+    public function getSecondChart()
+    {
+        $colors = [
+            'primary',
+            'secondary',
+            'info',
+            'success',
+            'warning',
+        ];
+        $loyalty_sum = Transaction::orderBy('loyalty_points','DESC')->where('transaction_type_id', 1)->limit(5)->sum('loyalty_points') * 0.001;
+        $users = User::where('role_id', 2)->whereHas('transactions', function ($q) {
+            $q->orderBy('loyalty_points', 'DESC');
+        })->limit(5)->get();
+        $labels = [];
+        $backgroundColors = [];
+        $data = [];
+        for ($i = 0; $i < 5; $i++) {
+            $user = $users[$i] ?? null;
+            if ($user) {
+                $labels[] = $user->name;
+                $data[] = (($user->loyalty->loyalty_earned * 0.001) / $loyalty_sum) * 100;
+            } else {
+                $labels[] = 'No customer';
+                $data[] = (0 / $loyalty_sum) * 100;
+            }
+            $backgroundColors[] = $colors[$i];
+        }
+        $datasets = [
+            'label' => 'Consumption',
+            'backgroundColors' => $backgroundColors,
+            'data' => $data,
+        ];
+        $data = [
+            'labels' => $labels,
+            'datasets' => $datasets,
+            'count' => $loyalty_sum
+        ];
+        return response()->json([
+            'success' => true,
+            'message' => 'Second Chart retrieved successfully!',
+            'data' => $data,
+        ]);
+    }
+
     public function getDashboardData()
     {
         $no_of_users = User::where('role_id', 2)->count();
@@ -91,7 +137,7 @@ class DashboardController extends Controller
     public function updateSetting(Request $request)
     {
         $setting = Setting::first();
-        if(!$setting) {
+        if (!$setting) {
             response()->json([
                 'success' => false,
                 'message' => 'Setting not found!',

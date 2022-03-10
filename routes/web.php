@@ -34,6 +34,7 @@ Route::get('/getSession', [AuthController::class, 'getSession']);
 Route::get('sync-data', function() {
     Artisan::call('sync:data');
 });
+Route::get('/getSecondChart', [DashboardController::class, 'getSecondChart']);
 // redirect if authenticated
 Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'index')->name('login');
