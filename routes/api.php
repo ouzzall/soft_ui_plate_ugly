@@ -84,4 +84,4 @@ Route::get('/test-get', function() {
 
 Route::get('sync', [OrderController::class, 'sync']);
 
-Route::post('createUser', [UserController::class, 'createUser']);
+

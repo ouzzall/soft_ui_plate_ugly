@@ -68,7 +68,7 @@ class AuthController extends Controller
     public function getSession()
     {
         if (Auth::check()) {
-            $user = Auth::user()->load('role');
+            $user = Auth::user()->load(['role', 'transactions']);
             return response()->json([
                 'success' => true,
                 'message' => 'Current User retrieved successfully!',

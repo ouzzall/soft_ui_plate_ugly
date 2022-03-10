@@ -43,9 +43,11 @@ import breakpoints from "@uf/assets/theme/base/breakpoints";
 // Images
 import burceMars from "@uf/assets/images/bruce-mars.jpg";
 import curved0 from "@uf/assets/images/curved-images/curved0.jpg";
+import { useSelector } from "react-redux";
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
+  const user = useSelector((state) => state.user.user);
   // const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
@@ -107,7 +109,7 @@ function Header() {
           <Grid item>
           <SuiBox position="relative" height="max-content" mx="auto">
               <SuiAvatar src={burceMars} alt="profile picture" size="xxl" variant="rounded" />
-              
+
             </SuiBox>
           </Grid>
 
@@ -115,14 +117,14 @@ function Header() {
           <Grid item>
             <SuiBox height="100%" mt={0.5} lineHeight={1}>
               <SuiTypography variant="h5" fontWeight="medium">
-                Alex Thompson
+                {user?.name}
               </SuiTypography>
               <SuiTypography variant="button" color="text" fontWeight="medium">
-                alecthompson@mail.com | (44) 123 1234 123
+                {user?.email} | {user?.phone}
               </SuiTypography>
             </SuiBox>
           </Grid>
-          
+
 
         </Grid>
       </Card>

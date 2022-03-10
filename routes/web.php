@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     });
     Route::middleware('can:verify_role,"customer"')->group(function() {
         Route::get('/getProfile', [UserController::class, 'getProfile']);
+        Route::post('/updateProfile', [UserController::class, 'updateProfile']);
         Route::post('/radeemPoints', [UserController::class, 'radeemPoints']);
         Route::get('/getUserCharts', [UserController::class, 'getUserCharts']);
     });

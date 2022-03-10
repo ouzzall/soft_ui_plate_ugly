@@ -157,9 +157,19 @@ class UserController extends Controller
         ]);
     }
 
-    public function createUser(Request $request)
+    public function updateProfile(Request $request)
     {
-        return $request->all();
+        $user = Auth::user();
+        if(!$user) {
+
+        }
+        $user->update($request->all());
+        $user = Auth::user()->load(['role', 'transactions']);
+        return response()->json([
+            'success' => true,
+            'message' => 'User profile updated successfully!',
+            'data' => $user,
+        ]);
     }
 
     public function getUserCharts()
