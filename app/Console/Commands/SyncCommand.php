@@ -78,6 +78,7 @@ class SyncCommand extends Command
             }
             DB::commit();
             Log::channel('stderr')->info('Syncing of data done');
+            Log::info('Syncing of data done');
         } catch(Exception $e) {
             DB::rollBack();
             return $e->getMessage();
