@@ -35,6 +35,7 @@ import Separator from "@uf/layouts/authentication/components/Separator";
 
 // Images
 import curved9 from "@uf/assets/images/curved-images/curved9.jpg";
+import Swal from "sweetalert2";
 
 function Basic() {
     const [rememberMe, setRememberMe] = useState(false);
@@ -56,6 +57,12 @@ function Basic() {
             } else {
                 history.push('/');
             }
+        } else {
+            const error = await Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: response.message,
+            });
         }
     }
 
@@ -66,14 +73,14 @@ function Basic() {
             image={curved9}
         >
             <Card>
-                <SuiBox p={3} mb={1} textAlign="center">
+                <SuiBox p={3} textAlign="center">
                     <SuiTypography variant="h5" fontWeight="medium">
                         Sign in
                     </SuiTypography>
                 </SuiBox>
-                <SuiBox mb={2}>
+                {/* <SuiBox mb={2}>
                     <Socials />
-                </SuiBox>
+                </SuiBox> */}
                 <SuiBox p={3}>
                     <SuiBox component="form" role="form" onSubmit={handleLogin}>
                         <SuiBox mb={2}>

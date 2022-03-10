@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -35,11 +35,41 @@ import Separator from "@uf/layouts/authentication/components/Separator";
 
 // Images
 import curved6 from "@uf/assets/images/curved-images/curved6.jpg";
+import Swal from "sweetalert2";
 
 function Basic() {
   const [agreement, setAgremment] = useState(true);
 
+  const history = useHistory();
+
   const handleSetAgremment = () => setAgremment(!agreement);
+
+  const handleSignup = async (event) => {
+    event.preventDefault();
+    let formData = new FormData(event.target);
+    let data = await fetch('/signup', {
+        method: 'POST',
+        body: formData
+    });
+    let response = await data.json();
+    if (response.success) {
+        const confirm = await Swal.fire({
+            icon: 'success',
+            title: 'Registration done',
+            text: 'You have been successfully registered',
+            confirmButtonText: 'Proceed to Login',
+        });
+        if(confirm.isConfirmed) {
+            history.push('/login');
+        }
+    } else {
+        const error = await Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: response.message,
+        });
+    }
+  }
 
   return (
     <BasicLayout
@@ -48,27 +78,27 @@ function Basic() {
       image={curved6}
     >
       <Card>
-        <SuiBox p={3} mb={1} textAlign="center">
+        <SuiBox p={3} textAlign="center">
           <SuiTypography variant="h5" fontWeight="medium">
-            Register with
+            Register
           </SuiTypography>
         </SuiBox>
-        <SuiBox mb={2}>
+        {/* <SuiBox mb={2}>
           <Socials />
-        </SuiBox>
-        <Separator />
+        </SuiBox> */}
+        {/* <Separator /> */}
         <SuiBox pt={2} pb={3} px={3}>
-          <SuiBox component="form" role="form">
+          <SuiBox component="form" role="form" onSubmit={handleSignup}>
             <SuiBox mb={2}>
-              <SuiInput placeholder="Name" />
+              <SuiInput placeholder="Name" name="name" />
             </SuiBox>
             <SuiBox mb={2}>
-              <SuiInput type="email" placeholder="Email" />
+              <SuiInput type="email" placeholder="Email" name="email" />
             </SuiBox>
             <SuiBox mb={2}>
-              <SuiInput type="password" placeholder="Password" />
+              <SuiInput type="password" placeholder="Password" name="password" />
             </SuiBox>
-            <SuiBox display="flex" alignItems="center">
+            {/* <SuiBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
               <SuiTypography
                 variant="button"
@@ -81,9 +111,9 @@ function Basic() {
               <SuiTypography component="a" href="#" variant="button" fontWeight="bold" textGradient>
                 Terms and Conditions
               </SuiTypography>
-            </SuiBox>
+            </SuiBox> */}
             <SuiBox mt={4} mb={1}>
-              <SuiButton variant="gradient" color="dark" fullWidth>
+              <SuiButton type="submit" variant="gradient" color="dark" fullWidth>
                 sign up
               </SuiButton>
             </SuiBox>

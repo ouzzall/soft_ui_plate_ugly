@@ -74,6 +74,11 @@ class OrdersCreateJob implements ShouldQueue
                     'loyalty_radeemed' => 0.0,
                 ]);
             }
+            if($user->shopify_customer_id == null) {
+                $user->update([
+                    'shopify_customer_id' => $customer->id,
+                ]);
+            }
             $localOrder = $user->orders()->create([
                 'order_number' => $order->id,
                 'order_name' => $order->name,

@@ -196,7 +196,7 @@ const routes = [
         name: "Edit Profile",
         key: "edit-profile",
         icon: <Shop size="12px" />,
-        route: "edit-profile",
+        route: "/edit-profile",
         component: EditProfile,
     },
     {

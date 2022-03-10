@@ -39,6 +39,7 @@ Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'index')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::view('/signup', 'index')->name('signup');
+    Route::post('/signup', [AuthController::class, 'signup']);
 });
 // auth middleware
 Route::middleware(['auth'])->group(function () {
@@ -75,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('can:verify_role,"customer"')->group(function() {
         Route::get('/getProfile', [UserController::class, 'getProfile']);
         Route::post('/radeemPoints', [UserController::class, 'radeemPoints']);
+        Route::get('/getUserCharts', [UserController::class, 'getUserCharts']);
     });
     Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');
 });

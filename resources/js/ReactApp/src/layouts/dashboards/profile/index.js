@@ -68,28 +68,38 @@ import { setLoyaltyInfo } from "../../../reducers/loyaltyInfoSlice";
 
 function Profile() {
     const [profile, setProfile] = useState({});
+    const [chartData, setChartData] = useState({});
+    const [transactions, setTransactions] = useState([]);
+    const [otherData, setOtherData] = useState({});
     const dispatch = useDispatch();
 
     useEffect(() => {
         const getData = async () => {
-            const data = await fetch('/getProfile');
-            const response = await data.json();
+            let data = await fetch('/getProfile');
+            let response = await data.json();
             if (response.success) {
-                setProfile(response.data);
-                if (response.data.price_rules.length > 0) {
-                    let code = response.data.price_rules[0].discount_code;
+                setProfile(response.data.user);
+                setOtherData(response.data.others);
+                setTransactions(response.data.user.transactions);
+                if (response.data.user.price_rules.length > 0) {
+                    let code = response.data.user.price_rules[0].discount_code;
                     dispatch(setLoyaltyInfo({
                         coupon: code,
-                        points: response.data.loyalty.loyalty_earned,
-                        expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
+                        points: response.data.user.loyalty.loyalty_earned,
+                        expiry: new Date(response.data.user.price_rules[0].ends_at).toLocaleDateString()
                     }));
                 } else {
                     dispatch(setLoyaltyInfo({
                         coupon: 'XXXXXXXX',
-                        points: response.data.loyalty.loyalty_earned,
+                        points: response.data.user.loyalty.loyalty_earned,
                         expiry: ''
                     }));
                 }
+            }
+            data = await fetch('/getUserCharts');
+            response = await data.json();
+            if (response.success) {
+                setChartData(response.data.sales_chart);
             }
         }
         getData();
@@ -102,35 +112,35 @@ function Profile() {
                     <Grid item xs={12} sm={4}>
                         <DefaultStatisticsCard
                             title="Coupons Created"
-                            count="5"
-                            percentage={{
-                                color: "success",
-                                value: "+55%",
-                                label: "since last month",
-                            }}
+                            count={otherData?.coupons_created}
+                            // percentage={{
+                            //     color: "success",
+                            //     value: "+55%",
+                            //     label: "since last month",
+                            // }}
                         />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <DefaultStatisticsCard
                             title="Total Earnings"
-                            count="$5,000"
-                            percentage={{
-                                color: "success",
-                                value: "+12%",
-                                label: "since last month",
-                            }}
+                            count={`$${otherData?.total_orders_amount}`}
+                            // percentage={{
+                            //     color: "success",
+                            //     value: "+12%",
+                            //     label: "since last month",
+                            // }}
 
                         />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <DefaultStatisticsCard
                             title="Orders"
-                            count="2"
-                            percentage={{
-                                color: "secondary",
-                                value: "+1",
-                                label: "since last month",
-                            }}
+                            count={otherData?.orders_created}
+                            // percentage={{
+                            //     color: "secondary",
+                            //     value: "+1",
+                            //     label: "since last month",
+                            // }}
 
                         />
                     </Grid>
@@ -141,12 +151,12 @@ function Profile() {
 
                     <Grid item xs={12} sm={12} lg={12}>
                         <DefaultLineChart
-                            title="Revenue"
+                            title="Sales Details"
                             description={
                                 <SuiBox display="flex" justifyContent="space-between">
                                     <SuiBox display="flex" ml={-1}>
-                                        <SuiBadgeDot color="info" size="sm" badgeContent="Facebook Ads" />
-                                        <SuiBadgeDot color="dark" size="sm" badgeContent="Google Ads" />
+                                        <SuiBadgeDot color="info" size="sm" badgeContent="Loyalty Points" />
+                                        <SuiBadgeDot color="dark" size="sm" badgeContent="Orders Amount" />
                                     </SuiBox>
                                     <SuiBox mt={-5.25} mr={-1}>
                                         <Tooltip title="See which ads perform better" placement="left" arrow>
@@ -163,7 +173,7 @@ function Profile() {
                                     </SuiBox>
                                 </SuiBox>
                             }
-                            chart={defaultLineChartData}
+                            chart={chartData}
                         />
                     </Grid>
                 </Grid>
@@ -175,70 +185,13 @@ function Profile() {
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
-                                { Header: "Order #", accessor: "orderNo" },
-                                { Header: "Status", accessor: "status" },
+                                { Header: "Customer Name", accessor: "user.name" },
+                                { Header: "Customer Email", accessor: "user.email" },
+                                { Header: "Loyalty Points", accessor: "loyalty_points" },
+                                { Header: "Transaction Type", accessor: "transaction_type.title" },
                                 { Header: "Date", accessor: "date" },
-                                { Header: "Products", accessor: "products" },
-                                { Header: "Price", accessor: "price" },
-                                { Header: "Points", accessor: "points" },
                             ],
-                            rows: [
-                                {
-                                    id: 1,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1274</Link>,
-                                    status: "Payed",
-                                    date: "4/11/2021",
-                                    products: "shoes",
-                                    price: "$474",
-                                    points: 10,
-                                },
-                                {
-                                    id: 2,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1275</Link>,
-                                    status: "Payed",
-                                    date: "6/11/2021",
-                                    products: "shirt",
-                                    price: "$778",
-                                    points: 50,
-                                },
-                                {
-                                    id: 3,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1276</Link>,
-                                    status: "Payed",
-                                    date: "7/11/2021",
-                                    products: "pant",
-                                    price: "$740",
-                                    points: 30,
-                                },
-                                {
-                                    id: 4,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1277</Link>,
-                                    status: "Payed",
-                                    date: "7/11/2021",
-                                    products: "Scarf",
-                                    price: "$400",
-                                    points: 30,
-                                },
-                                {
-                                    id: 5,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1278</Link>,
-                                    status: "Refunded",
-                                    date: "8/11/2021",
-                                    products: "shoes",
-                                    price: "$378",
-                                    points: 30,
-                                },
-                                {
-                                    id: 6,
-                                    orderNo: <Link to="/layouts/dashboards/order-details">1279</Link>,
-                                    status: "Payed",
-                                    date: "8/11/2021",
-                                    products: "shoes",
-                                    price: "$474",
-                                    points: 30,
-                                },
-
-                            ]
+                            rows: transactions
                         }}
                     />
                 </Card>

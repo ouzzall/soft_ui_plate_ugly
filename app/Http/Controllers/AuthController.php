@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -22,7 +26,7 @@ class AuthController extends Controller
         }
         return response()->json([
             'success' => false,
-            'message' => 'Invalid credentials',
+            'message' => 'Invalid credentials! Please try again',
             'data' => $user,
         ]);
     }
@@ -39,8 +43,26 @@ class AuthController extends Controller
         ]);
     }
 
-    public function signup()
+    public function signup(CreateUserRequest $request)
     {
+        $request['password'] = bcrypt($request->password);
+        $request['role_id'] = 2;
+        DB::beginTransaction();
+        try {
+            $user = User::create($request->all());
+            $user->loyalty()->create([
+                'loyalty_earned' => 0.0,
+                'loyalty_radeemed' => 0.0,
+            ]);
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => 'User registered successfully',
+                'user' => $user
+            ]);
+        } catch (Exception $exception) {
+            DB::rollBack();
+        }
     }
 
     public function getSession()

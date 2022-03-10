@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -128,18 +130,89 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = Auth::user();
-        $user = $user->load(['loyalty', 'price_rules' => function ($q) {
+        $couponsCount = $user->price_rules()->count();
+        $ordersSum = $user->orders()->sum('amount');
+        $ordersCounts = $user->orders()->count();
+        $user = $user->load(['loyalty', 'transactions' => function ($q) {
+            $q->with(['user', 'transaction_type'])->limit(5);
+        }, 'price_rules' => function ($q) {
             $q->latest();
         }]);
+        $user['transactions'] = $user->transactions->map(function ($value) {
+            $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
+            return $value;
+        });
+        $data = [
+            'user' => $user,
+            'others' => [
+                'coupons_created' => $couponsCount,
+                'orders_created' => $ordersCounts,
+                'total_orders_amount' => $ordersSum
+            ]
+        ];
         return response()->json([
             'success' => true,
             'message' => 'User profile retrieved successfully!',
-            'data' => $user,
+            'data' => $data,
         ]);
     }
 
     public function createUser(Request $request)
     {
         return $request->all();
+    }
+
+    public function getUserCharts()
+    {
+        $labels = [];
+        $user = Auth::user();
+        $today = Carbon::today();
+        $callback = function ($q) use ($user) {
+            $q->where('id', $user->id);
+        };
+        $transactions = Transaction::selectRaw('SUM(loyalty_points) loyalty_points, month(created_at) month')->whereHas('user', $callback)->groupBy('month')->get();
+        $orders = Order::selectRaw('SUM(amount) amount, month(created_at) month')->whereHas('user', $callback)->groupBy('month')->get();
+        $loyaltyData = [];
+        $totalOrdersData = [];
+        $j = 0;
+        $k = 0;
+        for ($i = 1; $i <= 12; $i++) {
+            $labels[] = Carbon::today()->month($i)->format('M');
+            if (($transactions[$j]['month'] ?? 0) == $i) {
+                $loyaltyData[] = $transactions[$j]['loyalty_points'];
+                $j++;
+            } else {
+                $loyaltyData[] = 0;
+            }
+            if (($orders[$k]['month'] ?? 0) == $i) {
+                $totalOrdersData[] = $orders[$k]['amount'];
+                $k++;
+            } else {
+                $totalOrdersData[] = 0;
+            }
+        }
+        $datasets = [
+            [
+                'label' => 'Loyalty Points',
+                'color' => 'info',
+                'data' => $loyaltyData,
+            ],
+            [
+                'label' => 'Orders Amount',
+                'color' => 'dark',
+                'data' => $totalOrdersData,
+            ]
+        ];
+        $data = [
+            'sales_chart' => [
+                'labels' => $labels,
+                'datasets' => $datasets,
+            ]
+        ];
+        return response()->json([
+            'success' => true,
+            'message' => 'Chart retrieved successfully!',
+            'data' => $data,
+        ]);
     }
 }
