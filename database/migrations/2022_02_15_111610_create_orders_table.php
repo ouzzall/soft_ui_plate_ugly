@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('order_name')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->double('loyalty_points')->default(0);
-            $table->date('delivery_date');
+            $table->date('delivery_date')->nullable();
             $table->double('amount');
             $table->timestamps();
             $table->softDeletes();

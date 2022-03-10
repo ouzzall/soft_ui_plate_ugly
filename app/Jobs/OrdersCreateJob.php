@@ -57,7 +57,6 @@ class OrdersCreateJob implements ShouldQueue
     public function handle()
     {
         $order = $this->data;
-        Log::info(json_encode($order));
         $customer = $order->customer;
         DB::beginTransaction();
         try {
