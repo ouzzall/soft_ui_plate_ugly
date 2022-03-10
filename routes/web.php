@@ -9,7 +9,9 @@ use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Models\Role;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
@@ -29,7 +31,9 @@ Route::get('/app-install', function () {
 })->middleware(['verify.shopify'])->name('home');
 Route::get('/getSession', [AuthController::class, 'getSession']);
 
-
+Route::get('sync-data', function() {
+    Artisan::call('sync:data');
+});
 // redirect if authenticated
 Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'index')->name('login');
