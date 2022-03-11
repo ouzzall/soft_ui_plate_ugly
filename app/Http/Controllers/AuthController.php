@@ -73,7 +73,7 @@ class AuthController extends Controller
                     'email' => $request->email,
                 ]
             ]);
-            if($customer['status'] != 200) {
+            if($customer['status'] != 201) {
                 return response()->json([
                     'success' => false,
                     'message' => 'An error occured while registration!',
