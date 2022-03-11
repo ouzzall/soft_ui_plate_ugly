@@ -77,7 +77,7 @@ class AuthController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'An error occured while registration!',
-                    'user' => null
+                    'user' => $customer
                 ]);
             }
             DB::commit();
