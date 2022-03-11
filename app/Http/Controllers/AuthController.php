@@ -57,6 +57,8 @@ class AuthController extends Controller
     {
         $request['password'] = bcrypt($request->password);
         $request['role_id'] = 2;
+        $name = '';
+        $nameSplit = explode(' ', $request->name);
         DB::beginTransaction();
         try {
             $user = User::create($request->all());
@@ -64,6 +66,20 @@ class AuthController extends Controller
                 'loyalty_earned' => 0.0,
                 'loyalty_radeemed' => 0.0,
             ]);
+            $customer = getShop()->api()->rest('POST', '/admin/api/2022-01/customers.json', [
+                'customer' => [
+                    'first_name' => (count($nameSplit) > 1) ? $nameSplit[0]: $request->name,
+                    'last_name' => (count($nameSplit) > 1) ? $nameSplit[1]: $request->name,
+                    'email' => $request->email,
+                ]
+            ]);
+            if($customer['status'] != 200) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'An error occured while registration!',
+                    'user' => null
+                ]);
+            }
             DB::commit();
             return response()->json([
                 'success' => true,
