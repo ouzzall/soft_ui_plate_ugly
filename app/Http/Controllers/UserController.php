@@ -19,7 +19,7 @@ class UserController extends Controller
     public function getUsers(Request $request)
     {
         $users = User::where('role_id', 2)->with('loyalty');
-        $users->when($request->get('is_blocked'), function($q) use($request) {
+        $users->when($request->has('is_blocked'), function($q) use($request) {
             $q->where('is_blocked', $request->is_blocked);
         });
         $users->when($request->get('search'), function ($q) use ($request) {
