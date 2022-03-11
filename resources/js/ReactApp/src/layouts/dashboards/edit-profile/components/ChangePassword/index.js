@@ -24,50 +24,79 @@ import SuiButton from "@uf/components/SuiButton";
 
 // Security page components
 import FormField from "@uf/layouts/pages/account/components/FormField";
+import Swal from "sweetalert2";
 
 function ChangePassword() {
-  return (
-    <Card id="change-password">
-      <SuiBox pt={2} px={2} lineHeight={1}>
-        <SuiTypography variant="h6" fontWeight="medium">
-          Change Password
-        </SuiTypography>
-        <SuiTypography variant="button" fontWeight="regular" color="text">
-          We will send you an email with the verification code.
-        </SuiTypography>
-      </SuiBox>
-      <SuiBox component="form" p={2}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <FormField
-              label="current password"
-              placeholder="Current Password"
-              inputProps={{ type: "password", autoComplete: "" }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormField
-              label="new password"
-              placeholder="New Password"
-              inputProps={{ type: "password", autoComplete: "" }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <FormField
-              label="confirm new password"
-              placeholder="Confirm Password"
-              inputProps={{ type: "password", autoComplete: "" }}
-            />
-          </Grid>
-        </Grid>
-        <SuiBox mt={2}>
-          <SuiButton variant="gradient" color="dark" fullWidth>
-            update password
-          </SuiButton>
-        </SuiBox>
-      </SuiBox>
-    </Card>
-  );
+
+    async function changePasswordHandler(event) {
+        event.preventDefault();
+        let formData = new FormData(event.target);
+        let data = await fetch(`/changePassword`, {
+            method: 'POST',
+            body: formData,
+        });
+        let response = await data.json();
+        if(response.success) {
+            await Swal.fire({
+                icon: 'success',
+                title: 'Done!',
+                text: response.message,
+            });
+            event.target.reset();
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: response.message,
+            });
+        }
+    }
+
+    return (
+        <Card id="change-password">
+            <SuiBox pt={2} px={2} lineHeight={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                    Change Password
+                </SuiTypography>
+                <SuiTypography variant="button" fontWeight="regular" color="text">
+                    We will send you an email
+                </SuiTypography>
+            </SuiBox>
+            <SuiBox component="form" p={2} onSubmit={changePasswordHandler}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <FormField
+                            name="current_password"
+                            label="current password"
+                            placeholder="Current Password"
+                            inputProps={{ type: "password", autoComplete: "" }}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormField
+                            name="new_password"
+                            label="new password"
+                            placeholder="New Password"
+                            inputProps={{ type: "password", autoComplete: "" }}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormField
+                            name="confirm_new_password"
+                            label="confirm new password"
+                            placeholder="Confirm Password"
+                            inputProps={{ type: "password", autoComplete: "" }}
+                        />
+                    </Grid>
+                </Grid>
+                <SuiBox mt={2}>
+                    <SuiButton type="submit" variant="gradient" color="dark" fullWidth>
+                        update password
+                    </SuiButton>
+                </SuiBox>
+            </SuiBox>
+        </Card>
+    );
 }
 
 export default ChangePassword;

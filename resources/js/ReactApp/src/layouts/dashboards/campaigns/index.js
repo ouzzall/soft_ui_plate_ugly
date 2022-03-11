@@ -47,9 +47,25 @@ import { setLoading } from "../../../reducers/loadingSlice";
 
 function Campaign() {
 
-    const renderColumns = (row => ({
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [queryString, setQueryString] = useState('');
+    const [reloadTable, setReloadTable] = useState(false);
+
+    useEffect(() => {
+        let query = '';
+        if (startDate != '') {
+            query += `startDate=${startDate}`;
+        }
+        if (endDate != '') {
+            query += `&endDate=${endDate}`;
+        }
+        setQueryString(query);
+    }, [startDate, endDate]);
+
+    const renderColumns = (row) => ({
         actions: <ActionCell edit={`/edit-campaign/${row.id}`} />
-    }))
+    })
 
     return (
         <DashboardLayout>
@@ -61,15 +77,19 @@ function Campaign() {
                     </Link>
                 </SuiBox>
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-                    <SuiBox display="flex" >
+                    <SuiBox display="flex">
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setStartDate(event[0].toLocaleDateString());
+                            }} input={{ placeholder: "Select Start Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select End Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setEndDate(new Date(event[0]).toLocaleDateString());
+                            }} input={{ placeholder: "Select End Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiButton variant="gradient" color="info">
+                            <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
                             </SuiButton>
                         </SuiBox>
@@ -111,6 +131,8 @@ function Campaign() {
                             ],
                         }}
                         renderColumns={renderColumns}
+                        key={reloadTable}
+                        filterQuery={queryString}
                     />
 
                 </Card>

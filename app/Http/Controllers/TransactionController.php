@@ -12,11 +12,23 @@ class TransactionController extends Controller
     public function getTransactions(Request $request)
     {
         $user = Auth::user();
+        if ($user->is_blocked && $user->role->type == 'customer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are blocked from using the application!',
+                'data' => null
+            ]);
+        }
         $transactions = Transaction::with(['user', 'transaction_type']);
         $transactions->when($user->role->type == 'customer', function ($q) use ($user) {
             $q->whereHas('user', function ($q) use ($user) {
                 $q->where('id', $user->id);
             });
+        });
+        $transactions->when($request->get('startDate') || $request->get('endDate'), function($q) use($request) {
+            $startDate = Carbon::createFromFormat('d/m/Y', $request->startDate)->format('Y-m-d');
+            $endDate = Carbon::createFromFormat('d/m/Y', $request->endDate)->format('Y-m-d');
+            $q->whereDate('created_at', '>=', $startDate)->whereDate('created_at', '<=', $endDate);
         });
         $transactions->when($request->get('search'), function ($q) use ($request) {
             $q->where(function($q) use ($request) {

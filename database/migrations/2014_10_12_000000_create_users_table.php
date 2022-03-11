@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->unsignedBigInteger('role_id')->nullable();
             $table->bigInteger('shopify_customer_id')->nullable();
+            $table->boolean('is_blocked')->default(0);
             $table->timestamps();
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
@@ -10,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -17,6 +19,9 @@ class UserController extends Controller
     public function getUsers(Request $request)
     {
         $users = User::where('role_id', 2)->with('loyalty');
+        $users->when($request->get('is_blocked'), function($q) use($request) {
+            $q->where('is_blocked', $request->is_blocked);
+        });
         $users->when($request->get('search'), function ($q) use ($request) {
             $q->where(function ($q) use ($request) {
                 $q->where('id', 'LIKE', '%' . $request->search . '%')
@@ -51,6 +56,13 @@ class UserController extends Controller
     public function radeemPoints()
     {
         $user = Auth::user();
+        if ($user->is_blocked && $user->role->type == 'customer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are blocked from using the application!',
+                'data' => null
+            ]);
+        }
         if ($user->loyalty->loyalty_earned < 10000) {
             return response()->json([
                 'success' => false,
@@ -130,6 +142,13 @@ class UserController extends Controller
     public function getProfile()
     {
         $user = Auth::user();
+        if ($user->is_blocked && $user->role->type == 'customer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are blocked from using the application!',
+                'data' => null
+            ]);
+        }
         $couponsCount = $user->price_rules()->count();
         $ordersSum = $user->orders()->sum('amount');
         $ordersCounts = $user->orders()->count();
@@ -160,8 +179,19 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
-        if(!$user) {
-
+        if ($user->is_blocked && $user->role->type == 'customer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are blocked from using the application!',
+                'data' => null
+            ]);
+        }
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Profile not found!',
+                'data' => $user,
+            ]);
         }
         $user->update($request->all());
         $user = Auth::user()->load(['role', 'transactions']);
@@ -172,10 +202,31 @@ class UserController extends Controller
         ]);
     }
 
+    public function changePassword(ChangePasswordRequest $request)
+    {
+        $user = Auth::user();
+        $password = bcrypt($request->new_password);
+        $user->update([
+            'password' => $password,
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Password changed successfully!',
+            'data' => null,
+        ]);
+    }
+
     public function getUserCharts()
     {
         $labels = [];
         $user = Auth::user();
+        if ($user->is_blocked && $user->role->type == 'customer') {
+            return response()->json([
+                'success' => false,
+                'message' => 'You are blocked from using the application!',
+                'data' => null
+            ]);
+        }
         $today = Carbon::today();
         $callback = function ($q) use ($user) {
             $q->where('id', $user->id);
@@ -223,6 +274,27 @@ class UserController extends Controller
             'success' => true,
             'message' => 'Chart retrieved successfully!',
             'data' => $data,
+        ]);
+    }
+
+    public function changeAuthority(Request $request, $id)
+    {
+        $user = User::where('role_id', 2)->find($id);
+        $action = $request->is_blocked ? 'blocked' : 'unblocked';
+        if(!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found!',
+                'data' => null,
+            ]);
+        }
+        $user->update([
+            'is_blocked' => $request->is_blocked
+        ]);
+        return response()->json([
+            'success' => true,
+            'message' => "User $action successfully!",
+            'data' => null,
         ]);
     }
 }

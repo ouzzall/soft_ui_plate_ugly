@@ -44,6 +44,22 @@ import { setLoading } from "../../../reducers/loadingSlice";
 
 function Orders() {
 
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [queryString, setQueryString] = useState('');
+    const [reloadTable, setReloadTable] = useState(false);
+
+    useEffect(() => {
+        let query = '';
+        if (startDate != '') {
+            query += `startDate=${startDate}`;
+        }
+        if (endDate != '') {
+            query += `&endDate=${endDate}`;
+        }
+        setQueryString(query);
+    }, [startDate, endDate]);
+
     return (
         <DashboardLayout>
             <DashboardNavbar />
@@ -51,13 +67,17 @@ function Orders() {
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                     <SuiBox display="flex" >
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setStartDate(event[0].toLocaleDateString());
+                            }} input={{ placeholder: "Select Start Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select End Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setEndDate(event[0].toLocaleDateString());
+                            }} input={{ placeholder: "Select End Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiButton variant="gradient" color="info">
+                            <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
                             </SuiButton>
                         </SuiBox>
@@ -100,6 +120,8 @@ function Orders() {
                                 { Header: "Date", accessor: "date" },
                             ]
                         }}
+                        key={reloadTable}
+                        filterQuery={queryString}
                     />
 
                 </Card>

@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/getUsers', [UserController::class, 'getUsers']);
         Route::get('/getCollections', [DefaultController::class, 'getCollections']);
         Route::get('/getProducts', [DefaultController::class, 'getProducts']);
+        Route::post('/changeAuthority/{id}', [UserController::class, 'changeAuthority']);
 
         Route::get('/getCampaigns', [CampaignController::class, 'getCampaigns']);
         Route::get('/getCampaign/{id}', [CampaignController::class, 'getCampaign']);
@@ -75,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/updateOrderRule/{id}', [RulesController::class, 'updateOrderRule']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function() {
+        Route::post('/changePassword', [UserController::class, 'changePassword']);
         Route::get('/getProfile', [UserController::class, 'getProfile']);
         Route::post('/updateProfile', [UserController::class, 'updateProfile']);
         Route::post('/radeemPoints', [UserController::class, 'radeemPoints']);

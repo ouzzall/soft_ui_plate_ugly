@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CampaignResource;
 use App\Models\Campaign;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -130,6 +131,11 @@ class CampaignController extends Controller
     public function getCampaigns(Request $request)
     {
         $campaigns = Campaign::query();
+        $campaigns->when($request->get('startDate') || $request->get('endDate'), function($q) use($request) {
+            $startDate = Carbon::createFromFormat('d/m/Y', $request->startDate)->format('Y-m-d');
+            $endDate = Carbon::createFromFormat('d/m/Y', $request->endDate)->format('Y-m-d');
+            $q->whereDate('created_at', '>=', $startDate)->whereDate('created_at', '<=', $endDate);
+        });
         $campaigns->when($request->get('search'), function ($q) use ($request) {
             $q->where(function ($q) use ($request) {
                 $q->where('id', 'LIKE', '%' . $request->search . '%')

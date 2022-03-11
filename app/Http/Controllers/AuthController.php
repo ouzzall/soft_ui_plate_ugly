@@ -18,6 +18,16 @@ class AuthController extends Controller
         $user = null;
         if (Auth::attempt($credentials, $remember_me)) {
             $user = Auth::user()->load('role');
+            if ($user->is_blocked && $user->role->type == 'customer') {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You are blocked from using the application!',
+                    'data' => null
+                ]);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'User Logged in successfully',
@@ -65,10 +75,20 @@ class AuthController extends Controller
         }
     }
 
-    public function getSession()
+    public function getSession(Request $request)
     {
         if (Auth::check()) {
             $user = Auth::user()->load(['role', 'transactions']);
+            if ($user->is_blocked && $user->role->type == 'customer') {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'You are blocked!',
+                    'data' => null
+                ]);
+            }
             return response()->json([
                 'success' => true,
                 'message' => 'Current User retrieved successfully!',

@@ -54,7 +54,7 @@ function DataTable({
     manualPagination,
     url,
     renderColumns,
-    reload
+    filterQuery
 }) {
     const defaultValue = entriesPerPage.defaultValue ? entriesPerPage.defaultValue : 10;
     const entries = entriesPerPage.entries ? entriesPerPage.entries : [5, 10, 15, 20, 25];
@@ -188,9 +188,13 @@ function DataTable({
     )
 
     const fetchAPIData = async ({ limit, skip, search }) => {
+        let filter = '';
+        if (filterQuery) {
+            filter = filterQuery;
+        }
         try {
             const response = await fetch(
-                `${url}?limit=${limit}&skip=${skip}&search=${search}`
+                `${url}?limit=${limit}&skip=${skip}&search=${search}&${filter}`
             )
             const data = await response.json();
             let result = data?.data;
@@ -214,7 +218,7 @@ function DataTable({
         if (isServerSide) {
             fetchData && fetchData({ pageIndex, pageSize })
         }
-    }, [pageIndex, pageSize, search, reload]);
+    }, [pageIndex, pageSize, search]);
 
     return loading ? (<div className="loaderHeight"><Loader /></div>) : (
         <>

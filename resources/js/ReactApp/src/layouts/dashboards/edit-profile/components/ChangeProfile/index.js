@@ -24,7 +24,7 @@ import SuiButton from "@uf/components/SuiButton";
 
 import FormField from "@uf/layouts/pages/account/components/FormField";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { setUser } from "@uf/reducers/userSlice";
 import Swal from "sweetalert2";
 
@@ -32,6 +32,13 @@ function ChangeProfile() {
 
     const user = useSelector((state) => state.user.user);
     const dispatch = useDispatch();
+    const [name, setName] = useState('');
+    const [phone, setPhone] = useState('');
+
+    useEffect(() => {
+        setName(user?.name);
+        setPhone(user?.phone);
+    }, [user]);
 
     const updateProfile = async (event) => {
         event.preventDefault();
@@ -41,7 +48,7 @@ function ChangeProfile() {
             body: formData,
         });
         let response = await data.json();
-        if(response.success) {
+        if (response.success) {
             dispatch(setUser(response.data));
             Swal.fire({
                 icon: 'success',
@@ -51,28 +58,29 @@ function ChangeProfile() {
         }
     }
 
-  return (
-    <Card id="change-password">
-    <SuiBox pt={2} px={2} lineHeight={1}>
-      <SuiTypography variant="h6" fontWeight="medium">
-        Change Profile
-      </SuiTypography>
-      <SuiTypography variant="button" fontWeight="regular" color="text">
-        You can update your profile by simple cick on update profile button.
-      </SuiTypography>
-    </SuiBox>
-    <SuiBox component="form" p={2} onSubmit={updateProfile}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <FormField
-            label="Name"
-            placeholder="Name"
-            name="name"
-            inputProps={{ type: "text", autoComplete: "" }}
-            defaultValue={user?.name}
-          />
-        </Grid>
-        {/* <Grid item xs={12}>
+    return (
+        <Card id="change-password">
+            <SuiBox pt={2} px={2} lineHeight={1}>
+                <SuiTypography variant="h6" fontWeight="medium">
+                    Change Profile
+                </SuiTypography>
+                <SuiTypography variant="button" fontWeight="regular" color="text">
+                    You can update your profile by simple cick on update profile button.
+                </SuiTypography>
+            </SuiBox>
+            <SuiBox component="form" p={2} onSubmit={updateProfile}>
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <FormField
+                            label="Name"
+                            placeholder="Name"
+                            name="name"
+                            inputProps={{ type: "text", autoComplete: "" }}
+                            onChange={(event) => setName(event.target.value)}
+                            value={name}
+                        />
+                    </Grid>
+                    {/* <Grid item xs={12}>
           <FormField
             label="Email"
             placeholder="Email"
@@ -80,30 +88,31 @@ function ChangeProfile() {
             defaultValue={user.email}
           />
         </Grid> */}
-        <Grid item xs={12}>
-          <FormField
-            label="Phone No"
-            placeholder="Phone #"
-            name="phone"
-            inputProps={{ type: "tel", autoComplete: "" }}
-            defaultValue={user?.phone}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <FormField style={{border: "none"}}
-            label="Upload Image"
-            inputProps={{ type: "file", autoComplete: "" }}
-          />
-        </Grid>
-      </Grid>
-      <SuiBox mt={2}>
-        <SuiButton type="submit" variant="gradient" color="dark" fullWidth>
-          update profile
-        </SuiButton>
-      </SuiBox>
-    </SuiBox>
-  </Card>
-  );
+                    <Grid item xs={12}>
+                        <FormField
+                            label="Phone No"
+                            placeholder="Phone #"
+                            name="phone"
+                            inputProps={{ type: "tel", autoComplete: "" }}
+                            onChange={(event) => setPhone(event.target.value)}
+                            value={phone}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormField style={{ border: "none" }}
+                            label="Upload Image"
+                            inputProps={{ type: "file", autoComplete: "" }}
+                        />
+                    </Grid>
+                </Grid>
+                <SuiBox mt={2}>
+                    <SuiButton type="submit" variant="gradient" color="dark" fullWidth>
+                        update profile
+                    </SuiButton>
+                </SuiBox>
+            </SuiBox>
+        </Card>
+    );
 }
 
 export default ChangeProfile;

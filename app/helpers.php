@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 if (!function_exists('getShop')) {
     function getShop()
     {
-        $shop = User::firstWhere('name', 'gorillacross.myshopify.com');
+        $shop = User::firstWhere('name', 'uglyfooddev.myshopify.com');
         return $shop;
     }
 }

@@ -44,29 +44,49 @@ import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
 import { setLoading } from "../../../reducers/loadingSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { start } from "@popperjs/core";
 
 function Orders() {
 
-    const renderColumns = (row => ({
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [queryString, setQueryString] = useState('');
+    const [reloadTable, setReloadTable] = useState(false);
+    const renderColumns = (row) => ({
         date: new Date(row.created_at).toLocaleDateString(),
         delivery_date: new Date(row.delivery_date).toLocaleDateString(),
         actions: <ActionCell view={`/order-details/${row.id}`} />
-    }))
+    })
+
+    useEffect(() => {
+        let query = '';
+        if (startDate != '') {
+            query += `startDate=${startDate}`;
+        }
+        if (endDate != '') {
+            query += `&endDate=${endDate}`;
+        }
+        setQueryString(query);
+    }, [startDate, endDate]);
 
     return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox my={3}>
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-                    <SuiBox display="flex" >
+                    <SuiBox display="flex">
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select Start Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setStartDate(event[0].toLocaleDateString());
+                            }} input={{ placeholder: "Select Start Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiDatePicker input={{ placeholder: "Select End Date" }} />
+                            <SuiDatePicker onChange={(event) => {
+                                setEndDate(new Date(event[0]).toLocaleDateString());
+                            }} input={{ placeholder: "Select End Date" }} />
                         </SuiBox>
                         <SuiBox ml={1}>
-                            <SuiButton variant="gradient" color="info">
+                            <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
                             </SuiButton>
                         </SuiBox>
@@ -90,15 +110,14 @@ function Orders() {
                                 ]}
                             />
                         </SuiBox>
-                        <SuiButton variant="gradient" color="info">
+                        <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                             Filter
                         </SuiButton>
-
                     </SuiBox>
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable canSearch manualPagination={true} isServerSide={true} url={'/getOrders'}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/getOrders`}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
@@ -112,8 +131,9 @@ function Orders() {
                             ],
                         }}
                         renderColumns={renderColumns}
+                        key={reloadTable}
+                        filterQuery={queryString}
                     />
-
                 </Card>
             </SuiBox>
             <Footer />

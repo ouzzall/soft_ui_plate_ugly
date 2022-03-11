@@ -42,13 +42,58 @@ import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../../reducers/loadingSlice";
+import Swal from "sweetalert2";
 
 function users() {
 
-
+    const [reloadTable, setReloadTable] = useState(false);
+    const [queryString, setQueryString] = useState('');
+    const [blockFilter, setBlockFilter] = useState({
+        label: '',
+        value: '',
+    });
     const renderColumns = (row) => ({
-        actions: <SuiButton variant="gradient" color="info" size="small">Block</SuiButton>
+        actions: <SuiButton variant="gradient" color="info" size="small" onClick={() => changeAuthority(!row.is_blocked, row.id)}>{row.is_blocked ? 'Unblock': 'Block'}</SuiButton>
     })
+
+    useEffect(() => {
+        let query = '';
+        if (blockFilter.value != '') {
+            query += `is_blocked=${blockFilter.value}`;
+        }
+        setQueryString(query);
+    }, [blockFilter]);
+
+    const changeAuthority = async (permission,id) => {
+        let action = permission ? 'Block': 'Unblock';
+        let confirm = await Swal.fire({
+            icon: 'question',
+            title: `${action} ?`,
+            text: `Do you want to ${action} this user ?`,
+            confirmButtonText: 'Yes',
+            showDenyButton: true,
+        });
+        if(confirm.isConfirmed) {
+            let data = await fetch(`/changeAuthority/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    is_blocked: permission
+                })
+            });
+            let response = await data.json();
+            if(response.success) {
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Done',
+                    text: response.message
+                });
+                setReloadTable(!reloadTable);
+            }
+        }
+    }
 
     return (
         <DashboardLayout>
@@ -62,12 +107,15 @@ function users() {
                             <SuiSelect
                                 placeholder="Type"
                                 options={[
-                                    { value: "Block", label: "Block" },
-                                    { value: "Active", label: "Active" },
+                                    { value: "1", label: "Block" },
+                                    { value: "0", label: "Active" },
                                 ]}
+                                onChange={(event) => {
+                                    setBlockFilter(event);
+                                }}
                             />
                         </SuiBox>
-                        <SuiButton variant="gradient" color="info">
+                        <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                             Filter
                         </SuiButton>
 
@@ -87,7 +135,9 @@ function users() {
                                 { Header: "Actions", accessor: "actions" }
                             ],
                         }}
+                        key={reloadTable}
                         renderColumns={renderColumns}
+                        filterQuery={queryString}
                     />
 
                 </Card>

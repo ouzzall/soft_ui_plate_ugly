@@ -123,11 +123,6 @@ function ShipingRules() {
         });
         const response = await data.json();
         if (response.success) {
-            Swal.fire({
-                title: 'Done!',
-                icon: 'success',
-                text: response.message,
-            });
             setEditId(-1);
             setOrderAmount(0);
             setShippingAmount(0);
@@ -135,9 +130,14 @@ function ShipingRules() {
                 value: '',
                 label: 'Select type'
             });
+            await Swal.fire({
+                title: 'Done!',
+                icon: 'success',
+                text: response.message,
+            });
             setReloadTable(!reloadTable);
         } else {
-            Swal.fire({
+            await Swal.fire({
                 title: 'Error!',
                 icon: 'error',
                 text: response.message,
@@ -355,7 +355,7 @@ function ShipingRules() {
                                 </SuiBox>
                             </Card>
                             <SuiBox mt={3}>
-                                <DataTable canSearch reload={reloadTable} manualPagination={true} isServerSide={true} url={'/getOrderRules'}
+                                <DataTable canSearch key={reloadTable} manualPagination={true} isServerSide={true} url={'/getOrderRules'}
                                     table={{
                                         columns: [
                                             { Header: "Id", accessor: "id" },
