@@ -86,7 +86,7 @@ function Campaign() {
             <SuiBox my={3}>
                 <SuiBox mb={3} display="flex" justifyContent="end">
                     <div style={{paddingRight: 10}} onClick={syncData}>
-                        <SuiButton variant="gradient" color="info">Sync Data</SuiButton>
+                        <SuiButton variant="gradient" color="info">Sync Shop Data</SuiButton>
                     </div>
                     <Link to="/create-campaign">
                         <SuiButton variant="gradient" color="info">Create Campaign</SuiButton>
