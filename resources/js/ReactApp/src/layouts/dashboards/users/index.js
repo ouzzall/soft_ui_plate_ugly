@@ -45,7 +45,8 @@ import { setLoading } from "../../../reducers/loadingSlice";
 import Swal from "sweetalert2";
 
 function users() {
-
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
     const [queryString, setQueryString] = useState('');
     const [blockFilter, setBlockFilter] = useState({
@@ -53,19 +54,25 @@ function users() {
         value: '',
     });
     const renderColumns = (row) => ({
-        actions: <SuiButton variant="gradient" color="info" size="small" onClick={() => changeAuthority(!row.is_blocked, row.id)}>{row.is_blocked ? 'Unblock': 'Block'}</SuiButton>
+        actions: <SuiButton variant="gradient" color="info" size="small" onClick={() => changeAuthority(!row.is_blocked, row.id)}>{row.is_blocked ? 'Unblock' : 'Block'}</SuiButton>
     })
 
     useEffect(() => {
         let query = '';
+        if (startDate != '') {
+            query += `startDate=${startDate}`;
+        }
+        if (endDate != '') {
+            query += `&endDate=${endDate}`;
+        }
         if (blockFilter.value != '') {
-            query += `is_blocked=${blockFilter.value}`;
+            query += `&is_blocked=${blockFilter.value}`;
         }
         setQueryString(query);
-    }, [blockFilter]);
+    }, [blockFilter, startDate, endDate]);
 
-    const changeAuthority = async (permission,id) => {
-        let action = permission ? 'Block': 'Unblock';
+    const changeAuthority = async (permission, id) => {
+        let action = permission ? 'Block' : 'Unblock';
         let confirm = await Swal.fire({
             icon: 'question',
             title: `${action} ?`,
@@ -73,7 +80,7 @@ function users() {
             confirmButtonText: 'Yes',
             showDenyButton: true,
         });
-        if(confirm.isConfirmed) {
+        if (confirm.isConfirmed) {
             let data = await fetch(`/changeAuthority/${id}`, {
                 method: 'POST',
                 headers: {
@@ -84,7 +91,7 @@ function users() {
                 })
             });
             let response = await data.json();
-            if(response.success) {
+            if (response.success) {
                 await Swal.fire({
                     icon: 'success',
                     title: 'Done',
@@ -100,7 +107,23 @@ function users() {
             <DashboardNavbar />
             <SuiBox my={3}>
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
-
+                    <SuiBox display="flex">
+                        <SuiBox ml={1}>
+                            <SuiDatePicker onChange={(event) => {
+                                setStartDate(event[0].toLocaleDateString());
+                            }} input={{ placeholder: "Select Start Date" }} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiDatePicker onChange={(event) => {
+                                setEndDate(new Date(event[0]).toLocaleDateString());
+                            }} input={{ placeholder: "Select End Date" }} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
+                                Filter
+                            </SuiButton>
+                        </SuiBox>
+                    </SuiBox>
                     <SuiBox display="flex">
 
                         <SuiBox style={{ width: "150px", marginRight: "10px" }}>

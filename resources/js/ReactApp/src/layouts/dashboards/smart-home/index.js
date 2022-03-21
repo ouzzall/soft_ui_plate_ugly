@@ -255,7 +255,7 @@ function SmartHome() {
 
             <SuiBox mb={3}>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} lg={7}>
                         <ReportsDoughnutChart
                             title="Top Five Customers"
                             count={{ number: `$${secondChart?.count}`, text: "Earnings" }}

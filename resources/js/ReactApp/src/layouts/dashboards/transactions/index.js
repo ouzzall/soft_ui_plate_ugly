@@ -48,6 +48,10 @@ function Orders() {
     const [endDate, setEndDate] = useState('');
     const [queryString, setQueryString] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
+    const [typeFilter, setTypeFilter] = useState({
+        label: '',
+        value: '',
+    });
 
     useEffect(() => {
         let query = '';
@@ -57,8 +61,11 @@ function Orders() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
+        if (typeFilter.value != '') {
+            query += `&type=${typeFilter.value}`;
+        }
         setQueryString(query);
-    }, [startDate, endDate]);
+    }, [startDate, endDate, typeFilter]);
 
     return (
         <DashboardLayout>
@@ -83,7 +90,7 @@ function Orders() {
                         </SuiBox>
                     </SuiBox>
                     <SuiBox display="flex">
-                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                        {/* <SuiBox style={{ width: "150px", marginRight: "10px" }}>
                             <SuiSelect
                                 placeholder="Category"
                                 options={[
@@ -91,17 +98,19 @@ function Orders() {
                                     { value: "order Wise", label: "Order Wise" },
                                 ]}
                             />
-                        </SuiBox>
+                        </SuiBox> */}
                         <SuiBox style={{ width: "150px", marginRight: "10px" }}>
                             <SuiSelect
                                 placeholder="Type"
                                 options={[
-                                    { value: "earned", label: "Earned" },
-                                    { value: "redeemed", label: "Redeemed" },
-                                ]}
+                                    { value: "1", label: "Earned" },
+                                    { value: "2", label: "Redeemed" },
+                                ]} onChange={(event) => {
+                                    setTypeFilter(event);
+                                }}
                             />
                         </SuiBox>
-                        <SuiButton variant="gradient" color="info">
+                        <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                             Filter
                         </SuiButton>
 

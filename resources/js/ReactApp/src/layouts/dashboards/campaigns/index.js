@@ -94,7 +94,7 @@ function Campaign() {
                             </SuiButton>
                         </SuiBox>
                     </SuiBox>
-                    <SuiBox display="flex">
+                    {/* <SuiBox display="flex">
                         <SuiBox style={{ width: "150px", marginRight: "10px" }}>
                             <SuiSelect
                                 placeholder="Category"
@@ -117,7 +117,7 @@ function Campaign() {
                             Filter
                         </SuiButton>
 
-                    </SuiBox>
+                    </SuiBox> */}
                 </SuiBox>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}

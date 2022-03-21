@@ -25,6 +25,9 @@ class TransactionController extends Controller
                 $q->where('id', $user->id);
             });
         });
+        $transactions->when($request->get('type'), function($q) use($request) {
+            $q->where('transaction_type_id', $request->type);
+        });
         $transactions->when($request->get('startDate') || $request->get('endDate'), function($q) use($request) {
             $startDate = Carbon::createFromFormat('d/m/Y', $request->startDate)->format('Y-m-d');
             $endDate = Carbon::createFromFormat('d/m/Y', $request->endDate)->format('Y-m-d');
