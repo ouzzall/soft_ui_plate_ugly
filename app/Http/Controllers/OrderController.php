@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendLoyaltyMail;
 use App\Models\Collection;
 use App\Models\Order;
 use App\Models\Product;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -150,6 +152,7 @@ class OrderController extends Controller
                 'transaction_type_id' => 1,
             ]);
             DB::commit();
+            Mail::to($order->user->email)->send(new SendLoyaltyMail($order->user->name));
             return response()->json([
                 'success' => true,
                 'message' => 'Product refunded and Amount added to loyalty!',

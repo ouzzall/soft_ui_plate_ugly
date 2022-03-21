@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendLoyaltyMail;
 use App\Models\Order;
 use App\Models\User;
 use Exception;
@@ -12,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Osiset\ShopifyApp\Objects\Values\ShopDomain;
 use stdClass;
 
@@ -98,6 +100,7 @@ class OrdersCreateJob implements ShouldQueue
                     'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
                     'transaction_type_id' => 1,
                 ]);
+                Mail::to($user->email)->send(new SendLoyaltyMail($user->name));
             }
             DB::commit();
             return response()->json([
