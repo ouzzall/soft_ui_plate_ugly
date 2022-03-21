@@ -82,8 +82,9 @@ class DashboardController extends Controller
         for ($i = 0; $i < 5; $i++) {
             $user = $users[$i] ?? null;
             if ($user) {
+                $loyalty_points = $user->transactions()->where('transaction_type_id', 1)->sum('loyalty_points');
                 $labels[] = $user->name;
-                $data[] = (($user->loyalty->loyalty_earned * 0.001) / $loyalty_sum) * 100;
+                $data[] = (($loyalty_points * 0.001) / $loyalty_sum) * 100;
             } else {
                 $labels[] = 'No customer';
                 $data[] = (0 / $loyalty_sum) * 100;
