@@ -84,7 +84,7 @@ class DashboardController extends Controller
             if ($user) {
                 $loyalty_points = $user->transactions()->where('transaction_type_id', 1)->sum('loyalty_points');
                 $labels[] = $user->name;
-                $data[] = (($loyalty_points * 0.001) / $loyalty_sum) * 100;
+                $data[] = number_format((($loyalty_points * 0.001) / $loyalty_sum) * 100, 2);
             } else {
                 $labels[] = 'No customer';
                 $data[] = (0 / $loyalty_sum) * 100;
@@ -139,7 +139,7 @@ class DashboardController extends Controller
     {
         $setting = Setting::first();
         if (!$setting) {
-            response()->json([
+            return response()->json([
                 'success' => false,
                 'message' => 'Setting not found!',
                 'data' => null,
