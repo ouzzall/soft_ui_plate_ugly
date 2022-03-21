@@ -44,8 +44,20 @@ import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../../reducers/loadingSlice";
+import Swal from 'sweetalert2';
 
 function Campaign() {
+
+    const syncData = async () => {
+        let data = await fetch('/sync-data');
+        let response = await data.json();
+        if(response.success) {
+            await Swal.fire({
+                title: 'Done!',
+                text: response.message,
+            });
+        }
+    }
 
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
@@ -72,6 +84,9 @@ function Campaign() {
             <DashboardNavbar />
             <SuiBox my={3}>
                 <SuiBox mb={3} display="flex" justifyContent="end">
+                    <div style={{paddingRight: 10}} onClick={syncData}>
+                        <SuiButton variant="gradient" color="info">Sync Data</SuiButton>
+                    </div>
                     <Link to="/create-campaign">
                         <SuiButton variant="gradient" color="info">Create Campaign</SuiButton>
                     </Link>

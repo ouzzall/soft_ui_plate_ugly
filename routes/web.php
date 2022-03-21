@@ -33,6 +33,11 @@ Route::get('/getSession', [AuthController::class, 'getSession']);
 
 Route::get('sync-data', function() {
     Artisan::call('sync:data');
+    return response()->json([
+        'success' => true,
+        'message' => 'Data synced successfully!',
+        'data' => null,
+    ]);
 });
 Route::get('/getSecondChart', [DashboardController::class, 'getSecondChart']);
 // redirect if authenticated
