@@ -54,6 +54,7 @@ function Campaign() {
         if(response.success) {
             await Swal.fire({
                 title: 'Done!',
+                icon: 'success',
                 text: response.message,
             });
         }
