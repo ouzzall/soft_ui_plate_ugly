@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $j = 0;
         $k = 0;
         for ($i = 1; $i <= 12; $i++) {
-            $labels[] = Carbon::now()->month($i)->format('M');
+            $labels[] = Carbon::now()->startOfMonth()->month($i)->format('M');
             if (($transactions[$j]['month'] ?? 0) == $i) {
                 $loyaltyData[] = $transactions[$j]['loyalty_points'];
                 $j++;
