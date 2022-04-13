@@ -61,8 +61,8 @@ function ShipingRules() {
     const [reloadTable, setReloadTable] = useState(false);
     const [spotify2FA, setSpotify2FA] = useState(true);
     const handleSetSpotify2FA = () => setSpotify2FA(!spotify2FA);
-    const [orderAmount, setOrderAmount] = useState(0);
-    const [shippingAmount, setShippingAmount] = useState(0);
+    const [orderAmount, setOrderAmount] = useState('');
+    const [shippingAmount, setShippingAmount] = useState('');
     const [discountType, setDiscountType] = useState('');
     const [editId, setEditId] = useState(-1);
 
