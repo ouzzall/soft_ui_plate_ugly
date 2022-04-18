@@ -147,7 +147,7 @@ class CampaignController extends Controller
         $campaigns->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $campaigns = $campaigns->get();
+        $campaigns = $campaigns->orderBy('id', 'DESC')->get();
         $data = [
             'data' => $campaigns,
             'pages' => ceil($count / $request->limit),

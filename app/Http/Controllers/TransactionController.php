@@ -50,7 +50,7 @@ class TransactionController extends Controller
         $transactions->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $transactions = $transactions->get();
+        $transactions = $transactions->orderBy('id', 'DESC')->get();
         $transactions = $transactions->map(function ($value) {
             $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
             return $value;

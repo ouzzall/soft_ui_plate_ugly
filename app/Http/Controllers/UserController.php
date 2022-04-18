@@ -45,7 +45,7 @@ class UserController extends Controller
         $users->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $users = $users->get();
+        $users = $users->orderBy('id', 'DESC')->get();
         $data = [
             'data' => $users,
             'pages' => ceil($count / $request->limit),
