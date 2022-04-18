@@ -48,7 +48,7 @@ class OrderController extends Controller
         $orders->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $orders = $orders->get();
+        $orders = $orders->orderBy('id', 'DESC')->get();
         $data = [
             'data' => $orders,
             'pages' => ceil($count / $request->limit),
