@@ -49,186 +49,205 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLoyaltyInfo } from "../../../../../reducers/loyaltyInfoSlice";
 
 function Header({ data }) {
-  const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
-  const dispatch = useDispatch();
+    const [tabsOrientation, setTabsOrientation] = useState("horizontal");
+    const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
+    const dispatch = useDispatch();
 
 
-  // const [tabValue, setTabValue] = useState(0);
+    // const [tabValue, setTabValue] = useState(0);
 
-  useEffect(() => {
+    useEffect(() => {
 
-    // A function that sets the orientation state of the tabs.
-    function handleTabsOrientation() {
-      return window.innerWidth < breakpoints.values.sm
-        ? setTabsOrientation("vertical")
-        : setTabsOrientation("horizontal");
+        // A function that sets the orientation state of the tabs.
+        function handleTabsOrientation() {
+            return window.innerWidth < breakpoints.values.sm
+                ? setTabsOrientation("vertical")
+                : setTabsOrientation("horizontal");
+        }
+
+        /**
+         The event listener that's calling the handleTabsOrientation function when resizing the window.
+        */
+        window.addEventListener("resize", handleTabsOrientation);
+
+        // Call the handleTabsOrientation function to set the state with the initial value.
+        handleTabsOrientation();
+
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleTabsOrientation);
+    }, [tabsOrientation]);
+
+    // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
+
+    const handleCreateCoupon = async () => {
+        const confirm = await Swal.fire({
+            title: 'Alert',
+            text: 'Do you want to generate a discount coupon?',
+            icon: 'question',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: 'No'
+        });
+        if (confirm.isConfirmed) {
+            const data = await fetch('/radeemPoints', {
+                method: 'POST',
+            });
+            const response = await data.json();
+            if (response.success) {
+                let code = response.data.price_rules[0].discount_code;
+                let loyalty_earned = response.data.loyalty.loyalty_earned;
+                let radeemable = response.data.loyalty.radeemable;
+                dispatch(setLoyaltyInfo({
+                    coupon: code,
+                    points: loyalty_earned,
+                    radeemable: radeemable,
+                    expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
+                }));
+                Swal.fire({
+                    title: 'Done',
+                    text: response.message,
+                    icon: 'success',
+                });
+            }
+        }
     }
 
-    /**
-     The event listener that's calling the handleTabsOrientation function when resizing the window.
-    */
-    window.addEventListener("resize", handleTabsOrientation);
+    return (
+        <SuiBox position="relative">
+            <DashboardNavbar absolute light />
+            <SuiBox style={{ minHeight: "200px" }}
 
-    // Call the handleTabsOrientation function to set the state with the initial value.
-    handleTabsOrientation();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleTabsOrientation);
-  }, [tabsOrientation]);
-
-  // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
-
-  const handleCreateCoupon = async () => {
-      const confirm = await Swal.fire({
-          title: 'Alert',
-          text: 'Do you want to generate a discount coupon?',
-          icon: 'question',
-          showDenyButton: true,
-          confirmButtonText: 'Yes',
-          denyButtonText: 'No'
-      });
-      if(confirm.isConfirmed) {
-          const data = await fetch('/radeemPoints', {
-              method: 'POST',
-          });
-          const response = await data.json();
-          if(response.success) {
-              let code = response.data.price_rules[0].discount_code;
-              let loyalty_earned = response.data.loyalty.loyalty_earned;
-              dispatch(setLoyaltyInfo({
-                coupon: code,
-                points: loyalty_earned,
-                expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
-            }));
-              Swal.fire({
-                  title: 'Done',
-                  text: response.message,
-                  icon: 'success',
-              });
-          }
-      }
-  }
-
-  return (
-    <SuiBox position="relative">
-      <DashboardNavbar absolute light />
-      <SuiBox style = {{minHeight: "200px"}}
-
-        display="flex"
-        alignItems="center"
-        position="relative"
-        minHeight="18.75rem"
-        borderRadius="xl"
-        sx={{
-          backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
-            `${linearGradient(
-              rgba(gradients.info.main, 0.6),
-              rgba(gradients.info.state, 0.6)
-            )}, url(${curved0})`,
-          backgroundSize: "cover",
-          backgroundPosition: "50%",
-          overflow: "hidden",
-        }}
-      />
-      <Card
-        sx={{
-          backdropFilter: `saturate(200%) blur(30px)`,
-          backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
-          boxShadow: ({ boxShadows: { navbarBoxShadow } }) => navbarBoxShadow,
-          position: "relative",
-          mt: -8,
-          mx: 3,
-          py: 2,
-          px: 2,
-        }}
-      >
-        <Grid container spacing={3} alignItems="center">
-          <Grid item>
-          <SuiBox position="relative" height="max-content" mx="auto">
-              <SuiAvatar src={burceMars} alt="profile picture" size="xxl" variant="rounded" />
-              <SuiBox alt="spotify logo" position="absolute" right={0} bottom={0} mr={-1} mb={-1}>
-              <Link to="/edit-profile">
-                <SuiButton variant="gradient" color="light" size="small" iconOnly>
-                  <Icon>edit</Icon>
-                </SuiButton>
-                </Link>
-              </SuiBox>
-            </SuiBox>
-          </Grid>
+                display="flex"
+                alignItems="center"
+                position="relative"
+                minHeight="18.75rem"
+                borderRadius="xl"
+                sx={{
+                    backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
+                        `${linearGradient(
+                            rgba(gradients.info.main, 0.6),
+                            rgba(gradients.info.state, 0.6)
+                        )}, url(${curved0})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "50%",
+                    overflow: "hidden",
+                }}
+            />
+            <Card
+                sx={{
+                    backdropFilter: `saturate(200%) blur(30px)`,
+                    backgroundColor: ({ functions: { rgba }, palette: { white } }) => rgba(white.main, 0.8),
+                    boxShadow: ({ boxShadows: { navbarBoxShadow } }) => navbarBoxShadow,
+                    position: "relative",
+                    mt: -8,
+                    mx: 3,
+                    py: 2,
+                    px: 2,
+                }}
+            >
+                <Grid container spacing={3} alignItems="center">
+                    <Grid item>
+                        <SuiBox position="relative" height="max-content" mx="auto">
+                            <SuiAvatar src={burceMars} alt="profile picture" size="xxl" variant="rounded" />
+                            <SuiBox alt="spotify logo" position="absolute" right={0} bottom={0} mr={-1} mb={-1}>
+                                <Link to="/edit-profile">
+                                    <SuiButton variant="gradient" color="light" size="small" iconOnly>
+                                        <Icon>edit</Icon>
+                                    </SuiButton>
+                                </Link>
+                            </SuiBox>
+                        </SuiBox>
+                    </Grid>
 
 
-          <Grid item>
-            <SuiBox height="100%" mt={0.5} lineHeight={1}>
-              <SuiTypography variant="h5" fontWeight="medium">
-                {data?.name}
-              </SuiTypography>
-              <SuiTypography variant="button" color="text" fontWeight="medium">
-                {data?.email} | {data?.phone}
-              </SuiTypography>
-            </SuiBox>
-          </Grid>
-          <Grid item xs={6} md={3} lg={3} sx={{ ml: "auto" }}>
-                <SuiBox
-                style={{paddingTop: "2px",paddingBottom:"0",paddingLeft:"10px",paddingRight:"10px"}}
-                  borderRadius="md"
-                  border="0.0625rem dashed #8392ab"
-                  textAlign="center"
-                  py={2}
-                >
-                  <SuiTypography variant="h6" style={{color:"#17c1e8"}} fontWeight="medium" textTransform="capitalize">
-                    Coupon
-                  </SuiTypography>
-                  <SuiBox display="flex" style={{marginBottom:"0"}} alignItems="center" mb={2}>
-                      <SuiBox width="70%" mr={1}>
-                        <SuiInput
-                          size="small"
-                          value={loyaltyInfo.coupon}
-                          icon={{ component: "lock", direction: "right" }}
-                          disabled
-                        />
-                      </SuiBox>
-                      <Tooltip title={`Expires On: ${loyaltyInfo.expiry}`} placement="top">
-                        <SuiButton
-                          variant="outlined"
-                          color="secondary"
-                          size="small"
-                          sx={{ padding: "0.5rem 1rem" }}
+                    <Grid item>
+                        <SuiBox height="100%" mt={0.5} lineHeight={1}>
+                            <SuiTypography variant="h5" fontWeight="medium">
+                                {data?.name}
+                            </SuiTypography>
+                            <SuiTypography variant="button" color="text" fontWeight="medium">
+                                {data?.email} | {data?.phone}
+                            </SuiTypography>
+                        </SuiBox>
+                    </Grid>
+                    <Grid item xs={6} md={3} lg={3} sx={{ ml: "auto" }}>
+                        <SuiBox
+                            style={{ paddingTop: "2px", paddingBottom: "0", paddingLeft: "10px", paddingRight: "10px" }}
+                            borderRadius="md"
+                            border="0.0625rem dashed #8392ab"
+                            textAlign="center"
+                            py={2}
                         >
-                          copy
-                        </SuiButton>
-                      </Tooltip>
-                    </SuiBox>
-                    <span style={{fontSize:"13px"}}>Expires On: {loyaltyInfo.expiry}</span>
+                            <SuiTypography variant="h6" style={{ color: "#17c1e8" }} fontWeight="medium" textTransform="capitalize">
+                                Coupon
+                            </SuiTypography>
+                            <SuiBox display="flex" style={{ marginBottom: "0" }} alignItems="center" mb={2}>
+                                <SuiBox width="70%" mr={1}>
+                                    <SuiInput
+                                        size="small"
+                                        value={loyaltyInfo.coupon}
+                                        icon={{ component: "lock", direction: "right" }}
+                                        disabled
+                                    />
+                                </SuiBox>
+                                <Tooltip title={`Expires On: ${loyaltyInfo.expiry}`} placement="top">
+                                    <SuiButton
+                                        variant="outlined"
+                                        color="secondary"
+                                        size="small"
+                                        sx={{ padding: "0.5rem 1rem" }}
+                                    >
+                                        copy
+                                    </SuiButton>
+                                </Tooltip>
+                            </SuiBox>
+                            <span style={{ fontSize: "13px" }}>Expires On: {loyaltyInfo.expiry}</span>
 
-                </SuiBox>
-          </Grid>
-          <Grid item xs={6} md={2} lg={2} >
-                {/* ernings card */}
-                <SuiBox
-                  style={{background: "linear-gradient(310deg, #2152ff,#21d4fd )"}}
-                  borderRadius="md"
-                  textAlign="center"
-                  py={2}
-                >
-                  <SuiTypography variant="h6" style={{color:"#fff"}} fontWeight="medium" textTransform="capitalize">
-                    Earnings
-                  </SuiTypography>
-                  <SuiTypography variant="h4" fontWeight="bold">
+                        </SuiBox>
+                    </Grid>
+                    <Grid item xs={6} md={2} lg={2} >
+                        {/* ernings card */}
+                        <SuiBox
+                            style={{ background: "linear-gradient(310deg, #2152ff,#21d4fd )" }}
+                            borderRadius="md"
+                            textAlign="center"
+                            py={2}
+                        >
+                            <SuiTypography variant="h6" style={{ color: "#fff" }} fontWeight="medium" textTransform="capitalize">
+                                Earned Points
+                            </SuiTypography>
+                            <SuiTypography variant="h4" fontWeight="bold">
 
 
-                      <SuiTypography style={{color:"#fff"}} component="span" variant="h5" fontWeight="bold">
-                       {loyaltyInfo.points}
-                      </SuiTypography>
-                      <SuiButton variant="text" style={{textDecoration: "underline"}} color="white" {...loyaltyInfo.points < 10000 ? {disabled: true}: {disabled: false} } onClick={handleCreateCoupon}>Create Coupon</SuiButton>
-                  </SuiTypography>
-                </SuiBox>
-          </Grid>
+                                <SuiTypography style={{ color: "#fff" }} component="span" variant="h5" fontWeight="bold">
+                                    {loyaltyInfo.points}
+                                </SuiTypography>
+                            </SuiTypography>
+                        </SuiBox>
+                    </Grid>
+                    <Grid item xs={6} md={2} lg={2} >
+                        {/* ernings card */}
+                        <SuiBox
+                            style={{ background: "linear-gradient(310deg, #2152ff,#21d4fd )" }}
+                            borderRadius="md"
+                            textAlign="center"
+                            py={1}>
+                            <SuiTypography variant="h6" style={{ color: "#fff" }} fontWeight="medium" textTransform="capitalize">
+                                Radeemable Points
+                            </SuiTypography>
+                            <SuiTypography variant="h6" fontWeight="bold">
+                                <SuiTypography style={{ color: "#fff" }} component="span" variant="h5" fontWeight="bold">
+                                    {loyaltyInfo.radeemable}
+                                </SuiTypography>
+                            </SuiTypography>
+                            <SuiButton variant="text" style={{ textDecoration: "underline" }} color="white" {...loyaltyInfo.radeemable < 10000 ? { disabled: true } : { disabled: false }} onClick={handleCreateCoupon}>Create Coupon</SuiButton>
+                        </SuiBox>
+                    </Grid>
 
-        </Grid>
-      </Card>
-    </SuiBox>
-  );
+                </Grid>
+            </Card>
+        </SuiBox>
+    );
 }
 
 export default Header;

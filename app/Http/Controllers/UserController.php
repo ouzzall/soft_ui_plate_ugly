@@ -68,7 +68,7 @@ class UserController extends Controller
                 'data' => null
             ]);
         }
-        if ($user->loyalty->loyalty_earned < 10000) {
+        if ($user->loyalty->radeemable < 10000) {
             return response()->json([
                 'success' => false,
                 'message' => 'You need at least 10000 loyalty points to perform radeem action!',
@@ -76,7 +76,7 @@ class UserController extends Controller
             ]);
         }
         $code = Str::random(8);
-        $value = $user->loyalty->loyalty_earned * 0.001;
+        $value = $user->loyalty->radeemable * 0.001;
         $starts_at = Carbon::now();
         $ends_at = $starts_at->addMonth();
         $createPriceRule = getShop()->api()->rest('POST', '/admin/api/2021-10/price_rules.json', [
@@ -114,8 +114,9 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user->loyalty()->increment('loyalty_radeemed', $user->loyalty->loyalty_earned);
-            $user->loyalty()->decrement('loyalty_earned', $user->loyalty->loyalty_earned);
+            $user->loyalty()->increment('loyalty_radeemed', $user->loyalty->radeemable);
+            $user->loyalty()->decrement('loyalty_earned', $user->loyalty->radeemable);
+            $user->loyalty()->decrement('radeemable', $user->loyalty->radeemable);
             $user->price_rules()->create([
                 'price_rule_id' => $priceRule['id'],
                 'title' => $priceRule['title'],
@@ -126,7 +127,7 @@ class UserController extends Controller
                 'discount_code' => $priceRule['title'],
             ]);
             $user->transactions()->create([
-                'loyalty_points' => $user->loyalty->loyalty_earned,
+                'loyalty_points' => $user->loyalty->radeemable,
                 'transaction_type_id' => 2,
             ]);
             $userData = $user->load(['loyalty', 'price_rules' => function ($q) {

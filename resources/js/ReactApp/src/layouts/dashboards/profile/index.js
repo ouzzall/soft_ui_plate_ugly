@@ -86,12 +86,14 @@ function Profile() {
                     dispatch(setLoyaltyInfo({
                         coupon: code,
                         points: response.data.user.loyalty.loyalty_earned,
+                        radeemable: response.data.user.loyalty.radeemable,
                         expiry: new Date(response.data.user.price_rules[0].ends_at).toLocaleDateString()
                     }));
                 } else {
                     dispatch(setLoyaltyInfo({
                         coupon: 'XXXXXXXX',
                         points: response.data.user.loyalty.loyalty_earned,
+                        radeemable: response.data.user.loyalty.radeemable,
                         expiry: ''
                     }));
                 }

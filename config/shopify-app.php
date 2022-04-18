@@ -327,6 +327,10 @@ return [
         [
             'topic' => env('SHOPIFY_WEBHOOK_2_TOPIC', 'ORDERS_CREATE'),
             'address' => env('SHOPIFY_WEBHOOK_2_ADDRESS', 'https://cfcd-110-39-134-126.ngrok.io/webhook/orders-create')
+        ],
+        [
+            'topic' => env('SHOPIFY_WEBHOOK_3_TOPIC', 'ORDERS_FULFILLED'),
+            'address' => env('SHOPIFY_WEBHOOK_3_ADDRESS', 'https://cfcd-110-39-134-126.ngrok.io/webhook/orders-fulfilled')
         ]
         /*
             [

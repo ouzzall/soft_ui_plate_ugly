@@ -15,6 +15,7 @@ class Order extends Model
         'loyalty_points',
         'delivery_date',
         'amount',
+        'is_fulfilled',
     ];
 
     public function user()
