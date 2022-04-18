@@ -22,7 +22,7 @@ class RulesController extends Controller
         $rules->when($request->has('skip') && $request->has('limit'), function ($q) use ($request) {
             $q->take($request->limit)->skip($request->skip);
         });
-        $rules = $rules->get();
+        $rules = $rules->orderBy('id', 'DESC')->get();
         $data = [
             'data' => $rules,
             'pages' => ceil($count / $request->limit),
