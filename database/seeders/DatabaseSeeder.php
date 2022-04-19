@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RadeemSetting;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             SettingSeeder::class,
             ShippingRuleTypeSeeder::class,
-            TransactionTypeSeeder::class
+            TransactionTypeSeeder::class,
+            RadeemSetting::class,
         ]);
     }
 }

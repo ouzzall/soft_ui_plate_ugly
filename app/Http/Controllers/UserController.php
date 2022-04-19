@@ -60,7 +60,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function radeemPoints()
+    public function radeemPoints(Request $request)
     {
         $user = Auth::user();
         if ($user->is_blocked && $user->role->type == 'customer') {
@@ -78,7 +78,11 @@ class UserController extends Controller
             ]);
         }
         $code = Str::random(8);
-        $value = $user->loyalty->loyalty_earned * 0.001;
+        if(!$request->get('loyalty_points')) {
+            $value = $user->loyalty->loyalty_earned * 0.001;
+        } else {
+            $value = $request->loyalty_points * 0.001;
+        }
         $starts_at = Carbon::now();
         $ends_at = $starts_at->addMonth();
         $createPriceRule = getShop()->api()->rest('POST', '/admin/api/2021-10/price_rules.json', [
@@ -116,8 +120,13 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user->loyalty()->increment('loyalty_radeemed', $user->loyalty->loyalty_earned);
-            $user->loyalty()->decrement('loyalty_earned', $user->loyalty->loyalty_earned);
+            if($request->get('loyalty_points')) {
+                $loyalty = $request->loyalty;
+            } else {
+                $loyalty = $user->loyalty->loyalty_earned;
+            }
+            $user->loyalty()->increment('loyalty_radeemed', $loyalty);
+            $user->loyalty()->decrement('loyalty_earned', $loyalty);
             $user->price_rules()->create([
                 'price_rule_id' => $priceRule['id'],
                 'title' => $priceRule['title'],

@@ -79,7 +79,7 @@ function Header({ data }) {
 
     // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
-    const handleCreateCoupon = async (e) => {
+    const handleCreateCoupon = async (e, value) => {
         if (e.target.style.cursor == 'not-allowed') {
             return;
         }
@@ -87,6 +87,9 @@ function Header({ data }) {
             title: 'Alert',
             text: 'Do you want to generate a discount coupon?',
             icon: 'question',
+            input: 'text',
+            inputLabel: 'Loyalty Points:',
+            inputValue: value,
             showDenyButton: true,
             confirmButtonText: 'Yes',
             denyButtonText: 'No'
@@ -94,6 +97,12 @@ function Header({ data }) {
         if (confirm.isConfirmed) {
             const data = await fetch('/radeemPoints', {
                 method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    loyalty_points: confirm.value,
+                })
             });
             const response = await data.json();
             if (response.success) {
@@ -222,7 +231,7 @@ function Header({ data }) {
                                     {loyaltyInfo.points}
                                 </SuiTypography>
                             </SuiTypography>
-                            <SuiButton variant="text" style={{ textDecoration: "underline", backgroundColor: 'rgb(255, 255, 255, 0.5)', pointerEvents: 'all', cursor: loyaltyInfo.points < 10000 ? 'not-allowed': '' }} color="white" onClick={handleCreateCoupon}>Create Coupon</SuiButton>
+                            <SuiButton variant="text" style={{ textDecoration: "underline", backgroundColor: 'rgb(255, 255, 255, 0.5)', pointerEvents: 'all', cursor: loyaltyInfo.points < 10000 ? 'not-allowed': '' }} color="white" onClick={(e) => handleCreateCoupon(e, loyaltyInfo.points)}>Create Coupon</SuiButton>
                         </SuiBox>
                     </Grid>
                 </Grid>
