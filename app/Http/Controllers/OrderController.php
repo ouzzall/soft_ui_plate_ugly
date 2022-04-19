@@ -151,7 +151,6 @@ class OrderController extends Controller
                 'loyalty_points' => $loyalty_points,
                 'transaction_type_id' => 1,
             ]);
-            $order->user->loyalty()->increment('radeemable', $loyalty_points);
             DB::commit();
             Mail::to($order->user->email)->send(new SendLoyaltyMail($order->user->name));
             return response()->json([

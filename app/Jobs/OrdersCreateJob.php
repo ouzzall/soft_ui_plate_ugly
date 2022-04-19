@@ -86,22 +86,6 @@ class OrdersCreateJob implements ShouldQueue
                 'order_name' => $order->name,
                 'amount' => $order->subtotal_price,
             ]);
-            $loyaltyCalculated = loyaltyCalculator($user, $order);
-            if ($loyaltyCalculated !== false) {
-                $user->loyalty()->increment('loyalty_earned', $loyaltyCalculated['loyalty_earned']);
-                $user->loyalty()->update([
-                    'last_earned_date' => $loyaltyCalculated['last_earned_date']
-                ]);
-                $localOrder->update([
-                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
-                    'delivery_date' => $loyaltyCalculated['last_earned_date'],
-                ]);
-                $user->transactions()->create([
-                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
-                    'transaction_type_id' => 1,
-                ]);
-                Mail::to($user->email)->send(new SendLoyaltyMail($user->name));
-            }
             DB::commit();
             return response()->json([
                 'success' => true,

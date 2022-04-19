@@ -96,11 +96,9 @@ function Header({ data }) {
             if (response.success) {
                 let code = response.data.price_rules[0].discount_code;
                 let loyalty_earned = response.data.loyalty.loyalty_earned;
-                let radeemable = response.data.loyalty.radeemable;
                 dispatch(setLoyaltyInfo({
                     coupon: code,
                     points: loyalty_earned,
-                    radeemable: radeemable,
                     expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
                 }));
                 Swal.fire({
@@ -217,33 +215,13 @@ function Header({ data }) {
                                 Earned Points
                             </SuiTypography>
                             <SuiTypography variant="h4" fontWeight="bold">
-
-
                                 <SuiTypography style={{ color: "#fff" }} component="span" variant="h5" fontWeight="bold">
                                     {loyaltyInfo.points}
                                 </SuiTypography>
                             </SuiTypography>
+                            <SuiButton variant="text" style={{ textDecoration: "underline" }} color="white" {...loyaltyInfo.points < 10000 ? { disabled: true } : { disabled: false }} onClick={handleCreateCoupon}>Create Coupon</SuiButton>
                         </SuiBox>
                     </Grid>
-                    <Grid item xs={6} md={2} lg={2} >
-                        {/* ernings card */}
-                        <SuiBox
-                            style={{ background: "linear-gradient(310deg, #2152ff,#21d4fd )" }}
-                            borderRadius="md"
-                            textAlign="center"
-                            py={1}>
-                            <SuiTypography variant="h6" style={{ color: "#fff" }} fontWeight="medium" textTransform="capitalize">
-                                Radeemable Points
-                            </SuiTypography>
-                            <SuiTypography variant="h6" fontWeight="bold">
-                                <SuiTypography style={{ color: "#fff" }} component="span" variant="h5" fontWeight="bold">
-                                    {loyaltyInfo.radeemable}
-                                </SuiTypography>
-                            </SuiTypography>
-                            <SuiButton variant="text" style={{ textDecoration: "underline" }} color="white" {...loyaltyInfo.radeemable < 10000 ? { disabled: true } : { disabled: false }} onClick={handleCreateCoupon}>Create Coupon</SuiButton>
-                        </SuiBox>
-                    </Grid>
-
                 </Grid>
             </Card>
         </SuiBox>

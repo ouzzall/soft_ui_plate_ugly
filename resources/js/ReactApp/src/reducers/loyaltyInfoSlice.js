@@ -5,14 +5,12 @@ export const loyaltyInfoSlice = createSlice({
   initialState: {
     coupon: 'XXXXXXXX',
     points: 0,
-    radeemable: 0,
     expiry: '',
   },
   reducers: {
     setLoyaltyInfo: (state, action) => {
       state.coupon = action.payload.coupon;
       state.points = action.payload.points;
-      state.radeemable = action.payload.radeemable;
       state.expiry = action.payload.expiry;
     }
   },

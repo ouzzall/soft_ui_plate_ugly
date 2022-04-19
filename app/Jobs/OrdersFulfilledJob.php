@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\SendLoyaltyMail;
 use App\Models\Order;
 use App\Models\User;
 use Exception;
@@ -12,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Osiset\ShopifyApp\Objects\Values\ShopDomain;
 use stdClass;
 
@@ -79,7 +81,29 @@ class OrdersFulfilledJob implements ShouldQueue
                 'is_fulfilled' => 1,
             ]);
             $user = User::firstWhere('email', $customer->email);
-            $user->loyalty()->increment('radeemable', $orderData->loyalty_points);
+            if(!$user) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User not found!!',
+                    'data' => $user,
+                ]);
+            }
+            $loyaltyCalculated = loyaltyCalculator($user, $order);
+            if ($loyaltyCalculated !== false) {
+                $user->loyalty()->increment('loyalty_earned', $loyaltyCalculated['loyalty_earned']);
+                $user->loyalty()->update([
+                    'last_earned_date' => $loyaltyCalculated['last_earned_date']
+                ]);
+                $orderData->update([
+                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
+                    'delivery_date' => $loyaltyCalculated['last_earned_date'],
+                ]);
+                $user->transactions()->create([
+                    'loyalty_points' => $loyaltyCalculated['loyalty_earned'],
+                    'transaction_type_id' => 1,
+                ]);
+                Mail::to($user->email)->send(new SendLoyaltyMail($user->name));
+            }
             DB::commit();
             return response()->json([
                 'success' => true,
