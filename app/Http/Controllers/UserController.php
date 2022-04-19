@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
+use App\Mail\SendRadeemMail;
 use App\Models\Order;
 use App\Models\Transaction;
 use App\Models\User;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UserController extends Controller
@@ -133,6 +135,7 @@ class UserController extends Controller
                 $q->latest();
             }]);
             DB::commit();
+            Mail::to($user->email)->send(new SendRadeemMail($user->name));
             return response()->json([
                 'success' => true,
                 'message' => 'Points Radeemed successfully!',
