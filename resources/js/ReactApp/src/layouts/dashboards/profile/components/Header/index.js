@@ -79,7 +79,10 @@ function Header({ data }) {
 
     // const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
-    const handleCreateCoupon = async () => {
+    const handleCreateCoupon = async (e) => {
+        if (e.target.style.cursor == 'not-allowed') {
+            return;
+        }
         const confirm = await Swal.fire({
             title: 'Alert',
             text: 'Do you want to generate a discount coupon?',
@@ -219,7 +222,7 @@ function Header({ data }) {
                                     {loyaltyInfo.points}
                                 </SuiTypography>
                             </SuiTypography>
-                            <SuiButton variant="text" style={{ textDecoration: "underline" }} color="white" {...loyaltyInfo.points < 10000 ? { disabled: true } : { disabled: false }} onClick={handleCreateCoupon}>Create Coupon</SuiButton>
+                            <SuiButton variant="text" style={{ textDecoration: "underline", backgroundColor: 'rgb(255, 255, 255, 0.5)', pointerEvents: 'all', cursor: loyaltyInfo.points < 10000 ? 'not-allowed': '' }} color="white" onClick={handleCreateCoupon}>Create Coupon</SuiButton>
                         </SuiBox>
                     </Grid>
                 </Grid>
