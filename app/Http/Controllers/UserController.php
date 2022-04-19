@@ -137,7 +137,7 @@ class UserController extends Controller
                 'discount_code' => $priceRule['title'],
             ]);
             $user->transactions()->create([
-                'loyalty_points' => $user->loyalty->loyalty_earned,
+                'loyalty_points' => $loyalty,
                 'transaction_type_id' => 2,
             ]);
             $userData = $user->load(['loyalty', 'price_rules' => function ($q) {
