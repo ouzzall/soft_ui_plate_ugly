@@ -121,10 +121,11 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             if($request->get('loyalty_points')) {
-                $loyalty = $request->loyalty;
+                $loyalty = $request->loyalty_points;
             } else {
                 $loyalty = $user->loyalty->loyalty_earned;
             }
+            return $loyalty;
             $user->loyalty()->increment('loyalty_radeemed', $loyalty);
             $user->loyalty()->decrement('loyalty_earned', $loyalty);
             $user->price_rules()->create([
