@@ -12,6 +12,7 @@ class Product extends Model
 
     protected $fillable = [
         'title',
-        'product_id'
+        'product_id',
+        'last_synced',
     ];
 }

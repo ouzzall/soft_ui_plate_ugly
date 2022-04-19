@@ -49,9 +49,12 @@ import Swal from 'sweetalert2';
 function Campaign() {
 
     const syncData = async () => {
+        setSyncLoading(true);
         let data = await fetch('/sync-data');
         let response = await data.json();
         if(response.success) {
+            setLastSynced(new Date(response.data.last_synced).toLocaleString());
+            setSyncLoading(false);
             await Swal.fire({
                 title: 'Done!',
                 icon: 'success',
@@ -64,6 +67,8 @@ function Campaign() {
     const [endDate, setEndDate] = useState('');
     const [queryString, setQueryString] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
+    const [lastSynced, setLastSynced] = useState('');
+    const [syncLoading, setSyncLoading] = useState(false);
 
     useEffect(() => {
         let query = '';
@@ -76,6 +81,17 @@ function Campaign() {
         setQueryString(query);
     }, [startDate, endDate]);
 
+    useEffect(() => {
+        const lastSync = async () => {
+            let data = await fetch('/last-synced');
+            let response = await data.json();
+            if(response.success) {
+                setLastSynced(new Date(response.data.last_synced).toLocaleString());
+            }
+        }
+        lastSync();
+    }, []);
+
     const renderColumns = (row) => ({
         actions: <ActionCell edit={`/edit-campaign/${row.id}`} />
     })
@@ -86,6 +102,7 @@ function Campaign() {
             <SuiBox my={3}>
                 <SuiBox mb={3} display="flex" justifyContent="end">
                     <div style={{paddingRight: 10}} onClick={syncData}>
+                        <span style={{paddingRight: 10, fontSize: 14}}>{syncLoading ? 'syncing...' : lastSynced}</span>
                         <SuiButton variant="gradient" color="info">Sync Shop Data</SuiButton>
                     </div>
                     <Link to="/create-campaign">

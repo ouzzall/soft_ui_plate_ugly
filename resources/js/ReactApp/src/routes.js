@@ -50,6 +50,7 @@ import OrderDetails from "@uf/layouts/dashboards/order-details";
 import Campaign from "@uf/layouts/dashboards/campaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
 import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
+import RadeemSetting from "@uf/layouts/dashboards/radeem-settings";
 
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
@@ -189,6 +190,14 @@ const routes = [
         icon: <Shop size="12px" />,
         route: "/order-details/:id",
         component: OrderDetails,
+    },
+    {
+        role: ["admin"],
+        name: "Radeem Settings",
+        key: "Radeem Settings",
+        icon: <Shop size="12px" />,
+        route: "/radeem-settings",
+        component: RadeemSetting,
     },
     {
         role: ["customer"],

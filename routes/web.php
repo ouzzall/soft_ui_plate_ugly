@@ -9,7 +9,10 @@ use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Mail\SendRegistrationMail;
+use App\Models\Product;
 use App\Models\Role;
+use App\Models\SyncDetail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -33,12 +36,32 @@ Route::get('/app-install', function () {
 })->middleware(['verify.shopify'])->name('home');
 Route::get('/getSession', [AuthController::class, 'getSession']);
 
-Route::get('sync-data', function() {
+Route::get('sync-data', function () {
     Artisan::call('sync:data');
+    $product = Product::orderBy('last_synced', 'DESC')->first();
+    Product::query()->update([
+        'last_synced' => Carbon::now()
+    ]);
+    $product->refresh();
+    $data = [
+        'last_synced' => $product->last_synced,
+    ];
     return response()->json([
         'success' => true,
         'message' => 'Data synced successfully!',
-        'data' => null,
+        'data' => $data,
+    ]);
+});
+
+Route::get('last-synced', function () {
+    $product = Product::orderBy('last_synced', 'DESC')->first();
+    $data = [
+        'last_synced' => $product->last_synced,
+    ];
+    return response()->json([
+        'success' => true,
+        'message' => 'Last data synced retrieved successfully!',
+        'data' => $data,
     ]);
 });
 Route::get('/getSecondChart', [DashboardController::class, 'getSecondChart']);
@@ -81,8 +104,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/getOrderRules', [RulesController::class, 'getOrderRules']);
         Route::post('/createOrderRule', [RulesController::class, 'saveOrderRule']);
         Route::post('/updateOrderRule/{id}', [RulesController::class, 'updateOrderRule']);
+
+        Route::get('/getRadeemSetting', [DefaultController::class, 'getRadeemSetting']);
+        Route::post('/setRadeemSetting', [DefaultController::class, 'setRadeemSetting']);
     });
-    Route::middleware('can:verify_role,"customer"')->group(function() {
+    Route::middleware('can:verify_role,"customer"')->group(function () {
         Route::post('/changePassword', [UserController::class, 'changePassword']);
         Route::get('/getProfile', [UserController::class, 'getProfile']);
         Route::post('/updateProfile', [UserController::class, 'updateProfile']);
