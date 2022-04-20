@@ -76,7 +76,9 @@ if (!function_exists('loyaltyCalculator')) {
         }
         Log::info('order_rule');
         // Rule (Order based)
-        $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/customers/' . $user->shopify_customer_id . '/orders.json');
+        $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/customers/' . $user->shopify_customer_id . '/orders.json', [
+            'status' => 'any'
+        ]);
         $ordersCollection = collect($orders['body']['orders']);
         $ordersCollection = $ordersCollection->filter(function ($orderData) use ($deliveryDate, $order) {
             $tags = explode(', ', $orderData['tags']);
@@ -84,15 +86,13 @@ if (!function_exists('loyaltyCalculator')) {
                 try {
                     $date = Carbon::createFromFormat('Y/m/d', $tag);
                     if ($date !== false) {
-                        Log::info($date . ' '. $deliveryDate . ' ' . $orderData['id'] . ' '. $order->id);
-                        return $date->format('Y-m-d') === $deliveryDate || $orderData['id'] == $order->id;
+                        return $date->format('Y-m-d') === $deliveryDate;
                     }
                 } catch (InvalidFormatException $ex) {
                     // format exception
                 }
             }
         });
-        Log::info(json_encode($ordersCollection));
         if ($ordersCollection->isNotEmpty()) {
             $totalOrderPriceSum = $ordersCollection->sum('subtotal_price');
             $totalShippingPriceSum = $ordersCollection->sum(function ($value) {
