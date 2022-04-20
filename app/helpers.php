@@ -104,9 +104,9 @@ if (!function_exists('loyaltyCalculator')) {
             if ($shipping_rule_one && $setting->order_rule_active) {
                 $loyaltyValue = 0;
                 if ($shipping_rule_one->discount_type == 'fixed') {
-                    $loyaltyValue = $shipping_rule_one->shipping_amount * 0.001;
+                    $loyaltyValue = $shipping_rule_one->shipping_amount / 0.001;
                 } elseif ($shipping_rule_one->discount_type == 'percentage') {
-                    $loyaltyValue = ($totalShippingPriceSum * ($shipping_rule_one->shipping_amount / 100)) * 0.001;
+                    $loyaltyValue = ($totalShippingPriceSum * ($shipping_rule_one->shipping_amount / 100)) / 0.001;
                 }
                 $result = [
                     'loyalty_earned' => $loyaltyValue,
