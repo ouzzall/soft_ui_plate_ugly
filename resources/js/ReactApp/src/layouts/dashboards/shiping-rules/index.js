@@ -146,7 +146,7 @@ function ShipingRules() {
     }
 
     const renderColumns = (row) => ({
-        shipping_amount: `$${row.shipping_amount}`,
+        shipping_amount: (row.discount_type == 'percentage') ? `${row.shipping_amount}%` : `$${row.shipping_amount}`,
         order_amount: `$${row.order_amount}`,
         actions: <Actions edit={() => editHandler(row)} />
     })
