@@ -85,6 +85,7 @@ if (!function_exists('loyaltyCalculator')) {
                 try {
                     $date = Carbon::createFromFormat('Y/m/d', $tag);
                     if ($date !== false) {
+                        Log::info($date);
                         return $date->format('Y-m-d') === $deliveryDate || $orderData['id'] == $order->id;
                     }
                 } catch (InvalidFormatException $ex) {
