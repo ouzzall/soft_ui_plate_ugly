@@ -5,6 +5,8 @@ namespace App\Jobs;
 use App\Mail\SendLoyaltyMail;
 use App\Models\Order;
 use App\Models\User;
+use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -76,15 +78,27 @@ class OrdersCreateJob implements ShouldQueue
                     'loyalty_radeemed' => 0.0,
                 ]);
             }
-            if($user->shopify_customer_id == null) {
+            if ($user->shopify_customer_id == null) {
                 $user->update([
                     'shopify_customer_id' => $customer->id,
                 ]);
+            }
+            $orderTags = explode(', ', $order->tags);
+            foreach ($orderTags as $tag) {
+                try {
+                    $date = Carbon::createFromFormat('Y/m/d', $tag);
+                    if ($date !== false) {
+                        $deliveryDate = $date->format('Y-m-d');
+                    }
+                } catch (InvalidFormatException $ex) {
+                    // format exception
+                }
             }
             $localOrder = $user->orders()->create([
                 'order_number' => $order->id,
                 'order_name' => $order->name,
                 'amount' => $order->subtotal_price,
+                'delivery_date' => $deliveryDate,
             ]);
             DB::commit();
             return response()->json([
