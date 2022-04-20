@@ -108,9 +108,9 @@ function Campaign() {
             <DashboardNavbar />
             <SuiBox my={3}>
                 <SuiBox mb={3} display="flex" justifyContent="end">
-                    <div style={{paddingRight: 10}} onClick={syncData}>
-                        <span style={{paddingRight: 10, fontSize: 14}}>{syncLoading ? 'syncing...' : lastSynced}</span>
-                        <SuiButton variant="gradient" color="info">Sync Shop Data</SuiButton>
+                    <div style={{paddingRight: 10}}>
+                        <span style={{paddingRight: 10, fontSize: 14}}>Last Sync: {syncLoading ? 'syncing...' : lastSynced}</span>
+                        <SuiButton onClick={syncData} variant="gradient" color="info">Sync Shop Data</SuiButton>
                     </div>
                     <Link to="/create-campaign">
                         <SuiButton variant="gradient" color="info">Create Campaign</SuiButton>

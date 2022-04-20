@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Mail\SendRadeemMail;
 use App\Models\Order;
+use App\Models\RadeemSetting;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
@@ -68,18 +69,27 @@ class UserController extends Controller
                 'data' => null
             ]);
         }
-        if ($user->loyalty->loyalty_earned < 10000) {
+        $RadeemSetting = RadeemSetting::first();
+        $code = Str::random(8);
+        if($request->get('loyalty_points')) {
+            $loyalty = (int) $request->loyalty_points;
+        } else {
+            $loyalty = $user->loyalty->loyalty_earned;
+        }
+        $value = $loyalty * 0.001;
+        if ($loyalty < $RadeemSetting->min_radeem_value) {
             return response()->json([
                 'success' => false,
-                'message' => 'You need at least 10000 loyalty points to perform radeem action!',
+                'message' => 'You can radeem minimum '. $RadeemSetting->min_radeem_value .' loyalty points!',
                 'data' => null
             ]);
         }
-        $code = Str::random(8);
-        if(!$request->get('loyalty_points')) {
-            $value = $user->loyalty->loyalty_earned * 0.001;
-        } else {
-            $value = $request->loyalty_points * 0.001;
+        if ($loyalty > $RadeemSetting->max_radeem_value) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You can radeem maximum ' . $RadeemSetting->max_radeem_value .' loyalty points!',
+                'data' => null
+            ]);
         }
         $starts_at = Carbon::now();
         $ends_at = $starts_at->addMonth();
@@ -118,11 +128,6 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         try {
-            if($request->get('loyalty_points')) {
-                $loyalty = (int) $request->loyalty_points;
-            } else {
-                $loyalty = $user->loyalty->loyalty_earned;
-            }
             $user->loyalty()->increment('loyalty_radeemed', $loyalty);
             $user->loyalty()->decrement('loyalty_earned', $loyalty);
             $user->price_rules()->create([
@@ -176,7 +181,9 @@ class UserController extends Controller
             $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
             return $value;
         });
+        $radeemSetting = RadeemSetting::first();
         $data = [
+            'radeem_setting' => $radeemSetting,
             'user' => $user,
             'others' => [
                 'coupons_created' => $couponsCount,

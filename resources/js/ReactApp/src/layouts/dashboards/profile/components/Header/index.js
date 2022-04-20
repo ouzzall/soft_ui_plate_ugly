@@ -51,6 +51,7 @@ import { setLoyaltyInfo } from "../../../../../reducers/loyaltyInfoSlice";
 function Header({ data }) {
     const [tabsOrientation, setTabsOrientation] = useState("horizontal");
     const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
+    const redeem = useSelector((state) => state.redeem);
     const dispatch = useDispatch();
 
 
@@ -113,11 +114,17 @@ function Header({ data }) {
                     points: loyalty_earned,
                     expiry: new Date(response.data.price_rules[0].ends_at).toLocaleDateString()
                 }));
-                Swal.fire({
+                await Swal.fire({
                     title: 'Done',
                     text: response.message,
                     icon: 'success',
                 });
+            } else {
+                await Swal.fire({
+                    title: 'Error',
+                    text: response.message,
+                    icon: 'error',
+                })
             }
         }
     }
@@ -231,7 +238,7 @@ function Header({ data }) {
                                     {loyaltyInfo.points}
                                 </SuiTypography>
                             </SuiTypography>
-                            <SuiButton variant="text" style={{ textDecoration: "underline", backgroundColor: 'rgb(255, 255, 255, 0.5)', pointerEvents: 'all', cursor: loyaltyInfo.points < 10000 ? 'not-allowed': '' }} color="white" onClick={(e) => handleCreateCoupon(e, loyaltyInfo.points)}>Create Coupon</SuiButton>
+                            <SuiButton variant="text" style={{ textDecoration: "underline", backgroundColor: 'rgb(255, 255, 255, 0.5)', pointerEvents: 'all', cursor: loyaltyInfo.points < redeem.min_value ? 'not-allowed': '' }} color="white" onClick={(e) => handleCreateCoupon(e, loyaltyInfo.points)}>Create Coupon</SuiButton>
                         </SuiBox>
                     </Grid>
                 </Grid>

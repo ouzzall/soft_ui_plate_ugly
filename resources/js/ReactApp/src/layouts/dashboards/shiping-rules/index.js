@@ -146,6 +146,8 @@ function ShipingRules() {
     }
 
     const renderColumns = (row) => ({
+        shipping_amount: `$${row.shipping_amount}`,
+        order_amount: `$${row.order_amount}`,
         actions: <Actions edit={() => editHandler(row)} />
     })
     return (
@@ -299,10 +301,10 @@ function ShipingRules() {
                                                 </SuiBox>
                                                 <SuiBox display="flex" justifyContent="flex-end" alignItems="center" width={{ xs: "100%", sm: "auto" }} mt={{ xs: 1, sm: 0 }}>
                                                     <SuiBox lineHeight={0} mx={2}>
-                                                        <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography>
+                                                        {/* <SuiTypography variant="button" color="text" fontWeight="regular"> {spotify2FA ? "Enabled" : "Disabled"} </SuiTypography> */}
                                                     </SuiBox>
                                                     <SuiBox mr={1}>
-                                                        <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} />
+                                                        {/* <Switch checked={spotify2FA} onChange={handleSetSpotify2FA} /> */}
                                                     </SuiBox>
                                                 </SuiBox>
                                             </SuiBox>
