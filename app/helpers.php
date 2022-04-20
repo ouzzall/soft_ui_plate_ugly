@@ -78,14 +78,13 @@ if (!function_exists('loyaltyCalculator')) {
         // Rule (Order based)
         $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/customers/' . $user->shopify_customer_id . '/orders.json');
         $ordersCollection = collect($orders['body']['orders']);
-        Log::info(json_encode($ordersCollection, JSON_PRETTY_PRINT));
         $ordersCollection = $ordersCollection->filter(function ($orderData) use ($deliveryDate, $order) {
             $tags = explode(', ', $orderData['tags']);
             foreach ($tags as $tag) {
                 try {
                     $date = Carbon::createFromFormat('Y/m/d', $tag);
                     if ($date !== false) {
-                        Log::info($date);
+                        Log::info($date . ' '. $deliveryDate . ' ' . $order['id'] . ' '. $order->id);
                         return $date->format('Y-m-d') === $deliveryDate || $orderData['id'] == $order->id;
                     }
                 } catch (InvalidFormatException $ex) {
