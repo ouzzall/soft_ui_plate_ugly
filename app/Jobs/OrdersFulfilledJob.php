@@ -89,6 +89,7 @@ class OrdersFulfilledJob implements ShouldQueue
                 ]);
             }
             $loyaltyCalculated = loyaltyCalculator($user, $order);
+            Log::info(json_encode($loyaltyCalculated));
             if ($loyaltyCalculated !== false) {
                 $user->loyalty()->increment('loyalty_earned', $loyaltyCalculated['loyalty_earned']);
                 $user->loyalty()->update([
