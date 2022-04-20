@@ -92,6 +92,7 @@ if (!function_exists('loyaltyCalculator')) {
             }
         });
         Log::info(json_encode($ordersCollection));
+        Log::info(json_encode($deliveryDate));
         if ($ordersCollection->isNotEmpty()) {
             $totalOrderPriceSum = $ordersCollection->sum('subtotal_price');
             $totalShippingPriceSum = $ordersCollection->sum(function ($value) {
