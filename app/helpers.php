@@ -101,7 +101,6 @@ if (!function_exists('loyaltyCalculator')) {
             });
             $shipping_rule_one = ShippingRule::where('shipping_rule_type', 1)->where('is_active', 1)
                 ->where('order_amount', '<=', $totalOrderPriceSum)->first();
-            Log::info(json_encode($shipping_rule_one));
             if ($shipping_rule_one && $setting->order_rule_active) {
                 $loyaltyValue = 0;
                 if ($shipping_rule_one->discount_type == 'fixed') {
