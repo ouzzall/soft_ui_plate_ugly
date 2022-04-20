@@ -49,10 +49,7 @@ function users() {
     const [endDate, setEndDate] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
     const [queryString, setQueryString] = useState('');
-    const [blockFilter, setBlockFilter] = useState({
-        label: '',
-        value: '',
-    });
+    const [blockFilter, setBlockFilter] = useState(null);
     const renderColumns = (row) => ({
         actions: <SuiButton variant="gradient" color="info" size="small" onClick={() => changeAuthority(!row.is_blocked, row.id)}>{row.is_blocked ? 'Unblock' : 'Block'}</SuiButton>
     })
@@ -65,11 +62,19 @@ function users() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
-        if (blockFilter.value != '') {
-            query += `&is_blocked=${blockFilter.value}`;
+        if (blockFilter?.value != '') {
+            query += `&is_blocked=${blockFilter?.value}`;
         }
         setQueryString(query);
     }, [blockFilter, startDate, endDate]);
+
+    const resetFilters = () => {
+        setStartDate('');
+        setEndDate('');
+        setBlockFilter(null);
+        setQueryString('');
+        setReloadTable(!reloadTable);
+    }
 
     const changeAuthority = async (permission, id) => {
         let action = permission ? 'Block' : 'Unblock';
@@ -110,13 +115,13 @@ function users() {
                     <SuiBox display="flex">
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setStartDate(event[0].toLocaleDateString());
-                            }} input={{ placeholder: "Select Start Date" }} />
+                                setStartDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select Start Date" }} value={startDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setEndDate(new Date(event[0]).toLocaleDateString());
-                            }} input={{ placeholder: "Select End Date" }} />
+                                setEndDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select End Date" }} value={endDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
@@ -136,12 +141,17 @@ function users() {
                                 onChange={(event) => {
                                     setBlockFilter(event);
                                 }}
+                                value={blockFilter}
                             />
                         </SuiBox>
                         <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                             Filter
                         </SuiButton>
-
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => resetFilters()} variant="gradient" color="info">
+                                Reset
+                            </SuiButton>
+                        </SuiBox>
                     </SuiBox>
                 </SuiBox>
                 <Card>

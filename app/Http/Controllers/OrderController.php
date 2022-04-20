@@ -27,9 +27,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('user');
         $orders->when($request->get('startDate') || $request->get('endDate'), function($q) use($request) {
-            $startDate = Carbon::createFromFormat('d/m/Y', $request->startDate)->format('Y-m-d');
-            $endDate = Carbon::createFromFormat('d/m/Y', $request->endDate)->format('Y-m-d');
-            $q->whereDate('created_at', '>=', $startDate)->whereDate('created_at', '<=', $endDate);
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
         });
         $orders->when($request->get('search'), function ($q) use ($request) {
             $q->where(function ($q) use ($request) {

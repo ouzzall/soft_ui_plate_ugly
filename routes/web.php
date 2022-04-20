@@ -64,7 +64,6 @@ Route::get('last-synced', function () {
         'data' => $data,
     ]);
 });
-Route::get('/getSecondChart', [DashboardController::class, 'getSecondChart']);
 // redirect if authenticated
 Route::middleware(['guest'])->group(function () {
     Route::view('/login', 'index')->name('login');
@@ -83,7 +82,6 @@ Route::middleware(['auth'])->group(function () {
 
     // admin routes
     Route::middleware('can:verify_role,"admin"')->group(function () {
-        Route::get('/getCharts', [DashboardController::class, 'getCharts']);
         Route::get('/getDashboardData', [DashboardController::class, 'getDashboardData']);
         Route::post('/updateSetting', [DashboardController::class, 'updateSetting']);
         Route::get('/getUsers', [UserController::class, 'getUsers']);

@@ -13,12 +13,22 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function getCharts()
+    private function getChart($request)
     {
         $labels = [];
         $today = Carbon::today();
-        $transactions = Transaction::selectRaw('SUM(loyalty_points) loyalty_points, month(created_at) month')->groupBy('month')->get();
-        $orders = Order::selectRaw('SUM(amount) amount, month(created_at) month')->groupBy('month')->get();
+        $transactions = Transaction::query();
+        $transactions->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $transactions = $transactions->selectRaw('SUM(loyalty_points) loyalty_points, month(created_at) month')->groupBy('month')->get();
+
+        $orders = Order::query();
+        $orders->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $orders = $orders->selectRaw('SUM(amount) amount, month(created_at) month')->groupBy('month')->get();
+
         $loyaltyData = [];
         $totalOrdersData = [];
         $j = 0;
@@ -51,19 +61,13 @@ class DashboardController extends Controller
             ]
         ];
         $data = [
-            'sales_chart' => [
-                'labels' => $labels,
-                'datasets' => $datasets,
-            ]
+            'labels' => $labels,
+            'datasets' => $datasets,
         ];
-        return response()->json([
-            'success' => true,
-            'message' => 'Chart retrieved successfully!',
-            'data' => $data,
-        ]);
+        return $data;
     }
 
-    public function getSecondChart()
+    private function getSecondChart($request)
     {
         $colors = [
             'primary',
@@ -72,22 +76,35 @@ class DashboardController extends Controller
             'success',
             'warning',
         ];
-        $loyalty_sum = Transaction::orderBy('loyalty_points','DESC')->where('transaction_type_id', 1)->limit(5)->sum('loyalty_points') * 0.001;
-        $users = User::where('role_id', 2)->whereHas('transactions', function ($q) {
-            $q->orderBy('loyalty_points', 'DESC');
+        $loyalty_sum = Transaction::query();
+        $loyalty_sum->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $loyalty_sum = $loyalty_sum->orderBy('loyalty_points', 'DESC')->where('transaction_type_id', 1)->limit(5)->sum('loyalty_points') * 0.001;
+
+        $users = User::where('role_id', 2)->whereHas('transactions', function ($q) use ($request) {
+            $q->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+                $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+            })->orderBy('loyalty_points', 'DESC');;
         })->limit(5)->get();
+
         $labels = [];
         $backgroundColors = [];
         $data = [];
         for ($i = 0; $i < 5; $i++) {
             $user = $users[$i] ?? null;
             if ($user) {
-                $loyalty_points = $user->transactions()->where('transaction_type_id', 1)->sum('loyalty_points');
+                $loyalty_points = $user->transactions();
+                $loyalty_points->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+                    $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+                });
+                $loyalty_points = $loyalty_points->where('transaction_type_id', 1)->sum('loyalty_points');
+
                 $labels[] = $user->name;
-                $data[] = number_format((($loyalty_points * 0.001) / $loyalty_sum) * 100, 2);
+                $data[] = number_format((($loyalty_points * 0.001) / ($loyalty_sum == 0 ? 1 : $loyalty_sum)) * 100, 2);
             } else {
                 $labels[] = 'No customer';
-                $data[] = (0 / $loyalty_sum) * 100;
+                $data[] = (0 / ($loyalty_sum == 0 ? 1 : $loyalty_sum)) * 100;
             }
             $backgroundColors[] = $colors[$i];
         }
@@ -101,32 +118,59 @@ class DashboardController extends Controller
             'datasets' => $datasets,
             'count' => $loyalty_sum
         ];
-        return response()->json([
-            'success' => true,
-            'message' => 'Second Chart retrieved successfully!',
-            'data' => $data,
-        ]);
+        return $data;
     }
 
-    public function getDashboardData()
+    public function getDashboardData(Request $request)
     {
-        $no_of_users = User::where('role_id', 2)->count();
-        $no_of_coupons_created = PriceRule::count();
-        $no_of_orders = Order::count();
-        $total_points_earned = Transaction::where('transaction_type_id', 1)->sum('loyalty_points');
+        $no_of_users = User::query();
+        $no_of_users->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $no_of_users = $no_of_users->where('role_id', 2)->count();
+
+        $no_of_coupons_created = PriceRule::query();
+        $no_of_coupons_created->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $no_of_coupons_created = $no_of_coupons_created->count();
+
+        $no_of_orders = Order::query();
+        $no_of_orders->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $no_of_orders = $no_of_orders->count();
+
+        $total_points_earned = Transaction::query();
+        $total_points_earned->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $total_points_earned = $total_points_earned->where('transaction_type_id', 1)->sum('loyalty_points');
+
         $setting = Setting::first();
-        $transactions = Transaction::with(['user', 'transaction_type'])->orderBy('id', 'DESC')->limit(5)->get();
+
+        $transactions = Transaction::query();
+        $transactions->when($request->get('startDate') || $request->get('endDate'), function ($q) use ($request) {
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
+        });
+        $transactions = $transactions->with(['user', 'transaction_type'])->orderBy('id', 'DESC')->limit(5)->get();
         $transactions = $transactions->map(function ($value) {
             $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
             return $value;
         });
+
         $data = [
-            'users' => $no_of_users,
-            'coupons' => $no_of_coupons_created,
-            'orders' => $no_of_orders,
-            'points_earned' => $total_points_earned,
-            'settings' => $setting,
-            'transactions' => $transactions
+            'dashboard' => [
+                'users' => $no_of_users,
+                'coupons' => $no_of_coupons_created,
+                'orders' => $no_of_orders,
+                'points_earned' => $total_points_earned,
+                'settings' => $setting,
+                'transactions' => $transactions
+            ],
+            'first_chart' => $this->getChart($request),
+            'second_chart' => $this->getSecondChart($request),
+
         ];
         return response()->json([
             'success' => true,

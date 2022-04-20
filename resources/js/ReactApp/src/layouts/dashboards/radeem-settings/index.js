@@ -106,14 +106,14 @@ function RadeemSetting() {
                                 <h5>Radeem Setting</h5>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="number" label="Min Radeem Value" placeholder="0" value={minRadeem} onChange={({ target: { value } }) => {
+                                        <FormField type="number" label="Min Radeem Points" placeholder="0" value={minRadeem} onChange={({ target: { value } }) => {
                                             setMinRadeem(value);
                                         }} />
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="number" label="Max Radeem Value" placeholder="0" value={maxRadeem} onChange={({ target: { value } }) => {
+                                        <FormField type="number" label="Max Radeem Points" placeholder="0" value={maxRadeem} onChange={({ target: { value } }) => {
                                             setMaxRadeem(value);
                                         }} />
                                     </Grid>

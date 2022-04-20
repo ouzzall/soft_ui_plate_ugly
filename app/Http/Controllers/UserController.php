@@ -22,9 +22,7 @@ class UserController extends Controller
     {
         $users = User::where('role_id', 2)->with('loyalty');
         $users->when($request->get('startDate') || $request->get('endDate'), function($q) use($request) {
-            $startDate = Carbon::createFromFormat('d/m/Y', $request->startDate)->format('Y-m-d');
-            $endDate = Carbon::createFromFormat('d/m/Y', $request->endDate)->format('Y-m-d');
-            $q->whereDate('created_at', '>=', $startDate)->whereDate('created_at', '<=', $endDate);
+            $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
         });
         $users->when($request->has('is_blocked'), function($q) use($request) {
             $q->where('is_blocked', $request->is_blocked);

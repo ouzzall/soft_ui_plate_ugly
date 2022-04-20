@@ -59,6 +59,7 @@ import GradientLineChart from "@uf/examples/Charts/LineCharts/GradientLineChart"
 import typography from "@uf/assets/theme/base/typography";
 
 import DataTable from "@uf/examples/Tables/DataTable";
+import SuiDatePicker from "@uf/components/SuiDatePicker";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "@uf/components/Loader";
 
@@ -94,32 +95,46 @@ function SmartHome() {
     const [dashboardData, setDashboardData] = useState({});
     const [loading, setLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+    const [queryString, setQueryString] = useState('');
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         const getDashboardData = async () => {
             setLoading(true);
-            let data = await fetch('/getCharts');
+            let data = await fetch(`/getDashboardData?${queryString}`);
             let response = await data.json();
             if (response.success) {
-                setChartData(response.data.sales_chart);
-            }
-            data = await fetch('/getDashboardData');
-            response = await data.json();
-            if (response.success) {
-                setDashboardData(response.data);
-                setOrderState(response.data.settings.order_rule_active);
-                setCampaignState(response.data.settings.campaign_rule_active);
-                setTransactions(response.data.transactions);
-            }
-            data = await fetch('/getSecondChart');
-            response = await data.json();
-            if (response.success) {
-                setSecondChart(response.data);
+                setDashboardData(response.data.dashboard);
+                setOrderState(response.data.dashboard.settings.order_rule_active);
+                setCampaignState(response.data.dashboard.settings.campaign_rule_active);
+                setTransactions(response.data.dashboard.transactions);
+                setChartData(response.data.first_chart);
+                setSecondChart(response.data.second_chart);
             }
             setLoading(false);
         }
         getDashboardData();
-    }, []);
+    }, [reload]);
+
+    useEffect(() => {
+        let query = '';
+        if (startDate != '') {
+            query += `startDate=${startDate}`;
+        }
+        if (endDate != '') {
+            query += `&endDate=${endDate}`;
+        }
+        setQueryString(query);
+    }, [startDate, endDate]);
+
+    const resetFilters = () => {
+        setStartDate('');
+        setEndDate('');
+        setQueryString('');
+        setReload(!reload);
+    }
 
     const orderRuleChange = async (e) => {
         e.target.disabled = true;
@@ -187,6 +202,53 @@ function SmartHome() {
         <DashboardNavbar />
         <SuiBox pt={3}>
             <SuiBox mb={3}>
+            <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
+                    <SuiBox display="flex">
+                        <SuiBox ml={1}>
+                            <SuiDatePicker onChange={(event) => {
+                                setStartDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select Start Date" }} value={startDate} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiDatePicker onChange={(event) => {
+                                setEndDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select End Date" }} value={endDate} />
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => setReload(!reload)} variant="gradient" color="info">
+                                Filter
+                            </SuiButton>
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => resetFilters()} variant="gradient" color="info">
+                                Reset
+                            </SuiButton>
+                        </SuiBox>
+                    </SuiBox>
+                    {/* <SuiBox display="flex">
+                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                            <SuiSelect
+                                placeholder="Category"
+                                options={[
+                                    { value: "area-wise", label: "Area Wise" },
+                                    { value: "order Wise", label: "Order Wise" },
+                                ]}
+                            />
+                        </SuiBox>
+                        <SuiBox style={{ width: "150px", marginRight: "10px" }}>
+                            <SuiSelect
+                                placeholder="Type"
+                                options={[
+                                    { value: "earned", label: "Earned" },
+                                    { value: "redeemed", label: "Redeemed" },
+                                ]}
+                            />
+                        </SuiBox>
+                        <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
+                            Filter
+                        </SuiButton>
+                    </SuiBox> */}
+                </SuiBox>
                 <Grid container spacing={3}>
                     <Grid item xs={12} xl={7}>
 

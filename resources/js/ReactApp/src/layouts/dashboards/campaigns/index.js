@@ -96,6 +96,13 @@ function Campaign() {
         actions: <ActionCell edit={`/edit-campaign/${row.id}`} />
     })
 
+    const resetFilters = () => {
+        setStartDate('');
+        setEndDate('');
+        setQueryString('');
+        setReloadTable(!reloadTable);
+    }
+
     return (
         <DashboardLayout>
             <DashboardNavbar />
@@ -113,17 +120,22 @@ function Campaign() {
                     <SuiBox display="flex">
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setStartDate(event[0].toLocaleDateString());
-                            }} input={{ placeholder: "Select Start Date" }} />
+                                setStartDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select Start Date" }} value={startDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setEndDate(new Date(event[0]).toLocaleDateString());
-                            }} input={{ placeholder: "Select End Date" }} />
+                                setEndDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select End Date" }} value={endDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
+                            </SuiButton>
+                        </SuiBox>
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => resetFilters()} variant="gradient" color="info">
+                                Reset
                             </SuiButton>
                         </SuiBox>
                     </SuiBox>

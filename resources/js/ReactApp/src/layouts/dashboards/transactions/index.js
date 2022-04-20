@@ -48,10 +48,7 @@ function Orders() {
     const [endDate, setEndDate] = useState('');
     const [queryString, setQueryString] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
-    const [typeFilter, setTypeFilter] = useState({
-        label: '',
-        value: '',
-    });
+    const [typeFilter, setTypeFilter] = useState(null);
 
     useEffect(() => {
         let query = '';
@@ -61,11 +58,19 @@ function Orders() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
-        if (typeFilter.value != '') {
-            query += `&type=${typeFilter.value}`;
+        if (typeFilter?.value != '') {
+            query += `&type=${typeFilter?.value}`;
         }
         setQueryString(query);
     }, [startDate, endDate, typeFilter]);
+
+    const resetFilters = () => {
+        setStartDate('');
+        setEndDate('');
+        setTypeFilter(null);
+        setQueryString('');
+        setReloadTable(!reloadTable);
+    }
 
     return (
         <DashboardLayout>
@@ -75,13 +80,13 @@ function Orders() {
                     <SuiBox display="flex" >
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setStartDate(event[0].toLocaleDateString());
-                            }} input={{ placeholder: "Select Start Date" }} />
+                                setStartDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select Start Date" }} value={startDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiDatePicker onChange={(event) => {
-                                setEndDate(event[0].toLocaleDateString());
-                            }} input={{ placeholder: "Select End Date" }} />
+                                setEndDate(event[0].toLocaleDateString().split( '/' ).reverse( ).join( '-' ));
+                            }} input={{ placeholder: "Select End Date" }} value={endDate} />
                         </SuiBox>
                         <SuiBox ml={1}>
                             <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
@@ -108,12 +113,17 @@ function Orders() {
                                 ]} onChange={(event) => {
                                     setTypeFilter(event);
                                 }}
+                                value={typeFilter}
                             />
                         </SuiBox>
                         <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                             Filter
                         </SuiButton>
-
+                        <SuiBox ml={1}>
+                            <SuiButton onClick={() => resetFilters()} variant="gradient" color="info">
+                                Reset
+                            </SuiButton>
+                        </SuiBox>
                     </SuiBox>
                 </SuiBox>
                 <Card>
