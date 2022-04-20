@@ -78,6 +78,7 @@ if (!function_exists('loyaltyCalculator')) {
         // Rule (Order based)
         $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/customers/' . $user->shopify_customer_id . '/orders.json');
         $ordersCollection = collect($orders['body']['orders']);
+        Log::info(json_encode($ordersCollection));
         $ordersCollection = $ordersCollection->filter(function ($order) use ($deliveryDate) {
             $tags = explode(', ', $order['tags']);
             foreach ($tags as $tag) {
