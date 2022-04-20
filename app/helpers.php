@@ -74,7 +74,7 @@ if (!function_exists('loyaltyCalculator')) {
                 }
             }
         }
-
+        Log::info('order_rule');
         // Rule (Order based)
         $orders = getShop()->api()->rest('GET', '/admin/api/2022-01/customers/' . $user->shopify_customer_id . '/orders.json');
         $ordersCollection = collect($orders['body']['orders']);
@@ -91,6 +91,7 @@ if (!function_exists('loyaltyCalculator')) {
                 }
             }
         });
+        Log::info(json_encode($ordersCollection));
         if ($ordersCollection->isNotEmpty()) {
             $totalOrderPriceSum = $ordersCollection->sum('subtotal_price');
             $totalShippingPriceSum = $ordersCollection->sum(function ($value) {
@@ -99,6 +100,7 @@ if (!function_exists('loyaltyCalculator')) {
             });
             $shipping_rule_one = ShippingRule::where('shipping_rule_type', 1)->where('is_active', 1)
                 ->where('order_amount', '<=', $totalOrderPriceSum)->first();
+            Log::info(json_encode($shipping_rule_one));
             if ($shipping_rule_one && $setting->order_rule_active) {
                 $loyaltyValue = 0;
                 if ($shipping_rule_one->discount_type == 'fixed') {
