@@ -63,7 +63,7 @@ function users() {
             query += `&endDate=${endDate}`;
         }
         if (blockFilter?.value != '') {
-            query += `&is_blocked=${blockFilter?.value}`;
+            query += `&is_blocked=${blockFilter?.value ?? ''}`;
         }
         setQueryString(query);
     }, [blockFilter, startDate, endDate]);

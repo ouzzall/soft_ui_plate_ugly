@@ -59,7 +59,7 @@ function Orders() {
             query += `&endDate=${endDate}`;
         }
         if (typeFilter?.value != '') {
-            query += `&type=${typeFilter?.value}`;
+            query += `&type=${typeFilter?.value ?? ''}`;
         }
         setQueryString(query);
     }, [startDate, endDate, typeFilter]);
