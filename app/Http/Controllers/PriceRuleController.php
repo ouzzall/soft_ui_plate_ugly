@@ -23,6 +23,7 @@ class PriceRuleController extends Controller
             $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
         });
         $price_rules->when($request->get('search'), function ($q) use ($request) {
+            $date = $request->search;
             try {
                 $date = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
             } catch (InvalidFormatException $ex) {
