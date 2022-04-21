@@ -101,6 +101,7 @@ class UserController extends Controller
                 'target_selection' => "all",
                 'allocation_method' => 'across',
                 'usage_limit' => 1,
+                'once_per_customer' => true,
                 'value_type' => 'fixed_amount',
                 'value' => "-" . $value,
                 'customer_selection' => 'all',
