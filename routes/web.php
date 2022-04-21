@@ -5,6 +5,7 @@ use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PriceRuleController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
@@ -79,6 +80,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('index');
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/getTransactions', [TransactionController::class, 'getTransactions']);
+    Route::get('/getDiscounts', [PriceRuleController::class, 'getDiscounts']);
 
     // admin routes
     Route::middleware('can:verify_role,"admin"')->group(function () {

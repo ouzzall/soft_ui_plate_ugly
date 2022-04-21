@@ -51,6 +51,7 @@ import Campaign from "@uf/layouts/dashboards/campaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
 import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
 import RadeemSetting from "@uf/layouts/dashboards/radeem-settings";
+import DiscountRule from "@uf/layouts/dashboards/discount-rules";
 
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
@@ -198,6 +199,14 @@ const routes = [
         icon: <Shop size="12px" />,
         route: "/radeem-settings",
         component: RadeemSetting,
+    },
+    {
+        role: ["admin", "customer"],
+        name: "Discount Rules",
+        key: "Discount Rules",
+        icon: <Shop size="12px" />,
+        route: "/discount-rules",
+        component: DiscountRule,
     },
     {
         role: ["customer"],
