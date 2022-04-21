@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendRadeemMail extends Mailable
+class SendRedeemMail extends Mailable
 {
     use Queueable, SerializesModels;
     private $name;
@@ -28,9 +28,9 @@ class SendRadeemMail extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@uglyfoods.com.sg', 'Example Radeem')
-            ->subject('Radeem')
-            ->markdown('mails.radeem')
+        return $this->from('admin@uglyfoods.com.sg', 'Example Redeem')
+            ->subject('Redeem')
+            ->markdown('mails.redeem')
             ->with([
                 'name' => $this->name,
                 'link' => '/inboxes/'

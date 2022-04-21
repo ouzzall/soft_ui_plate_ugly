@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRadeemSettingsTable extends Migration
+class CreateRedeemSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateRadeemSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('radeem_settings', function (Blueprint $table) {
+        Schema::create('redeem_settings', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('min_radeem_value');
-            $table->bigInteger('max_radeem_value');
+            $table->bigInteger('min_redeem_value');
+            $table->bigInteger('max_redeem_value');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateRadeemSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('radeem_settings');
+        Schema::dropIfExists('redeem_settings');
     }
 }

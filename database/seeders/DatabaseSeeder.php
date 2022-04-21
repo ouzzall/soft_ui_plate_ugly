@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             ShippingRuleTypeSeeder::class,
             TransactionTypeSeeder::class,
-            RadeemSettingSeeder::class,
+            RedeemSettingSeeder::class,
         ]);
     }
 }

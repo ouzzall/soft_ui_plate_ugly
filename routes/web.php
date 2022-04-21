@@ -105,14 +105,14 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/createOrderRule', [RulesController::class, 'saveOrderRule']);
         Route::post('/updateOrderRule/{id}', [RulesController::class, 'updateOrderRule']);
 
-        Route::get('/getRadeemSetting', [DefaultController::class, 'getRadeemSetting']);
-        Route::post('/setRadeemSetting', [DefaultController::class, 'setRadeemSetting']);
+        Route::get('/getRedeemSetting', [DefaultController::class, 'getRedeemSetting']);
+        Route::post('/setRedeemSetting', [DefaultController::class, 'setRedeemSetting']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function () {
         Route::post('/changePassword', [UserController::class, 'changePassword']);
         Route::get('/getProfile', [UserController::class, 'getProfile']);
         Route::post('/updateProfile', [UserController::class, 'updateProfile']);
-        Route::post('/radeemPoints', [UserController::class, 'radeemPoints']);
+        Route::post('/redeemPoints', [UserController::class, 'redeemPoints']);
         Route::get('/getUserCharts', [UserController::class, 'getUserCharts']);
     });
     Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');

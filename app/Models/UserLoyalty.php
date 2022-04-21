@@ -11,7 +11,7 @@ class UserLoyalty extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'loyalty_earned',
-        'loyalty_radeemed',
+        'loyalty_redeemed',
         'last_earned_date',
     ];
 

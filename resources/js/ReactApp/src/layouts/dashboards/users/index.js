@@ -164,7 +164,7 @@ function users() {
                                 { Header: "Email", accessor: "email" },
                                 { Header: "Phone No", accessor: "phone" },
                                 { Header: "Points Earned", accessor: "loyalty.loyalty_earned" },
-                                { Header: "Points Redeemed", accessor: "loyalty.loyalty_radeemed" },
+                                { Header: "Points Redeemed", accessor: "loyalty.loyalty_redeemed" },
                                 { Header: "Actions", accessor: "actions" }
                             ],
                         }}

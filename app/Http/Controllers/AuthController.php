@@ -66,7 +66,7 @@ class AuthController extends Controller
             $user = User::create($request->all());
             $user->loyalty()->create([
                 'loyalty_earned' => 0.0,
-                'loyalty_radeemed' => 0.0,
+                'loyalty_redeemed' => 0.0,
             ]);
             $customer = getShop()->api()->rest('POST', '/admin/api/2022-01/customers.json', [
                 'customer' => [

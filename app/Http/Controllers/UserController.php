@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ChangePasswordRequest;
-use App\Mail\SendRadeemMail;
+use App\Mail\SendRedeemMail;
 use App\Models\Order;
-use App\Models\RadeemSetting;
+use App\Models\RedeemSetting;
 use App\Models\Transaction;
 use App\Models\User;
 use Carbon\Carbon;
@@ -38,7 +38,7 @@ class UserController extends Controller
                     })
                     ->orWhereHas('loyalty', function ($q) use ($request) {
                         $q->where('loyalty_earned', 'LIKE', '%' . $request->search . '%')
-                            ->orWhere('loyalty_radeemed', 'LIKE', '%' . $request->search . '%');
+                            ->orWhere('loyalty_redeemed', 'LIKE', '%' . $request->search . '%');
                     });
             });
         });
@@ -59,7 +59,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function radeemPoints(Request $request)
+    public function redeemPoints(Request $request)
     {
         $user = Auth::user();
         if ($user->is_blocked && $user->role->type == 'customer') {
@@ -69,7 +69,7 @@ class UserController extends Controller
                 'data' => null
             ]);
         }
-        $RadeemSetting = RadeemSetting::first();
+        $RedeemSetting = RedeemSetting::first();
         $code = Str::random(8);
         if($request->get('loyalty_points')) {
             $loyalty = (int) $request->loyalty_points;
@@ -77,17 +77,17 @@ class UserController extends Controller
             $loyalty = $user->loyalty->loyalty_earned;
         }
         $value = $loyalty * 0.001;
-        if ($loyalty < $RadeemSetting->min_radeem_value) {
+        if ($loyalty < $RedeemSetting->min_redeem_value) {
             return response()->json([
                 'success' => false,
-                'message' => 'You can radeem minimum '. $RadeemSetting->min_radeem_value .' loyalty points!',
+                'message' => 'You can redeem minimum '. $RedeemSetting->min_redeem_value .' loyalty points!',
                 'data' => null
             ]);
         }
-        if ($loyalty > $RadeemSetting->max_radeem_value) {
+        if ($loyalty > $RedeemSetting->max_redeem_value) {
             return response()->json([
                 'success' => false,
-                'message' => 'You can radeem maximum ' . $RadeemSetting->max_radeem_value .' loyalty points!',
+                'message' => 'You can redeem maximum ' . $RedeemSetting->max_redeem_value .' loyalty points!',
                 'data' => null
             ]);
         }
@@ -129,7 +129,7 @@ class UserController extends Controller
         }
         DB::beginTransaction();
         try {
-            $user->loyalty()->increment('loyalty_radeemed', $loyalty);
+            $user->loyalty()->increment('loyalty_redeemed', $loyalty);
             $user->loyalty()->decrement('loyalty_earned', $loyalty);
             $user->price_rules()->create([
                 'price_rule_id' => $priceRule['id'],
@@ -148,10 +148,10 @@ class UserController extends Controller
                 $q->latest();
             }]);
             DB::commit();
-            Mail::to($user->email)->send(new SendRadeemMail($user->name));
+            Mail::to($user->email)->send(new SendRedeemMail($user->name));
             return response()->json([
                 'success' => true,
-                'message' => 'Points Radeemed successfully!',
+                'message' => 'Points Redeemed successfully!',
                 'data' => $userData,
             ]);
         } catch (Exception $ex) {
@@ -182,9 +182,9 @@ class UserController extends Controller
             $value['date'] = Carbon::parse($value['created_at'])->format('d/m/Y');
             return $value;
         });
-        $radeemSetting = RadeemSetting::first();
+        $redeemSetting = RedeemSetting::first();
         $data = [
-            'radeem_setting' => $radeemSetting,
+            'redeem_setting' => $redeemSetting,
             'user' => $user,
             'others' => [
                 'coupons_created' => $couponsCount,

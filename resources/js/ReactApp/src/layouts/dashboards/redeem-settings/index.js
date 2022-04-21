@@ -54,18 +54,18 @@ import Swal from "sweetalert2";
 // import initialValues from "@uf/layouts/pages/users/new-user/schemas/initialValues";
 
 
-function RadeemSetting() {
-    const [minRadeem, setMinRadeem] = useState(0);
-    const [maxRadeem, setMaxRadeem] = useState(0);
+function RedeemSetting() {
+    const [minRedeem, setMinRedeem] = useState(0);
+    const [maxRedeem, setMaxRedeem] = useState(0);
     const history = useHistory();
 
     const handleForm = async (event) => {
         event.preventDefault();
         let formData = {
-            min_radeem_value: minRadeem,
-            max_radeem_value: maxRadeem,
+            min_redeem_value: minRedeem,
+            max_redeem_value: maxRedeem,
         };
-        let data = await fetch('/setRadeemSetting', {
+        let data = await fetch('/setRedeemSetting', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -84,11 +84,11 @@ function RadeemSetting() {
 
     useEffect(() => {
         const getData = async () => {
-            let data = await fetch('/getRadeemSetting');
+            let data = await fetch('/getRedeemSetting');
             let response = await data.json();
             if(response.success) {
-                setMinRadeem(response.data.min_radeem_value);
-                setMaxRadeem(response.data.max_radeem_value);
+                setMinRedeem(response.data.min_redeem_value);
+                setMaxRedeem(response.data.max_redeem_value);
             }
         }
         getData();
@@ -103,18 +103,18 @@ function RadeemSetting() {
                     <Grid item xs={12} lg={8}>
                         <Card style={{ minHeight: "400px", }}>
                             <SuiBox style={{ padding: "40px 80px", }}>
-                                <h5>Radeem Setting</h5>
+                                <h5>Redeem Setting</h5>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="number" label="Min Radeem Points" placeholder="0" value={minRadeem} onChange={({ target: { value } }) => {
-                                            setMinRadeem(value);
+                                        <FormField type="number" label="Min Redeem Points" placeholder="0" value={minRedeem} onChange={({ target: { value } }) => {
+                                            setMinRedeem(value);
                                         }} />
                                     </Grid>
                                 </Grid>
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="number" label="Max Radeem Points" placeholder="0" value={maxRadeem} onChange={({ target: { value } }) => {
-                                            setMaxRadeem(value);
+                                        <FormField type="number" label="Max Redeem Points" placeholder="0" value={maxRedeem} onChange={({ target: { value } }) => {
+                                            setMaxRedeem(value);
                                         }} />
                                     </Grid>
                                 </Grid>
@@ -131,4 +131,4 @@ function RadeemSetting() {
     );
 }
 
-export default RadeemSetting;
+export default RedeemSetting;

@@ -50,7 +50,7 @@ import OrderDetails from "@uf/layouts/dashboards/order-details";
 import Campaign from "@uf/layouts/dashboards/campaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
 import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
-import RadeemSetting from "@uf/layouts/dashboards/radeem-settings";
+import RedeemSetting from "@uf/layouts/dashboards/redeem-settings";
 import DiscountRule from "@uf/layouts/dashboards/discount-rules";
 
 
@@ -194,11 +194,11 @@ const routes = [
     },
     {
         role: ["admin"],
-        name: "Radeem Settings",
-        key: "Radeem Settings",
+        name: "Redeem Settings",
+        key: "Redeem Settings",
         icon: <Shop size="12px" />,
-        route: "/radeem-settings",
-        component: RadeemSetting,
+        route: "/redeem-settings",
+        component: RedeemSetting,
     },
     {
         role: ["admin", "customer"],

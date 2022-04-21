@@ -16,7 +16,7 @@ class CreateUserLoyaltiesTable extends Migration
         Schema::create('user_loyalties', function (Blueprint $table) {
             $table->id();
             $table->double('loyalty_earned');
-            $table->double('loyalty_radeemed');
+            $table->double('loyalty_redeemed');
             $table->unsignedBigInteger('user_id');
             $table->date('last_earned_date')->nullable();
             $table->timestamps();

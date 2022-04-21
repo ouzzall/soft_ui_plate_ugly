@@ -75,7 +75,7 @@ class OrdersCreateJob implements ShouldQueue
                 ]);
                 $user->loyalty()->create([
                     'loyalty_earned' => 0.0,
-                    'loyalty_radeemed' => 0.0,
+                    'loyalty_redeemed' => 0.0,
                 ]);
             }
             if ($user->shopify_customer_id == null) {

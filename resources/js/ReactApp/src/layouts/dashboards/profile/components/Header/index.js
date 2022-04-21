@@ -96,7 +96,7 @@ function Header({ data }) {
             denyButtonText: 'No'
         });
         if (confirm.isConfirmed) {
-            const data = await fetch('/radeemPoints', {
+            const data = await fetch('/redeemPoints', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

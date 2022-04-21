@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\RadeemSetting;
+use App\Models\RedeemSetting;
 use Illuminate\Database\Seeder;
 
-class RadeemSettingSeeder extends Seeder
+class RedeemSettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class RadeemSettingSeeder extends Seeder
      */
     public function run()
     {
-        RadeemSetting::create([
-            'min_radeem_value' => 0,
-            'max_radeem_value' => 0
+        RedeemSetting::create([
+            'min_redeem_value' => 0,
+            'max_redeem_value' => 0
         ]);
     }
 }

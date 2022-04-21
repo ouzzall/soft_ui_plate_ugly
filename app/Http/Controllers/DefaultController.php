@@ -6,7 +6,7 @@ use App\Http\Resources\CollectionOptionsResource;
 use App\Http\Resources\ProductOptionsResource;
 use App\Models\Collection;
 use App\Models\Product;
-use App\Models\RadeemSetting;
+use App\Models\RedeemSetting;
 use Illuminate\Http\Request;
 
 class DefaultController extends Controller
@@ -32,27 +32,27 @@ class DefaultController extends Controller
         ]);
     }
 
-    public function getRadeemSetting()
+    public function getRedeemSetting()
     {
-        $radeem_setting = RadeemSetting::first();
+        $redeem_setting = RedeemSetting::first();
         return response()->json([
             'success' => true,
-            'message' => 'Radeem settings retrieved successfully!',
-            'data' => $radeem_setting,
+            'message' => 'Redeem settings retrieved successfully!',
+            'data' => $redeem_setting,
         ]);
     }
 
-    public function setRadeemSetting(Request $request)
+    public function setRedeemSetting(Request $request)
     {
-        $radeem_setting = RadeemSetting::first();
-        $radeem_setting->update([
-            'min_radeem_value' => $request->min_radeem_value,
-            'max_radeem_value' => $request->max_radeem_value,
+        $redeem_setting = RedeemSetting::first();
+        $redeem_setting->update([
+            'min_redeem_value' => $request->min_redeem_value,
+            'max_redeem_value' => $request->max_redeem_value,
         ]);
         return response()->json([
             'success' => true,
-            'message' => 'Radeem settings saved successfully!',
-            'data' => $radeem_setting,
+            'message' => 'Redeem settings saved successfully!',
+            'data' => $redeem_setting,
         ]);
     }
 }

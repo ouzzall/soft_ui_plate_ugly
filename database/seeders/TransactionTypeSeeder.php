@@ -18,7 +18,7 @@ class TransactionTypeSeeder extends Seeder
             'title' => 'Earned',
         ]);
         TransactionType::create([
-            'title' => 'Radeemed',
+            'title' => 'Redeemed',
         ]);
     }
 }
