@@ -92,7 +92,8 @@ class UserController extends Controller
             ]);
         }
         $starts_at = Carbon::now();
-        $ends_at = $starts_at->addMonth();
+        $current = Carbon::now();
+        $ends_at = $current->addMonth();
         $createPriceRule = getShop()->api()->rest('POST', '/admin/api/2021-10/price_rules.json', [
             'price_rule' => [
                 'title' => $code,
