@@ -24,7 +24,7 @@ class PriceRuleController extends Controller
         });
         $price_rules->when($request->get('search'), function ($q) use ($request) {
             try {
-                $date = Carbon::createFromFormat('Y-m-d H:i:s', $request->search)->format('d-m-Y');
+                $date = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
             } catch (InvalidFormatException $ex) {
 
             }
