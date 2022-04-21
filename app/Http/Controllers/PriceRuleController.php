@@ -33,7 +33,9 @@ class PriceRuleController extends Controller
                     $q->where('name', 'LIKE', '%' . $input . '%')
                     ->orWhere('email', 'LIKE', '%' . $input . '%');
                 })
-                ->orWhere('discount_code', 'LIKE', '%'. $input .'%');
+                ->orWhere('discount_code', 'LIKE', '%'. $input .'%')
+                ->orWhereDate('starts_at', 'LIKE', '%'. $input .'%')
+                ->orWhereDate('ends_at', 'LIKE', '%'. $input .'%');
             });
         });
         $count = $price_rules->count();
