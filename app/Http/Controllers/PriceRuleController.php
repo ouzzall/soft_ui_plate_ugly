@@ -23,20 +23,19 @@ class PriceRuleController extends Controller
             $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
         });
         $price_rules->when($request->get('search'), function ($q) use ($request) {
-            $date = $request->search;
             try {
-                $date = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
+                $request['date'] = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
             } catch (InvalidFormatException $ex) {
 
             }
-            $q->where(function($q) use ($request, $date) {
+            $q->where(function($q) use ($request) {
                 $q->whereHas('user', function($q) use ($request) {
                     $q->where('name', 'LIKE', '%' . $request->search . '%')
                     ->orWhere('email', 'LIKE', '%' . $request->search . '%');
                 })
                 ->orWhere('discount_code', 'LIKE', '%'. $request->search .'%')
-                ->orWhereDate('starts_at', 'LIKE', '%'. $date .'%')
-                ->orWhereDate('ends_at', 'LIKE', '%'. $date .'%');
+                ->orWhereDate('starts_at', 'LIKE', '%'. $request->date .'%')
+                ->orWhereDate('ends_at', 'LIKE', '%'. $request->date .'%');
             });
         });
         $count = $price_rules->count();
