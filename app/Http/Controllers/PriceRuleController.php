@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PriceRule;
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,14 +23,19 @@ class PriceRuleController extends Controller
             $q->whereDate('created_at', '>=', $request->startDate)->whereDate('created_at', '<=', $request->endDate);
         });
         $price_rules->when($request->get('search'), function ($q) use ($request) {
-            $q->where(function($q) use ($request) {
+            try {
+                $date = Carbon::createFromFormat('Y-m-d H:i:s', $request->search)->format('d-m-Y');
+            } catch (InvalidFormatException $ex) {
+
+            }
+            $q->where(function($q) use ($request, $date) {
                 $q->whereHas('user', function($q) use ($request) {
                     $q->where('name', 'LIKE', '%' . $request->search . '%')
                     ->orWhere('email', 'LIKE', '%' . $request->search . '%');
                 })
                 ->orWhere('discount_code', 'LIKE', '%'. $request->search .'%')
-                ->orWhereDate('starts_at', 'LIKE', '%'. $request->search .'%')
-                ->orWhereDate('ends_at', 'LIKE', '%'. $request->search .'%');
+                ->orWhereDate('starts_at', 'LIKE', '%'. $date .'%')
+                ->orWhereDate('ends_at', 'LIKE', '%'. $date .'%');
             });
         });
         $count = $price_rules->count();
