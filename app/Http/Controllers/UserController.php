@@ -100,6 +100,7 @@ class UserController extends Controller
                 'target_type' => "line_item",
                 'target_selection' => "all",
                 'allocation_method' => 'across',
+                'usage_limit' => 1,
                 'value_type' => 'fixed_amount',
                 'value' => "-" . $value,
                 'customer_selection' => 'all',
