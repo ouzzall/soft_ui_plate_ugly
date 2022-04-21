@@ -24,18 +24,18 @@ class PriceRuleController extends Controller
         });
         $price_rules->when($request->get('search'), function ($q) use ($request) {
             try {
-                $request['date'] = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
+                $input = Carbon::createFromFormat('Y-m-d', $request->search)->format('d-m-Y');
             } catch (InvalidFormatException $ex) {
-
+                $input = $request->search;
             }
-            $q->where(function($q) use ($request) {
-                $q->whereHas('user', function($q) use ($request) {
-                    $q->where('name', 'LIKE', '%' . $request->search . '%')
-                    ->orWhere('email', 'LIKE', '%' . $request->search . '%');
+            $q->where(function($q) use ($input) {
+                $q->whereHas('user', function($q) use ($input) {
+                    $q->where('name', 'LIKE', '%' . $input . '%')
+                    ->orWhere('email', 'LIKE', '%' . $input . '%');
                 })
-                ->orWhere('discount_code', 'LIKE', '%'. $request->search .'%')
-                ->orWhereDate('starts_at', 'LIKE', '%'. $request->date .'%')
-                ->orWhereDate('ends_at', 'LIKE', '%'. $request->date .'%');
+                ->orWhere('discount_code', 'LIKE', '%'. $input .'%')
+                ->orWhereDate('starts_at', 'LIKE', '%'. $input .'%')
+                ->orWhereDate('ends_at', 'LIKE', '%'. $input .'%');
             });
         });
         $count = $price_rules->count();
