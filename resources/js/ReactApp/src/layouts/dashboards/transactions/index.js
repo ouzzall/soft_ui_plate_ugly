@@ -58,7 +58,7 @@ function Orders() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
-        if (typeFilter?.value != '') {
+        if (typeFilter?.value != null) {
             query += `&type=${typeFilter?.value ?? ''}`;
         }
         setQueryString(query);

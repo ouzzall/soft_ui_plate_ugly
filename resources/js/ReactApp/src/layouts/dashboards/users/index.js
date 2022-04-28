@@ -62,7 +62,7 @@ function users() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
-        if (blockFilter?.value != '') {
+        if (blockFilter?.value != null) {
             query += `&is_blocked=${blockFilter?.value ?? ''}`;
         }
         setQueryString(query);
