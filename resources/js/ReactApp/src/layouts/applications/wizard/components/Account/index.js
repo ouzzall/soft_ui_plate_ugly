@@ -33,9 +33,24 @@ function Account() {
   const [code, setCode] = useState(false);
   const [develop, setDevelop] = useState(false);
 
-  const handleSetDesign = () => setDesign(!design);
-  const handleSetCode = () => setCode(!code);
-  const handleSetDevelop = () => setDevelop(!develop);
+  const handleSetDesign = () => {
+    setDesign(true)
+    setCode(false)
+    setDevelop(false)
+  
+  }
+  const handleSetCode = () => {
+    setDesign(false)
+    setCode(true)
+    setDevelop(false)
+  
+  }
+  const handleSetDevelop = () => {
+    setDesign(false)
+    setCode(false)
+    setDevelop(true)
+  
+  }
 
   const customButtonStyles = ({
     functions: { pxToRem, rgba },

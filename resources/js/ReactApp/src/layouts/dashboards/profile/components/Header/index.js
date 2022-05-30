@@ -33,6 +33,7 @@ import SuiButton from "@uf/components/SuiButton";
 // Soft UI Dashboard PRO React example components
 import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 import Icon from "@mui/material/Icon";
+import StarIcon from '@mui/icons-material/Star';
 // Soft UI Dashboard PRO React icons
 // import Cube from "@uf/examples/Icons/Cube";
 // import Document from "@uf/examples/Icons/Document";
@@ -173,6 +174,13 @@ function Header({ data }) {
                                     </SuiButton>
                                 </Link>
                             </SuiBox>
+                            <SuiBox alt="spotify logo" position="absolute" right={0} top={-7} mr={-1} mb={-1}>
+                                
+                            <Tooltip title="Gold" placement="top" arrow>
+                                        <StarIcon style={{color:"yellow",background: "lightgray",borderRadius: "50%",padding: "2px"}}/>
+                            </Tooltip>
+                                
+                            </SuiBox>
                         </SuiBox>
                     </Grid>
 
@@ -187,7 +195,7 @@ function Header({ data }) {
                             </SuiTypography>
                         </SuiBox>
                     </Grid>
-                    <Grid item xs={6} md={3} lg={3} sx={{ ml: "auto" }}>
+                    <Grid item xs={12} md={3} lg={3} sx={{ ml: "auto" }}>
                         <SuiBox
                             style={{ paddingTop: "2px", paddingBottom: "0", paddingLeft: "10px", paddingRight: "10px" }}
                             borderRadius="md"
@@ -222,7 +230,7 @@ function Header({ data }) {
 
                         </SuiBox>
                     </Grid>
-                    <Grid item xs={6} md={2} lg={2} >
+                    <Grid item xs={12} md={2} lg={2} >
                         {/* ernings card */}
                         <SuiBox
                             style={{ background: "linear-gradient(310deg, #2152ff,#21d4fd )" }}

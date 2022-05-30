@@ -51,8 +51,9 @@ import Campaign from "@uf/layouts/dashboards/campaigns";
 import CreateCampaign from "@uf/layouts/dashboards/new-campaign";
 import EditCampaign from "@uf/layouts/dashboards/edit-campaign";
 import RedeemSetting from "@uf/layouts/dashboards/redeem-settings";
+import PlanManager from "@uf/layouts/dashboards/plan-manager";
+import RewardManager from "@uf/layouts/dashboards/reward-manager";
 import DiscountRule from "@uf/layouts/dashboards/discount-rules";
-
 
 // import VRDefault from "@uf/layouts/dashboards/virtual-reality/vr-default";
 
@@ -200,6 +201,23 @@ const routes = [
         route: "/redeem-settings",
         component: RedeemSetting,
     },
+    {
+        role: ["admin"],
+        name: "Plan Manager",
+        key: "Plan Manager",
+        icon: <Shop size="12px" />,
+        route: "/plan-manager",
+        component: PlanManager,
+    },
+    {
+        role: ["admin"],
+        name: "Reward Manager",
+        key: "Reward Manager",
+        icon: <Shop size="12px" />,
+        route: "/reward-manager",
+        component: RewardManager,
+    },
+    
     {
         role: ["admin", "customer"],
         name: "Discount Rules",

@@ -67,8 +67,9 @@
     padding: 20px;
   }
   
-  @media only screen and (max-width: 720px) {
-    html {
-      overflow: hidden;
-    }
+  .productSelect.MuiBox-root.css-1dp6tiu {
+    display: flex;
+  }
+  .img_tag_styling {
+    margin-right: 15px;
   }

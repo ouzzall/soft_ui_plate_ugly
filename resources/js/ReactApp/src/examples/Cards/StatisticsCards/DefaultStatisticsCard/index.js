@@ -26,16 +26,17 @@ import SuiTypography from "@uf/components/SuiTypography";
 
 function DefaultStatisticsCard({ title, count, percentage, dropdown }) {
   return (
-    <Card>
+    <Card style={{minHeight:"132px"}}>
       <SuiBox p={2}>
-        <Grid container>
-          <Grid item xs={7}>
-            <SuiBox mb={0.5} lineHeight={1}>
+        <Grid >
+          <Grid  >
+            <SuiBox mb={0.5} lineHeight={1} >
               <SuiTypography
                 variant="button"
                 fontWeight="medium"
                 color="text"
                 textTransform="capitalize"
+                
               >
                 {title}
               </SuiTypography>

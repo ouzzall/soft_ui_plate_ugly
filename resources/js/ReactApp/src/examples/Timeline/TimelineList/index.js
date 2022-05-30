@@ -29,16 +29,16 @@ import { TimelineProvider } from "@uf/examples/Timeline/context";
 function TimelineList({ title, dark, children }) {
   return (
     <TimelineProvider value={dark}>
-      <Card>
-        <SuiBox bgColor={dark ? "dark" : "white"} variant="gradient">
-          <SuiBox pt={3} px={3}>
+      
+        <SuiBox >
+          <SuiBox  >
             <SuiTypography variant="h6" fontWeight="medium" color={dark ? "white" : "dark"}>
               {title}
             </SuiTypography>
           </SuiBox>
           <SuiBox p={2}>{children}</SuiBox>
         </SuiBox>
-      </Card>
+      
     </TimelineProvider>
   );
 }

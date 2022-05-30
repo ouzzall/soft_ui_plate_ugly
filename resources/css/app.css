@@ -28,3 +28,7 @@
   .loaderHeight {
       min-height: 600px;
   }
+.selectProductTitle{
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+}

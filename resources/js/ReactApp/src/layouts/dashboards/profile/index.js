@@ -65,6 +65,8 @@ import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTabl
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setLoyaltyInfo } from "../../../reducers/loyaltyInfoSlice";
+import TimelineList from "@uf/examples/Timeline/TimelineList";
+import TimelineItem from "@uf/examples/Timeline/TimelineItem";
 
 function Profile() {
     const [profile, setProfile] = useState({});
@@ -110,46 +112,71 @@ function Profile() {
             <SuiBox mb={3} mt={3}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
-                        <DefaultStatisticsCard
-                            title="Coupons Created"
-                            count={otherData?.coupons_created}
-                            // percentage={{
-                            //     color: "success",
-                            //     value: "+55%",
-                            //     label: "since last month",
-                            // }}
+                    <TimelineList >
+                        <TimelineItem
+                            color="success"
+                            icon="emoji_events"
+                            title="Abc Product"
+                            dateTime="22"
+                            progress="50"
+                            
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <DefaultStatisticsCard
-                            title="Total Earnings"
-                            count={`$${otherData?.total_orders_amount}`}
-                            // percentage={{
-                            //     color: "success",
-                            //     value: "+12%",
-                            //     label: "since last month",
-                            // }}
-
+                        <TimelineItem
+                            color="light"
+                            icon="emoji_events"
+                            title="Def Product"
+                            dateTime="44"
+                            progress="80"
                         />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <DefaultStatisticsCard
-                            title="Orders"
-                            count={otherData?.orders_created}
-                            // percentage={{
-                            //     color: "secondary",
-                            //     value: "+1",
-                            //     label: "since last month",
-                            // }}
-
+                        <TimelineItem
+                            color="light"
+                            icon="emoji_events"
+                            title="Zxc Product"
+                            dateTime="200"
+                            progress="20"
                         />
+                        
+                    </TimelineList>
                     </Grid>
-                </Grid>
-            </SuiBox>
-            <SuiBox mb={3}>
-                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={8}>
+                        <div style={{display:"flex"}} >
+                            <Grid item mt={3} xs={12} sm={4} >
+                                <DefaultStatisticsCard 
+                                    title="Coupons Created"
+                                    count={otherData?.coupons_created}
+                                    // percentage={{
+                                    //     color: "success",
+                                    //     value: "+55%",
+                                    //     label: "since last month",
+                                    // }}
+                                />
+                            </Grid>
+                            <Grid style={{marginLeft:"20px",marginRight:"20px"}} item mt={3} xs={12} sm={4}>
+                                <DefaultStatisticsCard 
+                                    title="Total Earnings"
+                                    count={`$${otherData?.total_orders_amount}`}
+                                    // percentage={{
+                                    //     color: "success",
+                                    //     value: "+12%",
+                                    //     label: "since last month",
+                                    // }}
 
-                    <Grid item xs={12} sm={12} lg={12}>
+                                />
+                            </Grid>
+                            <Grid item mt={3} xs={12} sm={4}>
+                                <DefaultStatisticsCard 
+                                    title="Orders"
+                                    count={otherData?.orders_created}
+                                    // percentage={{
+                                    //     color: "secondary",
+                                    //     value: "+1",
+                                    //     label: "since last month",
+                                    // }}
+
+                                />
+                            </Grid>
+                        </div>   
+                        <Grid item mt={3} xs={12} sm={12} lg={12}>
                         <DefaultLineChart
                             title="Sales Details"
                             description={
@@ -176,9 +203,8 @@ function Profile() {
                             chart={chartData}
                         />
                     </Grid>
-                </Grid>
-            </SuiBox>
-            <SuiBox my={3}>
+                    <Grid item mt={3} xs={12} sm={12} lg={12}>
+                    <SuiBox my={3}>
                 <Card>
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
                     <DataTable entriesPerPage={false} canSearch
@@ -195,7 +221,19 @@ function Profile() {
                         }}
                     />
                 </Card>
+            </SuiBox>            
+
+                    </Grid>
+                    </Grid>    
+                </Grid>
             </SuiBox>
+            <SuiBox mb={3}>
+                <Grid container spacing={3}>
+
+
+                </Grid>
+            </SuiBox>
+            
             {/* <SuiBox mt={3} mb={3}>
         <Grid container spacing={3}>
 
