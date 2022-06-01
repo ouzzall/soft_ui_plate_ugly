@@ -196,6 +196,7 @@ function Header({ data }) {
                                 {data?.email} | {data?.phone}
                                 
                             </SuiTypography>
+                            
                             <SuiTypography color="text"marginTop="10px" fontSize="14px" fontWeight="medium">
                                 
                                 <SuiProgress  value="60" />
