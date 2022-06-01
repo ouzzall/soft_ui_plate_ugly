@@ -18,6 +18,7 @@ import DashboardLayout from "@uf/examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 import Footer from "@uf/examples/Footer";
 import DataTable from "@uf/examples/Tables/DataTable";
+import Actions from "@uf/layouts/dashboards/plan-manager/components/ActionCell";
 // import ActionCell from "@uf/layouts/dashboards/redumtion/components/ActionCell";
 // Data
 // import dataTableData from "@uf/layouts/ecommerce/orders/order-list/data/dataTableData";
@@ -35,10 +36,12 @@ function Redumtion() {
     const [queryString, setQueryString] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
 
+    const [planId, setPlanId] = useState(false);
     const [planTitle, setPlanTitle] = useState('');
     const [planDays, setPlanDays] = useState(0);
     const [planOrders, setPlanOrders] = useState(0);
     const [planPercentage, setPlanPercentage] = useState(0);
+    const [planStar, setPlanStar] = useState("");
 
     useEffect(() => {
         let query = '';
@@ -62,15 +65,17 @@ function Redumtion() {
     {
         e.preventDefault();
 
-        console.log(planTitle,planDays,planOrders,planPercentage);
+        console.log(planTitle,planDays,planOrders,planPercentage,planStar);
         // console.log(e);
 
         const formData = new FormData();
 
+        formData.append("id", planId);
         formData.append("title", planTitle);
         formData.append("days", planDays);
         formData.append("orders", planOrders);
         formData.append("percentage", planPercentage);
+        formData.append("star", planStar);
 
 
         fetch("/add_plan", {
@@ -84,6 +89,15 @@ function Redumtion() {
             if (data.status === true) {
             // history.replace("/user-management");
             console.log(data);
+
+            setPlanId(false);
+            setPlanTitle('');
+            setPlanDays(0);
+            setPlanOrders(0);
+            setPlanPercentage(0);
+            setPlanStar("");
+            setReloadTable(!reloadTable);
+
             } else if (data.status === false) {
             console.log(data);
             // setErrorText(data.data);
@@ -91,6 +105,44 @@ function Redumtion() {
             }
         });
     }
+
+    function editHandler(e)
+    {
+        // console.log(e);
+        setPlanId(e.id);
+        setPlanTitle(e.title);
+        setPlanDays(e.days);
+        setPlanOrders(e.orders);
+        setPlanStar(e.star);
+        setPlanPercentage(e.percentage);
+    }
+
+    function deleteHandler(e)
+    {
+        // console.log(e);
+        fetch(`/delete_plan?id=${e.id}`, {
+        method: "GET",
+        // headers: { "content-Type": "application/json" },
+        // body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            if (data.status === true) {
+            // history.replace("/user-management");
+            console.log(data);
+            setReloadTable(!reloadTable);
+            } else if (data.status === false) {
+            console.log(data);
+            // setErrorText(data.data);
+            // setErrorSB(true);
+            }
+        });
+    }
+
+    const renderColumns = (row) => ({
+        actions: <Actions edit={() => editHandler(row)} del={() => deleteHandler(row)} />
+    })
 
     return (
         <DashboardLayout>
@@ -104,33 +156,39 @@ function Redumtion() {
 
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="Plan Name / Title" onChange={(e) => setPlanTitle(e.target.value)} placeholder="Title"  />
+                                        <FormField type="text" value={planTitle} label="Plan Name / Title" onChange={(e) => setPlanTitle(e.target.value)} placeholder="Title"  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Days" onChange={(e) => setPlanDays(e.target.value)} placeholder="0"  />
-                                    <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Star Color</label>
-                                       <SuiSelect
+                                        <FormField type="number" value={planDays} label="Number of Days" onChange={(e) => setPlanDays(e.target.value)} placeholder="0"  />
+                                    </Grid>
+                                    <Grid item md={6} xs={12} sm={4} >
+                                        <FormField type="number" value={planOrders} label="Number of Orders" onChange={(e) => setPlanOrders(e.target.value)} placeholder="0"  />
+                                    </Grid>
+                                    <Grid item md={6} xs={12} sm={4} >
+                                        <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Star Color</label>
+                                        <SuiSelect
                                         placeholder="Select Star Color"
+                                        value={[
+                                            { value: planStar, label: planStar },
+                                        ]}
                                         options={[
-                                            { value: "gold", label: "Gold" },
-                                            { value: "silver", label: "Silver" },
-                                            { value: "bronze", label: "Bronze" },
+                                            { value: "Gold", label: "Gold" },
+                                            { value: "Silver", label: "Silver" },
+                                            { value: "Bronze", label: "Bronze" },
                                             { value: "Red", label: "Red" },
-                                            { value: "blue", label: "Blue" },
-                                            { value: "orange", label: "Orange" },
+                                            { value: "Blue", label: "Blue" },
+                                            { value: "Orange", label: "Orange" },
 
                                         ]}
+                                        onChange={(e) => setPlanStar(e.value)}
                                         />
                                     </Grid>
-                                    <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Orders" onChange={(e) => setPlanOrders(e.target.value)} placeholder="0"  />
-                                </Grid>
-                                <Grid item  md={6} xs={12} sm={4} >
+                                    <Grid item  md={6} xs={12} sm={4} >
                                         <label style={{fontSize:"13px",fontWeight:"700"}}>Percentage </label>
                                         <Tooltip title="Multiply with cashback Points" placement="bottom" arrow>
                                             <ReportGmailerrorredRoundedIcon style={{fontSize:"20px !important",marginBottom:"-4px"}}/>
                                         </Tooltip>
-                                        <SuiInput placeholder="Percentage" onChange={(e) => setPlanPercentage(e.target.value)} icon={{ component: "percent", direction: "right", }} />
+                                        <SuiInput value={planPercentage} placeholder="Percentage" onChange={(e) => setPlanPercentage(e.target.value)} icon={{ component: "percent", direction: "right", }} />
                                     </Grid>
                                 </Grid>
 
@@ -142,7 +200,7 @@ function Redumtion() {
                     </Grid>
                     <Grid item xs={12} lg={7} >
                     <SuiBox my={3} style={{marginLeft:"24px",marginTop:"0"}}>
-                <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
+                {/* <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                     <SuiBox display="flex" >
                         <SuiBox style={{ width: "150px"}}>
                             <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Plan</label>
@@ -162,18 +220,7 @@ function Redumtion() {
                             </SuiButton>
                         </SuiBox>
                     </SuiBox>
-                    <SuiBox display="flex">
-                        {/* <SuiBox style={{ width: "150px", marginRight: "10px" }}>
-                            <SuiSelect
-                                placeholder="Category"
-                                options={[
-                                    { value: "area-wise", label: "Area Wise" },
-                                    { value: "order Wise", label: "Order Wise" },
-                                ]}
-                            />
-                            </SuiBox> */}
-                    </SuiBox>
-                </SuiBox>
+                </SuiBox> */}
                 <Card >
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
                     <DataTable canSearch manualPagination={true} isServerSide={true} url={`/get_plans`}
@@ -184,10 +231,13 @@ function Redumtion() {
                                 { Header: "Days", accessor: "days" },
                                 { Header: "Orders", accessor: "orders" },
                                 { Header: "Percentage", accessor: "percentage" },
+                                { Header: "Star", accessor: "star" },
+                                { Header: "Actions", accessor: "actions" },
                             ]
                         }}
                         key={reloadTable}
                         filterQuery={queryString}
+                        renderColumns={renderColumns}
                     />
 
                 </Card>

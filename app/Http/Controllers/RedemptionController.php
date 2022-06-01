@@ -13,17 +13,36 @@ class RedemptionController extends Controller
     {
         // return $request;
 
-        $vbl = new RedemptionPlan;
-        $vbl->title = $request->title;
-        $vbl->days = $request->days;
-        $vbl->orders = $request->orders;
-        $vbl->percentage = $request->percentage;
-        $vbl->save();
+        if($request->id == "false")
+        {
+            $vbl = new RedemptionPlan;
+            $vbl->title = $request->title;
+            $vbl->days = $request->days;
+            $vbl->orders = $request->orders;
+            $vbl->percentage = $request->percentage;
+            $vbl->star = $request->star;
+            $vbl->save();
 
-        $str['status']=true;
-        $str['message']="NEW PLAN ADDED";
-        $str['data']=$vbl;
-        return $str;
+            $str['status']=true;
+            $str['message']="NEW PLAN ADDED";
+            $str['data']=$vbl;
+            return $str;
+        }
+        else
+        {
+            $vbl = RedemptionPlan::find($request->id);
+            $vbl->title = $request->title;
+            $vbl->days = $request->days;
+            $vbl->orders = $request->orders;
+            $vbl->percentage = $request->percentage;
+            $vbl->star = $request->star;
+            $vbl->update();
+
+            $str['status']=true;
+            $str['message']="EXISTING PLAN UPDATED";
+            $str['data']=$vbl;
+            return $str;
+        }
     }
 
     public function get_plans(Request $request)
@@ -79,5 +98,17 @@ class RedemptionController extends Controller
             'message' => 'Discount Rules retrieved sucessfully!',
             'data' => $data,
         ]);
+    }
+
+    public function delete_plan(Request $request)
+    {
+        // return $request;
+
+        $vbl = RedemptionPlan::find($request->id);
+        $vbl->delete();
+
+        $str['status']=true;
+        $str['message']="PLAN DELETED";
+        return $str;
     }
 }

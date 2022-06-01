@@ -111,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/add_plan', [RedemptionController::class, 'add_plan']);
         Route::get('/get_plans', [RedemptionController::class, 'get_plans']);
+        Route::get('/delete_plan', [RedemptionController::class, 'delete_plan']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function () {
         Route::post('/changePassword', [UserController::class, 'changePassword']);

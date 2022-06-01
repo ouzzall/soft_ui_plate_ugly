@@ -16,38 +16,37 @@ Coded by www.creative-tim.com
 // @mui material components
 import Icon from "@mui/material/Icon";
 import Tooltip from "@mui/material/Tooltip";
+// import { Link } from "react-router-dom";
+
 
 // Soft UI Dashboard PRO React components
 import SuiBox from "@uf/components/SuiBox";
 import SuiTypography from "@uf/components/SuiTypography";
-import { Link } from "react-router-dom";
 
-function ActionCell({ view }) {
-    return (
-        <SuiBox display="flex" alignItems="center">
-            <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-                <Link to={view}>
-                    <Tooltip title="View order" placement="top">
-                        <Icon>visibility</Icon>
-                    </Tooltip>
-                </Link>
-            </SuiTypography>
-            <SuiBox mx={2}>
-                <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-                    <Link to={edit}>
-                        <Tooltip title="Edit Campaign" placement="top">
-                            <Icon>edit</Icon>
-                        </Tooltip>
-                    </Link>
-                </SuiTypography>
-            </SuiBox>
-            <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
-                <Tooltip title="Delete Campaign" placement="left">
-                    <Icon>delete</Icon>
-                </Tooltip>
-            </SuiTypography>
-        </SuiBox>
-    );
+function ActionCell({edit, del}) {
+  return (
+    <SuiBox display="flex" alignItems="center">
+      {/* <Link to="/layouts/dashboards/transactions">
+      <SuiTypography variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+        <Tooltip title="Preview product" placement="top">
+          <Icon>visibility</Icon>
+        </Tooltip>
+      </SuiTypography>
+      </Link> */}
+      <SuiBox mx={2}>
+        <SuiTypography onClick={edit} variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+          <Tooltip title="Edit Plan" placement="top">
+            <Icon>edit</Icon>
+          </Tooltip>
+        </SuiTypography>
+      </SuiBox>
+      <SuiTypography onClick={del} variant="body1" color="secondary" sx={{ cursor: "pointer", lineHeight: 0 }}>
+        <Tooltip title="Delete Plan" placement="left">
+          <Icon>delete</Icon>
+        </Tooltip>
+      </SuiTypography>
+    </SuiBox>
+  );
 }
 
 export default ActionCell;
