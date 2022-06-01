@@ -30,6 +30,7 @@ import SuiTypography from "@uf/components/SuiTypography";
 import SuiAvatar from "@uf/components/SuiAvatar";
 import SuiInput from "@uf/components/SuiInput";
 import SuiButton from "@uf/components/SuiButton";
+import SuiProgress from "@uf/components/SuiProgress";
 // Soft UI Dashboard PRO React example components
 import DashboardNavbar from "@uf/examples/Navbars/DashboardNavbar";
 import Icon from "@mui/material/Icon";
@@ -187,12 +188,24 @@ function Header({ data }) {
 
                     <Grid item>
                         <SuiBox height="100%" mt={0.5} lineHeight={1}>
+                           
                             <SuiTypography variant="h5" fontWeight="medium">
-                                {data?.name}
+                                {data?.name} (Silver)
                             </SuiTypography>
                             <SuiTypography variant="button" color="text" fontWeight="medium">
                                 {data?.email} | {data?.phone}
+                                
                             </SuiTypography>
+                            
+                            <SuiTypography color="text"marginTop="10px" fontSize="14px" fontWeight="medium">
+                                
+                                <SuiProgress  value="60" />
+                            </SuiTypography>
+                            <SuiTypography color="text" marginTop="5px"fontSize="14px" fontWeight="medium">
+                                You are 40 points away from gold
+                            </SuiTypography> 
+                             
+                            
                         </SuiBox>
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} sx={{ ml: "auto" }}>

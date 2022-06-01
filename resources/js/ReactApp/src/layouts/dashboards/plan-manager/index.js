@@ -108,6 +108,19 @@ function Redumtion() {
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
                                         <FormField type="number" label="Number of Days" onChange={(e) => setPlanDays(e.target.value)} placeholder="0"  />
+                                    <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Star Color</label>
+                                       <SuiSelect
+                                        placeholder="Select Star Color"
+                                        options={[
+                                            { value: "gold", label: "Gold" },
+                                            { value: "silver", label: "Silver" },
+                                            { value: "bronze", label: "Bronze" },
+                                            { value: "Red", label: "Red" },
+                                            { value: "blue", label: "Blue" },
+                                            { value: "orange", label: "Orange" },
+
+                                        ]}
+                                        />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
                                         <FormField type="number" label="Number of Orders" onChange={(e) => setPlanOrders(e.target.value)} placeholder="0"  />
