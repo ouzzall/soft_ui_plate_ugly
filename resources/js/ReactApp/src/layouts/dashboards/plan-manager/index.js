@@ -1,21 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// import { useState } from "react";
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Tooltip from "@mui/material/Tooltip";
@@ -53,6 +35,11 @@ function Redumtion() {
     const [queryString, setQueryString] = useState('');
     const [reloadTable, setReloadTable] = useState(false);
 
+    const [planTitle, setPlanTitle] = useState('');
+    const [planDays, setPlanDays] = useState(0);
+    const [planOrders, setPlanOrders] = useState(0);
+    const [planPercentage, setPlanPercentage] = useState(0);
+
     useEffect(() => {
         let query = '';
         if (startDate != '') {
@@ -71,6 +58,40 @@ function Redumtion() {
         setReloadTable(!reloadTable);
     }
 
+    function saveHandler(e)
+    {
+        e.preventDefault();
+
+        console.log(planTitle,planDays,planOrders,planPercentage);
+        // console.log(e);
+
+        const formData = new FormData();
+
+        formData.append("title", planTitle);
+        formData.append("days", planDays);
+        formData.append("orders", planOrders);
+        formData.append("percentage", planPercentage);
+
+
+        fetch("/add_plan", {
+        method: "POST",
+        // headers: { "content-Type": "application/json" },
+        body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            if (data.status === true) {
+            // history.replace("/user-management");
+            console.log(data);
+            } else if (data.status === false) {
+            console.log(data);
+            // setErrorText(data.data);
+            // setErrorSB(true);
+            }
+        });
+    }
+
     return (
         <DashboardLayout>
             <DashboardNavbar />
@@ -80,41 +101,28 @@ function Redumtion() {
                         <Card style={{ minHeight: "400px",padding: "40px 15%" }}>
                             <SuiBox >
                                 <h5>Plan Manager</h5>
-                               
+
                                 <Grid container spacing={3}>
                                     <Grid item md={12} xs={12} sm={4} >
-                                        <FormField type="text" label="Plane Name / Title" placeholder="Title"  />
-                                    </Grid>
-                                    
-                                    
-                                    <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Days" placeholder="0"  />
+                                        <FormField type="text" label="Plan Name / Title" onChange={(e) => setPlanTitle(e.target.value)} placeholder="Title"  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Reset Number of Days" placeholder="0"  />
+                                        <FormField type="number" label="Number of Days" onChange={(e) => setPlanDays(e.target.value)} placeholder="0"  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Orders" placeholder="0"  />
+                                        <FormField type="number" label="Number of Orders" onChange={(e) => setPlanOrders(e.target.value)} placeholder="0"  />
                                 </Grid>
                                 <Grid item  md={6} xs={12} sm={4} >
-                                        <label style={{fontSize:"13px",fontWeight:"700"}}>Percentage </label>  <Tooltip title="Multiply with cashback Points" placement="bottom" arrow>
-          {/* <SuiButton style={{marginBottom:"4px",marginLeft:"10px"}} variant="outlined" color="secondary" size="small" circular iconOnly> */}
-          <ReportGmailerrorredRoundedIcon style={{fontSize:"20px !important",marginBottom:"-4px"}}/>
-          {/* </SuiButton> */}
-        </Tooltip>
-        <SuiInput
-  placeholder="Percentage"
-  icon={{
-    component: "percent",
-    direction: "right",
-  }}
-/>
-                                    
+                                        <label style={{fontSize:"13px",fontWeight:"700"}}>Percentage </label>
+                                        <Tooltip title="Multiply with cashback Points" placement="bottom" arrow>
+                                            <ReportGmailerrorredRoundedIcon style={{fontSize:"20px !important",marginBottom:"-4px"}}/>
+                                        </Tooltip>
+                                        <SuiInput placeholder="Percentage" onChange={(e) => setPlanPercentage(e.target.value)} icon={{ component: "percent", direction: "right", }} />
                                     </Grid>
                                 </Grid>
-                               
+
                                 <Grid container spacing={3} mt={5} justifyContent="center">
-                                    <SuiButton type="submit" variant="gradient" color="info" >Save</SuiButton>
+                                    <SuiButton type="submit" variant="gradient" color="info" onClick={saveHandler}>Save</SuiButton>
                                 </Grid>
                             </SuiBox>
                         </Card>
@@ -123,19 +131,18 @@ function Redumtion() {
                     <SuiBox my={3} style={{marginLeft:"24px",marginTop:"0"}}>
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                     <SuiBox display="flex" >
-                        <suiBox style={{ width: "150px"}}>
+                        <SuiBox style={{ width: "150px"}}>
                             <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Plan</label>
-                                       <SuiSelect 
+                                       <SuiSelect
                                         placeholder="Select Plan"
                                         options={[
                                             { value: "Weekly", label: "weekly" },
                                             { value: "Monthly", label: "Monthly" },
                                             { value: "Fortnightly", label: "Fortnightly" },
                                             { value: "Yearly", label: "Yearly" },
-                                            
-                                        ]}  
+                                        ]}
                                         />
-                        </suiBox>
+                        </SuiBox>
                         <SuiBox ml={1} mt={4}>
                             <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
@@ -156,14 +163,14 @@ function Redumtion() {
                 </SuiBox>
                 <Card >
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/getDiscounts`}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/get_plans`}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
-                                { Header: "Customers Name", accessor: "user.name" },
-                                { Header: "Discount Code", accessor: "discount_code" },
-                                { Header: "Starts at", accessor: "starts_at" },
-                                { Header: "Ends at", accessor: "ends_at" },
+                                { Header: "Title", accessor: "title" },
+                                { Header: "Days", accessor: "days" },
+                                { Header: "Orders", accessor: "orders" },
+                                { Header: "Percentage", accessor: "percentage" },
                             ]
                         }}
                         key={reloadTable}
@@ -171,11 +178,11 @@ function Redumtion() {
                     />
 
                 </Card>
-            </SuiBox>                 
+            </SuiBox>
                     </Grid>
                 </Grid>
             </SuiBox>
-            
+
             <Footer />
         </DashboardLayout>
     );

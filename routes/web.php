@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RedemptionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CampaignController;
 use App\Http\Controllers\DashboardController;
@@ -107,6 +108,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/getRedeemSetting', [DefaultController::class, 'getRedeemSetting']);
         Route::post('/setRedeemSetting', [DefaultController::class, 'setRedeemSetting']);
+
+        Route::post('/add_plan', [RedemptionController::class, 'add_plan']);
+        Route::get('/get_plans', [RedemptionController::class, 'get_plans']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function () {
         Route::post('/changePassword', [UserController::class, 'changePassword']);

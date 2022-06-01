@@ -217,7 +217,7 @@ const routes = [
         route: "/reward-manager",
         component: RewardManager,
     },
-    
+
     {
         role: ["admin", "customer"],
         name: "Discount Rules",
