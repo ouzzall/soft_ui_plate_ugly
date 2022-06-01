@@ -68,7 +68,7 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
       </SuiBox>
       
       <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
-      <Card style={{padding: "20px"}}>
+      <Card style={{padding: "20px",marginTop:"10px"}}>
       
       <SuiBox display="flex" alignItems="center" >
       <SuiBox mr={2}>
@@ -96,41 +96,8 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
           
           <SuiProgress value={progress} />
         </SuiBox>
-        <SuiBox>
-        <SuiBox
-                            style={{ paddingTop: "2px", paddingBottom: "10px", paddingLeft: "10px", paddingRight: "10px" }}
-                            borderRadius="md"
-                            border="0.0625rem dashed #8392ab"
-                            textAlign="center"
-                            py={2}
-                        >
-                            <SuiTypography variant="h6" style={{ color: "#17c1e8" }} fontWeight="medium" textTransform="capitalize">
-                                Coupon
-                            </SuiTypography>
-                            <SuiBox display="flex" style={{ marginBottom: "0" }} alignItems="center" mb={2}>
-                                <SuiBox width="100%" mr={1}>
-                                    <SuiInput
-                                        size="small"
-                                        icon={{ component: "lock", direction: "right" }}
-                                        disabled
-                                    />
-                                </SuiBox>
-                                <Tooltip title={`Expires On: $`} placement="top">
-                                    <SuiButton
-                                        variant="outlined"
-                                        color="secondary"
-                                        size="small"
-                                        sx={{ padding: "0.5rem 1rem" }}
-                                    >
-                                        copy
-                                    </SuiButton>
-                                    
-                                </Tooltip>
-                                
-                            </SuiBox>
-                            <p style={{ fontSize: "13px",paddingTop:"10px",paddingBottom:"10px" }}>Expiress On: </p>
-
-                        </SuiBox>
+        <SuiBox style={{textAlign:"center"}}>
+            <SuiButton variant="gradient" color="info" size="small">Add to Cart</SuiButton>
          </SuiBox>           
         
         

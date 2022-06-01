@@ -197,11 +197,9 @@ function TearManager() {
                                     </SuiBox>
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Orders" placeholder="0"  />
+                                        <FormField type="number" label="Target Amount" placeholder="0"  />
                                     </Grid>
-                                    <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Number of Days" placeholder="0"  />
-                                    </Grid>
+                                   
                                     
                                    
                                     <Grid item md={12} xs={12} sm={4} >
