@@ -1,21 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// import { useState } from "react";
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 // import Icon from "@mui/material/Icon";
@@ -49,29 +31,102 @@ import { setLoading } from "../../../reducers/loadingSlice";
 import Settings from "@uf/examples/Icons/Settings";
 import Cube from "@uf/examples/Icons/Cube";
 import SpaceShip from "@uf/examples/Icons/SpaceShip";
+import Actions from "@uf/layouts/dashboards/plan-manager/components/ActionCell";
+
+import Silver from "@uf/assets/images/stars/Silver.png";
+import Gold from "@uf/assets/images/stars/Gold.png";
+import Red from "@uf/assets/images/stars/Red.png";
+import Blue from "@uf/assets/images/stars/Blue.png";
+import Green from "@uf/assets/images/stars/Green.png";
+import Orange from "@uf/assets/images/stars/Orange.png";
+import Pink from "@uf/assets/images/stars/Pink.png";
+import Purple from "@uf/assets/images/stars/Purple.png";
+import Yellow from "@uf/assets/images/stars/Yellow.png";
 
 function TearManager() {
     const [design, setDesign] = useState(false);
-  const [code, setCode] = useState(false);
-  const [develop, setDevelop] = useState(false);
+    const [code, setCode] = useState(false);
+    const [develop, setDevelop] = useState(false);
+
+    const [plans, setPlans] = useState(false);
+    const [rewards, setRewards] = useState(false);
+    const [products, setProducts] = useState(false);
+    const [productsData, setProductsData] = useState(false);
+
+    const [rewardTitle, setRewardTitle] = useState("");
+    const [rewardPreviousReward, setRewardPreviousReward] = useState(0);
+    const [rewardPlan, setRewardPlan] = useState(0);
+    const [rewardPoints, setRewardPoints] = useState(0);
+    const [rewardProduct, setRewardProduct] = useState(0);
+
+  useEffect(() => {
+    const abortCont = new AbortController();
+
+    fetch(`/reward_manager_init`, {
+      signal: abortCont.signal,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw Error("Not Fetching data from server.");
+        }
+        return res.json();
+      })
+      .then((result) => {
+        console.log(result);
+        setPlans(result.data[0]);
+        const options = [];
+        options.push({ value: 0, label: "First Time Only" });
+        // result.data[0].forEach((element) => {
+        // // console.log(element);
+        // newData2.push({ value: element.id, label: element.name });
+        // });
+        setRewards(options);
+        const productsInIt = [];
+        setProductsData(result.data[2]);
+        result.data[2].forEach((element) => {
+            // console.log(element);
+            productsInIt.push(
+                {
+                    value: element.id ,  label: (
+                        <SuiBox className="productSelect">
+                        <img
+                            src={element.image.src}
+                            alt="alt_image"
+                            width={22}
+                            className="img_tag_styling"
+                        /><p>{element.title}</p>
+                        </SuiBox>
+                    ),
+                }
+            );
+        });
+        setProducts(productsInIt);
+      })
+      .catch((err) => {
+          console.log(err);
+      });
+
+    return () => abortCont.abort();
+  }, [`/reward_manager_init`]);
+
 
   const handleSetDesign = () => {
     setDesign(true)
     setCode(false)
     setDevelop(false)
-  
+
   }
   const handleSetCode = () => {
     setDesign(false)
     setCode(true)
     setDevelop(false)
-  
+
   }
   const handleSetDevelop = () => {
     setDesign(false)
     setCode(false)
     setDevelop(true)
-  
+
   }
 
   const customButtonStyles = ({
@@ -90,7 +145,7 @@ function TearManager() {
       border: `${borderWidth[2]} solid ${transparent.main}`,
     },
 
-  
+
   });
 
     const [startDate, setStartDate] = useState('');
@@ -116,136 +171,152 @@ function TearManager() {
         setReloadTable(!reloadTable);
     }
 
+    // function handleSelect(e)
+    // {
+    //     console.log(e);
+    // }
+
+    function addRewardHandler(e)
+    {
+        e.preventDefault();
+        // console.log(productsData);
+        let image_src = "";
+        let variant_id = "";
+
+        productsData.forEach((element) => {
+            if(element.id == rewardProduct)
+            {
+                // console.log(element);
+                image_src = element.image.src;
+                variant_id = element.variants[0].id;
+            }
+        });
+
+        // console.log(rewardTitle,rewardPreviousReward,rewardPlan,rewardPoints,rewardProduct,image_src,variant_id);
+
+        const formData = new FormData();
+
+        formData.append("reward_title", rewardTitle);
+        formData.append("reward_point", rewardPoints);
+        formData.append("prev_reward_id", rewardPreviousReward);
+        formData.append("plan_id", rewardPlan);
+        formData.append("product_id", rewardProduct);
+        formData.append("variant_id", variant_id);
+        formData.append("image_src", image_src);
+
+        fetch("/add_reward", {
+        method: "POST",
+        // headers: { "content-Type": "application/json" },
+        body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            if (data.status === true) {
+            // history.replace("/user-management");
+            console.log(data);
+            } else if (data.status === false) {
+            console.log(data);
+            // setErrorText(data.data);
+            // setErrorSB(true);
+            }
+        });
+
+    }
+
+    const renderColumns = (row) => ({
+        dependency_init: <SuiTypography variant="body" >{row.dependency_title == null ? "No Dependency" : row.dependency_title }</SuiTypography>,
+        actions: <Actions edit={() => editHandler(row)} del={() => deleteHandler(row)} />,
+        image_src: <SuiBox className="productSelect">
+                        <img
+                            src={row.image_src}
+                            alt="alt_image"
+                            width={22}
+                            className="img_tag_styling"
+                        /><p>{row.reward_title}</p>
+                    </SuiBox>,
+        star_detail: <SuiBox className="productSelect">
+                    <img
+                        src={row.star == "Blue" ? Blue :
+                            row.star == "Yellow" ? Yellow :
+                            row.star == "Silver" ? Silver :
+                            row.star == "Gold" ? Gold :
+                            row.star == "Red" ? Red :
+                            row.star == "Orange" ? Orange :
+                            row.star == "Pink" ? Pink :
+                            row.star == "Purple" ? Purple :
+                             row.star == "Green" ? Green : null }
+                        alt="alt_image"
+                        width={22}
+                        className="img_tag_styling"
+                    />
+                    <p>{row.title}</p>
+                    </SuiBox>,
+    })
+
     return (
         <DashboardLayout>
             <DashboardNavbar />
             <SuiBox   py={3}  >
-                <Grid container ="center" sx={{ height: "100%" }}>
+                <Grid container sx={{ height: "100%" }}>
                     <Grid item xs={12} lg={5}>
                         <Card style={{ minHeight: "400px",padding: "40px 15%" }}>
                             <SuiBox >
                                 <h5>Reward Manager</h5>
-                               
+
                                 <Grid container spacing={3}>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="text" label="Title" placeholder="Title.."  />
+                                        <FormField type="text" onChange={(e) => {setRewardTitle(e.target.value)}} label="Title" placeholder="Title.."  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
                                         <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Parent</label>
                                        <SuiSelect
-                                        placeholder="Select Parent"
-                                        options={[
-                                            { value: "no", label: "No Parent" },
-                                            { value: "february", label: "February" },
-                                            { value: "march", label: "March" },
-                                            { value: "april", label: "April" },
-                                            { value: "may", label: "May" },
-                                            { value: "june", label: "June" },
-                                            { value: "july", label: "July" },
-                                            { value: "august", label: "August" },
-                                            { value: "september", label: "September" },
-                                            { value: "october", label: "October" },
-                                            { value: "november", label: "November" },
-                                            { value: "december", label: "December" },
-                                        ]}  
+                                        placeholder="Select Previous Reward"
+                                        options={rewards && rewards}
+                                        onChange={(e) => {setRewardPreviousReward(e.value)}}
                                         />
                                     </Grid>
                                     <Grid item md={12} xs={12} sm={4} >
                                     <SuiBox mt={2}>
                                         <Grid container spacing={3} justifyContent="center">
-                                        <Grid item xs={12} sm={3}>
-                                            <SuiBox textAlign="center">
-                                            <SuiButton
-                                                color="secondary"
-                                                variant={design ? "contained" : "outlined"}
-                                                onClick={handleSetDesign}
-                                                sx={customButtonStyles}
-                                            >
-                                                <Settings size="24px" color={design ? "white" : "dark"} />
-                                            </SuiButton>
-                                            <SuiTypography variant="h6" className="selectProductTitle">Design</SuiTypography>
-                                            </SuiBox>
-                                        </Grid>
-                                        
-                                        <Grid item xs={12} sm={3}>
-                                            <SuiBox textAlign="center">
-                                            <SuiButton
-                                                color="secondary"
-                                                variant={code ? "contained" : "outlined"}
-                                                onClick={handleSetCode}
-                                                sx={customButtonStyles}
-                                            >
-                                                <Cube size="24px" color={code ? "white" : "dark"} />
-                                            </SuiButton>
-                                            <SuiTypography variant="h6"className="selectProductTitle">Code</SuiTypography>
-                                            </SuiBox>
-                                        </Grid>
-                                        <Grid item xs={12} sm={3}>
-                                            <SuiBox textAlign="center">
-                                            <SuiButton
-                                                color="secondary"
-                                                variant={develop ? "contained" : "outlined"}
-                                                onClick={handleSetDevelop}
-                                                sx={customButtonStyles}
-                                            >
-                                                <SpaceShip size="24px" color={develop ? "white" : "dark"} />
-                                            </SuiButton>
-                                            <SuiTypography variant="h6" className="selectProductTitle">Develop</SuiTypography>
-                                            </SuiBox>
-                                        </Grid>
+                                            {plans &&
+                                            plans.map((value, index) => (
+                                            <Grid key=  {value.id} item xs={12} sm={3}>
+                                                <SuiBox textAlign="center">
+                                                <SuiButton
+                                                    color="secondary"
+                                                    variant={design ? "contained" : "outlined"}
+                                                    onClick={() => setRewardPlan(value.id)}
+                                                    sx={customButtonStyles}
+                                                >
+                                                    <Settings size="24px" color={design ? "white" : "dark"} />
+                                                </SuiButton>
+                                                <SuiTypography variant="h6" className="selectProductTitle">{value.title}</SuiTypography>
+                                                </SuiBox>
+                                            </Grid>
+                                            ))
+                                            }
                                         </Grid>
                                     </SuiBox>
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="number" label="Target Amount" placeholder="0"  />
+                                        <FormField onChange={(e) => {setRewardPoints(e.target.value)}} type="number" label="Target Points" placeholder="0"  />
                                     </Grid>
-                                   
-                                    
-                                   
+
+
+
                                     <Grid item md={12} xs={12} sm={4} >
                                         <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Product</label>
                                        <SuiSelect
                                         placeholder="Select Product"
-                                        options={[
-                                            { value: "Abc Product",  label: (
-                                                <SuiBox className="productSelect">
-                                                <img
-                                                    src={team2}
-                                                    alt="alt_image"
-                                                    width={22}
-                                                    className="img_tag_styling"
-                                                /><p>Product 1</p>
-                                                </SuiBox>
-                                            ), },
-                                            { value: "Def Product",  label: (
-                                                <SuiBox className="productSelect">
-                                                <img
-                                                    src={team2}
-                                                    alt="alt_image"
-                                                    width={22}
-                                                    className="img_tag_styling"
-                                                /><p>Def Product</p>
-                                                </SuiBox>
-                                            ), },
-                                            { value: "zxc product",  label: (
-                                                <SuiBox className="productSelect">
-                                                <img
-                                                    src={team2}
-                                                    alt="alt_image"
-                                                    width={22}
-                                                    className="img_tag_styling"
-                                                /><p>Zxc Product</p>
-                                                </SuiBox>
-                                            ), },
-                                            
-                                            
-                                        ]}  
+                                        options={products && products}
+                                        onChange={(e) => {setRewardProduct(e.value)}}
                                         />
                                     </Grid>
                                 </Grid>
-                                
+
                                 <Grid container spacing={3} mt={5} justifyContent="center">
-                                    <SuiButton type="submit" variant="gradient" color="info" >Save</SuiButton>
+                                    <SuiButton type="submit" variant="gradient" color="info" onClick={addRewardHandler}>Save</SuiButton>
                                 </Grid>
                             </SuiBox>
                         </Card>
@@ -254,19 +325,19 @@ function TearManager() {
                     <SuiBox my={3} style={{marginLeft:"24px",marginTop:"0"}}>
                 <SuiBox display="flex" justifyContent="space-between" alignItems="flex-start" mb={2}>
                     <SuiBox display="flex" >
-                        <suiBox style={{ width: "150px"}}>
+                        <SuiBox style={{ width: "150px"}}>
                             <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Plan</label>
-                                       <SuiSelect 
+                                       <SuiSelect
                                         placeholder="Select Plan"
                                         options={[
                                             { value: "Weekly", label: "weekly" },
                                             { value: "Monthly", label: "Monthly" },
                                             { value: "Fortnightly", label: "Fortnightly" },
                                             { value: "Yearly", label: "Yearly" },
-                                            
-                                        ]}  
+
+                                        ]}
                                         />
-                        </suiBox>
+                        </SuiBox>
                         <SuiBox ml={1} mt={4}>
                             <SuiButton onClick={() => setReloadTable(!reloadTable)} variant="gradient" color="info">
                                 Filter
@@ -287,26 +358,28 @@ function TearManager() {
                 </SuiBox>
                 <Card >
                     {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/getDiscounts`}
+                    <DataTable canSearch manualPagination={true} isServerSide={true} url={`/get_rewards`}
                         table={{
                             columns: [
                                 { Header: "Id", accessor: "id" },
-                                { Header: "Customers Name", accessor: "user.name" },
-                                { Header: "Discount Code", accessor: "discount_code" },
-                                { Header: "Starts at", accessor: "starts_at" },
-                                { Header: "Ends at", accessor: "ends_at" },
+                                { Header: "Product", accessor: "image_src" },
+                                { Header: "Plan", accessor: "star_detail" },
+                                { Header: "Target Points", accessor: "reward_point" },
+                                { Header: "Dependency", accessor: "dependency_init" },
+                                { Header: "Actions", accessor: "actions" },
                             ]
                         }}
                         key={reloadTable}
                         filterQuery={queryString}
+                        renderColumns={renderColumns}
                     />
 
                 </Card>
-            </SuiBox>                 
+            </SuiBox>
                     </Grid>
                 </Grid>
             </SuiBox>
-            
+
             <Footer />
         </DashboardLayout>
     );

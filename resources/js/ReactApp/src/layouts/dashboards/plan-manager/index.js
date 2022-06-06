@@ -173,12 +173,14 @@ function Redumtion() {
                                         ]}
                                         options={[
                                             { value: "Gold", label: "Gold" },
-                                            { value: "Silver", label: "Silver" },
-                                            { value: "Bronze", label: "Bronze" },
-                                            { value: "Red", label: "Red" },
-                                            { value: "Blue", label: "Blue" },
+                                            { value: "Green", label: "Green" },
                                             { value: "Orange", label: "Orange" },
-
+                                            { value: "Blue", label: "Blue" },
+                                            { value: "Pink", label: "Pink" },
+                                            { value: "Purple", label: "Purple" },
+                                            { value: "Red", label: "Red" },
+                                            { value: "Silver", label: "Silver" },
+                                            { value: "Yellow", label: "Yellow" },
                                         ]}
                                         onChange={(e) => setPlanStar(e.value)}
                                         />
