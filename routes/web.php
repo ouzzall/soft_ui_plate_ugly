@@ -115,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reward_manager_init', [RedemptionController::class, 'reward_manager_init']);
         Route::post('/add_reward', [RedemptionController::class, 'add_reward']);
         Route::get('/get_rewards', [RedemptionController::class, 'get_rewards']);
+        Route::get('/delete_reward', [RedemptionController::class, 'delete_reward']);
     });
     Route::middleware('can:verify_role,"customer"')->group(function () {
         Route::post('/changePassword', [UserController::class, 'changePassword']);

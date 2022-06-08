@@ -58,6 +58,9 @@ function TearManager() {
     const [rewardPlan, setRewardPlan] = useState(0);
     const [rewardPoints, setRewardPoints] = useState(0);
     const [rewardProduct, setRewardProduct] = useState(0);
+    const [searchOptions, setSearchOptions] = useState(0);
+    const [optionSelected, setOptionSelected] = useState(false);
+    const [rewardId, setRewardId] = useState(false);
 
   useEffect(() => {
     const abortCont = new AbortController();
@@ -75,7 +78,26 @@ function TearManager() {
         console.log(result);
         setPlans(result.data[0]);
         const options = [];
-        options.push({ value: 0, label: "First Time Only" });
+
+        const searchOptions = [];
+        result.data[0].forEach(element => {
+            searchOptions.push({ value: element.id, label: element.title });
+        });
+        setSearchOptions(searchOptions);
+
+
+        if(result.data[1].length == 0)
+        {
+            options.push({ value: 0, label: "First Time Only" });
+            setRewards(options);
+        }
+        else
+        {
+            result.data[1].forEach(element => {
+                options.push({ value: element.id, label: element.reward_title });
+            });
+            setRewards(options);
+        }
         // result.data[0].forEach((element) => {
         // // console.log(element);
         // newData2.push({ value: element.id, label: element.name });
@@ -161,8 +183,11 @@ function TearManager() {
         if (endDate != '') {
             query += `&endDate=${endDate}`;
         }
+        if (optionSelected != '') {
+            query += `&selected_plan=${optionSelected.value}`;
+        }
         setQueryString(query);
-    }, [startDate, endDate]);
+    }, [startDate, endDate, optionSelected]);
 
     const resetFilters = () => {
         setStartDate('');
@@ -182,13 +207,15 @@ function TearManager() {
         // console.log(productsData);
         let image_src = "";
         let variant_id = "";
+        let product_title = "";
 
         productsData.forEach((element) => {
-            if(element.id == rewardProduct)
+            if(element.id == rewardProduct.value)
             {
                 // console.log(element);
                 image_src = element.image.src;
                 variant_id = element.variants[0].id;
+                product_title = element.title;
             }
         });
 
@@ -196,13 +223,18 @@ function TearManager() {
 
         const formData = new FormData();
 
+        console.log(rewardPreviousReward);
+        console.log(rewardProduct);
+
+        formData.append("id", rewardId);
         formData.append("reward_title", rewardTitle);
         formData.append("reward_point", rewardPoints);
-        formData.append("prev_reward_id", rewardPreviousReward);
+        formData.append("prev_reward_id", rewardPreviousReward.value);
         formData.append("plan_id", rewardPlan);
-        formData.append("product_id", rewardProduct);
+        formData.append("product_id", rewardProduct.value);
         formData.append("variant_id", variant_id);
         formData.append("image_src", image_src);
+        formData.append("product_title", product_title);
 
         fetch("/add_reward", {
         method: "POST",
@@ -211,9 +243,11 @@ function TearManager() {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             if (data.status === true) {
             // history.replace("/user-management");
+            setReloadTable(!reloadTable);
+            setRewardId(false);
             console.log(data);
             } else if (data.status === false) {
             console.log(data);
@@ -252,7 +286,50 @@ function TearManager() {
                     />
                     <p>{row.title}</p>
                     </SuiBox>,
-    })
+    });
+
+    function editHandler(e)
+    {
+        // console.log(e);
+        setRewardId(e.id);
+        setRewardTitle(e.reward_title);
+        setRewardPoints(e.reward_point);
+        setRewardPlan(e.plan_id);
+        setRewardPreviousReward({ value: e.prev_reward_id, label: e.dependency_title });
+        setRewardProduct({value: e.product_id ,  label: (
+            <SuiBox className="productSelect">
+            <img
+                src={e.image_src}
+                alt="alt_image"
+                width={22}
+                className="img_tag_styling"
+            /><p>{e.product_title}</p>
+            </SuiBox>
+        )});
+    }
+
+    function deleteHandler(e)
+    {
+        // console.log(e);
+        fetch(`/delete_reward?id=${e.id}`, {
+        method: "GET",
+        // headers: { "content-Type": "application/json" },
+        // body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            if (data.status === true) {
+            // history.replace("/user-management");
+            console.log(data);
+            setReloadTable(!reloadTable);
+            } else if (data.status === false) {
+            console.log(data);
+            // setErrorText(data.data);
+            // setErrorSB(true);
+            }
+        });
+    }
 
     return (
         <DashboardLayout>
@@ -266,14 +343,15 @@ function TearManager() {
 
                                 <Grid container spacing={3}>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="text" onChange={(e) => {setRewardTitle(e.target.value)}} label="Title" placeholder="Title.."  />
+                                        <FormField type="text" onChange={(e) => {setRewardTitle(e.target.value)}} value={rewardTitle} label="Title" placeholder="Title.."  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
                                         <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Parent</label>
                                        <SuiSelect
                                         placeholder="Select Previous Reward"
                                         options={rewards && rewards}
-                                        onChange={(e) => {setRewardPreviousReward(e.value)}}
+                                        onChange={(e) => {setRewardPreviousReward(e)}}
+                                        value={rewardPreviousReward}
                                         />
                                     </Grid>
                                     <Grid item md={12} xs={12} sm={4} >
@@ -300,7 +378,7 @@ function TearManager() {
                                     </SuiBox>
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
-                                        <FormField onChange={(e) => {setRewardPoints(e.target.value)}} type="number" label="Target Points" placeholder="0"  />
+                                        <FormField onChange={(e) => {setRewardPoints(e.target.value)}} type="number" value={rewardPoints} label="Target Points" placeholder="0"  />
                                     </Grid>
 
 
@@ -310,7 +388,8 @@ function TearManager() {
                                        <SuiSelect
                                         placeholder="Select Product"
                                         options={products && products}
-                                        onChange={(e) => {setRewardProduct(e.value)}}
+                                        onChange={(e) => {setRewardProduct(e)}}
+                                        value={rewardProduct}
                                         />
                                     </Grid>
                                 </Grid>
@@ -329,13 +408,12 @@ function TearManager() {
                             <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Plan</label>
                                        <SuiSelect
                                         placeholder="Select Plan"
-                                        options={[
-                                            { value: "Weekly", label: "weekly" },
-                                            { value: "Monthly", label: "Monthly" },
-                                            { value: "Fortnightly", label: "Fortnightly" },
-                                            { value: "Yearly", label: "Yearly" },
-
-                                        ]}
+                                        options={searchOptions && searchOptions}
+                                        onChange={(event) => {
+                                            console.log(event.value);
+                                            setOptionSelected(event);
+                                        }}
+                                        value={optionSelected}
                                         />
                         </SuiBox>
                         <SuiBox ml={1} mt={4}>

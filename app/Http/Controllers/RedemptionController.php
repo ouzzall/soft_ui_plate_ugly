@@ -138,34 +138,75 @@ class RedemptionController extends Controller
     {
         // return $request;
 
-        $vbl = new RedemptionReward;
-        $vbl->reward_title = $request->reward_title;
-        $vbl->reward_point = $request->reward_point;
-        $vbl->prev_reward_id = $request->prev_reward_id;
-        $vbl->plan_id = $request->plan_id;
-        $vbl->product_id = $request->product_id;
-        $vbl->variant_id = $request->variant_id;
-        $vbl->image_src = $request->image_src;
-        $vbl->save();
+        if($request->id == "false")
+        {
+            $vbl = new RedemptionReward;
+            $vbl->product_title = $request->product_title;
+            $vbl->reward_title = $request->reward_title;
+            $vbl->reward_point = $request->reward_point;
+            $vbl->prev_reward_id = $request->prev_reward_id;
+            $vbl->plan_id = $request->plan_id;
+            $vbl->product_id = $request->product_id;
+            $vbl->variant_id = $request->variant_id;
+            $vbl->image_src = $request->image_src;
+            $vbl->save();
 
-        $str['status']=true;
-        $str['message']="NEW REWARD ADDDED";
-        $str['data']=$vbl;
-        return $str;
+            $str['status']=true;
+            $str['message']="NEW REWARD ADDDED";
+            $str['data']=$vbl;
+            return $str;
+        }
+        else
+        {
+            $vbl = RedemptionReward::find($request->id);
+            $vbl->product_title = $request->product_title;
+            $vbl->reward_title = $request->reward_title;
+            $vbl->reward_point = $request->reward_point;
+            $vbl->prev_reward_id = $request->prev_reward_id;
+            $vbl->plan_id = $request->plan_id;
+            $vbl->product_id = $request->product_id;
+            $vbl->variant_id = $request->variant_id;
+            $vbl->image_src = $request->image_src;
+            $vbl->save();
+
+            $str['status']=true;
+            $str['message']="REWARD UPDATED";
+            $str['data']=$vbl;
+            return $str;
+        }
+
+
     }
 
     public function get_rewards(Request $request)
     {
         $user = Auth::user();
 
+        $price_rules = "";
 
         // $price_rules = RedemptionReward::query();
-        $price_rules = RedemptionReward::
-        join('redemption_plans','redemption_plans.id','=','redemption_rewards.plan_id')
-        ->leftJoin('redemption_rewards as new_table','new_table.id','=','redemption_rewards.prev_reward_id')
-        ->select('redemption_rewards.*','redemption_plans.star','redemption_plans.title','new_table.reward_title as dependency_title');
+        if($request->selected_plan == "")
+        {
+            $price_rules = RedemptionReward::
+            join('redemption_plans','redemption_plans.id','=','redemption_rewards.plan_id')
+            ->leftJoin('redemption_rewards as new_table','new_table.id','=','redemption_rewards.prev_reward_id')
+            ->select('redemption_rewards.*','redemption_plans.star','redemption_plans.title','new_table.reward_title as dependency_title');
+        }
+        else
+        {
+            $price_rules = RedemptionReward::
+            where('redemption_rewards.plan_id','=',$request->selected_plan)
+            ->join('redemption_plans','redemption_plans.id','=','redemption_rewards.plan_id')
+            ->leftJoin('redemption_rewards as new_table','new_table.id','=','redemption_rewards.prev_reward_id')
+            ->select('redemption_rewards.*','redemption_plans.star','redemption_plans.title','new_table.reward_title as dependency_title');
+        }
+
         // ->select('redemption_rewards.*','redemption_plans.star','redemption_plans.title');
         // ->get();
+
+
+
+
 
         // return $price_rules;
 
@@ -213,5 +254,15 @@ class RedemptionController extends Controller
             'message' => 'Discount Rules retrieved sucessfully!',
             'data' => $data,
         ]);
+    }
+
+    public function delete_reward(Request $request)
+    {
+        $vbl = RedemptionReward::find($request->id);
+        $vbl->delete();
+
+        $str['status']=true;
+        $str['message']="REWARD DELETED";
+        return $str;
     }
 }
