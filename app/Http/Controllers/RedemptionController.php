@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RedemptionPlan;
 use App\Models\RedemptionReward;
 use App\Models\User;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -264,5 +265,18 @@ class RedemptionController extends Controller
         $str['status']=true;
         $str['message']="REWARD DELETED";
         return $str;
+    }
+
+    public function get_my_plan(Request $request)
+    {
+        $vbl1 = RedemptionPlan::all();
+        $vbl2 = Auth::user();
+        $vbl3 = Order::where('user_id',$vbl2->id)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Plans retrieved successfully',
+            'data' => array($vbl1,$vbl2,$vbl3),
+        ]);
     }
 }

@@ -1,19 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard PRO React - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import Tooltip from "@mui/material/Tooltip";
@@ -106,20 +90,56 @@ function Profile() {
         }
         getData();
     }, []);
+
+    useEffect(() => {
+        const getData = async () => {
+            let data = await fetch('/get_my_plan?id=2');
+            let response = await data.json();
+            if (response.success) {
+                // console.log(response);
+                // console.log(response.data[2].length);
+                response.data[0].sort((a, b) => (a.orders > b.orders) ? 1 : -1);
+                // console.log(response.data[0]);
+
+                let myPlan = false;
+                for (let i = 0; i < response.data[0].length; i++) {
+                    if(response.data[2].length >= response.data[0][i].orders)
+                    {
+                        myPlan = response.data[0][i];
+                        break;
+                    }
+                }
+                if(myPlan)
+                {
+                    console.log(myPlan);
+                    console.log("INSIDE");
+                }
+                else
+                {
+                    console.log("OUTSIDE");
+                    myPlan = response.data[0][0];
+                    console.log(myPlan);
+                    console.log(myPlan.orders - response.data[2].length);
+                }
+            }
+        }
+        getData();
+    }, []);
+
     return (
         <DashboardLayout>
             <Header data={profile} />
             <SuiBox mb={3} mt={3}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
-                    <TimelineList >
+                    <TimelineList title="CTH">
                         <TimelineItem
                             color="success"
                             icon="emoji_events"
                             title="Abc Product"
                             dateTime="22"
                             progress="50"
-                            
+
                         />
                         <TimelineItem
                             color="light"
@@ -135,15 +155,15 @@ function Profile() {
                             dateTime="200"
                             progress="20"
                         />
-                        
+
                     </TimelineList>
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <div style={{display:"flex"}} >
                             <Grid item mt={3} xs={12} sm={4} >
-                                <DefaultStatisticsCard 
+                                <DefaultStatisticsCard
                                     title="Coupons Created"
-                                    count={otherData?.coupons_created}
+                                    count={otherData && otherData.coupons_created}
                                     // percentage={{
                                     //     color: "success",
                                     //     value: "+55%",
@@ -152,9 +172,9 @@ function Profile() {
                                 />
                             </Grid>
                             <Grid style={{marginLeft:"20px",marginRight:"20px"}} item mt={3} xs={12} sm={4}>
-                                <DefaultStatisticsCard 
+                                <DefaultStatisticsCard
                                     title="Total Earnings"
-                                    count={`$${otherData?.total_orders_amount}`}
+                                    count={otherData && otherData.total_orders_amount}
                                     // percentage={{
                                     //     color: "success",
                                     //     value: "+12%",
@@ -164,9 +184,9 @@ function Profile() {
                                 />
                             </Grid>
                             <Grid item mt={3} xs={12} sm={4}>
-                                <DefaultStatisticsCard 
+                                <DefaultStatisticsCard
                                     title="Orders"
-                                    count={otherData?.orders_created}
+                                    count={otherData && otherData.orders_created}
                                     // percentage={{
                                     //     color: "secondary",
                                     //     value: "+1",
@@ -175,7 +195,7 @@ function Profile() {
 
                                 />
                             </Grid>
-                        </div>   
+                        </div>
                         <Grid item mt={3} xs={12} sm={12} lg={12}>
                         <DefaultLineChart
                             title="Sales Details"
@@ -221,10 +241,10 @@ function Profile() {
                         }}
                     />
                 </Card>
-            </SuiBox>            
+            </SuiBox>
 
                     </Grid>
-                    </Grid>    
+                    </Grid>
                 </Grid>
             </SuiBox>
             <SuiBox mb={3}>
@@ -233,7 +253,7 @@ function Profile() {
 
                 </Grid>
             </SuiBox>
-            
+
             {/* <SuiBox mt={3} mb={3}>
         <Grid container spacing={3}>
 
