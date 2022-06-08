@@ -322,15 +322,15 @@ return [
     'webhooks' => [
         [
             'topic' => env('SHOPIFY_WEBHOOK_1_TOPIC', 'SUBSCRIPTION_CONTRACTS_CREATE'),
-            'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', 'https://0842-2400-adc5-10b-ee00-5474-d3bf-9920-e8af.ngrok.io/webhook/subscription-contract')
+            'address' => env('SHOPIFY_WEBHOOK_1_ADDRESS', 'https://040d-2400-adc5-1b3-b500-1c17-134e-a693-e268.ngrok.io/webhook/subscription-contract')
         ],
         [
             'topic' => env('SHOPIFY_WEBHOOK_2_TOPIC', 'ORDERS_CREATE'),
-            'address' => env('SHOPIFY_WEBHOOK_2_ADDRESS', 'https://0842-2400-adc5-10b-ee00-5474-d3bf-9920-e8af.ngrok.io/webhook/orders-create')
+            'address' => env('SHOPIFY_WEBHOOK_2_ADDRESS', 'https://040d-2400-adc5-1b3-b500-1c17-134e-a693-e268.ngrok.io/webhook/orders-create')
         ],
         [
             'topic' => env('SHOPIFY_WEBHOOK_3_TOPIC', 'ORDERS_FULFILLED'),
-            'address' => env('SHOPIFY_WEBHOOK_3_ADDRESS', 'https://0842-2400-adc5-10b-ee00-5474-d3bf-9920-e8af.ngrok.io/webhook/orders-fulfilled')
+            'address' => env('SHOPIFY_WEBHOOK_3_ADDRESS', 'https://040d-2400-adc5-1b3-b500-1c17-134e-a693-e268.ngrok.io/webhook/orders-fulfilled')
         ]
         /*
             [

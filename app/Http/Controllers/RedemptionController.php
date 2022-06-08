@@ -122,7 +122,7 @@ class RedemptionController extends Controller
         $vbl1 = RedemptionPlan::all();
         $vbl2 = RedemptionReward::all();
 
-        $vbl = User::where('name', 'kh-abdullah-str.myshopify.com')->first();
+        $vbl = getShop();
         // return $vbl;
         $response = $vbl->api()->rest('get', '/admin/api/2022-04/products.json');
 
