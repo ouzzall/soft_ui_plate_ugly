@@ -36,7 +36,7 @@ import { useTimeline } from "@uf/examples/Timeline/context";
 import { timelineItem, timelineItemIcon } from "@uf/examples/Timeline/TimelineItem/styles";
 import { Card, Grid } from "@mui/material";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress }) {
+function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints}) {
   const isDark = useTimeline();
 
   const renderBadges =
@@ -63,26 +63,24 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         top="3.25%"
         left="2px"
         zIndex={2}
+        opacity={availability == "YES" ? 1 : 0.5}
       >
         <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
       </SuiBox>
-      
-      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem">
+
+      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" ? 1 : 0.5}>
       <Card style={{padding: "20px",marginTop:"10px"}}>
-      
-      <SuiBox display="flex" alignItems="center" >
+
+      <SuiBox display="flex" alignItems="center">
       <SuiBox mr={2}>
-        
-        <SuiAvatar src={burceMars} alt="profile picture" variant="rounded" />
+
+        <SuiAvatar src={image} alt="profile picture" variant="rounded" />
       </SuiBox>
       <SuiBox display="flex" flexDirection="column" width="250px">
         <SuiTypography variant="button" fontWeight="700">
-        {title} 
+        {title}
         </SuiTypography>
         <SuiTypography variant="button" fontWeight="medium" color="secondary">
-          <SuiTypography component="span" variant="button" color="secondary">
-            $
-          </SuiTypography>
           {dateTime}
         </SuiTypography>
       </SuiBox>
@@ -90,20 +88,20 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         <CheckCircleIcon/>
       </div>
     </SuiBox>
-       
-        <h6 style={{marginTop:"15px"}}>You are {100 - progress} points away</h6>
+
+        <h6 style={{marginTop:"15px"}}>{typeof progress == "number" ? `You are ${progress} points away` : "Get Your Reward"} </h6>
         <SuiBox mt={2} mb={1.5}>
-          
-          <SuiProgress value={progress} />
+
+          {availability == "NO" ? <SuiProgress value={(userPoints/dateTime)*100} /> : null}
         </SuiBox>
         <SuiBox style={{textAlign:"center"}}>
             <SuiButton variant="gradient" color="info" size="small">Add to Cart</SuiButton>
-         </SuiBox>           
-        
-        
+         </SuiBox>
+
+
         </Card>
       </SuiBox>
-      
+
     </SuiBox>
   );
 }

@@ -59,6 +59,10 @@ function Profile() {
     const [otherData, setOtherData] = useState({});
     const dispatch = useDispatch();
 
+    const [nextPlan, setNextPlan] = useState(false);
+    const [currentPlan, setCurrentPlan] = useState(false);
+    const [rewardsList, setRewardsList] = useState(false);
+
     useEffect(() => {
         const getData = async () => {
             let data = await fetch('/getProfile');
@@ -93,7 +97,7 @@ function Profile() {
 
     useEffect(() => {
         const getData = async () => {
-            let data = await fetch('/get_my_plan?id=2');
+            let data = await fetch('/get_my_plan');
             let response = await data.json();
             if (response.success) {
                 // console.log(response);
@@ -101,26 +105,63 @@ function Profile() {
                 response.data[0].sort((a, b) => (a.orders > b.orders) ? 1 : -1);
                 // console.log(response.data[0]);
 
-                let myPlan = false;
+                let next_plan = "";
+                let current_plan = "";
                 for (let i = 0; i < response.data[0].length; i++) {
                     if(response.data[2].length >= response.data[0][i].orders)
                     {
-                        myPlan = response.data[0][i];
+                        current_plan = response.data[0][i];
+                        next_plan = response.data[0][i+1];
                         break;
                     }
                 }
-                if(myPlan)
+                if(next_plan)
                 {
-                    console.log(myPlan);
-                    console.log("INSIDE");
+                    // console.log(current_plan);
+                    // console.log(next_plan);
+                    setCurrentPlan({currentStar: current_plan.star, currentPlan: current_plan.title});
+                    setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
+
+                    // console.log("INSIDE");
                 }
                 else
                 {
-                    console.log("OUTSIDE");
-                    myPlan = response.data[0][0];
-                    console.log(myPlan);
-                    console.log(myPlan.orders - response.data[2].length);
+                    // console.log("OUTSIDE");
+                    next_plan = response.data[0][0];
+                    setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
+                    // console.log(next_plan);
+                    // console.log(next_plan.orders - response.data[2].length);
                 }
+
+                const current_rewards = [];
+                if(current_plan)
+                {
+                    for (let i = 0; i < response.data[3].length; i++) {
+                        if(response.data[3][i].plan_id == current_plan.id)
+                        {
+                            current_rewards.push(response.data[3][i]);
+                        }
+                    }
+                }
+                // console.log(current_rewards);
+                // console.log(response.data[4]);
+                current_rewards.forEach(element => {
+                    // console.log(element);
+                    if(element.reward_point <= response.data[4].loyalty_earned)
+                    {
+                        element.availability = "YES";
+                    }
+                    else
+                    {
+                        element.availability = "NO";
+                        element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
+                        element.user_points = response.data[4].loyalty_earned;
+                    }
+
+                });
+                // console.log(current_rewards);
+                setRewardsList(current_rewards);
+
             }
         }
         getData();
@@ -128,34 +169,26 @@ function Profile() {
 
     return (
         <DashboardLayout>
-            <Header data={profile} />
+            <Header data={profile} nextPlan={nextPlan} currentPlan={currentPlan}/>
             <SuiBox mb={3} mt={3}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
-                    <TimelineList title="CTH">
-                        <TimelineItem
-                            color="success"
-                            icon="emoji_events"
-                            title="Abc Product"
-                            dateTime="22"
-                            progress="50"
-
-                        />
-                        <TimelineItem
-                            color="light"
-                            icon="emoji_events"
-                            title="Def Product"
-                            dateTime="44"
-                            progress="80"
-                        />
-                        <TimelineItem
-                            color="light"
-                            icon="emoji_events"
-                            title="Zxc Product"
-                            dateTime="200"
-                            progress="20"
-                        />
-
+                    <TimelineList>
+                        {rewardsList &&
+                            rewardsList.map((value,index) => (
+                                    <TimelineItem
+                                    color="success"
+                                    icon="emoji_events"
+                                    title={value.reward_title}
+                                    dateTime={value.reward_point}
+                                    progress={value.points_diffrence}
+                                    image={value.image_src}
+                                    availability={value.availability}
+                                    userPoints={value.user_points}
+                                    />
+                                )
+                            )
+                        }
                     </TimelineList>
                     </Grid>
                     <Grid item xs={12} sm={8}>

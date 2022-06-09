@@ -50,13 +50,23 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoyaltyInfo } from "../../../../../reducers/loyaltyInfoSlice";
 
-function Header({ data }) {
+import Silver from "@uf/assets/images/stars/Silver.png";
+import Gold from "@uf/assets/images/stars/Gold.png";
+import Red from "@uf/assets/images/stars/Red.png";
+import Blue from "@uf/assets/images/stars/Blue.png";
+import Green from "@uf/assets/images/stars/Green.png";
+import Orange from "@uf/assets/images/stars/Orange.png";
+import Pink from "@uf/assets/images/stars/Pink.png";
+import Purple from "@uf/assets/images/stars/Purple.png";
+import Yellow from "@uf/assets/images/stars/Yellow.png";
+
+function Header({ data, nextPlan, currentPlan}) {
     const [tabsOrientation, setTabsOrientation] = useState("horizontal");
     const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
     const redeem = useSelector((state) => state.redeem);
     const dispatch = useDispatch();
 
-
+    // console.log(redemption);
     // const [tabValue, setTabValue] = useState(0);
 
     useEffect(() => {
@@ -176,11 +186,25 @@ function Header({ data }) {
                                 </Link>
                             </SuiBox>
                             <SuiBox alt="spotify logo" position="absolute" right={0} top={-7} mr={-1} mb={-1}>
-                                
+
                             <Tooltip title="Gold" placement="top" arrow>
-                                        <StarIcon style={{color:"yellow",background: "lightgray",borderRadius: "50%",padding: "2px"}}/>
+                                <SuiBox>
+                                {currentPlan && <img
+                                    src={currentPlan.currentStar == "Blue" ? Blue :
+                                    currentPlan.currentStar == "Yellow" ? Yellow :
+                                    currentPlan.currentStar == "Silver" ? Silver :
+                                    currentPlan.currentStar == "Gold" ? Gold :
+                                    currentPlan.currentStar == "Red" ? Red :
+                                    currentPlan.currentStar == "Orange" ? Orange :
+                                    currentPlan.currentStar == "Pink" ? Pink :
+                                    currentPlan.currentStar == "Purple" ? Purple :
+                                    currentPlan.currentStar == "Green" ? Green : null }
+                                    alt="alt_image"
+                                    width={26}
+                                />}
+                                </SuiBox>
                             </Tooltip>
-                                
+
                             </SuiBox>
                         </SuiBox>
                     </Grid>
@@ -188,24 +212,25 @@ function Header({ data }) {
 
                     <Grid item>
                         <SuiBox height="100%" mt={0.5} lineHeight={1}>
-                           
+
                             <SuiTypography variant="h5" fontWeight="medium">
-                                {data?.name} (Silver)
+                                {data?.name} {currentPlan && `(${currentPlan.currentPlan})`}
                             </SuiTypography>
                             <SuiTypography variant="button" color="text" fontWeight="medium">
                                 {data?.email} | {data?.phone}
-                                
+
                             </SuiTypography>
-                            
+
                             <SuiTypography color="text"marginTop="10px" fontSize="14px" fontWeight="medium">
-                                
+
                                 <SuiProgress  value="60" />
                             </SuiTypography>
-                            <SuiTypography color="text" marginTop="5px"fontSize="14px" fontWeight="medium">
-                                You are 40 points away from gold
-                            </SuiTypography> 
-                             
-                            
+                            {nextPlan &&
+                                <SuiTypography color="text" marginTop="5px"fontSize="14px" fontWeight="medium">
+                                    You are {nextPlan.remPoints} orders away from {nextPlan.nextPlan}
+                                </SuiTypography>
+                            }
+
                         </SuiBox>
                     </Grid>
                     <Grid item xs={12} md={3} lg={3} sx={{ ml: "auto" }}>

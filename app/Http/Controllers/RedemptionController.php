@@ -6,6 +6,7 @@ use App\Models\RedemptionPlan;
 use App\Models\RedemptionReward;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\UserLoyalty;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -272,11 +273,13 @@ class RedemptionController extends Controller
         $vbl1 = RedemptionPlan::all();
         $vbl2 = Auth::user();
         $vbl3 = Order::where('user_id',$vbl2->id)->get();
+        $vbl4 = RedemptionReward::all();
+        $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
 
         return response()->json([
             'success' => true,
             'message' => 'Plans retrieved successfully',
-            'data' => array($vbl1,$vbl2,$vbl3),
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5),
         ]);
     }
 }
