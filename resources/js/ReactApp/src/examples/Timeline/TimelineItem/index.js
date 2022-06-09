@@ -63,12 +63,12 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         top="3.25%"
         left="2px"
         zIndex={2}
-        opacity={availability == "YES" ? 1 : 0.5}
+        opacity={availability == "YES" ? 1 : 0.7}
       >
         <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
       </SuiBox>
 
-      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" ? 1 : 0.5}>
+      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" ? 1 : 0.7}>
       <Card style={{padding: "20px",marginTop:"10px"}}>
 
       <SuiBox display="flex" alignItems="center">
@@ -95,7 +95,9 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
           {availability == "NO" ? <SuiProgress value={(userPoints/dateTime)*100} /> : null}
         </SuiBox>
         <SuiBox style={{textAlign:"center"}}>
-            <SuiButton variant="gradient" color="info" size="small">Add to Cart</SuiButton>
+            {availability == "YES" ?
+              <SuiButton variant="gradient" color="info" size="small">Add to Cart</SuiButton>
+            : <SuiButton variant="gradient" color="info" size="small" disabled>Add to Cart</SuiButton>}
          </SuiBox>
 
 
