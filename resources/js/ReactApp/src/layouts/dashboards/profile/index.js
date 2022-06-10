@@ -173,7 +173,7 @@ function Profile() {
 
     return (
         <DashboardLayout>
-            <Header data={profile} nextPlan={nextPlan} currentPlan={currentPlan}/>
+            <Header data={profile} nextPlan={nextPlan} currentPlan={currentPlan} ordersProgress={ordersProgress}/>
             <SuiBox mb={3} mt={3}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>

@@ -60,7 +60,7 @@ import Pink from "@uf/assets/images/stars/Pink.png";
 import Purple from "@uf/assets/images/stars/Purple.png";
 import Yellow from "@uf/assets/images/stars/Yellow.png";
 
-function Header({ data, nextPlan, currentPlan}) {
+function Header({ data, nextPlan, currentPlan, ordersProgress}) {
     const [tabsOrientation, setTabsOrientation] = useState("horizontal");
     const loyaltyInfo = useSelector((state) => state.loyaltyInfo);
     const redeem = useSelector((state) => state.redeem);
@@ -223,7 +223,7 @@ function Header({ data, nextPlan, currentPlan}) {
 
                             <SuiTypography color="text"marginTop="10px" fontSize="14px" fontWeight="medium">
 
-                                <SuiProgress  value="60" />
+                                <SuiProgress  value={ordersProgress && ordersProgress} />
                             </SuiTypography>
                             {nextPlan &&
                                 <SuiTypography color="text" marginTop="5px"fontSize="14px" fontWeight="medium">
