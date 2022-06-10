@@ -20,7 +20,7 @@ class CreateRedemptionRewardsTable extends Migration
             $table->bigInteger('prev_reward_id');
             $table->bigInteger('plan_id');
             $table->bigInteger('product_id');
-            $table->bigInteger('product_title');
+            $table->string('product_title');
             $table->bigInteger('variant_id');
             $table->string('image_src');
             $table->timestamps();
