@@ -61,6 +61,7 @@ function Profile() {
 
     const [nextPlan, setNextPlan] = useState(false);
     const [currentPlan, setCurrentPlan] = useState(false);
+    const [ordersProgress, setOrdersProgress] = useState(false);
     const [rewardsList, setRewardsList] = useState(false);
 
     useEffect(() => {
@@ -121,7 +122,7 @@ function Profile() {
                     // console.log(next_plan);
                     setCurrentPlan({currentStar: current_plan.star, currentPlan: current_plan.title});
                     setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
-
+                    setOrdersProgress((response.data[2].length/next_plan.orders)*100);
                     // console.log("INSIDE");
                 }
                 else
@@ -129,6 +130,7 @@ function Profile() {
                     // console.log("OUTSIDE");
                     next_plan = response.data[0][0];
                     setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
+                    setOrdersProgress((response.data[2].length/next_plan.orders)*100);
                     // console.log(next_plan);
                     // console.log(next_plan.orders - response.data[2].length);
                 }
