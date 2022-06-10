@@ -36,8 +36,10 @@ import { useTimeline } from "@uf/examples/Timeline/context";
 import { timelineItem, timelineItemIcon } from "@uf/examples/Timeline/TimelineItem/styles";
 import { Card, Grid } from "@mui/material";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints}) {
+function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints, variantId, discountCode, shopName}) {
   const isDark = useTimeline();
+
+//   console.log(shopName);
 
   const renderBadges =
     badges.length > 0
@@ -96,7 +98,7 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         </SuiBox>
         <SuiBox style={{textAlign:"center"}}>
             {availability == "YES" ?
-              <SuiButton variant="gradient" color="info" size="small">Add to Cart</SuiButton>
+              <SuiButton variant="gradient" color="info" size="small" href={`https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${discountCode}`} target="_blank">Add to Cart</SuiButton>
             : <SuiButton variant="gradient" color="info" size="small" disabled>Add to Cart</SuiButton>}
          </SuiBox>
 

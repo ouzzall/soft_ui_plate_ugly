@@ -275,11 +275,12 @@ class RedemptionController extends Controller
         $vbl3 = Order::where('user_id',$vbl2->id)->get();
         $vbl4 = RedemptionReward::all();
         $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
+        $vbl6 = getShop();
 
         return response()->json([
             'success' => true,
             'message' => 'Plans retrieved successfully',
-            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5),
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
         ]);
     }
 }

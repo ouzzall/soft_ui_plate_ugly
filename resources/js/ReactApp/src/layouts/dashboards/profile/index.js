@@ -100,7 +100,7 @@ function Profile() {
             let data = await fetch('/get_my_plan');
             let response = await data.json();
             if (response.success) {
-                // console.log(response);
+                console.log(response);
                 // console.log(response.data[2].length);
                 response.data[0].sort((a, b) => (a.orders > b.orders) ? 1 : -1);
                 // console.log(response.data[0]);
@@ -147,6 +147,7 @@ function Profile() {
                 // console.log(response.data[4]);
                 current_rewards.forEach(element => {
                     // console.log(element);
+                    element.shop_name = response.data[5].name;
                     if(element.reward_point <= response.data[4].loyalty_earned)
                     {
                         element.availability = "YES";
@@ -156,6 +157,7 @@ function Profile() {
                         element.availability = "NO";
                         element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
                         element.user_points = response.data[4].loyalty_earned;
+
                     }
 
                 });
@@ -185,6 +187,9 @@ function Profile() {
                                     image={value.image_src}
                                     availability={value.availability}
                                     userPoints={value.user_points}
+                                    variantId={value.variant_id}
+                                    discountCode="CTH_CTH"
+                                    shopName={value.shop_name}
                                     />
                                 )
                             )

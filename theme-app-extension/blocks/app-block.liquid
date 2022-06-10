@@ -1,0 +1,71 @@
+<div>CTH2</div>
+
+<script>
+
+    $(document).ready(function(){
+        {% comment %} console.log("CTH2"); {% endcomment %}
+        let my_address = window.location.href;
+        let my_shop = Shopify.shop;
+        console.log(my_address);
+        if(my_address.includes("redemption"))
+        {
+            const queryString = window.location.search;
+            console.log(queryString);
+
+            const urlParams = new URLSearchParams(queryString);
+            console.log(urlParams);
+
+            const variant_id = urlParams.get('variant_id');
+            console.log(variant_id);
+
+            const discount_code = urlParams.get('discount_code');
+            console.log(discount_code);
+
+            if(variant_id && discount_code)
+            {
+                {% comment %} console.log("INSIDE CTH"); {% endcomment %}
+
+                let formData2 = {
+
+                    items: [
+                      {
+                        quantity: 1,
+                        id: variant_id,
+                      }
+                    ]
+
+                  };
+
+                fetch('/cart/add.js', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData2)
+                  })
+                  .then(response => {
+                    return response.json();
+                  })
+                  .then((data) => {
+                    console.log(data);
+
+                    var action_src = "https://"+Shopify.shop+"/checkout?discount=" + discount_code;
+                    console.log(action_src);
+                    window.location.href = action_src;
+                    {% comment %} window.location.href = "../../cart"; {% endcomment %}
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+            }
+        }
+    });
+
+</script>
+
+{% schema %}
+  {
+    "name": "ATC_LINK",
+    "target": "section"
+  }
+{% endschema %}
