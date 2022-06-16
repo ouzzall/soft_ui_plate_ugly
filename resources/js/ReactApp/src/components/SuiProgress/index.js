@@ -32,6 +32,7 @@ const SuiProgress = forwardRef(({ variant, color, value, label, ...rest }, ref) 
       </SuiTypography>
     )}
     <SuiProgressRoot
+      style={{height: "16px" }}
       {...rest}
       ref={ref}
       variant="determinate"

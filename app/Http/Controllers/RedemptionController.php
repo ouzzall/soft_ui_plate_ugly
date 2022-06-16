@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RedemptionPlan;
 use App\Models\RedemptionReward;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\UserLoyalty;
@@ -18,35 +20,62 @@ class RedemptionController extends Controller
     {
         // return $request;
 
-        if($request->id == "false")
-        {
-            $vbl = new RedemptionPlan;
-            $vbl->title = $request->title;
-            $vbl->days = $request->days;
-            $vbl->orders = $request->orders;
-            $vbl->percentage = $request->percentage;
-            $vbl->star = $request->star;
-            $vbl->save();
+        $validator = Validator::make($request->all(),[
+        'title'=>'required',
+        'days' => 'required',
+        'orders' => 'required',
+        'min_orders_amount' => 'required',
+        'percentage' => 'required',
+        'star' => 'required',
+        ], [
+        ]);
 
-            $str['status']=true;
-            $str['message']="NEW PLAN ADDED";
-            $str['data']=$vbl;
+        if ($validator->fails())
+        {
+            $str['status']=false;
+            $error=$validator->errors()->toArray();
+            foreach($error as $x_value){
+                $err[]=$x_value[0];
+            }
+            $str['message'] =$err['0'];
+            // $str['data'] = $validator->errors()->toArray();
             return $str;
         }
         else
         {
-            $vbl = RedemptionPlan::find($request->id);
-            $vbl->title = $request->title;
-            $vbl->days = $request->days;
-            $vbl->orders = $request->orders;
-            $vbl->percentage = $request->percentage;
-            $vbl->star = $request->star;
-            $vbl->update();
 
-            $str['status']=true;
-            $str['message']="EXISTING PLAN UPDATED";
-            $str['data']=$vbl;
-            return $str;
+            if($request->id == "false")
+            {
+                $vbl = new RedemptionPlan;
+                $vbl->title = $request->title;
+                $vbl->days = $request->days;
+                $vbl->orders = $request->orders;
+                $vbl->min_orders_amount = $request->min_orders_amount;
+                $vbl->percentage = $request->percentage;
+                $vbl->star = $request->star;
+                $vbl->save();
+
+                $str['status']=true;
+                $str['message']="New Plan Added";
+                $str['data']=$vbl;
+                return $str;
+            }
+            else
+            {
+                $vbl = RedemptionPlan::find($request->id);
+                $vbl->title = $request->title;
+                $vbl->days = $request->days;
+                $vbl->orders = $request->orders;
+                $vbl->min_orders_amount = $request->min_orders_amount;
+                $vbl->percentage = $request->percentage;
+                $vbl->star = $request->star;
+                $vbl->update();
+
+                $str['status']=true;
+                $str['message']="Plan Updated";
+                $str['data']=$vbl;
+                return $str;
+            }
         }
     }
 
@@ -140,44 +169,68 @@ class RedemptionController extends Controller
     {
         // return $request;
 
-        if($request->id == "false")
-        {
-            $vbl = new RedemptionReward;
-            $vbl->product_title = $request->product_title;
-            $vbl->reward_title = $request->reward_title;
-            $vbl->reward_point = $request->reward_point;
-            $vbl->prev_reward_id = $request->prev_reward_id;
-            $vbl->plan_id = $request->plan_id;
-            $vbl->product_id = $request->product_id;
-            $vbl->variant_id = $request->variant_id;
-            $vbl->image_src = $request->image_src;
-            $vbl->save();
+        $validator = Validator::make($request->all(),[
+        'product_title'=>'required',
+        'reward_title' => 'required',
+        'reward_point' => 'required',
+        'prev_reward_id' => 'required|numeric',
+        'plan_id' => 'required',
+        'product_id' => 'required',
+        'variant_id' => 'required',
+        'image_src' => 'required',
+        ], [
+        ]);
 
-            $str['status']=true;
-            $str['message']="NEW REWARD ADDDED";
-            $str['data']=$vbl;
+        if ($validator->fails())
+        {
+            $str['status']=false;
+            $error=$validator->errors()->toArray();
+            foreach($error as $x_value){
+                $err[]=$x_value[0];
+            }
+            $str['message'] =$err['0'];
+            // $str['data'] = $validator->errors()->toArray();
             return $str;
         }
         else
         {
-            $vbl = RedemptionReward::find($request->id);
-            $vbl->product_title = $request->product_title;
-            $vbl->reward_title = $request->reward_title;
-            $vbl->reward_point = $request->reward_point;
-            $vbl->prev_reward_id = $request->prev_reward_id;
-            $vbl->plan_id = $request->plan_id;
-            $vbl->product_id = $request->product_id;
-            $vbl->variant_id = $request->variant_id;
-            $vbl->image_src = $request->image_src;
-            $vbl->save();
+            if($request->id == "false")
+            {
+                $vbl = new RedemptionReward;
+                $vbl->product_title = $request->product_title;
+                $vbl->reward_title = $request->reward_title;
+                $vbl->reward_point = $request->reward_point;
+                $vbl->prev_reward_id = $request->prev_reward_id;
+                $vbl->plan_id = $request->plan_id;
+                $vbl->product_id = $request->product_id;
+                $vbl->variant_id = $request->variant_id;
+                $vbl->image_src = $request->image_src;
+                $vbl->save();
 
-            $str['status']=true;
-            $str['message']="REWARD UPDATED";
-            $str['data']=$vbl;
-            return $str;
+                $str['status']=true;
+                $str['message']="New Reward Added";
+                $str['data']=$vbl;
+                return $str;
+            }
+            else
+            {
+                $vbl = RedemptionReward::find($request->id);
+                $vbl->product_title = $request->product_title;
+                $vbl->reward_title = $request->reward_title;
+                $vbl->reward_point = $request->reward_point;
+                $vbl->prev_reward_id = $request->prev_reward_id;
+                $vbl->plan_id = $request->plan_id;
+                $vbl->product_id = $request->product_id;
+                $vbl->variant_id = $request->variant_id;
+                $vbl->image_src = $request->image_src;
+                $vbl->save();
+
+                $str['status']=true;
+                $str['message']="Reward Updated";
+                $str['data']=$vbl;
+                return $str;
+            }
         }
-
-
     }
 
     public function get_rewards(Request $request)
@@ -272,7 +325,9 @@ class RedemptionController extends Controller
     {
         $vbl1 = RedemptionPlan::all();
         $vbl2 = Auth::user();
-        $vbl3 = Order::where('user_id',$vbl2->id)->get();
+        $vbl3 = Order::where('user_id',$vbl2->id)
+        ->where('amount','>',100)
+        ->get();
         $vbl4 = RedemptionReward::all();
         $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
         $vbl6 = getShop();
@@ -282,5 +337,17 @@ class RedemptionController extends Controller
             'message' => 'Plans retrieved successfully',
             'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
         ]);
+    }
+
+    public function get_plan_rewards(Request $request)
+    {
+        // return $request;
+
+        $vbl4 = RedemptionReward::where('plan_id',$request->id)->get();
+
+        $str['status']=true;
+        $str['message']="SPECIFIC REWARDS SHOWN";
+        $str['data']=$vbl4;
+        return $str;
     }
 }

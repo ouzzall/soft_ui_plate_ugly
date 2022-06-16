@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import Loader from "@uf/components/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../../../reducers/loadingSlice";
+import Swal from "sweetalert2";
 
 function Redumtion() {
 
@@ -42,6 +43,8 @@ function Redumtion() {
     const [planOrders, setPlanOrders] = useState(0);
     const [planPercentage, setPlanPercentage] = useState(0);
     const [planStar, setPlanStar] = useState("");
+    const [minOrdersAmount, setMinOrdersAmount] = useState(0);
+
 
     useEffect(() => {
         let query = '';
@@ -65,7 +68,7 @@ function Redumtion() {
     {
         e.preventDefault();
 
-        console.log(planTitle,planDays,planOrders,planPercentage,planStar);
+        console.log(planTitle,planDays,planOrders,planPercentage,planStar,minOrdersAmount);
         // console.log(e);
 
         const formData = new FormData();
@@ -74,6 +77,7 @@ function Redumtion() {
         formData.append("title", planTitle);
         formData.append("days", planDays);
         formData.append("orders", planOrders);
+        formData.append("min_orders_amount", minOrdersAmount);
         formData.append("percentage", planPercentage);
         formData.append("star", planStar);
 
@@ -94,12 +98,16 @@ function Redumtion() {
             setPlanTitle('');
             setPlanDays(0);
             setPlanOrders(0);
+            setMinOrdersAmount(0);
             setPlanPercentage(0);
             setPlanStar("");
             setReloadTable(!reloadTable);
 
+            Swal.fire("Success!", data.message , "success");
+
             } else if (data.status === false) {
             console.log(data);
+            Swal.fire("Error!", data.message , "error");
             // setErrorText(data.data);
             // setErrorSB(true);
             }
@@ -113,6 +121,7 @@ function Redumtion() {
         setPlanTitle(e.title);
         setPlanDays(e.days);
         setPlanOrders(e.orders);
+        setMinOrdersAmount(e.orders);
         setPlanStar(e.star);
         setPlanPercentage(e.percentage);
     }
@@ -130,6 +139,7 @@ function Redumtion() {
             // console.log(data);
             if (data.status === true) {
             // history.replace("/user-management");
+            Swal.fire("Success!", "Plan Deleted" , "success");
             console.log(data);
             setReloadTable(!reloadTable);
             } else if (data.status === false) {
@@ -165,6 +175,9 @@ function Redumtion() {
                                         <FormField type="number" value={planOrders} label="Number of Orders" onChange={(e) => setPlanOrders(e.target.value)} placeholder="0"  />
                                     </Grid>
                                     <Grid item md={6} xs={12} sm={4} >
+                                        <FormField type="number" value={minOrdersAmount} label="Minimum Order Amount" onChange={(e) => setMinOrdersAmount(e.target.value)} placeholder="0"  />
+                                    </Grid>
+                                    <Grid item md={6} xs={12} sm={4} >
                                         <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Star Color</label>
                                         <SuiSelect
                                         placeholder="Select Star Color"
@@ -185,7 +198,7 @@ function Redumtion() {
                                         onChange={(e) => setPlanStar(e.value)}
                                         />
                                     </Grid>
-                                    <Grid item  md={6} xs={12} sm={4} >
+                                    <Grid item  md={12} xs={12} sm={12} >
                                         <label style={{fontSize:"13px",fontWeight:"700"}}>Percentage </label>
                                         <Tooltip title="Multiply with cashback Points" placement="bottom" arrow>
                                             <ReportGmailerrorredRoundedIcon style={{fontSize:"20px !important",marginBottom:"-4px"}}/>
@@ -232,6 +245,7 @@ function Redumtion() {
                                 { Header: "Title", accessor: "title" },
                                 { Header: "Days", accessor: "days" },
                                 { Header: "Orders", accessor: "orders" },
+                                { Header: "Min Order Amount", accessor: "min_orders_amount" },
                                 { Header: "Percentage", accessor: "percentage" },
                                 { Header: "Star", accessor: "star" },
                                 { Header: "Actions", accessor: "actions" },

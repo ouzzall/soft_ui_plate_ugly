@@ -51,6 +51,7 @@ import { useDispatch } from "react-redux";
 import { setLoyaltyInfo } from "../../../reducers/loyaltyInfoSlice";
 import TimelineList from "@uf/examples/Timeline/TimelineList";
 import TimelineItem from "@uf/examples/Timeline/TimelineItem";
+import Swal from "sweetalert2";
 
 function Profile() {
     const [profile, setProfile] = useState({});
@@ -63,10 +64,11 @@ function Profile() {
     const [currentPlan, setCurrentPlan] = useState(false);
     const [ordersProgress, setOrdersProgress] = useState(false);
     const [rewardsList, setRewardsList] = useState(false);
+    const [loyaltyPoints, setLoyaltyPoints] = useState(0);
 
     useEffect(() => {
         const getData = async () => {
-            let data = await fetch('/getProfile');
+            let data = await fetch("/getProfile");
             let response = await data.json();
             if (response.success) {
                 setProfile(response.data.user);
@@ -74,136 +76,191 @@ function Profile() {
                 setTransactions(response.data.user.transactions);
                 if (response.data.user.price_rules.length > 0) {
                     let code = response.data.user.price_rules[0].discount_code;
-                    dispatch(setLoyaltyInfo({
-                        coupon: code,
-                        points: response.data.user.loyalty.loyalty_earned,
-                        expiry: new Date(response.data.user.price_rules[0].ends_at).toLocaleDateString()
-                    }));
+                    dispatch(
+                        setLoyaltyInfo({
+                            coupon: code,
+                            points: response.data.user.loyalty.loyalty_earned,
+                            expiry: new Date(
+                                response.data.user.price_rules[0].ends_at
+                            ).toLocaleDateString(),
+                        })
+                    );
                 } else {
-                    dispatch(setLoyaltyInfo({
-                        coupon: 'XXXXXXXX',
-                        points: response.data.user.loyalty.loyalty_earned,
-                        expiry: ''
-                    }));
+                    dispatch(
+                        setLoyaltyInfo({
+                            coupon: "XXXXXXXX",
+                            points: response.data.user.loyalty.loyalty_earned,
+                            expiry: "",
+                        })
+                    );
                 }
             }
-            data = await fetch('/getUserCharts');
+            data = await fetch("/getUserCharts");
             response = await data.json();
             if (response.success) {
                 setChartData(response.data.sales_chart);
             }
-        }
+        };
         getData();
     }, []);
 
     useEffect(() => {
         const getData = async () => {
-            let data = await fetch('/get_my_plan');
+            let data = await fetch("/get_my_plan");
             let response = await data.json();
             if (response.success) {
                 console.log(response);
                 // console.log(response.data[2].length);
-                response.data[0].sort((a, b) => (a.orders > b.orders) ? 1 : -1);
+                response.data[0].sort((a, b) => (a.orders > b.orders ? 1 : -1));
+                setLoyaltyPoints(response.data[4].loyalty_earned);
                 // console.log(response.data[0]);
 
                 let next_plan = "";
                 let current_plan = "";
                 for (let i = 0; i < response.data[0].length; i++) {
-                    if(response.data[2].length >= response.data[0][i].orders)
-                    {
+                    if (response.data[2].length >= response.data[0][i].orders) {
                         current_plan = response.data[0][i];
-                        next_plan = response.data[0][i+1];
+                        next_plan = response.data[0][i + 1];
                         break;
                     }
                 }
-                if(next_plan)
-                {
+                if (next_plan) {
                     // console.log(current_plan);
                     // console.log(next_plan);
-                    setCurrentPlan({currentStar: current_plan.star, currentPlan: current_plan.title});
-                    setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
-                    setOrdersProgress((response.data[2].length/next_plan.orders)*100);
+                    setCurrentPlan({
+                        currentStar: current_plan.star,
+                        currentPlan: current_plan.title,
+                    });
+                    setNextPlan({
+                        remPoints: next_plan.orders - response.data[2].length,
+                        nextPlan: next_plan.title,
+                    });
+                    setOrdersProgress(
+                        (response.data[2].length / next_plan.orders) * 100
+                    );
                     // console.log("INSIDE");
-                }
-                else
-                {
+                } else {
                     // console.log("OUTSIDE");
                     next_plan = response.data[0][0];
-                    setNextPlan({remPoints: next_plan.orders - response.data[2].length, nextPlan: next_plan.title});
-                    setOrdersProgress((response.data[2].length/next_plan.orders)*100);
+                    setNextPlan({
+                        remPoints: next_plan.orders - response.data[2].length,
+                        nextPlan: next_plan.title,
+                    });
+                    setOrdersProgress(
+                        (response.data[2].length / next_plan.orders) * 100
+                    );
                     // console.log(next_plan);
                     // console.log(next_plan.orders - response.data[2].length);
                 }
 
                 const current_rewards = [];
-                if(current_plan)
-                {
+                if (current_plan) {
                     for (let i = 0; i < response.data[3].length; i++) {
-                        if(response.data[3][i].plan_id == current_plan.id)
-                        {
+                        if (response.data[3][i].plan_id == current_plan.id) {
                             current_rewards.push(response.data[3][i]);
                         }
                     }
                 }
                 // console.log(current_rewards);
                 // console.log(response.data[4]);
-                current_rewards.forEach(element => {
+                current_rewards.forEach((element) => {
                     // console.log(element);
                     element.shop_name = response.data[5].name;
-                    if(element.reward_point <= response.data[4].loyalty_earned)
-                    {
+                    if (
+                        element.reward_point <= response.data[4].loyalty_earned
+                    ) {
                         element.availability = "YES";
-                    }
-                    else
-                    {
+                    } else {
                         element.availability = "NO";
-                        element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
+                        element.points_diffrence =
+                            element.reward_point -
+                            response.data[4].loyalty_earned;
                         element.user_points = response.data[4].loyalty_earned;
-
                     }
-
                 });
                 // console.log(current_rewards);
                 setRewardsList(current_rewards);
-
             }
-        }
+        };
         getData();
     }, []);
 
+    function allRewardsHandler() {
+        console.log(rewardsList);
+        console.log(loyaltyPoints);
+
+        let allRewardsPoints = 0;
+        const allRewardsIds = [];
+        rewardsList.forEach(element => {
+            allRewardsPoints += element.reward_point;
+            allRewardsIds.push(element.variant_id);
+        });
+
+        console.log(allRewardsPoints);
+
+        if(allRewardsPoints < loyaltyPoints)
+        {
+            Swal.fire("Error!", "Your loyalty points are less than all rewards points.", "error");
+        }
+        else
+        {
+            window.open(`https://${rewardsList[0].shop_name}?all_rewards=true&variant_id=${allRewardsIds.toString()}&discount_code=CTH_CTH`, "_blank");
+        }
+    }
+
     return (
         <DashboardLayout>
-            <Header data={profile} nextPlan={nextPlan} currentPlan={currentPlan} ordersProgress={ordersProgress}/>
+            <Header
+                data={profile}
+                nextPlan={nextPlan}
+                currentPlan={currentPlan}
+                ordersProgress={ordersProgress}
+            />
             <SuiBox mb={3} mt={3}>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
-                    <TimelineList>
-                        {rewardsList &&
-                            rewardsList.map((value,index) => (
+                        <TimelineList>
+                            {rewardsList &&
+                                rewardsList.map((value, index) => (
                                     <TimelineItem
-                                    color="success"
-                                    icon="emoji_events"
-                                    title={value.reward_title}
-                                    dateTime={value.reward_point}
-                                    progress={value.points_diffrence}
-                                    image={value.image_src}
-                                    availability={value.availability}
-                                    userPoints={value.user_points}
-                                    variantId={value.variant_id}
-                                    discountCode="CTH_CTH"
-                                    shopName={value.shop_name}
+                                        color="success"
+                                        icon="emoji_events"
+                                        title={value.reward_title}
+                                        dateTime={value.reward_point}
+                                        progress={value.points_diffrence}
+                                        image={value.image_src}
+                                        availability={value.availability}
+                                        userPoints={value.user_points}
+                                        variantId={value.variant_id}
+                                        discountCode="CTH_CTH"
+                                        shopName={value.shop_name}
                                     />
-                                )
-                            )
-                        }
-                    </TimelineList>
+                                ))}
+                            <SuiBox
+                                display="flex"
+                                justifyContent="center"
+                                ml={2}
+                                mt={3}
+                            >
+                                <SuiButton
+                                    type="submit"
+                                    variant="gradient"
+                                    color="dark"
+                                    onClick={allRewardsHandler}
+                                >
+                                    Get All Rewards
+                                </SuiButton>
+                            </SuiBox>
+                        </TimelineList>
                     </Grid>
                     <Grid item xs={12} sm={8}>
-                        <div style={{display:"flex"}} >
-                            <Grid item mt={3} xs={12} sm={4} >
+                        <div style={{ display: "flex" }}>
+                            <Grid item mt={3} xs={12} sm={4}>
                                 <DefaultStatisticsCard
                                     title="Coupons Created"
-                                    count={otherData && otherData.coupons_created}
+                                    count={
+                                        otherData && otherData.coupons_created
+                                    }
                                     // percentage={{
                                     //     color: "success",
                                     //     value: "+55%",
@@ -211,87 +268,131 @@ function Profile() {
                                     // }}
                                 />
                             </Grid>
-                            <Grid style={{marginLeft:"20px",marginRight:"20px"}} item mt={3} xs={12} sm={4}>
+                            <Grid
+                                style={{
+                                    marginLeft: "20px",
+                                    marginRight: "20px",
+                                }}
+                                item
+                                mt={3}
+                                xs={12}
+                                sm={4}
+                            >
                                 <DefaultStatisticsCard
                                     title="Total Earnings"
-                                    count={otherData && otherData.total_orders_amount}
+                                    count={
+                                        otherData &&
+                                        otherData.total_orders_amount
+                                    }
                                     // percentage={{
                                     //     color: "success",
                                     //     value: "+12%",
                                     //     label: "since last month",
                                     // }}
-
                                 />
                             </Grid>
                             <Grid item mt={3} xs={12} sm={4}>
                                 <DefaultStatisticsCard
                                     title="Orders"
-                                    count={otherData && otherData.orders_created}
+                                    count={
+                                        otherData && otherData.orders_created
+                                    }
                                     // percentage={{
                                     //     color: "secondary",
                                     //     value: "+1",
                                     //     label: "since last month",
                                     // }}
-
                                 />
                             </Grid>
                         </div>
                         <Grid item mt={3} xs={12} sm={12} lg={12}>
-                        <DefaultLineChart
-                            title="Sales Details"
-                            description={
-                                <SuiBox display="flex" justifyContent="space-between">
-                                    <SuiBox display="flex" ml={-1}>
-                                        <SuiBadgeDot color="info" size="sm" badgeContent="Loyalty Points" />
-                                        <SuiBadgeDot color="dark" size="sm" badgeContent="Orders Amount" />
-                                    </SuiBox>
-                                    <SuiBox mt={-5.25} mr={-1}>
-                                        <Tooltip title="See which ads perform better" placement="left" arrow>
-                                            <SuiButton
-                                                variant="outlined"
-                                                color="secondary"
-                                                size="small"
-                                                circular
-                                                iconOnly
+                            <DefaultLineChart
+                                title="Sales Details"
+                                description={
+                                    <SuiBox
+                                        display="flex"
+                                        justifyContent="space-between"
+                                    >
+                                        <SuiBox display="flex" ml={-1}>
+                                            <SuiBadgeDot
+                                                color="info"
+                                                size="sm"
+                                                badgeContent="Loyalty Points"
+                                            />
+                                            <SuiBadgeDot
+                                                color="dark"
+                                                size="sm"
+                                                badgeContent="Orders Amount"
+                                            />
+                                        </SuiBox>
+                                        <SuiBox mt={-5.25} mr={-1}>
+                                            <Tooltip
+                                                title="See which ads perform better"
+                                                placement="left"
+                                                arrow
                                             >
-                                                <Icon>priority_high</Icon>
-                                            </SuiButton>
-                                        </Tooltip>
+                                                <SuiButton
+                                                    variant="outlined"
+                                                    color="secondary"
+                                                    size="small"
+                                                    circular
+                                                    iconOnly
+                                                >
+                                                    <Icon>priority_high</Icon>
+                                                </SuiButton>
+                                            </Tooltip>
+                                        </SuiBox>
                                     </SuiBox>
-                                </SuiBox>
-                            }
-                            chart={chartData}
-                        />
-                    </Grid>
-                    <Grid item mt={3} xs={12} sm={12} lg={12}>
-                    <SuiBox my={3}>
-                <Card>
-                    {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
-                    <DataTable entriesPerPage={false} canSearch
-                        table={{
-                            columns: [
-                                { Header: "Id", accessor: "id" },
-                                { Header: "Customer Name", accessor: "user.name" },
-                                { Header: "Customer Email", accessor: "user.email" },
-                                { Header: "Loyalty Points", accessor: "loyalty_points" },
-                                { Header: "Transaction Type", accessor: "transaction_type.title" },
-                                { Header: "Date", accessor: "date" },
-                            ],
-                            rows: transactions
-                        }}
-                    />
-                </Card>
-            </SuiBox>
-
-                    </Grid>
+                                }
+                                chart={chartData}
+                            />
+                        </Grid>
+                        <Grid item mt={3} xs={12} sm={12} lg={12}>
+                            <SuiBox my={3}>
+                                <Card>
+                                    {/* <DataTable table={dataTableData} entriesPerPage={false} canSearch /> */}
+                                    <DataTable
+                                        entriesPerPage={false}
+                                        canSearch
+                                        table={{
+                                            columns: [
+                                                {
+                                                    Header: "Id",
+                                                    accessor: "id",
+                                                },
+                                                {
+                                                    Header: "Customer Name",
+                                                    accessor: "user.name",
+                                                },
+                                                {
+                                                    Header: "Customer Email",
+                                                    accessor: "user.email",
+                                                },
+                                                {
+                                                    Header: "Loyalty Points",
+                                                    accessor: "loyalty_points",
+                                                },
+                                                {
+                                                    Header: "Transaction Type",
+                                                    accessor:
+                                                        "transaction_type.title",
+                                                },
+                                                {
+                                                    Header: "Date",
+                                                    accessor: "date",
+                                                },
+                                            ],
+                                            rows: transactions,
+                                        }}
+                                    />
+                                </Card>
+                            </SuiBox>
+                        </Grid>
                     </Grid>
                 </Grid>
             </SuiBox>
             <SuiBox mb={3}>
-                <Grid container spacing={3}>
-
-
-                </Grid>
+                <Grid container spacing={3}></Grid>
             </SuiBox>
 
             {/* <SuiBox mt={3} mb={3}>
@@ -303,7 +404,6 @@ function Profile() {
 
         </Grid>
       </SuiBox> */}
-
 
             <Footer />
         </DashboardLayout>

@@ -18,6 +18,7 @@ class CreateRedemptionPlansTable extends Migration
             $table->string('title');
             $table->bigInteger('days');
             $table->bigInteger('orders');
+            $table->bigInteger('min_orders_amount');
             $table->bigInteger('percentage');
             $table->string('star');
             $table->timestamps();

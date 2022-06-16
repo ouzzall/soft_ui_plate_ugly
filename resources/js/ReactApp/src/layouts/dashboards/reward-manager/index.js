@@ -42,6 +42,7 @@ import Orange from "@uf/assets/images/stars/Orange.png";
 import Pink from "@uf/assets/images/stars/Pink.png";
 import Purple from "@uf/assets/images/stars/Purple.png";
 import Yellow from "@uf/assets/images/stars/Yellow.png";
+import Swal from "sweetalert2";
 
 function TearManager() {
     const [design, setDesign] = useState(false);
@@ -85,24 +86,14 @@ function TearManager() {
         });
         setSearchOptions(searchOptions);
 
+        options.push({ value: 0, label: "" });
+        setRewards(options);
 
-        if(result.data[1].length == 0)
-        {
-            options.push({ value: 0, label: "First Time Only" });
-            setRewards(options);
-        }
-        else
-        {
-            result.data[1].forEach(element => {
-                options.push({ value: element.id, label: element.reward_title });
-            });
-            setRewards(options);
-        }
         // result.data[0].forEach((element) => {
         // // console.log(element);
         // newData2.push({ value: element.id, label: element.name });
         // });
-        setRewards(options);
+        // setRewards(options);
         const productsInIt = [];
         setProductsData(result.data[2]);
         result.data[2].forEach((element) => {
@@ -249,8 +240,10 @@ function TearManager() {
             setReloadTable(!reloadTable);
             setRewardId(false);
             console.log(data);
+            Swal.fire("Success!", data.message , "success");
             } else if (data.status === false) {
             console.log(data);
+            Swal.fire("Error!", data.message , "error");
             // setErrorText(data.data);
             // setErrorSB(true);
             }
@@ -321,6 +314,7 @@ function TearManager() {
             // console.log(data);
             if (data.status === true) {
             // history.replace("/user-management");
+            Swal.fire("Success!", "Reward Deleted" , "success");
             console.log(data);
             setReloadTable(!reloadTable);
             } else if (data.status === false) {
@@ -329,6 +323,47 @@ function TearManager() {
             // setErrorSB(true);
             }
         });
+    }
+
+    function planCatcher(e)
+    {
+        console.log(e);
+
+        const planId = new URLSearchParams({ id: e }).toString();
+
+        fetch(`/get_plan_rewards?${planId}`, {
+        // method: "POST",
+        // headers: { "content-Type": "application/json" },
+        // body: formData,
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // console.log(data);
+            if (data.status === true) {
+            // history.replace("/user-management");
+            console.log(data);
+            const options = [];
+            if(data.data.length == 0)
+            {
+                options.push({ value: 0, label: "No Previous Rewards" });
+                setRewards(options);
+            }
+            else
+            {
+                data.data.forEach(element => {
+                    options.push({ value: element.id, label: element.reward_title });
+                });
+                setRewards(options);
+            }
+
+            } else if (data.status === false) {
+            console.log(data);
+            // setErrorText(data.data);
+            // setErrorSB(true);
+            }
+        });
+
+
     }
 
     return (
@@ -342,20 +377,9 @@ function TearManager() {
                                 <h5>Reward Manager</h5>
 
                                 <Grid container spacing={3}>
-                                    <Grid item md={6} xs={12} sm={4} >
-                                        <FormField type="text" onChange={(e) => {setRewardTitle(e.target.value)}} value={rewardTitle} label="Title" placeholder="Title.."  />
-                                    </Grid>
-                                    <Grid item md={6} xs={12} sm={4} >
-                                        <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Parent</label>
-                                       <SuiSelect
-                                        placeholder="Select Previous Reward"
-                                        options={rewards && rewards}
-                                        onChange={(e) => {setRewardPreviousReward(e)}}
-                                        value={rewardPreviousReward}
-                                        />
-                                    </Grid>
-                                    <Grid item md={12} xs={12} sm={4} >
+                                <Grid item md={12} xs={12} sm={4} >
                                     <SuiBox mt={2}>
+                                        <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Plan</label>
                                         <Grid container spacing={3} justifyContent="center">
                                             {plans &&
                                             plans.map((value, index) => (
@@ -364,7 +388,7 @@ function TearManager() {
                                                 <SuiButton
                                                     color="secondary"
                                                     variant={design ? "contained" : "outlined"}
-                                                    onClick={() => setRewardPlan(value.id)}
+                                                    onClick={() => {setRewardPlan(value.id); planCatcher(value.id)}}
                                                     sx={customButtonStyles}
                                                 >
                                                     <Settings size="24px" color={design ? "white" : "dark"} />
@@ -377,12 +401,22 @@ function TearManager() {
                                         </Grid>
                                     </SuiBox>
                                     </Grid>
+                                    <Grid item md={12} xs={12} sm={12} >
+                                        <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Parent</label>
+                                       <SuiSelect
+                                        placeholder="Select Prev Reward"
+                                        options={rewards && rewards}
+                                        onChange={(e) => {setRewardPreviousReward(e)}}
+                                        value={rewardPreviousReward}
+                                        />
+                                    </Grid>
+                                    <Grid item md={6} xs={12} sm={4} >
+                                        <FormField type="text" onChange={(e) => {setRewardTitle(e.target.value)}} value={rewardTitle} label="Title" placeholder="Title.."  />
+                                    </Grid>
+
                                     <Grid item md={6} xs={12} sm={4} >
                                         <FormField onChange={(e) => {setRewardPoints(e.target.value)}} type="number" value={rewardPoints} label="Target Points" placeholder="0"  />
                                     </Grid>
-
-
-
                                     <Grid item md={12} xs={12} sm={4} >
                                         <label className="MuiTypography-root MuiTypography-caption css-cgrud3-MuiTypography-root">Select Product</label>
                                        <SuiSelect

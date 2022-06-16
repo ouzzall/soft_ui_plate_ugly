@@ -40,6 +40,7 @@ export default styled(LinearProgress)(({ theme, ownerState }) => {
       background: backgroundValue,
       width: `${value}%`,
       color: text.main,
+      height: "18.5px",
     },
   };
 });
