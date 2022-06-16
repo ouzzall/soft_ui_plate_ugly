@@ -326,7 +326,7 @@ class RedemptionController extends Controller
         $vbl1 = RedemptionPlan::all();
         $vbl2 = Auth::user();
         $vbl3 = Order::where('user_id',$vbl2->id)
-        ->where('amount','>',100)
+        // ->where('amount','>',100)
         ->get();
         $vbl4 = RedemptionReward::all();
         $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();

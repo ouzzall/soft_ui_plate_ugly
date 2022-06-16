@@ -241,6 +241,14 @@ function TearManager() {
             setRewardId(false);
             console.log(data);
             Swal.fire("Success!", data.message , "success");
+            setRewardTitle("");
+            setRewardPoints(0);
+            setRewardPreviousReward(0);
+            setRewardPlan(0);
+            setRewardProduct(0);
+            const options = [];
+            options.push({ value: 0, label: "" });
+            setRewards(options);
             } else if (data.status === false) {
             console.log(data);
             Swal.fire("Error!", data.message , "error");
