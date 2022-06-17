@@ -124,8 +124,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/updateProfile', [UserController::class, 'updateProfile']);
         Route::post('/redeemPoints', [UserController::class, 'redeemPoints']);
         Route::get('/getUserCharts', [UserController::class, 'getUserCharts']);
-
         Route::get('/get_my_plan', [RedemptionController::class, 'get_my_plan']);
+        Route::get('/make_discount_code', [RedemptionController::class, 'make_discount_code']);
     });
     Route::view('/{any}', 'index')->where('any', '^(?!webhook).*$')->name('index.view');
 });

@@ -36,10 +36,10 @@ import { useTimeline } from "@uf/examples/Timeline/context";
 import { timelineItem, timelineItemIcon } from "@uf/examples/Timeline/TimelineItem/styles";
 import { Card, Grid } from "@mui/material";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints, variantId, discountCode, shopName}) {
+function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints, variantId, discountCode, shopName, rewardStatus}) {
   const isDark = useTimeline();
 
-//   console.log(shopName);
+//   console.log(rewardStatus);
 
   const renderBadges =
     badges.length > 0
@@ -65,12 +65,12 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         top="3.25%"
         left="2px"
         zIndex={2}
-        opacity={availability == "YES" ? 1 : 0.7}
+        opacity={availability == "YES" && rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}
       >
         <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
       </SuiBox>
 
-      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" ? 1 : 0.7}>
+      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" && rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}>
       <Card style={{padding: "20px",marginTop:"10px"}}>
 
       <SuiBox display="flex" alignItems="center">
@@ -97,11 +97,13 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
           {availability == "NO" ? <SuiProgress value={(userPoints/dateTime)*100} /> : null}
         </SuiBox>
         <SuiBox style={{textAlign:"center"}}>
-            {availability == "YES" ?
-              <SuiButton variant="gradient" color="info" size="small" href={`https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${discountCode}`} target="_blank">Add to Cart</SuiButton>
-            : <SuiButton variant="gradient" color="info" size="small" disabled>Add to Cart</SuiButton>}
+            {availability == "YES" && rewardStatus == "CASHED" ?
+            <SuiButton variant="gradient" color="info" size="small" disabled>CASHED</SuiButton> :
+            availability == "YES" && rewardStatus == "NOT_CASHED" ?
+            <SuiButton variant="gradient" color="info" size="small" href={`https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${discountCode}`} target="_blank">Add to Cart</SuiButton> :
+            availability == "NO" ?
+            <SuiButton variant="gradient" color="info" size="small" disabled>Add to Cart</SuiButton> : null}
          </SuiBox>
-
 
         </Card>
       </SuiBox>

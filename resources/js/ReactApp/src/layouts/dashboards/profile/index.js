@@ -191,20 +191,43 @@ function Profile() {
 
         let allRewardsPoints = 0;
         const allRewardsIds = [];
+        const allRewardsDBIds = [];
         rewardsList.forEach(element => {
             allRewardsPoints += element.reward_point;
             allRewardsIds.push(element.variant_id);
+            allRewardsDBIds.push(element.id);
         });
 
         console.log(allRewardsPoints);
 
-        if(allRewardsPoints < loyaltyPoints)
+        if(allRewardsPoints > loyaltyPoints)
         {
             Swal.fire("Error!", "Your loyalty points are less than all rewards points.", "error");
         }
         else
         {
-            window.open(`https://${rewardsList[0].shop_name}?all_rewards=true&variant_id=${allRewardsIds.toString()}&discount_code=CTH_CTH`, "_blank");
+            // window.open(`https://${rewardsList[0].shop_name}?all_rewards=true&variant_id=${allRewardsIds.toString()}&discount_code=CTH_CTH`, "_blank");
+
+            const dataS = new URLSearchParams({ variant_ids: allRewardsIds.toString(),  ids: allRewardsDBIds.toString(), all_rewards: true}).toString();
+
+            fetch(`/make_discount_code?${dataS}`, {
+            // method: "POST",
+            // headers: { "content-Type": "application/json" },
+            // body: formData,
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                // console.log(data);
+                if (data.status === true) {
+                // history.replace("/user-management");
+                // console.log(data);
+                window.open(`https://${rewardsList[0].shop_name}?all_rewards=true&variant_id=${allRewardsIds.toString()}&discount_code=${data.data}`, "_blank");
+                } else if (data.status === false) {
+                // console.log(data);
+                // setErrorText(data.data);
+                // setErrorSB(true);
+                }
+            });
         }
     }
 
@@ -234,6 +257,7 @@ function Profile() {
                                         variantId={value.variant_id}
                                         discountCode="CTH_CTH"
                                         shopName={value.shop_name}
+                                        rewardStatus={value.reward_status}
                                     />
                                 ))}
                             <SuiBox

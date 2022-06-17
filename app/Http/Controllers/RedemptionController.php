@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\RedemptionPlan;
+use Illuminate\Support\Str;
 use App\Models\RedemptionReward;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\UserLoyalty;
+use App\Models\RewardRecieved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -323,12 +325,61 @@ class RedemptionController extends Controller
 
     public function get_my_plan(Request $request)
     {
-        $vbl1 = RedemptionPlan::all();
+        $vbl1 = RedemptionPlan::orderBy('orders','asc')->get();
         $vbl2 = Auth::user();
         $vbl3 = Order::where('user_id',$vbl2->id)
-        // ->where('amount','>',100)
+        // ->where('amount' , '>' , $next_plan->min_orders_amount)
         ->get();
+        // return $vbl1;
+
+        $next_plan = "";
+        $current_plan = "";
+        for ($i = 0; $i < count($vbl1); $i++) {
+            if (count($vbl3) >= $vbl1[$i]->orders) {
+                $current_plan = $vbl1[$i];
+                $next_plan = $vbl1[$i + 1];
+                break;
+            }
+        }
+        if ($next_plan) {
+            // echo $current_plan;
+            // echo $next_plan;
+        } else {
+            // console.log("OUTSIDE");
+            $next_plan = $vbl1[0];
+            // echo $next_plan;
+        }
+
+        $vbl3 = Order::where('user_id',$vbl2->id)
+        ->where('amount' , '>' , $next_plan->min_orders_amount)
+        ->get();
+
         $vbl4 = RedemptionReward::all();
+        $vbl7 = RewardRecieved::all();
+
+        $final_array = array();
+        foreach ($vbl4 as $value) {
+            $inside = RewardRecieved::where('reward_id',$value->id)->where('user_id',$vbl2->id)->first();
+            if(empty($inside))
+            {
+                $value->reward_status = "NOT_CASHED";
+                array_push($final_array,$value);
+            }
+            else
+            {
+                $value->reward_status = "CASHED";
+                array_push($final_array,$value);
+            }
+        }
+        $vbl4 = $final_array;
+
+        // $vbl4 = DB::table('redemption_rewards')
+        // ->leftJoin('reward_recieveds','reward_recieveds.reward_id','=','redemption_rewards.id')
+        // ->where('reward_recieveds.user_id','=',$vbl2->id)
+        // ->select('redemption_rewards.*','reward_recieveds.reward_code','reward_recieveds.status')
+        // ->get();
+        // return $vbl4;
+
         $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
         $vbl6 = getShop();
 
@@ -349,5 +400,62 @@ class RedemptionController extends Controller
         $str['message']="SPECIFIC REWARDS SHOWN";
         $str['data']=$vbl4;
         return $str;
+    }
+
+    public function make_discount_code(Request $request)
+    {
+        // return $request;
+
+        $current_user = Auth::user();
+
+        if($request->all_rewards == true)
+        {
+            $code = Str::random(8);
+            $variant_ids = explode(",",$request->variant_ids);
+            $ids = explode(",",$request->ids);
+            for ($i=0; $i < count($ids); $i++) {
+                $vbl = new RewardRecieved;
+                $vbl->reward_id = $ids[$i];
+                $vbl->user_id = $current_user->id;
+                $vbl->reward_code = $code;
+                $vbl->status = "true";
+                $vbl->save();
+            }
+
+            $createPriceRule = getShop()->api()->rest('POST', '/admin/api/2021-10/price_rules.json', [
+                'price_rule' => [
+                    'title' => $code,
+                    'target_type' => "line_item",
+                    'target_selection' => "entitled",
+                    'allocation_method' => 'across',
+                    'usage_limit' => 1,
+                    'once_per_customer' => true,
+                    "value_type" => "percentage",
+                    "value" => "-100.0",
+                    'customer_selection' => 'all',
+                    'entitled_variant_ids' => explode(",",$request->variant_ids),
+                    'starts_at' => Carbon::now(),
+                    'ends_at' => Carbon::now()->addDays(30),
+                ]
+            ]);
+
+            // $createPriceRule = getShop()->api()->rest('GET', '/admin/api/2022-04/price_rules.json', [
+            // $createPriceRule = getShop()->api()->rest('delete', '/admin/api/2022-04/price_rules/975343091765.json', [
+            // ]);
+
+            // return $createPriceRule;
+
+            $priceRule = $createPriceRule['body']['price_rule'];
+            $discountCode = getShop()->api()->rest('POST', '/admin/api/2022-01/price_rules/' . $priceRule['id'] . '/discount_codes.json', [
+                'discount_code' => [
+                    'code' => $code,
+                ]
+            ]);
+
+            $str['status'] = true;
+            $str['message'] = "DISCOUNT CODE GENERATED IN DISCOUNTS";
+            $str['data'] = $code;
+            return $str;
+        }
     }
 }

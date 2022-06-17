@@ -54,6 +54,8 @@
                     console.log(action_src);
                     window.location.href = action_src; {% endcomment %}
                     window.location.href = "https://"+Shopify.shop+"/cart";
+                    localStorage.setItem("discount_code",discount_code);
+                    localStorage.setItem("shop_name",Shopify.shop);
                   })
                   .catch((error) => {
                     console.error(error);
