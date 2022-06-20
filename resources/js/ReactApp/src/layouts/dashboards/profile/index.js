@@ -171,7 +171,8 @@ function Profile() {
                     }
                 }
 
-
+                console.log(current_plan);
+                console.log(next_plan);
 
                 if (next_plan == "PEAK") {
                     // echo $current_plan;
