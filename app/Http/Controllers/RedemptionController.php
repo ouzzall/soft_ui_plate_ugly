@@ -367,6 +367,8 @@ class RedemptionController extends Controller
                 }
             }
 
+            return array($current_plan,$next_plan,$orders_length);
+
             if($next_plan == "")
             {
                 // echo "HELLO5";
