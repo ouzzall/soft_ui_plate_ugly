@@ -356,12 +356,10 @@ class RedemptionController extends Controller
                 // echo $next_plan;
             }
 
-            $vbl3 = Order::where('user_id',$vbl2->id)
-            ->where('amount' , '>=' , $next_plan->min_orders_amount)
-            ->get();
+            // $vbl3 = Order::where('user_id',$vbl2->id)
+            // ->where('amount' , '>=' , $next_plan->min_orders_amount)
+            // ->get();
         }
-
-        return array ($current_plan,$next_plan,$vbl3);
 
         $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
         $vbl7 = RewardRecieved::all();
@@ -395,7 +393,7 @@ class RedemptionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Plans retrieved successfully',
-            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6,$current_plan,$next_plan),
         ]);
     }
 
