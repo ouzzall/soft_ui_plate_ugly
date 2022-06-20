@@ -186,6 +186,7 @@ function Profile() {
 
                 if(response.data[7] == "PEAK")
                 {
+                    console.log("IF 1");
                     current_plan = response.data[6];
 
                     setCurrentPlan({
@@ -201,6 +202,7 @@ function Profile() {
                 }
                 else if(response.data[6] == "")
                 {
+                    console.log("IF 2");
                     current_plan = response.data[6];
                     next_plan = response.data[7];
 
@@ -214,6 +216,7 @@ function Profile() {
                 }
                 else if(response.data[7] && response.data[6])
                 {
+                    console.log("IF 3");
                     current_plan = response.data[6];
                     next_plan = response.data[7];
 
