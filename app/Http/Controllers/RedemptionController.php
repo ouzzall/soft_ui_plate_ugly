@@ -393,7 +393,7 @@ class RedemptionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Plans retrieved successfully',
-            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6,$current_plan,$next_plan),
         ]);
     }
 
