@@ -357,7 +357,7 @@ class RedemptionController extends Controller
             }
 
             $vbl3 = Order::where('user_id',$vbl2->id)
-            ->where('amount' , '>' , $next_plan->min_orders_amount)
+            ->where('amount' , '>=' , $next_plan->min_orders_amount)
             ->get();
         }
 
