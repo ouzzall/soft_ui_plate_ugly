@@ -343,9 +343,13 @@ class RedemptionController extends Controller
                     {
                         $current_plan = $vbl1[$i];
                         if(count($vbl1) == 1)
-                        $next_plan = "START";
+                        {
+                            return $next_plan = "START";
+                        }
                         if(count($vbl1) < 1)
-                        $next_plan = "PEAK";
+                        {
+                            return $next_plan = "PEAK";
+                        }
                         break;
                     }
                     else
