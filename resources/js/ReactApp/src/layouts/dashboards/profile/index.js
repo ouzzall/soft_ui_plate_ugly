@@ -127,6 +127,7 @@ function Profile() {
                             next_plan = response.data[0][i + 1];
                         console.log(current_plan);
                         console.log(next_plan);
+                        console.log(next_plan);
                         break;
                         // next_plan = response.data[0][i + 1];
                         // console.log(current_plan);
