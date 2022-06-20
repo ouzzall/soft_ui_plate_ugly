@@ -335,6 +335,8 @@ class RedemptionController extends Controller
         $current_plan = "";
         $orders_length = 0;
 
+        $vbl3 = "";
+
         if(count($vbl1) != 0)
         {
             for ($i = 0; $i < count($vbl1); $i++) {
