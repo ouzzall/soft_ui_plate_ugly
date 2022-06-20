@@ -339,12 +339,24 @@ class RedemptionController extends Controller
         {
             for ($i = 0; $i < count($vbl1); $i++) {
                 if (count($vbl3) >= $vbl1[$i]->orders) {
-                    $current_plan = $vbl1[$i];
                     if($i + 1 == count($vbl1))
+                    {
+                        $current_plan = $vbl1[$i];
                         $next_plan = false;
+                        break;
+                    }
                     else
-                        $next_plan = $vbl1[$i + 1];
-                    break;
+                    {
+                        // $current_plan = $vbl1[$i];
+                        // $next_plan = $vbl1[$i + 1];
+                        if (count($vbl3) >= $vbl1[$i + 1]->orders) {
+                        }
+                        else
+                        {
+                            $current_plan = $vbl1[$i];
+                            $next_plan = $vbl1[$i + 1];
+                        }
+                    }
                 }
             }
             if ($next_plan) {
