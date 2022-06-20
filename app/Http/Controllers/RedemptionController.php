@@ -357,7 +357,7 @@ class RedemptionController extends Controller
                         // $current_plan = $vbl1[$i];
                         // $next_plan = $vbl1[$i + 1];
                         if (count($vbl3) >= $vbl1[$i + 1]->orders) {
-                            return "CTH";
+                            ECHO "INSIDE";
                         }
                         else
                         {
