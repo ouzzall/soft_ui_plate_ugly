@@ -117,7 +117,7 @@ function Profile() {
 
                 let next_plan = "";
                 let current_plan = "";
-                for (let i = response.data[0].length-1; i >= 0; i--) {
+                for (let i = response.data[0].length; i >= 0; i--) {
                     console.log(response.data[0][i]);
                     if (response.data[2].length >= response.data[0][i].orders) {
                         current_plan = response.data[0][i];
