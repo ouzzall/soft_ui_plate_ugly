@@ -115,70 +115,119 @@ function Profile() {
                 setLoyaltyPoints(response.data[4].loyalty_earned);
                 // console.log(response.data[0]);
 
-                let next_plan = "";
+                // let next_plan = "";
+                // let current_plan = "";
+                // for (let i = 0; i < response.data[0].length; i++) {
+                //     if (response.data[2].length >= response.data[0][i].orders) {
+                //         current_plan = response.data[0][i];
+                //         if(i + 1 == response.data[0].length)
+                //             next_plan = false;
+                //         else
+                //             next_plan = response.data[0][i + 1];
+                //         console.log(current_plan);
+                //         console.log(next_plan);
+                //         break;
+                //         // next_plan = response.data[0][i + 1];
+                //         // console.log(current_plan);
+                //         // console.log(next_plan);
+                //         // break;
+                //     }
+                // }
+                // if (next_plan) {
+                //     // console.log(current_plan);
+                //     // console.log(next_plan);
+                //     setCurrentPlan({
+                //         currentStar: current_plan.star,
+                //         currentPlan: current_plan.title,
+                //     });
+                //     setNextPlan({
+                //         remPoints: next_plan.orders - response.data[2].length,
+                //         nextPlan: next_plan.title,
+                //     });
+                //     setOrdersProgress(
+                //         (response.data[2].length / next_plan.orders) * 100
+                //     );
+                //     // console.log("INSIDE");
+                // } else {
+                //     // console.log("OUTSIDE");
+
+                //     next_plan = response.data[0][0];
+
+                //     if(next_plan == current_plan)
+                //     {
+                //         setCurrentPlan({
+                //             currentStar: current_plan.star,
+                //             currentPlan: current_plan.title,
+                //         });
+                //         // console.log("CTH");
+                //         setNextPlan({
+                //             remPoints: next_plan.orders - response.data[2].length,
+                //             nextPlan: "NO_PLAN",
+                //         });
+                //         setOrdersProgress(100);
+                //     }
+                //     else
+                //     {
+                //         setNextPlan({
+                //             remPoints: next_plan.orders - response.data[2].length,
+                //             nextPlan: next_plan.title,
+                //         });
+                //         setOrdersProgress(
+                //             (response.data[2].length / next_plan.orders) * 100
+                //         );
+                //     }
+
+                //     // console.log(next_plan);
+                //     // console.log(next_plan.orders - response.data[2].length);
+                // }
+
                 let current_plan = "";
-                for (let i = 0; i < response.data[0].length; i++) {
-                    if (response.data[2].length >= response.data[0][i].orders) {
-                        current_plan = response.data[0][i];
-                        if(i + 1 == response.data[0].length)
-                            next_plan = false;
-                        else
-                            next_plan = response.data[0][i + 1];
-                        console.log(current_plan);
-                        console.log(next_plan);
-                        break;
-                        // next_plan = response.data[0][i + 1];
-                        // console.log(current_plan);
-                        // console.log(next_plan);
-                        // break;
-                    }
-                }
-                if (next_plan) {
-                    // console.log(current_plan);
-                    // console.log(next_plan);
+                let next_plan = "";
+
+                if(response.data[7] == "PEAK")
+                {
+                    current_plan = response.data[6];
+
                     setCurrentPlan({
-                        currentStar: current_plan.star,
-                        currentPlan: current_plan.title,
+                        currentStar: response.data[6].star,
+                        currentPlan: response.data[6].title,
                     });
+                    // console.log("CTH");
                     setNextPlan({
-                        remPoints: next_plan.orders - response.data[2].length,
+                        remPoints: 0,
+                        nextPlan: "NO_PLAN",
+                    });
+                    setOrdersProgress(100);
+                }
+                else if(response.data[6] == "")
+                {
+                    current_plan = response.data[6];
+                    next_plan = response.data[7];
+
+                    setNextPlan({
+                        remPoints: next_plan.orders - response.data[8],
                         nextPlan: next_plan.title,
                     });
                     setOrdersProgress(
-                        (response.data[2].length / next_plan.orders) * 100
+                        (response.data[8] / next_plan.orders) * 100
                     );
-                    // console.log("INSIDE");
-                } else {
-                    // console.log("OUTSIDE");
+                }
+                else if(response.data[7] && response.data[6])
+                {
+                    current_plan = response.data[6];
+                    next_plan = response.data[7];
 
-                    next_plan = response.data[0][0];
-
-                    if(next_plan == current_plan)
-                    {
-                        setCurrentPlan({
-                            currentStar: current_plan.star,
-                            currentPlan: current_plan.title,
-                        });
-                        // console.log("CTH");
-                        setNextPlan({
-                            remPoints: next_plan.orders - response.data[2].length,
-                            nextPlan: "NO_PLAN",
-                        });
-                        setOrdersProgress(100);
-                    }
-                    else
-                    {
-                        setNextPlan({
-                            remPoints: next_plan.orders - response.data[2].length,
-                            nextPlan: next_plan.title,
-                        });
-                        setOrdersProgress(
-                            (response.data[2].length / next_plan.orders) * 100
-                        );
-                    }
-
-                    // console.log(next_plan);
-                    // console.log(next_plan.orders - response.data[2].length);
+                    setCurrentPlan({
+                        currentStar: response.data[6].star,
+                        currentPlan: response.data[6].title,
+                    });
+                    setNextPlan({
+                        remPoints: next_plan.orders - response.data[8],
+                        nextPlan: next_plan.title,
+                    });
+                    setOrdersProgress(
+                        (response.data[8] / next_plan.orders) * 100
+                    );
                 }
 
                 const current_rewards = [];

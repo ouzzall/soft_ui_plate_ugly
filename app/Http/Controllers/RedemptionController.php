@@ -327,38 +327,84 @@ class RedemptionController extends Controller
     {
         $vbl1 = RedemptionPlan::orderBy('orders','asc')->get();
         $vbl2 = Auth::user();
-        $vbl3 = Order::where('user_id',$vbl2->id)
-        // ->where('amount' , '>' , $next_plan->min_orders_amount)
-        ->get();
+        // $vbl3 = Order::where('user_id',$vbl2->id)
+        // ->get();
         // return $vbl1;
 
         $next_plan = "";
         $current_plan = "";
+        $orders_length = 0;
 
         if(count($vbl1) != 0)
         {
             for ($i = 0; $i < count($vbl1); $i++) {
+
+                // echo "HELLO1";
+                $vbl3 = Order::where('user_id',$vbl2->id)
+                ->where('amount' , '>=' , $vbl1[$i]->min_orders_amount)
+                ->get();
+
+                // echo $vbl1[$i];
+                // echo count($vbl3)."\n";
+
                 if (count($vbl3) >= $vbl1[$i]->orders) {
+                    // echo "HELLO2";
+                    // echo $vbl1[$i];
+                    // echo count($vbl3)."\n";
                     $current_plan = $vbl1[$i];
-                    if($i + 1 == count($vbl1))
-                        $next_plan = false;
+                    if($i+1 == count($vbl1))
+                    {
+                        // echo "HELLO3";
+                        $next_plan = "PEAK";
+                    }
                     else
-                        $next_plan = $vbl1[$i + 1];
-                    break;
+                    {
+                        // echo "HELL4";
+                        $next_plan = $vbl1[$i+1];
+                    }
+
+                    // break;
                 }
             }
-            if ($next_plan) {
-                // echo $current_plan;
-                // echo $next_plan;
-            } else {
-                // console.log("OUTSIDE");
-                $next_plan = $vbl1[0];
-                // echo $next_plan;
-            }
 
-            $vbl3 = Order::where('user_id',$vbl2->id)
-            ->where('amount' , '>=' , $next_plan->min_orders_amount)
-            ->get();
+            if($next_plan == "")
+            {
+                // echo "HELLO5";
+                $next_plan = $vbl1[0];
+                $current_plan = "";
+
+                $vbl567 = Order::where('user_id',$vbl2->id)
+                ->where('amount' , '>=' , $next_plan->min_orders_amount)
+                ->get();
+                $orders_length = count($vbl567);
+                // echo "CURRENT_PLAN: ".$current_plan."\n";
+                // echo "NEXT_PLAN: ".$next_plan."\n";
+            }
+            else
+            {
+                $vbl567 = Order::where('user_id',$vbl2->id)
+                ->where('amount' , '>=' , $next_plan->min_orders_amount)
+                ->get();
+                $orders_length = count($vbl567);
+            }
+            // else {
+            //     // echo $current_plan."\n";
+            //     // echo $next_plan."\n";
+            // }
+
+
+            // if ($next_plan) {
+            //     // echo $current_plan;
+            //     // echo $next_plan;
+            // } else {
+            //     // console.log("OUTSIDE");
+            //     $next_plan = $vbl1[0];
+            //     // echo $next_plan;
+            // }
+
+            // $vbl3 = Order::where('user_id',$vbl2->id)
+            // ->where('amount' , '>=' , $next_plan->min_orders_amount)
+            // ->get();
         }
 
         $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
@@ -393,7 +439,7 @@ class RedemptionController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Plans retrieved successfully',
-            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6,$current_plan,$next_plan,$orders_length),
         ]);
     }
 
