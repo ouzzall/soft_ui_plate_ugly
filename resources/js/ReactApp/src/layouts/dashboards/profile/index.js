@@ -181,90 +181,99 @@ function Profile() {
                 //     // console.log(next_plan.orders - response.data[2].length);
                 // }
 
-                let current_plan = "";
-                let next_plan = "";
-
-                if(response.data[7] == "PEAK")
+                if(response.data[0].length > 0)
                 {
-                    console.log("IF 1");
-                    current_plan = response.data[6];
+                    let current_plan = "";
+                    let next_plan = "";
 
-                    setCurrentPlan({
-                        currentStar: response.data[6].star,
-                        currentPlan: response.data[6].title,
-                    });
-                    // console.log("CTH");
-                    setNextPlan({
-                        remPoints: 0,
-                        nextPlan: "NO_PLAN",
-                    });
-                    setOrdersProgress(100);
-                }
-                else if(response.data[6] == "")
-                {
-                    console.log("IF 2");
-                    current_plan = response.data[6];
-                    next_plan = response.data[7];
+                    if(response.data[7] == "PEAK")
+                    {
+                        console.log("IF 1");
+                        current_plan = response.data[6];
 
-                    setNextPlan({
-                        remPoints: next_plan.orders - response.data[8],
-                        nextPlan: next_plan.title,
-                    });
-                    setOrdersProgress(
-                        (response.data[8] / next_plan.orders) * 100
-                    );
-                }
-                else if(response.data[7] && response.data[6])
-                {
-                    console.log("IF 3");
-                    current_plan = response.data[6];
-                    next_plan = response.data[7];
+                        setCurrentPlan({
+                            currentStar: response.data[6].star,
+                            currentPlan: response.data[6].title,
+                        });
+                        // console.log("CTH");
+                        setNextPlan({
+                            remPoints: 0,
+                            nextPlan: "NO_PLAN",
+                        });
+                        setOrdersProgress(100);
+                    }
+                    else if(response.data[6] == "")
+                    {
+                        console.log("IF 2");
+                        current_plan = response.data[6];
+                        next_plan = response.data[7];
 
-                    setCurrentPlan({
-                        currentStar: response.data[6].star,
-                        currentPlan: response.data[6].title,
-                    });
-                    setNextPlan({
-                        remPoints: next_plan.orders - response.data[8],
-                        nextPlan: next_plan.title,
-                    });
-                    setOrdersProgress(
-                        (response.data[8] / next_plan.orders) * 100
-                    );
-                }
+                        setNextPlan({
+                            remPoints: next_plan.orders - response.data[8],
+                            nextPlan: next_plan.title,
+                        });
+                        setOrdersProgress(
+                            (response.data[8] / next_plan.orders) * 100
+                        );
+                    }
+                    else if(response.data[7] && response.data[6])
+                    {
+                        console.log("IF 3");
+                        current_plan = response.data[6];
+                        next_plan = response.data[7];
 
-                const current_rewards = [];
-                if (current_plan) {
-                    for (let i = 0; i < response.data[3].length; i++) {
-                        if (response.data[3][i].plan_id == current_plan.id) {
-                            current_rewards.push(response.data[3][i]);
+                        setCurrentPlan({
+                            currentStar: response.data[6].star,
+                            currentPlan: response.data[6].title,
+                        });
+                        setNextPlan({
+                            remPoints: next_plan.orders - response.data[8],
+                            nextPlan: next_plan.title,
+                        });
+                        setOrdersProgress(
+                            (response.data[8] / next_plan.orders) * 100
+                        );
+                    }
+
+                    const current_rewards = [];
+                    if (current_plan) {
+                        for (let i = 0; i < response.data[3].length; i++) {
+                            if (response.data[3][i].plan_id == current_plan.id) {
+                                current_rewards.push(response.data[3][i]);
+                            }
                         }
                     }
-                }
-                // console.log(current_rewards);
-                // console.log(response.data[4]);
-                let firstDisable = false;
-                current_rewards.forEach((element) => {
-                    // console.log(element);
-                    element.shop_name = response.data[5].name;
-                    if (element.reward_point <= response.data[4].loyalty_earned) {
-                        if(firstDisable == false)
-                        {
-                            element.availability = "YES";
-                        }
-                        else
-                        {
+                    // console.log(current_rewards);
+                    // console.log(response.data[4]);
+                    let firstDisable = false;
+                    current_rewards.forEach((element) => {
+                        // console.log(element);
+                        element.shop_name = response.data[5].name;
+                        if (element.reward_point <= response.data[4].loyalty_earned) {
+                            if(firstDisable == false)
+                            {
+                                element.availability = "YES";
+                            }
+                            else
+                            {
+                                element.availability = "NO";
+                            }
+                        } else {
+                            firstDisable = true;
                             element.availability = "NO";
+                            element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
+                            element.user_points = response.data[4].loyalty_earned;
                         }
-                    } else {
-                        firstDisable = true;
-                        element.availability = "NO";
-                        element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
-                        element.user_points = response.data[4].loyalty_earned;
-                    }
-                });
-                // console.log(current_rewards);
-                setRewardsList(current_rewards);
+                    });
+                    // console.log(current_rewards);
+                    setRewardsList(current_rewards);
+                }
+                else
+                {
+                    setCurrentPlan(false);
+                    setNextPlan(false);
+                    setOrdersProgress(false);
+                }
             }
         };
         getData();
