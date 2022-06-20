@@ -119,39 +119,67 @@ function Profile() {
                 let current_plan = "";
                 for (let i = 0; i < response.data[0].length; i++) {
                     if (response.data[2].length >= response.data[0][i].orders) {
-                        current_plan = response.data[0][i];
+
+
+
                         if(i + 1 == response.data[0].length)
-                            next_plan = false;
+                        {
+                            // echo "HELLO2\n";
+                            current_plan = response.data[0][i];
+                            // echo count($vbl1);
+                            if(response.data[0].length == 1)
+                            {
+                                // echo "HELLO3\n";
+                                next_plan = "START";
+                            }
+                            if(response.data[0].length > 1)
+                            {
+                                // echo "HELLO4\n";
+                                next_plan = "PEAK";
+                            }
+                            break;
+                        }
                         else
-                            next_plan = response.data[0][i + 1];
-                        console.log(current_plan);
-                        console.log(next_plan);
-                        break;
+                        {
+                            // $current_plan = $vbl1[$i];
+                            // $next_plan = $vbl1[$i + 1];
+                            if (response.data[2].length >= response.data[0][i + 1].orders) {
+                                // echo "HELLO5\n";
+                            }
+                            else
+                            {
+                                // echo "HELLO6\n";
+                                current_plan = response.data[0][i];
+                                next_plan = response.data[0][i + 1];
+                            }
+                        }
+
+
+
+                        // current_plan = response.data[0][i];
+                        // if(i + 1 == response.data[0].length)
+                        //     next_plan = false;
+                        // else
+                        //     next_plan = response.data[0][i + 1];
+                        // console.log(current_plan);
+                        // console.log(next_plan);
+                        // break;
                         // next_plan = response.data[0][i + 1];
                         // console.log(current_plan);
                         // console.log(next_plan);
                         // break;
                     }
                 }
-                if (next_plan) {
-                    // console.log(current_plan);
-                    // console.log(next_plan);
-                    setCurrentPlan({
-                        currentStar: current_plan.star,
-                        currentPlan: current_plan.title,
-                    });
-                    setNextPlan({
-                        remPoints: next_plan.orders - response.data[2].length,
-                        nextPlan: next_plan.title,
-                    });
-                    setOrdersProgress(
-                        (response.data[2].length / next_plan.orders) * 100
-                    );
-                    // console.log("INSIDE");
-                } else {
-                    // console.log("OUTSIDE");
 
+
+
+                if (next_plan == "PEAK") {
+                    // echo $current_plan;
+                    // echo $next_plan;
+                } else if(next_plan == "START"){
+                    // console.log("OUTSIDE");
                     next_plan = response.data[0][0];
+                    // echo $next_plan;
 
                     if(next_plan == current_plan)
                     {
@@ -176,10 +204,70 @@ function Profile() {
                             (response.data[2].length / next_plan.orders) * 100
                         );
                     }
-
-                    // console.log(next_plan);
-                    // console.log(next_plan.orders - response.data[2].length);
                 }
+                else if(next_plan)
+                {
+                    setCurrentPlan({
+                        currentStar: current_plan.star,
+                        currentPlan: current_plan.title,
+                    });
+                    setNextPlan({
+                        remPoints: next_plan.orders - response.data[2].length,
+                        nextPlan: next_plan.title,
+                    });
+                    setOrdersProgress(
+                        (response.data[2].length / next_plan.orders) * 100
+                    );
+                }
+
+
+                // if (next_plan) {
+                //     // console.log(current_plan);
+                //     // console.log(next_plan);
+                //     setCurrentPlan({
+                //         currentStar: current_plan.star,
+                //         currentPlan: current_plan.title,
+                //     });
+                //     setNextPlan({
+                //         remPoints: next_plan.orders - response.data[2].length,
+                //         nextPlan: next_plan.title,
+                //     });
+                //     setOrdersProgress(
+                //         (response.data[2].length / next_plan.orders) * 100
+                //     );
+                //     // console.log("INSIDE");
+                // } else {
+                //     // console.log("OUTSIDE");
+
+                //     next_plan = response.data[0][0];
+
+                //     if(next_plan == current_plan)
+                //     {
+                //         setCurrentPlan({
+                //             currentStar: current_plan.star,
+                //             currentPlan: current_plan.title,
+                //         });
+                //         // console.log("CTH");
+                //         setNextPlan({
+                //             remPoints: next_plan.orders - response.data[2].length,
+                //             nextPlan: "NO_PLAN",
+                //         });
+                //         setOrdersProgress(100);
+                //     }
+                //     else
+                //     {
+                //         setNextPlan({
+                //             remPoints: next_plan.orders - response.data[2].length,
+                //             nextPlan: next_plan.title,
+                //         });
+                //         setOrdersProgress(
+                //             (response.data[2].length / next_plan.orders) * 100
+                //         );
+                //     }
+
+                //     // console.log(next_plan);
+                //     // console.log(next_plan.orders - response.data[2].length);
+                // }
 
                 const current_rewards = [];
                 if (current_plan) {
