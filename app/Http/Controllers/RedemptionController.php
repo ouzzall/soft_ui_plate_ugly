@@ -367,7 +367,7 @@ class RedemptionController extends Controller
                 }
             }
 
-            return array($current_plan,$next_plan,$orders_length);
+            // return array($current_plan,$next_plan,$orders_length);
 
             if($next_plan == "")
             {
@@ -384,10 +384,13 @@ class RedemptionController extends Controller
             }
             else
             {
-                $vbl567 = Order::where('user_id',$vbl2->id)
-                ->where('amount' , '>=' , $next_plan->min_orders_amount)
-                ->get();
-                $orders_length = count($vbl567);
+                if($next_plan != "PEAK")
+                {
+                    $vbl567 = Order::where('user_id',$vbl2->id)
+                    ->where('amount' , '>=' , $next_plan->min_orders_amount)
+                    ->get();
+                    $orders_length = count($vbl567);
+                }
             }
             // else {
             //     // echo $current_plan."\n";
