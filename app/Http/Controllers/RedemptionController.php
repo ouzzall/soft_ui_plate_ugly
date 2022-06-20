@@ -342,6 +342,9 @@ class RedemptionController extends Controller
                     if($i + 1 == count($vbl1))
                     {
                         $current_plan = $vbl1[$i];
+                        if(count($vbl1) == 1)
+                        $next_plan = "START";
+                        if(count($vbl1) < 1)
                         $next_plan = "PEAK";
                         break;
                     }
@@ -360,9 +363,9 @@ class RedemptionController extends Controller
                 }
             }
             if ($next_plan == "PEAK") {
-                echo $current_plan;
-                echo $next_plan = "";
-            } else {
+                // echo $current_plan;
+                // echo $next_plan;
+            } else if($next_plan == "START"){
                 // console.log("OUTSIDE");
                 $next_plan = $vbl1[0];
                 // echo $next_plan;
