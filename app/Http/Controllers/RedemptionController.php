@@ -371,6 +371,8 @@ class RedemptionController extends Controller
                 // echo $next_plan;
             }
 
+            return array($current_plan,$next_plan);
+
             if($next_plan != "PEAK")
             {
                 $vbl3 = Order::where('user_id',$vbl2->id)
