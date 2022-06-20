@@ -102,7 +102,7 @@ function Profile() {
             }
         };
         getData();
-    }, []);
+    }, [loyaltyPoints]);
 
     useEffect(() => {
         const getData = async () => {
@@ -120,8 +120,17 @@ function Profile() {
                 for (let i = 0; i < response.data[0].length; i++) {
                     if (response.data[2].length >= response.data[0][i].orders) {
                         current_plan = response.data[0][i];
-                        next_plan = response.data[0][i + 1];
+                        if(i + 1 == response.data[0].length)
+                            next_plan = false;
+                        else
+                            next_plan = response.data[0][i + 1];
+                        console.log(current_plan);
+                        console.log(next_plan);
                         break;
+                        // next_plan = response.data[0][i + 1];
+                        // console.log(current_plan);
+                        // console.log(next_plan);
+                        // break;
                     }
                 }
                 if (next_plan) {
@@ -141,14 +150,33 @@ function Profile() {
                     // console.log("INSIDE");
                 } else {
                     // console.log("OUTSIDE");
+
                     next_plan = response.data[0][0];
-                    setNextPlan({
-                        remPoints: next_plan.orders - response.data[2].length,
-                        nextPlan: next_plan.title,
-                    });
-                    setOrdersProgress(
-                        (response.data[2].length / next_plan.orders) * 100
-                    );
+
+                    if(next_plan == current_plan)
+                    {
+                        setCurrentPlan({
+                            currentStar: current_plan.star,
+                            currentPlan: current_plan.title,
+                        });
+                        // console.log("CTH");
+                        setNextPlan({
+                            remPoints: next_plan.orders - response.data[2].length,
+                            nextPlan: "NO_PLAN",
+                        });
+                        setOrdersProgress(100);
+                    }
+                    else
+                    {
+                        setNextPlan({
+                            remPoints: next_plan.orders - response.data[2].length,
+                            nextPlan: next_plan.title,
+                        });
+                        setOrdersProgress(
+                            (response.data[2].length / next_plan.orders) * 100
+                        );
+                    }
+
                     // console.log(next_plan);
                     // console.log(next_plan.orders - response.data[2].length);
                 }
@@ -163,18 +191,23 @@ function Profile() {
                 }
                 // console.log(current_rewards);
                 // console.log(response.data[4]);
+                let firstDisable = false;
                 current_rewards.forEach((element) => {
                     // console.log(element);
                     element.shop_name = response.data[5].name;
-                    if (
-                        element.reward_point <= response.data[4].loyalty_earned
-                    ) {
-                        element.availability = "YES";
+                    if (element.reward_point <= response.data[4].loyalty_earned) {
+                        if(firstDisable == false)
+                        {
+                            element.availability = "YES";
+                        }
+                        else
+                        {
+                            element.availability = "NO";
+                        }
                     } else {
+                        firstDisable = true;
                         element.availability = "NO";
-                        element.points_diffrence =
-                            element.reward_point -
-                            response.data[4].loyalty_earned;
+                        element.points_diffrence = element.reward_point - response.data[4].loyalty_earned;
                         element.user_points = response.data[4].loyalty_earned;
                     }
                 });
@@ -183,7 +216,7 @@ function Profile() {
             }
         };
         getData();
-    }, []);
+    }, [loyaltyPoints]);
 
     function allRewardsHandler() {
         console.log(rewardsList);
@@ -193,9 +226,12 @@ function Profile() {
         const allRewardsIds = [];
         const allRewardsDBIds = [];
         rewardsList.forEach(element => {
-            allRewardsPoints += element.reward_point;
-            allRewardsIds.push(element.variant_id);
-            allRewardsDBIds.push(element.id);
+            if(element.reward_status == "NOT_CASHED")
+            {
+                allRewardsPoints += element.reward_point;
+                allRewardsIds.push(element.variant_id);
+                allRewardsDBIds.push(element.id);
+            }
         });
 
         console.log(allRewardsPoints);
@@ -222,13 +258,19 @@ function Profile() {
                 // history.replace("/user-management");
                 // console.log(data);
                 window.open(`https://${rewardsList[0].shop_name}?all_rewards=true&variant_id=${allRewardsIds.toString()}&discount_code=${data.data}`, "_blank");
-                } else if (data.status === false) {
+                setLoyaltyPoints(0);
+            } else if (data.status === false) {
                 // console.log(data);
                 // setErrorText(data.data);
                 // setErrorSB(true);
                 }
             });
         }
+    }
+
+    function settingOther()
+    {
+        setLoyaltyPoints(0);
     }
 
     return (
@@ -246,6 +288,7 @@ function Profile() {
                             {rewardsList &&
                                 rewardsList.map((value, index) => (
                                     <TimelineItem
+                                        func={settingOther}
                                         color="success"
                                         icon="emoji_events"
                                         title={value.reward_title}
@@ -255,7 +298,7 @@ function Profile() {
                                         availability={value.availability}
                                         userPoints={value.user_points}
                                         variantId={value.variant_id}
-                                        discountCode="CTH_CTH"
+                                        rewardOwnId={value.id}
                                         shopName={value.shop_name}
                                         rewardStatus={value.reward_status}
                                     />

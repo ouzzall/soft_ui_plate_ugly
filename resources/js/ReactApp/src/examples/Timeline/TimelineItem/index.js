@@ -36,7 +36,7 @@ import { useTimeline } from "@uf/examples/Timeline/context";
 import { timelineItem, timelineItemIcon } from "@uf/examples/Timeline/TimelineItem/styles";
 import { Card, Grid } from "@mui/material";
 
-function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints, variantId, discountCode, shopName, rewardStatus}) {
+function TimelineItem({ color, icon, title, dateTime, description, badges, lastItem,progress, image, availability, userPoints, variantId, shopName, rewardStatus, rewardOwnId, func}) {
   const isDark = useTimeline();
 
 //   console.log(rewardStatus);
@@ -54,6 +54,34 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         })
       : null;
 
+  function makeDiscount(rewardOwnId,variantId,shopName)
+  {
+    // `https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${discountCode}`
+    console.log(rewardOwnId,variantId,shopName);
+
+    const dataS = new URLSearchParams({ variant_id: variantId,  id: rewardOwnId, one_reward: true}).toString();
+
+    fetch(`/make_discount_code?${dataS}`, {
+    // method: "POST",
+    // headers: { "content-Type": "application/json" },
+    // body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        // console.log(data);
+        if (data.status === true) {
+        // history.replace("/user-management");
+        // console.log(data);
+        window.open(`https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${data.data}`, "_blank");
+        func();
+    } else if (data.status === false) {
+        // console.log(data);
+        // setErrorText(data.data);
+        // setErrorSB(true);
+        }
+    });
+  }
+
   return (
     <SuiBox position="relative" sx={(theme) => timelineItem(theme, { lastItem })}>
       <SuiBox
@@ -65,12 +93,12 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
         top="3.25%"
         left="2px"
         zIndex={2}
-        opacity={availability == "YES" && rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}
+        opacity={rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}
       >
         <Icon sx={(theme) => timelineItemIcon(theme, { color })}>{icon}</Icon>
       </SuiBox>
 
-      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={availability == "YES" && rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}>
+      <SuiBox ml={5.75} pt={description ? 0.7 : 0.5} lineHeight={0} maxWidth="30rem"  opacity={rewardStatus == "CASHED" ? 0.2 : availability == "YES" && rewardStatus == "NOT_CASHED" ? 1 : availability == "NO" ? 0.7 : null}>
       <Card style={{padding: "20px",marginTop:"10px"}}>
 
       <SuiBox display="flex" alignItems="center">
@@ -91,16 +119,16 @@ function TimelineItem({ color, icon, title, dateTime, description, badges, lastI
       </div>
     </SuiBox>
 
-        <h6 style={{marginTop:"15px"}}>{typeof progress == "number" ? `You are ${progress} points away` : "Get Your Reward"} </h6>
+        <h6 style={{marginTop:"15px"}}>{typeof progress == "number" ? `You are ${~~progress} points away` : "Get Your Reward"} </h6>
         <SuiBox mt={2} mb={1.5}>
 
           {availability == "NO" ? <SuiProgress value={(userPoints/dateTime)*100} /> : null}
         </SuiBox>
         <SuiBox style={{textAlign:"center"}}>
-            {availability == "YES" && rewardStatus == "CASHED" ?
+            {rewardStatus == "CASHED" ?
             <SuiButton variant="gradient" color="info" size="small" disabled>CASHED</SuiButton> :
             availability == "YES" && rewardStatus == "NOT_CASHED" ?
-            <SuiButton variant="gradient" color="info" size="small" href={`https://${shopName}?redemption=true&variant_id=${variantId}&discount_code=${discountCode}`} target="_blank">Add to Cart</SuiButton> :
+            <SuiButton variant="gradient" color="info" size="small" onClick={() => makeDiscount(rewardOwnId,variantId,shopName)}>Add to Cart</SuiButton> :
             availability == "NO" ?
             <SuiButton variant="gradient" color="info" size="small" disabled>Add to Cart</SuiButton> : null}
          </SuiBox>

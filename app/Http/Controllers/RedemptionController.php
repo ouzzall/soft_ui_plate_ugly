@@ -334,27 +334,34 @@ class RedemptionController extends Controller
 
         $next_plan = "";
         $current_plan = "";
-        for ($i = 0; $i < count($vbl1); $i++) {
-            if (count($vbl3) >= $vbl1[$i]->orders) {
-                $current_plan = $vbl1[$i];
-                $next_plan = $vbl1[$i + 1];
-                break;
+
+        if(count($vbl1) != 0)
+        {
+            for ($i = 0; $i < count($vbl1); $i++) {
+                if (count($vbl3) >= $vbl1[$i]->orders) {
+                    $current_plan = $vbl1[$i];
+                    if($i + 1 == count($vbl1))
+                        $next_plan = false;
+                    else
+                        $next_plan = $vbl1[$i + 1];
+                    break;
+                }
             }
-        }
-        if ($next_plan) {
-            // echo $current_plan;
-            // echo $next_plan;
-        } else {
-            // console.log("OUTSIDE");
-            $next_plan = $vbl1[0];
-            // echo $next_plan;
+            if ($next_plan) {
+                // echo $current_plan;
+                // echo $next_plan;
+            } else {
+                // console.log("OUTSIDE");
+                $next_plan = $vbl1[0];
+                // echo $next_plan;
+            }
+
+            $vbl3 = Order::where('user_id',$vbl2->id)
+            ->where('amount' , '>' , $next_plan->min_orders_amount)
+            ->get();
         }
 
-        $vbl3 = Order::where('user_id',$vbl2->id)
-        ->where('amount' , '>' , $next_plan->min_orders_amount)
-        ->get();
-
-        $vbl4 = RedemptionReward::all();
+        $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
         $vbl7 = RewardRecieved::all();
 
         $final_array = array();
@@ -434,6 +441,59 @@ class RedemptionController extends Controller
                     "value" => "-100.0",
                     'customer_selection' => 'all',
                     'entitled_variant_ids' => explode(",",$request->variant_ids),
+                    'starts_at' => Carbon::now(),
+                    'ends_at' => Carbon::now()->addDays(30),
+                ]
+            ]);
+
+            // $createPriceRule = getShop()->api()->rest('GET', '/admin/api/2022-04/price_rules.json', [
+            // $createPriceRule = getShop()->api()->rest('delete', '/admin/api/2022-04/price_rules/975343091765.json', [
+            // ]);
+
+            // return $createPriceRule;
+
+            $priceRule = $createPriceRule['body']['price_rule'];
+            $discountCode = getShop()->api()->rest('POST', '/admin/api/2022-01/price_rules/' . $priceRule['id'] . '/discount_codes.json', [
+                'discount_code' => [
+                    'code' => $code,
+                ]
+            ]);
+
+            $str['status'] = true;
+            $str['message'] = "DISCOUNT CODE GENERATED IN DISCOUNTS";
+            $str['data'] = $code;
+            return $str;
+        }
+        else if($request->one_reward == true)
+        {
+            $code = Str::random(8);
+            // $variant_id = $request->variant_id;
+
+            $vbl10 = RedemptionReward::find($request->id);
+
+            $vbl20 = UserLoyalty::where('user_id',$current_user->id)->first();
+            $vbl20->loyalty_earned = $vbl20->loyalty_earned - $vbl10->reward_point;
+            $vbl20->save();
+
+            $vbl = new RewardRecieved;
+            $vbl->reward_id = $request->id;
+            $vbl->user_id = $current_user->id;
+            $vbl->reward_code = $code;
+            $vbl->status = "true";
+            $vbl->save();
+
+            $createPriceRule = getShop()->api()->rest('POST', '/admin/api/2021-10/price_rules.json', [
+                'price_rule' => [
+                    'title' => $code,
+                    'target_type' => "line_item",
+                    'target_selection' => "entitled",
+                    'allocation_method' => 'across',
+                    'usage_limit' => 1,
+                    'once_per_customer' => true,
+                    "value_type" => "percentage",
+                    "value" => "-100.0",
+                    'customer_selection' => 'all',
+                    'entitled_variant_ids' => [$request->variant_id],
                     'starts_at' => Carbon::now(),
                     'ends_at' => Carbon::now()->addDays(30),
                 ]

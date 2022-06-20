@@ -227,7 +227,7 @@ function Header({ data, nextPlan, currentPlan, ordersProgress}) {
                             </SuiTypography>
                             {nextPlan &&
                                 <SuiTypography color="text" marginTop="5px"fontSize="14px" fontWeight="medium">
-                                    You are {nextPlan.remPoints} orders away from {nextPlan.nextPlan}
+                                    {nextPlan.nextPlan == "NO_PLAN" ? "You are at the Peak" : `You are ${nextPlan.remPoints} orders away from ${nextPlan.nextPlan}`}
                                 </SuiTypography>
                             }
 
