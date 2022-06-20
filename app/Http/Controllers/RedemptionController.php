@@ -390,12 +390,12 @@ class RedemptionController extends Controller
 
             // return array($current_plan,$next_plan);
 
-            if($next_plan != "PEAK")
-            {
+            // if($next_plan != "PEAK")
+            // {
                 $vbl3 = Order::where('user_id',$vbl2->id)
                 ->where('amount' , '>=' , $next_plan->min_orders_amount)
                 ->get();
-            }
+            // }
         }
 
         $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();

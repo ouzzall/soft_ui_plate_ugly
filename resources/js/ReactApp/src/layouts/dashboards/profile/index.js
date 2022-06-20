@@ -119,7 +119,7 @@ function Profile() {
                 let current_plan = "";
                 for (let i = 0; i < response.data[0].length; i++) {
                     if (response.data[2].length >= response.data[0][i].orders) {
-                    console.log("CTH1");
+                        console.log("CTH1");
 
 
                         if(i + 1 == response.data[0].length)
