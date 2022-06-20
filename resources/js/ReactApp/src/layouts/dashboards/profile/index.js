@@ -119,23 +119,26 @@ function Profile() {
                 let current_plan = "";
                 for (let i = 0; i < response.data[0].length; i++) {
                     if (response.data[2].length >= response.data[0][i].orders) {
-
+                    console.log("CTH1");
 
 
                         if(i + 1 == response.data[0].length)
                         {
+                            console.log("CTH2");
                             // echo "HELLO2\n";
                             current_plan = response.data[0][i];
                             // echo count($vbl1);
                             if(response.data[0].length == 1)
                             {
                                 // echo "HELLO3\n";
+                                console.log("CTH3");
                                 next_plan = "START";
                             }
                             if(response.data[0].length > 1)
                             {
                                 // echo "HELLO4\n";
                                 next_plan = "PEAK";
+                                console.log("CTH4");
                             }
                             break;
                         }
@@ -145,12 +148,14 @@ function Profile() {
                             // $next_plan = $vbl1[$i + 1];
                             if (response.data[2].length >= response.data[0][i + 1].orders) {
                                 // echo "HELLO5\n";
+                                console.log("CTH5");
                             }
                             else
                             {
                                 // echo "HELLO6\n";
                                 current_plan = response.data[0][i];
                                 next_plan = response.data[0][i + 1];
+                                console.log("CTH6");
                             }
                         }
 
