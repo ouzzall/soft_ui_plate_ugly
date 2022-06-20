@@ -349,12 +349,12 @@ class RedemptionController extends Controller
                         if(count($vbl1) == 1)
                         {
                             // echo "HELLO3\n";
-                            $next_plan = "START";
+                            $next_plan = "PEAK";
                         }
                         if(count($vbl1) > 1)
                         {
                             // echo "HELLO4\n";
-                            $next_plan = "PEAK";
+                            $next_plan = "START";
                         }
                         break;
                     }
