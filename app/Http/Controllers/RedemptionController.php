@@ -361,6 +361,8 @@ class RedemptionController extends Controller
             ->get();
         }
 
+        return array ($current_plan,$next_plan,$vbl3);
+
         $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
         $vbl7 = RewardRecieved::all();
 
