@@ -345,6 +345,7 @@ class RedemptionController extends Controller
                     {
                         echo "HELLO2\n";
                         $current_plan = $vbl1[$i];
+                        echo count($vbl1);
                         if(count($vbl1) == 1)
                         {
                             echo "HELLO3\n";
