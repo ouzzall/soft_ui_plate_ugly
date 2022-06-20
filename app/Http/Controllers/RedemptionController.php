@@ -373,8 +373,9 @@ class RedemptionController extends Controller
                     }
                 }
             }
-
+            echo "CTH1";
             echo $current_plan."\n";
+            echo "CTH2";
             echo $next_plan."\n";
 
             if ($next_plan == "PEAK") {
