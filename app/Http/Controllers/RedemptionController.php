@@ -337,92 +337,48 @@ class RedemptionController extends Controller
 
         if(count($vbl1) != 0)
         {
-            // echo "HELLO0\n";
             for ($i = 0; $i < count($vbl1); $i++) {
-
-                $vbl3 = Order::where('user_id',$vbl2->id)
-                ->where('amount' , '>=' , $vbl1[$i]->min_orders_amount)
-                ->get();
-
                 if (count($vbl3) >= $vbl1[$i]->orders) {
-                    echo "HELLO1\n";
+                    $current_plan = $vbl1[$i];
                     if($i + 1 == count($vbl1))
-                    {
-                        echo "HELLO2\n";
-                        $current_plan = $vbl1[$i];
-                        echo count($vbl1);
-                        if(count($vbl1) == 1)
-                        {
-                            echo "HELLO3\n";
-                            $next_plan = "PEAK";
-                        }
-                        if(count($vbl1) > 1)
-                        {
-                            echo "HELLO4\n";
-                            $next_plan = "START";
-                        }
-                        break;
-                    }
+                        $next_plan = false;
                     else
-                    {
-                        // $current_plan = $vbl1[$i];
-                        // $next_plan = $vbl1[$i + 1];
-                        if (count($vbl3) >= $vbl1[$i + 1]->orders) {
-                            echo "HELLO5\n";
-                        }
-                        else
-                        {
-                            echo "HELLO6\n";
-                            $current_plan = $vbl1[$i];
-                            $next_plan = $vbl1[$i + 1];
-                        }
-                    }
+                        $next_plan = $vbl1[$i + 1];
+                    break;
                 }
-            // }
-            // // echo "CTH1";
-            // // echo $current_plan."\n";
-            // // echo "CTH2";
-            // // echo $next_plan."\n";
+            }
+            if ($next_plan) {
+                // echo $current_plan;
+                // echo $next_plan;
+            } else {
+                // console.log("OUTSIDE");
+                $next_plan = $vbl1[0];
+                // echo $next_plan;
+            }
 
-            // if ($next_plan == "PEAK") {
-            //     // echo $current_plan;
-            //     // echo $next_plan;
-            // } else if($next_plan == "START"){
-            //     // console.log("OUTSIDE");
-            //     $next_plan = $vbl1[0];
-            //     // echo $next_plan;
-            // }
-
-            // return array($current_plan,$next_plan);
-
-            // if($next_plan != "PEAK")
-            // {
-            //     $vbl3 = Order::where('user_id',$vbl2->id)
-            //     ->where('amount' , '>=' , $next_plan->min_orders_amount)
-            //     ->get();
-           }
+            $vbl3 = Order::where('user_id',$vbl2->id)
+            ->where('amount' , '>=' , $next_plan->min_orders_amount)
+            ->get();
         }
 
-        // return array($current_plan,$next_plan);
+        $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
+        $vbl7 = RewardRecieved::all();
 
-        // $vbl4 = RedemptionReward::orderBy('prev_reward_id','asc')->get();
-        // $vbl7 = RewardRecieved::all();
-
-        // $final_array = array();
-        // foreach ($vbl4 as $value) {
-        //     $inside = RewardRecieved::where('reward_id',$value->id)->where('user_id',$vbl2->id)->first();
-        //     if(empty($inside))
-        //     {
-        //         $value->reward_status = "NOT_CASHED";
-        //         array_push($final_array,$value);
-        //     }
-        //     else
-        //     {
-        //         $value->reward_status = "CASHED";
-        //         array_push($final_array,$value);
-        //     }
-        // }
-        // $vbl4 = $final_array;
+        $final_array = array();
+        foreach ($vbl4 as $value) {
+            $inside = RewardRecieved::where('reward_id',$value->id)->where('user_id',$vbl2->id)->first();
+            if(empty($inside))
+            {
+                $value->reward_status = "NOT_CASHED";
+                array_push($final_array,$value);
+            }
+            else
+            {
+                $value->reward_status = "CASHED";
+                array_push($final_array,$value);
+            }
+        }
+        $vbl4 = $final_array;
 
         // $vbl4 = DB::table('redemption_rewards')
         // ->leftJoin('reward_recieveds','reward_recieveds.reward_id','=','redemption_rewards.id')
@@ -431,14 +387,14 @@ class RedemptionController extends Controller
         // ->get();
         // return $vbl4;
 
-        // $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
-        // $vbl6 = getShop();
+        $vbl5 = UserLoyalty::where('user_id',$vbl2->id)->first();
+        $vbl6 = getShop();
 
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Plans retrieved successfully',
-        //     'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6,$current_plan,$next_plan),
-        // ]);
+        return response()->json([
+            'success' => true,
+            'message' => 'Plans retrieved successfully',
+            'data' => array($vbl1,$vbl2,$vbl3,$vbl4,$vbl5,$vbl6),
+        ]);
     }
 
     public function get_plan_rewards(Request $request)
