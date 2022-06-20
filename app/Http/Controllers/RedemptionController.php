@@ -338,13 +338,11 @@ class RedemptionController extends Controller
         if(count($vbl1) != 0)
         {
             for ($i = 0; $i < count($vbl1); $i++) {
-
-                echo $vbl1[$i]->min_orders_amount."\n";
-
+                echo $vbl1[$i]->orders."\n";
                 $vbl3 = Order::where('user_id',$vbl2->id)
                 ->where('amount' , '>=' , $vbl1[$i]->min_orders_amount)
                 ->get();
-
+                // if()
                 echo count($vbl3)."\n";
 
                 // if (count($vbl3) >= $vbl1[$i]->orders) {
