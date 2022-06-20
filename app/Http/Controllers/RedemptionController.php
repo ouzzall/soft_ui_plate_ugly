@@ -325,7 +325,7 @@ class RedemptionController extends Controller
 
     public function get_my_plan(Request $request)
     {
-        $vbl1 = RedemptionPlan::orderBy('orders','asc')->get();
+        $vbl1 = RedemptionPlan::orderBy('orders','desc')->get();
         $vbl2 = Auth::user();
         $vbl3 = Order::where('user_id',$vbl2->id)
         // ->where('amount' , '>' , $next_plan->min_orders_amount)
