@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/test-post', function () {
-    $shop = User::where('name', 'uglyfoods.myshopify.com')->first();
+    $shop = User::where('name', 'kh-abdullah-str.myshopify.com')->first();
     $api = $shop->api()->graph('mutation sellingPlanGroupCreate($input: SellingPlanGroupInput!, $resources: SellingPlanGroupResourceInput!) {
         sellingPlanGroupCreate(input: $input, resources: $resources) {
           sellingPlanGroup {
@@ -68,7 +68,7 @@ Route::post('/test-post', function () {
 });
 
 Route::get('/test-get', function() {
-    $shop = User::where('name', 'uglyfoods.myshopify.com')->first();
+    $shop = User::where('name', 'kh-abdullah-str.myshopify.com')->first();
     $api = $shop->api()->graph('query { sellingPlanGroup(id: "gid://shopify/SellingPlanGroup/70680666") {
         id,
         products(first: 10) {

@@ -30,7 +30,7 @@ class SendRegistrationMail extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@uglyfoods.com.sg', 'Example')
+        return $this->from('soft_ui@gmail.com', 'Example')
             ->subject('Registration')
             ->markdown('mails.exmpl')
             ->with([

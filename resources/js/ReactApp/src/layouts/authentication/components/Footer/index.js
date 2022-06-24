@@ -31,11 +31,11 @@ function Footer() {
   return (
     <SuiBox component="footer" py={6}>
       <Grid container justifyContent="center">
-        
-        
+
+
         <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
           <SuiTypography variant="body2" color="secondary">
-            Copyright &copy; 2022, uglyfood.
+            Copyright &copy; 2022, Soft UI Plate
           </SuiTypography>
         </Grid>
       </Grid>

@@ -60,7 +60,7 @@ function Footer() {
         fontSize={size.sm}
         px={1.5}
       >
-        &copy; {new Date().getFullYear()}, uglyfood
+        &copy; {new Date().getFullYear()}, Soft UI Plate
 
       </SuiBox>
 

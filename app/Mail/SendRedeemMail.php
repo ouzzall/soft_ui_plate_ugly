@@ -28,7 +28,7 @@ class SendRedeemMail extends Mailable
      */
     public function build()
     {
-        return $this->from('admin@uglyfoods.com.sg', 'Example Redeem')
+        return $this->from('soft_ui@gmail.com', 'Example Redeem')
             ->subject('Redeem')
             ->markdown('mails.redeem')
             ->with([
